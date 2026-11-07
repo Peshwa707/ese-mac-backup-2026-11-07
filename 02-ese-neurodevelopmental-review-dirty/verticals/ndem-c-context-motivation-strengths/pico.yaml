@@ -1,0 +1,32 @@
+review:
+  title: Motivation, Person-Environment Fit, Hyperfocus, and Proposed Strengths in ADHD and Autism
+  short_id: ndem-c-context-motivation-strengths
+  registration: Protocol frozen for AI-assisted rapid review on 2026-07-29; not prospectively registered.
+  output_base: /Users/neurologic/Documents/EvidenceEngine/neurodevelopmental-environmental-mismatch
+pico:
+  population: Adolescents and adults with ADHD, autism-spectrum disorder or traits, and relevant control
+    groups.
+  intervention: Interest, novelty, reward, feedback, urgency, autonomy, person-environment fit, workplace
+    or educational fit, hyperfocus, creativity, divergent thinking, or pattern recognition.
+  comparator: Low-interest or routine tasks, low-reward conditions, standardized environments, controls,
+    or alternative explanatory variables.
+  outcomes:
+    primary:
+    - Attention or task performance under different motivational conditions
+    - Functional effects of person-environment fit
+    - Objective evidence for hyperfocus, creativity, divergent thinking, or pattern recognition
+    secondary:
+    - Specificity, ecological validity, trade-offs, and confounding
+eligibility:
+  inclusion:
+  - Adolescent or adult ADHD/autism sample or validated trait analysis.
+  - Empirically examines motivation, task context, environmental fit, hyperfocus, creativity, divergent
+    thinking, or pattern recognition.
+  - Reports a comparative, within-person, or systematically synthesized result.
+  exclusion:
+  - Advocacy-only or conceptual claim without empirical outcome data.
+  - No separable ADHD/autism group or validated trait analysis.
+  - Purely pediatric educational study without developmental relevance.
+  - No outcome relevant to claims H3, H6, or H10.
+disclaimer: AI Reviewer-1 rapid-review draft. Human Reviewer 2 and clinical sign-off remain pending. Not
+  diagnostic or treatment guidance.

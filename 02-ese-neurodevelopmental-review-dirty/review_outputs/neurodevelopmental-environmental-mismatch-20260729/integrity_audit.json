@@ -1,0 +1,44 @@
+{
+  "status": "Independent AI adversarial audit complete; independent human Reviewer 2 and clinical sign-off pending",
+  "search_date": "2026-07-29",
+  "report_cited_pmids": 92,
+  "verified_pubmed_records": 92,
+  "verified_reference_rows_including_guidelines": 94,
+  "claim_study_relationship_rows": 298,
+  "ledger_claims": 66,
+  "claims_with_matrix_relationships": 64,
+  "claims_without_any_matrix_relationship": [
+    "H10.3",
+    "H3.4"
+  ],
+  "atomic_claim_sections": 66,
+  "claim_template_complete": true,
+  "claim_section_pmids_all_mapped": true,
+  "post_hoc_hypothesis_only_pmids": [
+    "40868584",
+    "42199316",
+    "42327684"
+  ],
+  "uncatalogued_report_pmids": [],
+  "selected_retracted_records": [],
+  "duplicate_reference_ids": [],
+  "artifact_sha256": {
+    "systematic_evidence_review_full.md": "d318966b82672b75f7faccccb251a9ba8890065212f669f59d78b6185cc5065b",
+    "claim_evidence_matrix.csv": "684785d6f1013aae9ded0ed0671e18799738e234828bea3d0f7c24f1ad0866ca",
+    "verified_references.csv": "bb5dad33d56ec3e1fc748e703ec3532967ad68c89feee19763fa7804043864fa",
+    "search_strategy.md": "69b8c5216aa963748589c87763d8805d7d8aa8905521fb385e11a7b49d17404b",
+    "excluded_studies.md": "3314cb4be564ea6af4ce3bba17b7c2f9fbe9050ee8a363079708555f736501f1",
+    "unverified_or_rejected_references.md": "776dec86fe3f476f6cbb454af16f2ac2d82b3c88aa94e381d4b6fa1ec4d8768b",
+    "psychiatrist_brief.md": "4d7772253021b050398b52f8d175d6f31424f37d34e3547caf4f7a97b778098a",
+    "systematic_evidence_review_full.pdf": "ef5e1d982c3d0dbc91858e1af6c2d3a912755ac73a79758c1106b12cd5573082"
+  },
+  "gate_status": {
+    "ai_reviewer_1": "complete",
+    "independent_ai_adversarial_audit": "complete",
+    "human_reviewer_2": "pending",
+    "full_text_screening": "pending",
+    "formal_risk_of_bias": "pending",
+    "clinical_sign_off": "pending",
+    "official_engine_export": "withheld"
+  }
+}

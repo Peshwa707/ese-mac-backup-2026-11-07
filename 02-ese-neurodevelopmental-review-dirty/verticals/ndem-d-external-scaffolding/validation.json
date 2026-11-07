@@ -1,0 +1,21 @@
+{
+  "name": "ndem-d-external-scaffolding",
+  "ok": false,
+  "errors": [
+    "GRADE outcome 'Overall response rate (ORR)' field 'orr' is not an extraction field",
+    "GRADE outcome '>=Complete response (>=CR)' field 'cr_or_better_rate' is not an extraction field",
+    "GRADE outcome 'MRD negativity' field 'mrd_negativity_rate' is not an extraction field",
+    "GRADE outcome 'Progression-free survival (median)' field 'median_pfs' is not an extraction field",
+    "GRADE outcome 'Overall survival (median)' field 'median_os' is not an extraction field",
+    "GRADE outcome 'CRS (any grade)' field 'crs_any_grade' is not an extraction field",
+    "GRADE outcome 'CRS (grade >=3)' field 'crs_grade_3plus' is not an extraction field",
+    "GRADE outcome 'ICANS / neurotoxicity' field 'icans_any_grade' is not an extraction field",
+    "GRADE outcome 'Infections (grade >=3)' field 'infections_grade_3plus' is not an extraction field",
+    "GRADE outcome 'Neutropenia (grade >=3)' field 'neutropenia_grade_3plus' is not an extraction field",
+    "GRADE outcome 'Treatment-related mortality' field 'treatment_related_mortality' is not an extraction field"
+  ],
+  "warnings": [
+    "extraction field 'effect_estimate' looks poolable but has no supported pool marker in extraction_schema.yaml."
+  ],
+  "pubmed_count": 422
+}

@@ -1,0 +1,97 @@
+# Data dictionary for extraction — RMZ-vs-propofol hysteroscopy validation vertical.
+# tx arm = Remimazolam (RMZ); ctrl arm = Propofol.
+#
+# Dichotomous outcomes pool as 2x2 binary (pool: binary_2x2 -> R meta::metabin,
+# measure RR, Mantel-Haenszel) to match the referent (RR, 95% CI). Duration
+# outcomes pool as continuous SMD (pool: continuous -> meta::metacont) to match
+# the referent's SMD choice.
+#
+# HONESTY NOTE: the automated first pass extracts at the ABSTRACT level. Per-arm
+# event/total and mean/SD usually live in full-text tables and will correctly
+# return "NR" here — a known limitation (full-text/human step), not a hidden gap.
+
+identity:
+  - first_author
+  - year
+  - study_name
+  - study_design        # RCT
+  - modality            # constant: "RMZ-vs-propofol" (single comparison)
+  - country
+  - nct                 # registration number, verified live
+
+fields:
+  population:
+    - {name: total_n, level: abstract}
+    - {name: n_rmz_arm, level: abstract}
+    - {name: n_propofol_arm, level: abstract}
+    - {name: median_age, level: fulltext}
+    - {name: pct_female, level: fulltext}
+
+  procedural_dichotomous:
+    - name: sedation_success
+      level: fulltext
+      pool: binary_2x2
+      label: "Sedation success (RR)"
+      pair: {events_tx: sedsucc_events_rmz, n_tx: sedsucc_n_rmz, events_ctrl: sedsucc_events_prop, n_ctrl: sedsucc_n_prop}
+
+  procedural_continuous:
+    - name: recovery_duration
+      level: fulltext
+      pool: continuous
+      label: "Recovery duration (SMD)"
+      pair: {n_tx: rec_n_rmz, mean_tx: rec_mean_rmz, sd_tx: rec_sd_rmz, n_ctrl: rec_n_prop, mean_ctrl: rec_mean_prop, sd_ctrl: rec_sd_prop}
+    - name: procedure_duration
+      level: fulltext
+      pool: continuous
+      label: "Total procedure duration (SMD)"
+      pair: {n_tx: proc_n_rmz, mean_tx: proc_mean_rmz, sd_tx: proc_sd_rmz, n_ctrl: proc_n_prop, mean_ctrl: proc_mean_prop, sd_ctrl: proc_sd_prop}
+
+  safety_dichotomous:
+    - name: injection_pain
+      level: fulltext
+      pool: binary_2x2
+      label: "Injection pain (RR)"
+      pair: {events_tx: pain_events_rmz, n_tx: pain_n_rmz, events_ctrl: pain_events_prop, n_ctrl: pain_n_prop}
+    - name: body_movement
+      level: fulltext
+      pool: binary_2x2
+      label: "Body movement (RR)"
+      pair: {events_tx: move_events_rmz, n_tx: move_n_rmz, events_ctrl: move_events_prop, n_ctrl: move_n_prop}
+    - name: low_spo2_resp_depression
+      level: fulltext
+      pool: binary_2x2
+      label: "Low SpO2 / respiratory depression (RR)"
+      pair: {events_tx: spo2_events_rmz, n_tx: spo2_n_rmz, events_ctrl: spo2_events_prop, n_ctrl: spo2_n_prop}
+    - name: bradycardia
+      level: fulltext
+      pool: binary_2x2
+      label: "Bradycardia (RR)"
+      pair: {events_tx: brady_events_rmz, n_tx: brady_n_rmz, events_ctrl: brady_events_prop, n_ctrl: brady_n_prop}
+    - name: hypotension
+      level: fulltext
+      pool: binary_2x2
+      label: "Hypotension (RR)"
+      pair: {events_tx: hypo_events_rmz, n_tx: hypo_n_rmz, events_ctrl: hypo_events_prop, n_ctrl: hypo_n_prop}
+    - name: hiccough
+      level: fulltext
+      pool: binary_2x2
+      label: "Hiccough (RR)"
+      pair: {events_tx: hicc_events_rmz, n_tx: hicc_n_rmz, events_ctrl: hicc_events_prop, n_ctrl: hicc_n_prop}
+    - name: ponv
+      level: fulltext
+      pool: binary_2x2
+      label: "PONV (RR)"
+      pair: {events_tx: ponv_events_rmz, n_tx: ponv_n_rmz, events_ctrl: ponv_events_prop, n_ctrl: ponv_n_prop}
+    - name: postop_dizziness
+      level: fulltext
+      pool: binary_2x2
+      label: "Postoperative dizziness (RR)"
+      pair: {events_tx: dizz_events_rmz, n_tx: dizz_n_rmz, events_ctrl: dizz_events_prop, n_ctrl: dizz_n_prop}
+
+rules:
+  - "Copy values verbatim from the source text only. Do not use outside knowledge."
+  - "tx = Remimazolam (RMZ); ctrl = Propofol. Never swap arms."
+  - "If a field is not stated, set value to 'NR'."
+  - "If a value is inferred/derived rather than stated, prefix with 'ESTIMATED:' and note the method."
+  - "For each non-NR numeric value, include the exact verbatim quote from the source that supports it."
+  - "Dichotomous outcomes are recorded event/total per arm; continuous durations as mean/SD/N per arm."

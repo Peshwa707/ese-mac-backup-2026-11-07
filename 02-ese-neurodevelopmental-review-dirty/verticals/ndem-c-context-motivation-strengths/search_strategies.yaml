@@ -1,0 +1,30 @@
+disclaimer: Auto-generated from the protocol concept blocks; review the PubMed string and translate to
+  each non-PubMed database before importing.
+pubmed:
+  executed: true
+  query: '( "Attention Deficit Disorder with Hyperactivity"[Mesh] OR "Autism Spectrum Disorder"[Mesh]
+    OR ADHD[tiab] OR autism[tiab] OR autistic[tiab] ) AND ( interest[tiab] OR novelty[tiab] OR reward[tiab]
+    OR urgency[tiab] OR "immediate feedback"[tiab] OR "person-environment fit"[tiab] OR "job crafting"[tiab]
+    OR autonomy[tiab] OR workplace[tiab] OR hyperfocus[tiab] OR creativity[tiab] OR "divergent thinking"[tiab]
+    OR "pattern recognition"[tiab] ) AND ( experiment[tiab] OR performance[tiab] OR function[tiab] OR
+    impairment[tiab] OR cohort[tiab] OR "Systematic Review"[pt] OR "Meta-Analysis"[pt] ) AND ("1800/01/01"[dp]
+    : "2026/07/29"[dp])'
+  retmax: 300
+other_databases:
+- name: Europe PMC
+  executed: false
+  note: translate concept blocks to this database; import exported records (provenance-attested).
+- name: PsycINFO
+  executed: false
+  note: translate concept blocks to this database; import exported records (provenance-attested).
+- name: Embase
+  executed: false
+  note: translate concept blocks to this database; import exported records (provenance-attested).
+- name: Web of Science
+  executed: false
+  note: translate concept blocks to this database; import exported records (provenance-attested).
+- name: Scopus
+  executed: false
+  note: translate concept blocks to this database; import exported records (provenance-attested).
+named_trials: []
+reference_mining_seeds: []

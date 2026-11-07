@@ -1,0 +1,85 @@
+# PICO + eligibility for the systematic-review vertical.
+# The active review's question lives here; swapping this file (plus
+# search_strategies.yaml) re-points the engine at a different review.
+#
+# First review encoded: BCMA-directed CAR-T vs bispecific antibodies in early
+# relapsed multiple myeloma (1-3 prior lines).
+
+review:
+  title: >
+    Bispecific Antibodies Versus CAR-T Cell Therapy in Early Relapsed Multiple
+    Myeloma (1-3 Prior Lines): A Systematic Review and Meta-Analysis
+  short_id: sr-mm-bcma
+  registration: "PROSPERO: [DRAFT — not yet submitted]"
+
+pico:
+  population: >
+    Adults (>=18) with relapsed/refractory multiple myeloma (RRMM) after 1-3
+    prior lines of therapy. Studies enrolling broader RRMM populations are
+    eligible if they report an extractable 1-3 prior-line subgroup.
+  intervention: >
+    BCMA-directed CAR-T cell therapy (ciltacabtagene autoleucel / cilta-cel;
+    idecabtagene vicleucel / ide-cel).
+  comparator: >
+    BCMA-directed bispecific antibodies (teclistamab, elranatamab,
+    linvoseltamab) +/- combination regimens.
+  outcomes:
+    primary:
+      - progression-free survival (PFS)
+      - overall survival (OS)
+    secondary:
+      - overall response rate (ORR)
+      - ">=complete response (>=CR) rate"
+      - MRD negativity rate
+      - cytokine release syndrome (CRS, any grade and >=grade 3)
+      - ICANS / neurotoxicity
+      - grade >=3 infections
+      - cytopenias (neutropenia, thrombocytopenia, anemia)
+      - treatment-related mortality
+
+# Synthesis axis: stratify by treatment class (`modality`), normalized to two arms.
+synthesis:
+  subgroup_field: modality
+  subgroup_map:
+    CAR-T: [car]
+    BsAb: [bsab, bispecific, both]
+  arms: [CAR-T, BsAb]
+  indirect_comparison: true
+  dose_outcome: orr
+
+# Eligibility — applied by the screening stage (Step 4/5). Each criterion is
+# phrased so the screening LLM can judge it against a title+abstract.
+# Scoping-review framing (Population–Concept–Context), used when the review
+# profile's framing is 'pcc'. Maps the same topic for an evidence-mapping question.
+pcc:
+  population: >
+    Adults with relapsed/refractory multiple myeloma (RRMM).
+  concept: >
+    BCMA-directed T-cell-redirecting immunotherapies — CAR-T cell therapy and
+    bispecific antibodies — including their efficacy, safety, access, and sequencing.
+  context: >
+    Early relapse (1–3 prior lines); real-world and trial settings; 2018–present.
+
+eligibility:
+  inclusion:
+    - "Phase 2 or 3 clinical trial (randomized or single-arm), real-world cohort, propensity-matched analysis, or registry study."
+    - "Adults with RRMM that includes patients at 1-3 prior lines (or reports an extractable 1-3 line subgroup)."
+    - "Intervention is a BCMA-directed CAR-T therapy OR a BCMA-directed bispecific antibody (single-modality studies are eligible for pooled-proportions analysis)."
+    - "Reports at least one pre-specified efficacy or safety endpoint."
+  exclusion:
+    - "Preclinical, in vitro, or animal study."
+    - "Case report or case series (n < 10)."
+    - "Review, editorial, commentary, or protocol-only paper with no outcome data."
+    - "Non-BCMA target only (e.g. GPRC5D-only, FcRH5-only) with no BCMA arm."
+    - "Exclusively >=4-prior-line population with no extractable 1-3 line subgroup."
+  # Domain-specific PRISMA exclusion-reason buckets (generic study-type buckets are built in).
+  exclusion_buckets:
+    - {label: "non-BCMA target", keywords: ["non-bcma", "gprc5d", "fcrh5", "not bcma"]}
+    - {label: ">=4 prior lines only", keywords: [">=4", "4 prior", "four prior", "later line", "heavily pretreated"]}
+
+disclaimer: >
+  Automated systematic-review FIRST PASS. The AI acts as Reviewer 1 only: every
+  screening decision and extracted value is a draft requiring independent human
+  (Reviewer 2) verification before any use. Every cited PMID/NCT is verified
+  against its live source; unverifiable items are dropped, and any value not
+  found in the source is marked NR (not reported), never invented.

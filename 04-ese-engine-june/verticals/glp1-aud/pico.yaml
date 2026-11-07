@@ -1,0 +1,53 @@
+review:
+  title: >
+    Efficacy and Safety of GLP-1 Receptor Agonists for Alcohol Use Disorder:
+    A Systematic Review and Meta-Analysis of Randomized Controlled Trials
+  short_id: sr-glp1-aud
+  registration: "Fresh SR/MA (upgraded engine run)"
+
+pico:
+  population: >
+    Adults with alcohol use disorder, alcohol dependence, or heavy/at-risk drinking.
+  intervention: >
+    GLP-1 receptor agonists (semaglutide, liraglutide, exenatide, dulaglutide,
+    tirzepatide [GIP/GLP-1]) at any dose/duration.
+  comparator: >
+    Placebo (or usual care).
+  outcomes:
+    primary:
+      - "Alcohol consumption (continuous; drinks/day, drinks per drinking day, percent heavy drinking days, grams/day, or total consumption) pooled as SMD across measures"
+    secondary:
+      - "Alcohol craving (continuous); abstinence or no-heavy-drinking (binary, RR)"
+      - "Any adverse event, nausea/GI adverse events, discontinuation due to AE (binary, RR)"
+
+synthesis:
+  subgroup_field: agent
+  subgroup_map:
+    semaglutide: [semaglutide]
+    liraglutide: [liraglutide]
+    exenatide: [exenatide]
+    dulaglutide: [dulaglutide]
+    tirzepatide: [tirzepatide]
+  arms: [semaglutide, liraglutide, exenatide, dulaglutide, tirzepatide]
+  indirect_comparison: false
+
+eligibility:
+  inclusion:
+    - "Randomized controlled trial (parallel or crossover)."
+    - "Adults with alcohol use disorder, alcohol dependence, or heavy/at-risk drinking."
+    - "Intervention is a GLP-1 receptor agonist."
+    - "Comparator is placebo or usual care."
+    - "Reports an alcohol-consumption, craving, abstinence, or safety outcome."
+  exclusion:
+    - "Non-randomized design (observational, single-arm, preclinical/animal)."
+    - "GLP-1 RA studied only for diabetes/obesity with NO alcohol outcome reported."
+    - "Review, protocol-only, editorial, secondary analysis without extractable outcome data."
+    - "Population without alcohol problem use (e.g. general diabetes cohort, no AUD/heavy-drinking subgroup)."
+  exclusion_buckets:
+    - {label: "not randomized/animal", keywords: ["animal", "rat", "mouse", "preclinical", "in vitro", "observational", "cohort", "case report"]}
+    - {label: "no alcohol outcome", keywords: ["no alcohol outcome", "diabetes only", "weight loss only"]}
+
+disclaimer: >
+  Upgraded-engine SR/MA. AI = Reviewer 1; independent cross-vendor AI = Reviewer 2; human verifies.
+  Full-text-first extraction (abstract fallback flagged). Continuous alcohol-consumption pooled as SMD
+  (heterogeneous measures); binary outcomes as RR. Young field — expect small k; reported honestly.

@@ -1,0 +1,58 @@
+{
+  "title": "Motivation, Person-Environment Fit, Hyperfocus, and Proposed Strengths in ADHD and Autism",
+  "short_id": "ndem-c-context-motivation-strengths",
+  "framing": "pico",
+  "profile": "rapid",
+  "background": "This module evaluates motivational modulation, person-environment fit, hyperfocus, creativity, divergent thinking, and proposed neurodevelopmental strengths while actively testing nonspecific and selection-based explanations.",
+  "population": "Adolescents and adults with ADHD, autism-spectrum disorder or traits, and relevant control groups.",
+  "intervention": "Interest, novelty, reward, feedback, urgency, autonomy, person-environment fit, workplace or educational fit, hyperfocus, creativity, divergent thinking, or pattern recognition.",
+  "comparator": "Low-interest or routine tasks, low-reward conditions, standardized environments, controls, or alternative explanatory variables.",
+  "outcomes_primary": [
+    {"name": "Attention or task performance under different motivational conditions", "pool_field": ""},
+    {"name": "Functional effects of person-environment fit", "pool_field": ""},
+    {"name": "Objective evidence for hyperfocus, creativity, divergent thinking, or pattern recognition", "pool_field": ""}
+  ],
+  "outcomes_secondary": [
+    {"name": "Specificity, ecological validity, trade-offs, and confounding", "pool_field": ""}
+  ],
+  "designs": ["systematic review", "meta-analysis", "experimental", "cohort", "cross-sectional", "qualitative"],
+  "inclusion": [
+    "Adolescent or adult ADHD/autism sample or validated trait analysis.",
+    "Empirically examines motivation, task context, environmental fit, hyperfocus, creativity, divergent thinking, or pattern recognition.",
+    "Reports a comparative, within-person, or systematically synthesized result."
+  ],
+  "exclusion": [
+    "Advocacy-only or conceptual claim without empirical outcome data.",
+    "No separable ADHD/autism group or validated trait analysis.",
+    "Purely pediatric educational study without developmental relevance.",
+    "No outcome relevant to claims H3, H6, or H10."
+  ],
+  "search": {
+    "concept_blocks": [
+      {"name": "conditions", "terms": ["ADHD", "autism", "autistic"], "mesh": ["Attention Deficit Disorder with Hyperactivity", "Autism Spectrum Disorder"]},
+      {"name": "context_or_strength", "terms": ["interest", "novelty", "reward", "urgency", "\"immediate feedback\"", "\"person-environment fit\"", "\"job crafting\"", "autonomy", "workplace", "hyperfocus", "creativity", "\"divergent thinking\"", "\"pattern recognition\""], "mesh": []},
+      {"name": "evidence", "terms": ["experiment", "performance", "function", "impairment", "cohort", "\"Systematic Review\"[pt]", "\"Meta-Analysis\"[pt]"], "mesh": []}
+    ],
+    "databases": ["PubMed", "Europe PMC", "PsycINFO", "Embase", "Web of Science", "Scopus"],
+    "date_from": "",
+    "date_to": "2026/07/29",
+    "retmax": 300
+  },
+  "rob_tool": "auto",
+  "analysis": {
+    "effect_measure": "Narrative synthesis with construct-specific effect estimates where reported.",
+    "dose_response": false,
+    "subgroups": ["diagnosis versus traits", "objective versus self-report outcome", "laboratory versus real-world context", "mood state"],
+    "publication_bias": false
+  },
+  "extraction_groups": [
+    {"group": "identity", "fields": [{"name": "claim_ids"}, {"name": "study_design"}, {"name": "country"}, {"name": "funding_conflicts", "level": "fulltext"}]},
+    {"group": "population", "fields": [{"name": "total_n"}, {"name": "age_range"}, {"name": "diagnostic_method"}, {"name": "context"}]},
+    {"group": "findings", "fields": [{"name": "construct_definition"}, {"name": "outcome_measure"}, {"name": "effect_estimate"}, {"name": "confidence_interval"}, {"name": "direction"}, {"name": "supporting_quote"}]},
+    {"group": "appraisal", "fields": [{"name": "ecological_validity"}, {"name": "major_limitations"}, {"name": "alternative_explanations"}, {"name": "directness_to_claim"}]}
+  ],
+  "registration": "Protocol frozen for AI-assisted rapid review on 2026-07-29; not prospectively registered.",
+  "output_base": "/Users/neurologic/Documents/EvidenceEngine/neurodevelopmental-environmental-mismatch",
+  "disclaimer": "AI Reviewer-1 rapid-review draft. Human Reviewer 2 and clinical sign-off remain pending. Not diagnostic or treatment guidance."
+}
+

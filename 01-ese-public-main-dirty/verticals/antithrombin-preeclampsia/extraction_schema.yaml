@@ -1,0 +1,117 @@
+# Data dictionary for extraction (Step 6) — antithrombin / pre-eclampsia vertical.
+# core/sr reads this to build the extraction prompt and the output tables.
+#
+# HONESTY NOTE: the automated first pass extracts at the ABSTRACT level (what
+# PubMed returns). Continuous outcomes (pregnancy-prolongation days, birth weight)
+# and most binary event counts live in full-text tables and will correctly come
+# back "NR" here — that is a known limitation (full-text extraction is a human /
+# Milestone-2 step), not a gap to hide.
+#
+# POOLING:
+#   - pregnancy prolongation & birth weight = CONTINUOUS two-arm outcomes
+#     (pool: continuous); the engine pools with meta::metacont. Both are on
+#     natural, shared units (days; grams) so mean difference (MD) is appropriate.
+#   - all clinical events (fetal/neonatal death, SGA/IUGR composite, cesarean,
+#     RDS, IVH, NEC, ROP, sepsis, PPH, transfusion, HELLP, eclampsia, pulmonary
+#     edema) = BINARY event proportions (pool: proportion); risk ratios at the
+#     human stage.
+
+# Fields the screening stage already captures (echoed into the table for context).
+identity:
+  - first_author
+  - year
+  - study_name
+  - study_design        # RCT (parallel / crossover)
+  - formulation         # recombinant | plasma_derived   (PRIMARY subgroup axis)
+  - intervention        # e.g. recombinant human antithrombin, plasma-derived AT concentrate
+  - at_dose             # dosing regimen as reported (IU/kg, duration) — free text
+  - comparator_label    # placebo
+  - ga_at_enrollment    # gestational age at randomization (weeks) — free text
+  - nct                 # registration number, verified live
+
+# Core extraction fields. `level: abstract` = usually present in an abstract;
+# `level: fulltext` = usually only in full text (expect NR at the automated pass).
+fields:
+  population:
+    - {name: total_n, level: abstract}
+    - {name: n_intervention_arm, level: abstract}
+    - {name: n_comparator_arm, level: abstract}
+    - {name: mean_ga_enrollment_wk, level: fulltext}
+    - {name: pe_severity_definition, level: fulltext}  # how the trial defined early-onset severe PE
+
+  # PRIMARY: pregnancy prolongation (continuous, days from randomization to delivery, MD).
+  pregnancy_prolongation:
+    - name: prolongation_days
+      level: fulltext
+      pool: continuous
+      label: "Pregnancy prolongation — days from randomization to delivery (MD)"
+      beneficial: higher   # more days = better
+      pair:
+        n_tx: prol_n_tx
+        mean_tx: prol_mean_tx
+        sd_tx: prol_sd_tx
+        n_ctrl: prol_n_ctrl
+        mean_ctrl: prol_mean_ctrl
+        sd_ctrl: prol_sd_ctrl
+        # Optional median/IQR fallback (used when means/SDs are not reported):
+        median_tx: prol_median_tx
+        q1_tx: prol_q1_tx
+        q3_tx: prol_q3_tx
+        median_ctrl: prol_median_ctrl
+        q1_ctrl: prol_q1_ctrl
+        q3_ctrl: prol_q3_ctrl
+
+  # SECONDARY efficacy: birth weight (continuous, grams, MD).
+  birth_weight:
+    - name: birth_weight_g
+      level: fulltext
+      pool: continuous
+      label: "Birth weight (grams, MD)"
+      beneficial: higher
+      pair:
+        n_tx: bw_n_tx
+        mean_tx: bw_mean_tx
+        sd_tx: bw_sd_tx
+        n_ctrl: bw_n_ctrl
+        mean_ctrl: bw_mean_ctrl
+        sd_ctrl: bw_sd_ctrl
+        median_tx: bw_median_tx
+        q1_tx: bw_q1_tx
+        q3_tx: bw_q3_tx
+        median_ctrl: bw_median_ctrl
+        q1_ctrl: bw_q1_ctrl
+        q3_ctrl: bw_q3_ctrl
+
+  # SECONDARY efficacy: binary fetal/neonatal/delivery outcomes (event proportions).
+  fetal_neonatal_efficacy:
+    - {name: fetal_death_pct, level: abstract, pool: proportion, label: "Fetal death", beneficial: lower}
+    - {name: neonatal_death_pct, level: abstract, pool: proportion, label: "Neonatal death (<=28 days)", beneficial: lower}
+    - {name: sga_iugr_pct, level: abstract, pool: proportion, label: "SGA or IUGR (composite)", beneficial: lower}
+    - {name: cesarean_pct, level: abstract, pool: proportion, label: "Cesarean delivery", beneficial: lower}
+
+  # SECONDARY: severe neonatal complications (event proportions).
+  neonatal_complications:
+    - {name: rds_pct, level: fulltext, pool: proportion, label: "Respiratory distress syndrome (RDS)", beneficial: lower}
+    - {name: ivh_pct, level: fulltext, pool: proportion, label: "Intraventricular hemorrhage (IVH)", beneficial: lower}
+    - {name: nec_pct, level: fulltext, pool: proportion, label: "Necrotizing enterocolitis (NEC)", beneficial: lower}
+    - {name: rop_pct, level: fulltext, pool: proportion, label: "Retinopathy of prematurity (ROP)", beneficial: lower}
+    - {name: neonatal_sepsis_pct, level: fulltext, pool: proportion, label: "Neonatal sepsis", beneficial: lower}
+
+  # SECONDARY: maternal safety (event proportions).
+  maternal_safety:
+    - {name: pph_pct, level: fulltext, pool: proportion, label: "Postpartum hemorrhage (PPH)", beneficial: lower}
+    - {name: rbc_transfusion_pct, level: fulltext, pool: proportion, label: "Red blood cell transfusion", beneficial: lower}
+    - {name: hellp_pct, level: fulltext, pool: proportion, label: "HELLP syndrome", beneficial: lower}
+    - {name: eclampsia_pct, level: fulltext, pool: proportion, label: "Eclampsia", beneficial: lower}
+    - {name: pulmonary_edema_pct, level: fulltext, pool: proportion, label: "Pulmonary edema", beneficial: lower}
+
+# Rules the extraction prompt enforces.
+rules:
+  - "Copy values verbatim from the source text only. Do not use outside knowledge."
+  - "If a field is not stated in the source, set value to 'NR' (not reported)."
+  - "If a value is inferred/derived rather than stated, prefix with 'ESTIMATED:' and note the method."
+  - "For each non-NR numeric value, include the EXACT verbatim quote from the source that supports it."
+  - "For continuous outcomes (pregnancy prolongation, birth weight), record per-arm n, mean, and SD; if only median/IQR or median/range are reported, record those in the median/q1/q3 sub-fields and leave mean/sd as NR — do not convert."
+  - "For binary outcomes, record the number of events and the arm denominator (n events / n arm); do not report a percentage without its denominator."
+  - "Record SGA and IUGR together as the single composite sga_iugr_pct field, per protocol; note in the quote which construct (SGA, IUGR, or both) the trial reported."
+  - "Record the antithrombin formulation (recombinant vs plasma-derived) and dose exactly as reported; never infer formulation from the drug name alone if the source is ambiguous."

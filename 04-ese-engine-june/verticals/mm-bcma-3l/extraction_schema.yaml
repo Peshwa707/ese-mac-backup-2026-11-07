@@ -1,0 +1,23 @@
+# Data dictionary for the benchmark protocol. Field names match the engine's
+# poolable PROPORTION_FIELDS so the meta-analysis covers the protocol's outcomes.
+fields:
+  population:
+    - {name: total_n, level: abstract}
+    - {name: comparator_label, level: abstract}     # single-arm -> usually "single-arm"
+    - {name: pct_triple_class_refractory, level: abstract}
+    - {name: median_prior_lines, level: abstract}
+    - {name: pct_prior_bcma, level: fulltext}
+  efficacy:
+    - {name: complete_response_rate, level: abstract, pool: proportion, label: "Complete response rate (CR)"}   # PRIMARY outcome (CR)
+    - {name: orr, level: abstract, pool: proportion, label: "Overall response rate (ORR)"}
+  safety:
+    - {name: crs_any_grade, level: abstract, pool: proportion, label: "CRS (any grade)"}
+    - {name: crs_grade_3plus, level: abstract, pool: proportion, label: "CRS (grade >=3)"}
+    - {name: neutropenia_grade_3plus, level: fulltext, pool: proportion, label: "Neutropenia (grade >=3)"}
+    - {name: anemia_grade_3plus, level: fulltext, pool: proportion, label: "Anemia (grade >=3)"}
+
+rules:
+  - "Copy values verbatim from the source text only. Do not use outside knowledge."
+  - "If a field is not stated, set value to 'NR'. Derived values: prefix 'ESTIMATED:'."
+  - "For each non-NR numeric value, include the exact verbatim supporting quote."
+  - "Record the class (CAR-T or bispecific) in `modality`."

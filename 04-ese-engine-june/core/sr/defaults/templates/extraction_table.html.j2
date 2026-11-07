@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<title>Extraction — {{ run.review_title }}</title>
+<style>
+  body { font: 14px/1.5 -apple-system, Helvetica, Arial, sans-serif; color: #1c2b40; margin: 32px; background:#fafbfd; }
+  h1 { font-size: 20px; } h2 { font-size: 16px; margin: 4px 0 12px; }
+  .banner { background:#fff7e6; border:1px solid #d8a93a; border-radius:8px; padding:12px 16px; margin:16px 0; }
+  .study { border:1px solid #ccd6e6; border-radius:10px; padding:16px 20px; margin:18px 0; background:#fff; }
+  .study h3 { margin:0 0 6px; font-size:15px; }
+  .pmid { font-family: ui-monospace, monospace; color:#34507a; }
+  table { border-collapse: collapse; width:100%; margin:8px 0 14px; }
+  th, td { text-align:left; padding:6px 10px; border-bottom:1px solid #eef1f6; vertical-align:top; }
+  th { color:#5a6b85; font-weight:600; width:30%; }
+  .grp { margin-top:10px; color:#8a4a4a; font-weight:700; font-size:13px; text-transform:uppercase; letter-spacing:.04em; }
+  .nr { color:#9aa5b5; font-style:italic; }
+  .est { background:#fff3cd; }
+  .quote { color:#5a6b85; font-size:12px; font-style:italic; }
+  .foot { color:#6b7890; font-size:12px; margin-top:24px; }
+</style></head>
+<body>
+  <h1>Data Extraction (abstract-level, AI Reviewer 1 draft)</h1>
+  <h2>{{ run.review_title }}</h2>
+  <div class="banner">
+    <strong>Honesty notice.</strong> {{ run.disclaimer }}<br>
+    Values marked <span class="nr">NR</span> were not stated in the abstract (many efficacy/safety
+    numbers live only in full-text tables — that is expected at this stage, not a fabricated gap).
+    <span class="est">ESTIMATED</span> values are derived, not stated. Every non-NR value carries the
+    verbatim abstract quote supporting it. <strong>Requires independent human verification.</strong>
+  </div>
+
+  {% if not run.extractions %}
+    <p>No studies were included at screening, so there is nothing to extract. See the screening sheet.</p>
+  {% endif %}
+
+  {% for s in run.extractions %}
+  <div class="study">
+    <h3>{{ s.study_name or "Study" }}{% if s.modality %} — {{ s.modality }}{% endif %}
+        <span class="pmid">[PMID: {{ s.pmid }}]</span></h3>
+    {% if s.data_cut %}<div class="quote">Data cut: {{ s.data_cut }}</div>{% endif %}
+    {% for group in groups %}
+      {% set rows = s.values | selectattr("group", "equalto", group) | list %}
+      {% if rows %}
+      <div class="grp">{{ group }}</div>
+      <table>
+        {% for v in rows %}
+        <tr>
+          <th>{{ v.field }}</th>
+          <td class="{% if v.flag == 'NR' %}nr{% elif v.flag == 'ESTIMATED' %}est{% endif %}">
+            {{ v.value }}
+            {% if v.quote %}<div class="quote">“{{ v.quote }}”</div>{% endif %}
+          </td>
+        </tr>
+        {% endfor %}
+      </table>
+      {% endif %}
+    {% endfor %}
+    {% if s.extraction_notes %}<div class="quote">Notes: {{ s.extraction_notes }}</div>{% endif %}
+  </div>
+  {% endfor %}
+
+  <div class="foot">
+    Run {{ run.run_id[:8] }} · provenance {{ run.provenance_id[:8] }} ·
+    {{ run.extractions | length }} study/studies extracted.
+  </div>
+</body></html>

@@ -1,0 +1,57 @@
+{
+  "title": "ADHD, Autism, Developmental Coordination Disorder, and Adult Social Functioning",
+  "short_id": "ndem-b-overlap-social-dcd",
+  "framing": "pico",
+  "profile": "rapid",
+  "background": "This module evaluates overlap among ADHD, autism, and developmental coordination disorder and competing explanations for adult social and motor difficulties.",
+  "population": "Adolescents and adults with ADHD, autism-spectrum disorder or traits, developmental coordination disorder, or overlapping profiles.",
+  "intervention": "Single or co-occurring neurodevelopmental profiles, social-communication features, motor coordination, and developmental overlap.",
+  "comparator": "Neurotypical controls, single-diagnosis groups, or alternative psychiatric and contextual explanations.",
+  "outcomes_primary": [
+    {"name": "Diagnostic or trait overlap among ADHD, autism, and developmental coordination disorder", "pool_field": ""},
+    {"name": "Social-communication, peer, adaptive, and motor outcomes", "pool_field": ""}
+  ],
+  "outcomes_secondary": [
+    {"name": "Incremental explanatory value and alternative explanations", "pool_field": ""}
+  ],
+  "designs": ["systematic review", "meta-analysis", "diagnostic validation", "cohort", "case-control", "cross-sectional", "qualitative"],
+  "inclusion": [
+    "Adolescent or adult sample with ADHD, autism, developmental coordination disorder, or validated traits.",
+    "Reports overlap, differential diagnosis, social communication, peer functioning, adaptive functioning, or motor coordination.",
+    "Provides empirical comparative data or an authoritative evidence synthesis."
+  ],
+  "exclusion": [
+    "Pediatric-only sample with no relevance to persistence beyond adolescence.",
+    "No separable target neurodevelopmental group.",
+    "Opinion or advocacy without empirical data.",
+    "No outcome relevant to claims H5 or H11."
+  ],
+  "search": {
+    "concept_blocks": [
+      {"name": "conditions", "terms": ["ADHD", "autism", "autistic", "\"developmental coordination disorder\"", "dyspraxia"], "mesh": ["Attention Deficit Disorder with Hyperactivity", "Autism Spectrum Disorder", "Developmental Coordination Disorder"]},
+      {"name": "overlap_or_function", "terms": ["comorbidity", "overlap", "\"differential diagnosis\"", "\"social communication\"", "\"social functioning\"", "peer", "bullying", "literal", "\"motor coordination\"", "\"adaptive functioning\""], "mesh": []},
+      {"name": "age_or_design", "terms": ["adult", "adolescent", "cohort", "\"Systematic Review\"[pt]", "\"Meta-Analysis\"[pt]"], "mesh": []}
+    ],
+    "databases": ["PubMed", "Europe PMC", "PsycINFO", "Embase", "Scopus"],
+    "date_from": "",
+    "date_to": "2026/07/29",
+    "retmax": 300
+  },
+  "rob_tool": "auto",
+  "analysis": {
+    "effect_measure": "Narrative synthesis; no pooling across diagnostic constructs.",
+    "dose_response": false,
+    "subgroups": ["diagnosed conditions versus traits", "age", "sex or gender", "single versus overlapping diagnosis"],
+    "publication_bias": false
+  },
+  "extraction_groups": [
+    {"group": "identity", "fields": [{"name": "claim_ids"}, {"name": "study_design"}, {"name": "country"}, {"name": "funding_conflicts", "level": "fulltext"}]},
+    {"group": "population", "fields": [{"name": "total_n"}, {"name": "age_range"}, {"name": "diagnostic_method"}, {"name": "comparison_groups"}]},
+    {"group": "findings", "fields": [{"name": "outcome_measure"}, {"name": "effect_estimate"}, {"name": "confidence_interval"}, {"name": "direction"}, {"name": "incremental_validity"}, {"name": "supporting_quote"}]},
+    {"group": "appraisal", "fields": [{"name": "major_limitations"}, {"name": "alternative_explanations"}, {"name": "directness_to_claim"}]}
+  ],
+  "registration": "Protocol frozen for AI-assisted rapid review on 2026-07-29; not prospectively registered.",
+  "output_base": "/Users/neurologic/Documents/EvidenceEngine/neurodevelopmental-environmental-mismatch",
+  "disclaimer": "AI Reviewer-1 rapid-review draft. Human Reviewer 2 and clinical sign-off remain pending. Not diagnostic or treatment guidance."
+}
+

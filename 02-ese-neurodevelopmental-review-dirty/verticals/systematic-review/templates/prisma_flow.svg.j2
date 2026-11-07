@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="760" font-family="Helvetica, Arial, sans-serif" font-size="13">
+  <style>
+    .box { fill: #f4f7fb; stroke: #34507a; stroke-width: 1.5; rx: 6; }
+    .side { fill: #fbf4f4; stroke: #8a4a4a; stroke-width: 1.5; }
+    .phase { fill: #34507a; }
+    .phaselabel { fill: #ffffff; font-weight: bold; }
+    .t { fill: #1c2b40; }
+    .arrow { stroke: #34507a; stroke-width: 1.5; marker-end: url(#a); }
+  </style>
+  <defs>
+    <marker id="a" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#34507a"/>
+    </marker>
+  </defs>
+
+  <text x="320" y="24" text-anchor="middle" font-weight="bold" class="t">PRISMA 2020 Flow — {{ run.review_title[:70] }}{% if run.review_title|length > 70 %}…{% endif %}</text>
+
+  <!-- Identification -->
+  <rect class="phase" x="10" y="44" width="28" height="150" rx="4"/>
+  <text class="phaselabel" x="24" y="125" text-anchor="middle" transform="rotate(-90 24 125)">Identification</text>
+  <rect class="box" x="60" y="56" width="300" height="64" rx="6"/>
+  <text class="t" x="72" y="80">Records identified:</text>
+  <text class="t" x="72" y="100">  • PubMed/MEDLINE  n = {{ c.identified_pubmed }}</text>
+  <text class="t" x="72" y="116">  • Other sources    n = {{ c.identified_other_sources }}{% if run.sources_executed|reject('equalto','pubmed')|list %} ({{ run.sources_executed|reject('equalto','pubmed')|join(', ') }}){% endif %}</text>
+
+  <rect class="box" x="60" y="140" width="300" height="40" rx="6"/>
+  <text class="t" x="72" y="165">Records after duplicates removed  n = {{ c.after_dedup }}</text>
+  <line class="arrow" x1="210" y1="120" x2="210" y2="140"/>
+
+  <!-- Screening -->
+  <rect class="phase" x="10" y="210" width="28" height="320" rx="4"/>
+  <text class="phaselabel" x="24" y="370" text-anchor="middle" transform="rotate(-90 24 370)">Screening</text>
+
+  <rect class="side" x="400" y="140" width="220" height="40"/>
+  <text class="t" x="412" y="165">PMIDs not verified, removed  n = {{ c.id_unverified_removed }}</text>
+  <line class="arrow" x1="360" y1="160" x2="400" y2="160"/>
+
+  <rect class="side" x="400" y="186" width="220" height="28"/>
+  <text class="t" x="412" y="204">Excluded by publication type  n = {{ c.prescreen_excluded }}</text>
+  <line class="arrow" x1="360" y1="200" x2="400" y2="200"/>
+
+  <rect class="box" x="60" y="220" width="300" height="40" rx="6"/>
+  <text class="t" x="72" y="245">Records screened (verified)  n = {{ c.screened }}</text>
+  <line class="arrow" x1="210" y1="180" x2="210" y2="220"/>
+
+  <rect class="side" x="400" y="220" width="220" height="150"/>
+  <text class="t" x="412" y="242" font-weight="bold">Excluded at screening  n = {{ c.excluded_screening }}</text>
+  {% set y = 262 %}
+  {% for reason, n in run.exclusion_reasons.items() %}
+  <text class="t" x="412" y="{{ y + loop.index0 * 18 }}">  • {{ reason }}: {{ n }}</text>
+  {% endfor %}
+  <line class="arrow" x1="360" y1="240" x2="400" y2="240"/>
+
+  <rect class="box" x="60" y="300" width="300" height="40" rx="6"/>
+  <text class="t" x="72" y="325">Uncertain → full-text/human  n = {{ c.uncertain }}</text>
+  <line class="arrow" x1="210" y1="260" x2="210" y2="300"/>
+
+  <!-- Included -->
+  <rect class="phase" x="10" y="560" width="28" height="120" rx="4"/>
+  <text class="phaselabel" x="24" y="620" text-anchor="middle" transform="rotate(-90 24 620)">Included</text>
+  <rect class="box" x="60" y="580" width="300" height="48" rx="6"/>
+  <text class="t" x="72" y="600" font-weight="bold">Studies included (extracted)</text>
+  <text class="t" x="72" y="620">n = {{ c.included }}  (abstract-level extraction)</text>
+  <line class="arrow" x1="210" y1="340" x2="210" y2="580"/>
+
+  <text x="60" y="700" class="t" font-style="italic" font-size="11">First-pass (AI Reviewer 1). Counts are live from this run; every PMID verified against PubMed.</text>
+  <text x="60" y="718" class="t" font-style="italic" font-size="11">Run {{ run.run_id[:8] }} · provenance {{ run.provenance_id[:8] }}</text>
+</svg>

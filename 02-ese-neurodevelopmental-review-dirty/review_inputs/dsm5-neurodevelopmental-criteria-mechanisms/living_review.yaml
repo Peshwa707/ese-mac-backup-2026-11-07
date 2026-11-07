@@ -1,0 +1,28 @@
+version: "1.0.0"
+model: staged_snapshot_then_living
+baseline:
+  status: not_started
+  search_date: null
+  protocol_version: "1.0.0"
+updates:
+  cadence: quarterly
+  triggers:
+    - newly published diagnostic-validation evidence
+    - new randomized or controlled intervention evidence
+    - new guideline or safety signal
+    - material change in measurement standards
+  delta_artifacts:
+    - search_manifest.json
+    - screening_delta.json
+    - extraction_delta.json
+    - certainty_delta.json
+    - claim_change_log.json
+  merge_rule: "New verified records supersede prior records only with an explicit change reason and provenance."
+  no_silent_overwrite: true
+gates:
+  ai_reviewer_1: required_for_draft
+  ai_reviewer_2: required_for_ai_cross_check
+  human_reviewer_2: required_before_reconciliation
+  reconciliation: required_after_human_reviewer_2
+  clinical_signoff: required_before_public_clinical_package
+  publication_claims: prohibited_until_all_gates_pass

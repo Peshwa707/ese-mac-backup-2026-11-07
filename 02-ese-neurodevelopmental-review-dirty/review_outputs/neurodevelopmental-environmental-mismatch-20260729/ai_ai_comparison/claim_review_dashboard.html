@@ -1,0 +1,466 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="ADHD-friendly claim review dashboard for the Codex and Claude evidence review comparison.">
+  <title>Claim review dashboard · Codex + Claude</title>
+  <style>
+    :root {
+      --ink: #172033;
+      --muted: #5f6b7a;
+      --soft: #eef2f6;
+      --panel: #ffffff;
+      --canvas: #f7f8fa;
+      --line: #dce3ea;
+      --navy: #17324d;
+      --blue: #2b6cb0;
+      --blue-soft: #e5f0fb;
+      --green: #176b4d;
+      --green-soft: #e4f4ed;
+      --amber: #8a5a00;
+      --amber-soft: #fff4d8;
+      --red: #9a3434;
+      --red-soft: #fde9e9;
+      --purple: #6841a3;
+      --purple-soft: #f1eafd;
+      --shadow: 0 10px 30px rgba(23, 32, 51, .07);
+      --radius: 16px;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--canvas);
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.5;
+    }
+    button, input, select { font: inherit; }
+    button { cursor: pointer; }
+    a { color: var(--blue); }
+    :focus-visible { outline: 3px solid #f0b429; outline-offset: 3px; }
+
+    .topbar {
+      background: var(--navy);
+      color: #fff;
+      padding: 18px clamp(18px, 5vw, 72px);
+    }
+    .topbar-inner, .page { max-width: 1180px; margin: 0 auto; }
+    .eyebrow {
+      margin: 0 0 4px;
+      color: #bcd7ed;
+      font-size: .78rem;
+      font-weight: 750;
+      letter-spacing: .09em;
+      text-transform: uppercase;
+    }
+    h1, h2, h3 { line-height: 1.15; }
+    h1 { margin: 0; font-size: clamp(1.5rem, 3vw, 2.2rem); }
+    .subtitle { margin: 8px 0 0; color: #d9e6f2; max-width: 760px; }
+
+    .page { padding: 26px clamp(16px, 4vw, 48px) 64px; }
+    .notice {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      margin-bottom: 22px;
+      padding: 16px 18px;
+      border: 1px solid #f0d28d;
+      border-radius: var(--radius);
+      background: #fffaf0;
+    }
+    .notice strong { color: #684400; }
+    .notice p { margin: 0; }
+    .notice .icon { flex: 0 0 auto; font-size: 1.25rem; }
+
+    .focus-card {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 18px;
+      align-items: center;
+      margin-bottom: 24px;
+      padding: 22px;
+      border: 1px solid #cbdcf0;
+      border-left: 6px solid var(--blue);
+      border-radius: var(--radius);
+      background: var(--panel);
+      box-shadow: var(--shadow);
+    }
+    .focus-card h2 { margin: 0 0 6px; font-size: 1.12rem; }
+    .focus-card p { margin: 0; color: var(--muted); }
+    .primary-btn {
+      border: 0;
+      border-radius: 10px;
+      padding: 11px 15px;
+      background: var(--blue);
+      color: #fff;
+      font-weight: 750;
+      white-space: nowrap;
+    }
+    .primary-btn:hover { background: #20558e; }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+    .stat {
+      min-height: 112px;
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: var(--panel);
+    }
+    .stat .number { display: block; font-size: 1.8rem; font-weight: 800; }
+    .stat .label { color: var(--muted); font-size: .9rem; }
+    .stat[data-tone="green"] { border-top: 4px solid var(--green); }
+    .stat[data-tone="amber"] { border-top: 4px solid #d99a00; }
+    .stat[data-tone="purple"] { border-top: 4px solid var(--purple); }
+    .stat[data-tone="red"] { border-top: 4px solid var(--red); }
+
+    .layout { display: grid; grid-template-columns: minmax(0, 1.7fr) minmax(260px, .8fr); gap: 22px; align-items: start; }
+    .panel { border: 1px solid var(--line); border-radius: var(--radius); background: var(--panel); box-shadow: var(--shadow); }
+    .panel-header { padding: 20px 20px 0; }
+    .panel-header h2 { margin: 0; font-size: 1.25rem; }
+    .panel-header p { margin: 7px 0 0; color: var(--muted); }
+
+    .controls { padding: 18px 20px 20px; border-bottom: 1px solid var(--line); }
+    .search-row { display: flex; gap: 10px; }
+    .search-row input { flex: 1; min-width: 0; }
+    input, select {
+      width: 100%;
+      border: 1px solid #bac6d2;
+      border-radius: 10px;
+      background: #fff;
+      color: var(--ink);
+      padding: 10px 12px;
+    }
+    .filter-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+    .filter {
+      border: 1px solid #c5d0da;
+      border-radius: 999px;
+      padding: 7px 11px;
+      background: #fff;
+      color: var(--ink);
+      font-size: .88rem;
+      font-weight: 650;
+    }
+    .filter[aria-pressed="true"] { border-color: var(--blue); background: var(--blue-soft); color: #174b7c; }
+    .filter[data-filter="strongest"][aria-pressed="true"] { border-color: var(--green); background: var(--green-soft); color: var(--green); }
+    .filter[data-filter="indeterminate"][aria-pressed="true"] { border-color: var(--purple); background: var(--purple-soft); color: var(--purple); }
+    .filter[data-filter="not-advanced"][aria-pressed="true"] { border-color: var(--red); background: var(--red-soft); color: var(--red); }
+    .filter[data-filter="material"][aria-pressed="true"] { border-color: #b67800; background: var(--amber-soft); color: var(--amber); }
+    .select-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 12px; }
+    .control-label { display: block; margin-bottom: 5px; color: var(--muted); font-size: .8rem; font-weight: 700; }
+    .result-count { margin: 15px 20px 0; color: var(--muted); font-size: .9rem; }
+
+    .claims { display: grid; gap: 10px; padding: 14px 20px 22px; }
+    .claim-card {
+      border: 1px solid var(--line);
+      border-radius: 13px;
+      background: #fff;
+      overflow: hidden;
+    }
+    .claim-card summary {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px;
+      list-style: none;
+      cursor: pointer;
+    }
+    .claim-card summary::-webkit-details-marker { display: none; }
+    .claim-card summary::before { content: "＋"; color: var(--muted); font-size: 1.1rem; font-weight: 700; }
+    .claim-card[open] summary::before { content: "−"; }
+    .claim-id { min-width: 50px; font-weight: 800; }
+    .claim-title { flex: 1; min-width: 0; font-weight: 700; }
+    .badges { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 6px; }
+    .badge { display: inline-flex; align-items: center; border-radius: 999px; padding: 3px 8px; font-size: .75rem; font-weight: 800; white-space: nowrap; }
+    .badge.strongest { background: var(--green-soft); color: var(--green); }
+    .badge.intermediate { background: var(--amber-soft); color: var(--amber); }
+    .badge.indeterminate { background: var(--purple-soft); color: var(--purple); }
+    .badge.not-advanced { background: var(--red-soft); color: var(--red); }
+    .badge.material { background: #fff0c2; color: #805300; }
+    .badge.neutral { background: var(--soft); color: var(--muted); }
+    .claim-detail { padding: 0 18px 17px 48px; }
+    .claim-detail p { margin: 0 0 12px; }
+    .claim-text { font-size: 1rem; }
+    .review-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 12px 0; }
+    .review-box { padding: 11px; border-radius: 10px; background: var(--soft); }
+    .review-box strong { display: block; font-size: .82rem; }
+    .review-box span { color: var(--muted); font-size: .88rem; }
+    .next-action { padding: 11px 12px; border-left: 4px solid var(--blue); border-radius: 7px; background: #f1f7fd; color: #234b70; }
+    .next-action strong { display: block; margin-bottom: 2px; }
+
+    .side { display: grid; gap: 16px; }
+    .side-card { padding: 18px; }
+    .side-card h2 { margin: 0 0 10px; font-size: 1.05rem; }
+    .side-card p { margin: 7px 0; color: var(--muted); font-size: .92rem; }
+    .side-card ul { margin: 8px 0 0; padding-left: 20px; color: var(--muted); }
+    .side-card li { margin: 7px 0; }
+    .legend-row { display: flex; gap: 8px; align-items: center; margin: 9px 0; font-size: .9rem; }
+    .links a { display: block; margin: 9px 0; font-weight: 650; }
+    .loading, .empty { padding: 30px 20px; color: var(--muted); text-align: center; }
+    .error { margin: 14px 20px; padding: 13px; border-radius: 10px; background: var(--red-soft); color: var(--red); }
+    .footer { margin-top: 24px; color: var(--muted); font-size: .82rem; }
+
+    @media (max-width: 880px) {
+      .layout { grid-template-columns: 1fr; }
+      .side { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @media (max-width: 680px) {
+      .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .stats .stat:first-child { grid-column: span 2; }
+      .focus-card { grid-template-columns: 1fr; }
+      .side { grid-template-columns: 1fr; }
+      .select-row, .review-grid { grid-template-columns: 1fr; }
+      .claim-card summary { align-items: flex-start; flex-wrap: wrap; }
+      .badges { justify-content: flex-start; width: 100%; padding-left: 60px; }
+      .claim-detail { padding-left: 18px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <p class="eyebrow">Evidence review · quick-scan dashboard</p>
+      <h1>Codex + Claude claim map</h1>
+      <p class="subtitle">A focused view of what is most supported, partly supported, unresolved, or not ready to advance.</p>
+    </div>
+  </header>
+
+  <main class="page">
+    <section class="notice" aria-label="Review boundary">
+      <div class="icon" aria-hidden="true">⚠</div>
+      <p><strong>This is a draft AI–AI synthesis.</strong> It is not Human Reviewer 2, formal risk-of-bias/GRADE completion, clinical sign-off, diagnosis, or treatment guidance.</p>
+    </section>
+
+    <section class="focus-card" aria-labelledby="focus-title">
+      <div>
+        <h2 id="focus-title">ONE next action</h2>
+        <p>Start with the <strong>9 material disagreements</strong>, then review claims where the two reviewers disagree about directness to the case.</p>
+      </div>
+      <button class="primary-btn" id="focusButton" type="button">Show material disagreements</button>
+    </section>
+
+    <section class="stats" aria-label="Claim totals">
+      <div class="stat"><span class="number" id="statTotal">—</span><span class="label">claims paired</span></div>
+      <div class="stat" data-tone="green"><span class="number" id="statStrongest">—</span><span class="label">most supported</span></div>
+      <div class="stat" data-tone="amber"><span class="number" id="statIntermediate">—</span><span class="label">intermediate</span></div>
+      <div class="stat" data-tone="purple"><span class="number" id="statIndeterminate">—</span><span class="label">indeterminate</span></div>
+      <div class="stat" data-tone="red"><span class="number" id="statNotAdvanced">—</span><span class="label">not advanced</span></div>
+    </section>
+
+    <div class="layout">
+      <section class="panel" aria-labelledby="claims-title">
+        <div class="panel-header">
+          <h2 id="claims-title">Claim cards</h2>
+          <p>Open one card at a time. Use the filters to reduce the review surface.</p>
+        </div>
+        <div class="controls">
+          <div class="search-row">
+            <label class="sr-only" for="search">Search claims</label>
+            <input id="search" type="search" placeholder="Search by claim ID or wording…" autocomplete="off">
+          </div>
+          <div class="filter-row" role="toolbar" aria-label="Claim category filters">
+            <button class="filter" data-filter="all" aria-pressed="true" type="button">All</button>
+            <button class="filter" data-filter="strongest" aria-pressed="false" type="button">Most supported</button>
+            <button class="filter" data-filter="intermediate" aria-pressed="false" type="button">Intermediate</button>
+            <button class="filter" data-filter="indeterminate" aria-pressed="false" type="button">Indeterminate</button>
+            <button class="filter" data-filter="not-advanced" aria-pressed="false" type="button">Not advanced</button>
+            <button class="filter" data-filter="material" aria-pressed="false" type="button">Material disagreement</button>
+          </div>
+          <div class="select-row">
+            <div>
+              <label class="control-label" for="certainty">Reviewer certainty</label>
+              <select id="certainty">
+                <option value="all">Any certainty</option>
+                <option value="high">High</option>
+                <option value="moderate">Moderate</option>
+                <option value="low">Low</option>
+                <option value="very low">Very low</option>
+              </select>
+            </div>
+            <div>
+              <label class="control-label" for="sort">Sort</label>
+              <select id="sort">
+                <option value="protocol">Protocol order</option>
+                <option value="priority">Review priority</option>
+                <option value="certainty">Highest certainty</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="result-count" id="resultCount" aria-live="polite">Loading claims…</div>
+        <div class="claims" id="claims" aria-live="polite">
+          <div class="loading">Loading the claim comparison…</div>
+        </div>
+      </section>
+
+      <aside class="side" aria-label="Review orientation">
+        <section class="panel side-card">
+          <h2>Start here</h2>
+          <ul>
+            <li>Material disagreements first.</li>
+            <li>Then check directness-to-case.</li>
+            <li>Keep indeterminate claims as evidence gaps.</li>
+          </ul>
+        </section>
+        <section class="panel side-card">
+          <h2>Label key</h2>
+          <div class="legend-row"><span class="badge strongest">Most supported</span><span>Both supported</span></div>
+          <div class="legend-row"><span class="badge intermediate">Intermediate</span><span>Partial or mixed</span></div>
+          <div class="legend-row"><span class="badge indeterminate">Indeterminate</span><span>Evidence insufficient</span></div>
+          <div class="legend-row"><span class="badge not-advanced">Not advanced</span><span>Unsupported or unresolved</span></div>
+        </section>
+        <section class="panel side-card">
+          <h2>Gate status</h2>
+          <p><strong>AI secondary review:</strong> complete</p>
+          <p><strong>AI–AI reconciliation:</strong> draft</p>
+          <p><strong>Human Reviewer 2:</strong> pending</p>
+          <p><strong>Clinical sign-off:</strong> pending</p>
+        </section>
+        <section class="panel side-card links">
+          <h2>Source files</h2>
+          <a href="./plain_language_learning_points.md">Read the plain-language learning points</a>
+          <a href="./two_reviewer_claim_certainty_summary.md">Read the Markdown summary</a>
+          <a href="./ai_reviewer_comparison.md">Open the full comparison</a>
+          <a href="./claim_level_comparison.csv">Open the claim CSV</a>
+          <a href="../claude_ai_reviewer_2/systematic_evidence_review_full.pdf">Open Claude’s PDF</a>
+        </section>
+      </aside>
+    </div>
+
+    <p class="footer">Local-only dashboard. It reads the adjacent <code>claim_level_comparison.csv</code>; no external services or data are used.</p>
+  </main>
+
+  <script>
+    const state = { claims: [], filter: 'all', search: '', certainty: 'all', sort: 'protocol' };
+    const verdictRank = { unsupported: 0, indeterminate: 1, 'partially supported': 2, supported: 3 };
+    const certaintyRank = { 'very low': 0, low: 1, moderate: 2, high: 3 };
+
+    function parseCSV(text) {
+      const rows = [];
+      let row = [], cell = '', quoted = false;
+      for (let i = 0; i < text.length; i += 1) {
+        const ch = text[i], next = text[i + 1];
+        if (quoted) {
+          if (ch === '"' && next === '"') { cell += '"'; i += 1; }
+          else if (ch === '"') quoted = false;
+          else cell += ch;
+        } else if (ch === '"') quoted = true;
+        else if (ch === ',') { row.push(cell); cell = ''; }
+        else if (ch === '\n') { row.push(cell.replace(/\r$/, '')); rows.push(row); row = []; cell = ''; }
+        else cell += ch;
+      }
+      if (cell || row.length) { row.push(cell); rows.push(row); }
+      const headers = rows.shift() || [];
+      return rows.filter(r => r.length && r.some(Boolean)).map(r => Object.fromEntries(headers.map((h, i) => [h, r[i] || ''])));
+    }
+
+    function categoryFor(row) {
+      const a = row.reviewer_1_verdict, b = row.reviewer_2_verdict;
+      if (a === 'supported' && b === 'supported') return 'strongest';
+      if ((a === 'unsupported' && (b === 'unsupported' || b === 'indeterminate')) || (b === 'unsupported' && a === 'indeterminate')) return 'not-advanced';
+      if (a === 'indeterminate' && b === 'indeterminate') return 'indeterminate';
+      return 'intermediate';
+    }
+
+    function prepare(rows) {
+      return rows.map((row, index) => ({
+        ...row,
+        order: index,
+        category: categoryFor(row),
+        material: row.material_disagreement === 'True',
+        evidenceCount: (row.reviewer_1_evidence_module_pmid_occurrences || '').split(';').filter(Boolean).length + (row.reviewer_2_evidence_module_pmid_occurrences || '').split(';').filter(Boolean).length,
+      }));
+    }
+
+    function clean(text) { return String(text || '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' }[c])); }
+    function labelFor(category) { return ({ strongest: 'Most supported', intermediate: 'Intermediate', indeterminate: 'Indeterminate', 'not-advanced': 'Not advanced' }[category]); }
+    function nextAction(row) {
+      if (row.material) return 'Human adjudication: compare both evidence sets and resolve the disagreement before synthesis.';
+      if (row.category === 'strongest') return 'Verify full text and risk of bias before using this as a high-confidence conclusion.';
+      if (row.category === 'indeterminate') return 'Record as an evidence gap unless new direct evidence is found.';
+      if (row.category === 'not-advanced') return 'Do not advance this claim; check whether a new search is justified.';
+      return 'Use bounded wording and check directness, competing explanations, and full-text evidence.';
+    }
+
+    function visibleRows() {
+      const q = state.search.trim().toLowerCase();
+      let rows = state.claims.filter(row => {
+        const text = `${row.claim_id} ${row.reviewer_2_calibrated_claim}`.toLowerCase();
+        const matchesSearch = !q || text.includes(q);
+        const matchesFilter = state.filter === 'all' || (state.filter === 'material' ? row.material : row.category === state.filter);
+        const matchesCertainty = state.certainty === 'all' || row.reviewer_1_certainty === state.certainty || row.reviewer_2_certainty === state.certainty;
+        return matchesSearch && matchesFilter && matchesCertainty;
+      });
+      if (state.sort === 'priority') rows.sort((a, b) => Number(b.material) - Number(a.material) || b.evidenceCount - a.evidenceCount || a.order - b.order);
+      if (state.sort === 'certainty') rows.sort((a, b) => Math.max(certaintyRank[b.reviewer_1_certainty] || 0, certaintyRank[b.reviewer_2_certainty] || 0) - Math.max(certaintyRank[a.reviewer_1_certainty] || 0, certaintyRank[a.reviewer_2_certainty] || 0) || a.order - b.order);
+      return rows;
+    }
+
+    function renderStats() {
+      const counts = Object.fromEntries(['strongest', 'intermediate', 'indeterminate', 'not-advanced'].map(k => [k, state.claims.filter(r => r.category === k).length]));
+      document.querySelector('#statTotal').textContent = state.claims.length;
+      document.querySelector('#statStrongest').textContent = counts.strongest;
+      document.querySelector('#statIntermediate').textContent = counts.intermediate;
+      document.querySelector('#statIndeterminate').textContent = counts.indeterminate;
+      document.querySelector('#statNotAdvanced').textContent = counts['not-advanced'];
+    }
+
+    function render() {
+      const rows = visibleRows();
+      const container = document.querySelector('#claims');
+      document.querySelector('#resultCount').textContent = `${rows.length} of ${state.claims.length} claims shown`;
+      if (!rows.length) { container.innerHTML = '<div class="empty">No claims match those filters. Try “All” or clear the search.</div>'; return; }
+      container.innerHTML = rows.map(row => `
+        <details class="claim-card" ${row.material ? 'data-material="true"' : ''}>
+          <summary>
+            <span class="claim-id">${clean(row.claim_id)}</span>
+            <span class="claim-title">${clean(row.reviewer_2_calibrated_claim)}</span>
+            <span class="badges">
+              <span class="badge ${row.category}">${labelFor(row.category)}</span>
+              ${row.material ? '<span class="badge material">Material</span>' : ''}
+            </span>
+          </summary>
+          <div class="claim-detail">
+            <p class="claim-text">${clean(row.reviewer_2_calibrated_claim)}</p>
+            <div class="review-grid">
+              <div class="review-box"><strong>Primary reviewer</strong><span>${clean(row.reviewer_1_verdict)} · ${clean(row.reviewer_1_certainty)} certainty</span></div>
+              <div class="review-box"><strong>Claude reviewer</strong><span>${clean(row.reviewer_2_verdict)} · ${clean(row.reviewer_2_certainty)} certainty</span></div>
+            </div>
+            <p class="next-action"><strong>Next action</strong>${nextAction(row)}</p>
+          </div>
+        </details>`).join('');
+    }
+
+    function setFilter(filter) {
+      state.filter = filter;
+      document.querySelectorAll('.filter').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.filter === filter)));
+      render();
+    }
+
+    async function loadData() {
+      try {
+        const response = await fetch('./claim_level_comparison.csv', { cache: 'no-store' });
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        state.claims = prepare(parseCSV(await response.text()));
+        renderStats(); render();
+      } catch (error) {
+        document.querySelector('#resultCount').textContent = 'Data not loaded';
+        document.querySelector('#claims').innerHTML = `<div class="error"><strong>Start the local page through a small web server.</strong><br>From this folder run <code>python3 -m http.server 8765</code>, then open <code>http://localhost:8765/claim_review_dashboard.html</code>. Direct file opening can block CSV loading in the browser.</div>`;
+      }
+    }
+
+    document.querySelectorAll('.filter').forEach(button => button.addEventListener('click', () => setFilter(button.dataset.filter)));
+    document.querySelector('#search').addEventListener('input', event => { state.search = event.target.value; render(); });
+    document.querySelector('#certainty').addEventListener('change', event => { state.certainty = event.target.value; render(); });
+    document.querySelector('#sort').addEventListener('change', event => { state.sort = event.target.value; render(); });
+    document.querySelector('#focusButton').addEventListener('click', () => { setFilter('material'); document.querySelector('#claims-title').scrollIntoView({ behavior: 'smooth', block: 'start' }); });
+    loadData();
+  </script>
+</body>
+</html>

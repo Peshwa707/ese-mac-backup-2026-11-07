@@ -1,0 +1,131 @@
+# Search strategy for the antithrombin / early-onset pre-eclampsia vertical (Step 3).
+# core/sr reads this. PubMed is executed live; databases requiring institutional
+# access (Web of Science, Scopus, CENTRAL) are produced for the reproducible
+# record and flagged "not executed" until run through an institutional gateway.
+#
+# Encodes the protocol's three-block search verbatim:
+#   Block 1 (drug):     antithrombin family terms
+#   Block 2 (disease):  pre-eclampsia / eclampsia / HELLP / toxaemia terms
+#   Block 3 (pregnancy): pregnancy / gestation / obstetric / maternal terms
+
+disclaimer: >
+  Search executed without outcome, date, or language filters per protocol, to
+  avoid missing eligible studies. Reference lists of eligible trials are manually
+  cross-checked to identify additional eligible studies (handled at the human
+  reference-mining step). The PubMed string is size-checked live via NCBI
+  E-utilities esearch (count only) before the screening pass; the antithrombin +
+  pre-eclampsia intersection is expected to be small (a handful of RCTs).
+
+# --- PubMed / MEDLINE (executed live) -------------------------------------
+# Three blocks AND-ed exactly as the protocol specifies. Truncation wildcards
+# (preeclamp*, eclamp*, pregnan*, gestation*, obstetric*) use PubMed's [tiab]
+# wildcard; phrase terms are quoted. AT-III / AT III variants included.
+pubmed:
+  executed: true
+  query: >
+    (antithrombin[tiab] OR "antithrombin III"[tiab] OR "antithrombin concentrate"[tiab]
+    OR "AT III"[tiab] OR "AT-III"[tiab] OR "recombinant antithrombin"[tiab]
+    OR "plasma-derived antithrombin"[tiab]) AND
+    ("pre-eclampsia"[tiab] OR preeclampsia[tiab] OR "pre eclampsia"[tiab]
+    OR preeclamp*[tiab] OR pre-eclamp*[tiab] OR eclamp*[tiab] OR "HELLP syndrome"[tiab]
+    OR "toxemia of pregnancy"[tiab] OR "toxaemia of pregnancy"[tiab]) AND
+    (pregnan*[tiab] OR gestation*[tiab] OR obstetric*[tiab] OR maternal[tiab]
+    OR antenatal[tiab] OR antepartum[tiab] OR "ante partum"[tiab])
+  retmax: 2000
+
+# --- Europe PMC (executed live; free) --------------------------------------
+# Europe PMC searches FULL TEXT by default, so an unfielded query is far broader
+# than PubMed's [tiab] (≈1,700 vs 274). TITLE_ABS: restricts to title/abstract,
+# making it comparable to the PubMed strategy (≈193) and tractable to screen.
+europepmc:
+  executed: true
+  query: >
+    (TITLE_ABS:antithrombin OR TITLE_ABS:"antithrombin III" OR
+    TITLE_ABS:"antithrombin concentrate" OR TITLE_ABS:"AT III" OR TITLE_ABS:"AT-III"
+    OR TITLE_ABS:"recombinant antithrombin" OR TITLE_ABS:"plasma-derived antithrombin")
+    AND (TITLE_ABS:"pre-eclampsia" OR TITLE_ABS:preeclampsia OR TITLE_ABS:"pre eclampsia"
+    OR TITLE_ABS:preeclamp* OR TITLE_ABS:eclamp* OR TITLE_ABS:"HELLP syndrome"
+    OR TITLE_ABS:"toxemia of pregnancy" OR TITLE_ABS:"toxaemia of pregnancy")
+    AND (TITLE_ABS:pregnan* OR TITLE_ABS:gestation* OR TITLE_ABS:obstetric*
+    OR TITLE_ABS:maternal OR TITLE_ABS:antenatal OR TITLE_ABS:antepartum)
+  page_size: 1000
+
+# --- ClinicalTrials.gov (executed live; free; trial registrations) ---------
+clinicaltrials:
+  executed: true
+  query: "antithrombin pre-eclampsia preeclampsia pregnancy randomized"
+
+# --- Web of Science (Clarivate Starter API; credentialed) ------------------
+# Live via the WoS Starter API when a WOS_STARTER_KEY is set in
+# ~/.config/ese/providers.env (free Starter tier = 50 requests/day; get a key at
+# developer.clarivate.com). With no key the connector self-skips (unavailable),
+# so leaving this executed is safe. Uses WoS advanced-search field tags (TS= topic).
+webofscience:
+  executed: true
+  db: WOS
+  query: >
+    TS=((antithrombin OR "antithrombin III" OR "AT III" OR "AT-III" OR
+    "recombinant antithrombin" OR "plasma-derived antithrombin") AND
+    ("pre-eclampsia" OR preeclampsia OR "pre eclampsia" OR preeclamp* OR eclamp*
+    OR "HELLP syndrome" OR "toxemia of pregnancy" OR "toxaemia of pregnancy") AND
+    (pregnan* OR gestation* OR obstetric* OR maternal OR antenatal OR antepartum))
+
+# --- Scopus (Elsevier Search API; credentialed) ----------------------------
+# Live when SCOPUS_API_KEY is set in ~/.config/ese/providers.env; full results
+# also need SCOPUS_INSTTOKEN (institutional token) or the subscribing institution's
+# network. With no key the connector self-skips (unavailable). Uses Scopus
+# TITLE-ABS-KEY() field syntax.
+scopus:
+  executed: true
+  view: STANDARD
+  query: >
+    TITLE-ABS-KEY((antithrombin OR "antithrombin III" OR "AT III" OR "AT-III" OR
+    "recombinant antithrombin" OR "plasma-derived antithrombin") AND
+    ("pre-eclampsia" OR preeclampsia OR "pre eclampsia" OR preeclamp* OR eclamp*
+    OR "HELLP syndrome" OR "toxemia of pregnancy" OR "toxaemia of pregnancy") AND
+    (pregnan* OR gestation* OR obstetric* OR maternal OR antenatal OR antepartum))
+
+# --- Databases requiring institutional access (strings only, NOT executed) -
+# Produced so the search record is reproducible and honest (the protocol names
+# PubMed, Web of Science, CENTRAL, and Scopus).
+other_databases:
+  - name: CENTRAL
+    executed: false
+    note: "Cochrane CENTRAL (free text). Not executed in the automated pass; run via institutional gateway."
+    query: >
+      (antithrombin OR "antithrombin III" OR "AT III" OR "AT-III" OR
+      "recombinant antithrombin" OR "plasma-derived antithrombin") AND
+      ("pre-eclampsia" OR preeclampsia OR eclampsia OR "HELLP syndrome" OR
+      "toxaemia of pregnancy") AND (pregnancy OR gestation OR obstetric OR maternal)
+  - name: Web of Science
+    executed: false
+    note: "Topic search (TS=). Not executed in the automated pass."
+    query: >
+      TS=((antithrombin OR "antithrombin III" OR "AT III" OR "AT-III" OR
+      "recombinant antithrombin" OR "plasma-derived antithrombin") AND
+      ("pre-eclampsia" OR preeclampsia OR "pre eclampsia" OR preeclamp* OR eclamp*
+      OR "HELLP syndrome" OR "toxemia of pregnancy" OR "toxaemia of pregnancy") AND
+      (pregnan* OR gestation* OR obstetric* OR maternal OR antenatal OR antepartum))
+  - name: Scopus
+    executed: false
+    note: "TITLE-ABS-KEY search. Not executed in the automated pass."
+    query: >
+      TITLE-ABS-KEY((antithrombin OR "antithrombin III" OR "AT III" OR "AT-III" OR
+      "recombinant antithrombin" OR "plasma-derived antithrombin") AND
+      ("pre-eclampsia" OR preeclampsia OR "pre eclampsia" OR preeclamp* OR eclamp*
+      OR "HELLP syndrome" OR "toxemia of pregnancy" OR "toxaemia of pregnancy") AND
+      (pregnan* OR gestation* OR obstetric* OR maternal OR antenatal OR antepartum))
+
+# --- Supplementary searches ------------------------------------------------
+# Reference lists of eligible trials are hand-cross-checked (protocol). Named
+# anchor trials left for the human team; the largest RCT in this space is the
+# Japanese plasma-derived AT trial (Paidas/KYORIN-type program) — flagged for
+# manual confirmation, not asserted here.
+named_trials: []
+
+reference_mining_seeds: []
+
+conference_abstract_targets:
+  executed: false
+  note: "Obstetric/perinatal congresses are not in the PubMed API; flagged for manual search."
+  venues: [SMFM, ISSHP, "FIGO", "World Congress on Controversies in Obstetrics"]

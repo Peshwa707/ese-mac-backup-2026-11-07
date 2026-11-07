@@ -1,0 +1,12 @@
+__pycache__/
+.pytest_cache/
+.coverage
+.venv/
+*.pyc
+*.log
+data/
+runs/
+.DS_Store
+
+# dual-review / agenttalk runtime
+.agenttalk/

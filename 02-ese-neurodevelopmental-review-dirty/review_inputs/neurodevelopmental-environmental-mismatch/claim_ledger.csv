@@ -1,0 +1,68 @@
+claim_id,module,claim_text,claim_role
+H1.1,A,"ADHD-related executive difficulties can begin in childhood.",hypothesis
+H1.2,A,"ADHD-related executive difficulties can persist through adolescence.",hypothesis
+H1.3,A,"ADHD-related executive difficulties can persist into adulthood.",hypothesis
+H1.4,A,"Persistent ADHD traits can impair more than one life setting.",hypothesis
+H1.N1,A,"Adult difficulties may instead begin after mood, sleep, trauma, substance, medication, or occupational changes.",counterclaim
+H2.1,A,"High academic or intellectual achievement is compatible with clinically meaningful impairment.",hypothesis
+H2.2,A,"Higher intelligence can delay recognition of ADHD or autistic impairment.",hypothesis
+H2.3,A,"Compensation can preserve achievement while increasing effort or instability.",hypothesis
+H2.4,A,"Achievement alone does not establish compensation or masking.",qualification
+H2.N1,A,"Observed achievement may reflect efficient independent functioning rather than hidden impairment.",counterclaim
+H3.1,C,"Interest can moderate attention or task performance in ADHD.",hypothesis
+H3.2,C,"Novelty can moderate attention or task performance in ADHD.",hypothesis
+H3.3,C,"Reward and immediate feedback can moderate ADHD task performance.",hypothesis
+H3.4,C,"Urgency or deadlines can alter task initiation or performance.",hypothesis
+H3.5,C,"Motivational effects may be nonspecific rather than unique to ADHD.",counterclaim
+H4.1,D,"Checklists and reminders can improve real-world task performance.",hypothesis
+H4.2,D,"ADHD coaching or executive-function-focused CBT can improve functioning.",hypothesis
+H4.3,D,"Digital aids or assistive technology can support executive functioning.",hypothesis
+H4.4,D,"Occupational or educational redesign can reduce functional impairment.",hypothesis
+H4.5,D,"AI-assisted organization has evidence for durable clinical benefit.",hypothesis
+H4.6,D,"External scaffolds can have limited durability, dependence, burden, or harms.",qualification
+H5.1,B,"ADHD is associated with social and peer difficulties.",hypothesis
+H5.2,B,"Autistic features can explain additional social-communication variance beyond ADHD.",hypothesis
+H5.3,B,"Anxiety, trauma, mood state, substances, or conflict can explain social difficulties.",counterclaim
+H5.4,B,"Multiple interacting conditions may explain social difficulties better than one diagnosis.",qualification
+H6.1,C,"Person-environment fit can moderate neurodevelopmental impairment.",hypothesis
+H6.2,C,"Autonomy, meaning, or task fit can improve functioning.",hypothesis
+H6.3,C,"Standardized or repetitive demands can amplify impairment.",hypothesis
+H6.4,C,"Severity, burnout, workload, or interpersonal conflict may explain apparent mismatch effects.",counterclaim
+H7.1,E1,"Short or inadequate sleep can worsen attention and executive functioning.",hypothesis
+H7.2,E1,"Sleep quality and circadian irregularity can worsen ADHD-related functioning.",hypothesis
+H7.3,E1,"Shift work can impair sleep, cognition, or mood.",hypothesis
+H7.4,E1,"Within-person symptom variation can track sleep changes.",hypothesis
+H7.5,E1,"Sleep loss can precipitate or amplify bipolar-spectrum mood symptoms.",hypothesis
+H7.N1,E1,"Some apparent sleep effects may reflect reverse causation from mood or baseline severity.",counterclaim
+H8.1,E2,"Mood episodes can produce episodic executive, speech, salience, and impulse-control changes.",hypothesis
+H8.2,E2,"Cannabis or THC can worsen cognition, anxiety, psychosis risk, or mood stability.",hypothesis
+H8.3,E2,"Prescription stimulants can produce state-dependent activation or mood effects.",hypothesis
+H8.4,E2,"Nicotine can produce acute activation and dependence-related state changes.",hypothesis
+H8.5,E2,"Medication effects can mimic or amplify baseline neurodevelopmental traits.",hypothesis
+H8.6,E2,"Sleep, mood, cannabis, stimulants, and nicotine can interact.",hypothesis
+H8.7,E2,"Stable persistence during euthymia, abstinence, and adequate sleep supports a trait-level component.",qualification
+H9.1,F,"Maladaptive or immersive daydreaming is associated with loneliness, rejection, shame, or boredom.",hypothesis
+H9.2,F,"Daydreaming can function as emotional compensation or escape.",hypothesis
+H9.3,F,"Temporal direction between adversity and daydreaming is established.",hypothesis
+H9.4,F,"Normative fantasy, dissociation, compulsivity, trauma, or mood can better explain daydreaming.",counterclaim
+H10.1,C,"ADHD or autistic traits are associated with divergent thinking.",hypothesis
+H10.2,C,"ADHD or autistic traits are associated with real-world creativity.",hypothesis
+H10.3,C,"Hyperfocus is a reliable and clinically meaningful construct.",hypothesis
+H10.4,C,"ADHD or autistic traits are associated with superior pattern recognition.",hypothesis
+H10.5,C,"Proposed strengths and impairments can represent context-dependent trade-offs.",hypothesis
+H10.6,C,"Education, intelligence, personality, mood, or selection bias can explain proposed strengths.",counterclaim
+H11.1,B,"ADHD and developmental coordination disorder commonly overlap.",hypothesis
+H11.2,B,"Developmental coordination difficulties can persist into adulthood.",hypothesis
+H11.3,B,"Motor impairment can exceed what inattention alone explains.",hypothesis
+H11.4,B,"Neurologic disease, injury, anxiety, medication, obesity, or limited practice can explain motor problems.",counterclaim
+H12.1,F,"Anxiety, shame, rejection, or bullying are associated with functional burden.",hypothesis
+H12.2,F,"Anxiety or rejection-related distress mediates avoidance or social dysfunction.",hypothesis
+H12.3,F,"Prospective evidence establishes the direction of this mediation.",hypothesis
+H12.4,F,"Functional difficulty can remain independently associated with neurodevelopmental traits.",qualification
+G1,G,"Baseline traits and state or environmental modifiers interact.",model
+G2,G,"Context-dependent compensation can alter observable impairment.",model
+G3,G,"One coherent adaptive-constraint model explains the observations better than alternatives.",model
+G4,G,"Retrospective reconstruction and confirmation bias can create apparent coherence.",null
+G5,G,"Multiple independent or interacting causes can outperform one unifying model.",null
+G6,G,"Group-level literature cannot establish individual diagnosis or causation.",boundary
+

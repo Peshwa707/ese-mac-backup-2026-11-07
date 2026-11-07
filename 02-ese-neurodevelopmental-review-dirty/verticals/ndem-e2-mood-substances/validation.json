@@ -1,0 +1,9 @@
+{
+  "name": "ndem-e2-mood-substances",
+  "ok": true,
+  "errors": [],
+  "warnings": [
+    "extraction field 'effect_estimate' looks poolable but has no supported pool marker in extraction_schema.yaml."
+  ],
+  "pubmed_count": 7918
+}

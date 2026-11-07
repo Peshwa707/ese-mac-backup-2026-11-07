@@ -1,0 +1,51 @@
+fields:
+  identity:
+  - name: claim_ids
+    level: abstract
+  - name: study_design
+    level: abstract
+  - name: country
+    level: abstract
+  - name: funding_conflicts
+    level: fulltext
+  population:
+  - name: total_n
+    level: abstract
+  - name: age_range
+    level: abstract
+  - name: diagnostic_method
+    level: abstract
+  - name: construct_measure
+    level: abstract
+  findings:
+  - name: exposure_measure
+    level: abstract
+  - name: outcome_measure
+    level: abstract
+  - name: effect_estimate
+    level: abstract
+  - name: confidence_interval
+    level: abstract
+  - name: mediation_estimate
+    level: abstract
+  - name: temporal_direction
+    level: abstract
+  - name: direction
+    level: abstract
+  - name: supporting_quote
+    level: abstract
+  appraisal:
+  - name: construct_validity
+    level: abstract
+  - name: major_limitations
+    level: abstract
+  - name: alternative_explanations
+    level: abstract
+  - name: directness_to_claim
+    level: abstract
+rules:
+- Copy values verbatim from the source text only. Do not use outside knowledge.
+- 'If a field is not stated, set value to ''NR''. Derived/computed values: prefix ''ESTIMATED:''.'
+- For each non-NR numeric value, include the exact verbatim supporting quote.
+- Effect estimates must be the categorical highest-vs-lowest contrast WITH its 95% CI; a continuous per-increment
+  estimate is NOT a substitute — set NR if only that exists.

@@ -1,0 +1,118 @@
+# Data dictionary for extraction (Step 6) — executive-dysfunction vertical.
+# core/sr reads this to build the extraction prompt and the output tables.
+#
+# HONESTY NOTE: the automated first pass extracts at the ABSTRACT level (what
+# PubMed returns). Continuous EF/functioning numbers (per-arm mean, SD, n) almost
+# always live in full-text tables and will correctly come back "NR" here — that
+# is a known limitation (full-text extraction is a human / Milestone-2 step),
+# not a gap to hide.
+#
+# POOLING: objective EF performance and real-world functioning are CONTINUOUS
+# two-arm outcomes (pool: continuous). The engine pools them with meta::metacont
+# as standardized mean differences (SMD) — required because the included trials
+# use heterogeneous instruments (WCST, Stroop, TMT-B, n-back, etc.) on different
+# scales. Each continuous field declares a `pair` mapping to the per-arm
+# sub-fields the engine needs (n/mean/sd per arm; median/IQR optional fallback).
+
+# Fields the screening stage already captures (echoed into the table for context).
+identity:
+  - first_author
+  - year
+  - study_name
+  - study_design        # RCT (parallel / crossover)
+  - disorder            # bipolar | schizophrenia | ADHD  (PRIMARY subgroup axis)
+  - intervention_type   # drug | non-drug                 (SECOND axis; see pico.yaml note)
+  - intervention        # e.g. methylphenidate, cognitive remediation, atomoxetine, CBT
+  - comparator_label    # placebo | usual care | waitlist | active comparator
+  - nct                 # registration number, verified live
+
+# Core extraction fields. `level: abstract` = usually present in an abstract;
+# `level: fulltext` = usually only in full text (expect NR at the automated pass).
+fields:
+  population:
+    - {name: total_n, level: abstract}
+    - {name: n_intervention_arm, level: abstract}
+    - {name: n_comparator_arm, level: abstract}
+    - {name: median_age, level: fulltext}
+    - {name: pct_female, level: fulltext}
+    - {name: ef_measure_used, level: abstract}   # name of the EF instrument(s) reported
+
+  # CO-PRIMARY 1: objective executive-function test performance (continuous, SMD).
+  ef_objective:
+    - name: ef_test_score
+      level: fulltext
+      pool: continuous
+      label: "Objective executive-function test performance (SMD)"
+      # beneficial: direction depends on the instrument's scoring; left to the
+      # human reviewer to set per study (higher-better vs lower-better differ
+      # across WCST errors, Stroop interference, TMT-B time, n-back accuracy).
+      pair:
+        n_tx: ef_n_tx
+        mean_tx: ef_mean_tx
+        sd_tx: ef_sd_tx
+        n_ctrl: ef_n_ctrl
+        mean_ctrl: ef_mean_ctrl
+        sd_ctrl: ef_sd_ctrl
+        # Optional median/IQR/range fallback (used when means/SDs are not reported):
+        median_tx: ef_median_tx
+        q1_tx: ef_q1_tx
+        q3_tx: ef_q3_tx
+        median_ctrl: ef_median_ctrl
+        q1_ctrl: ef_q1_ctrl
+        q3_ctrl: ef_q3_ctrl
+
+  # CO-PRIMARY 2: real-world / everyday functioning (continuous, SMD).
+  # Analyzed SEPARATELY from ef_objective — do not pool the two together.
+  functioning:
+    - name: functioning_score
+      level: fulltext
+      pool: continuous
+      label: "Real-world / everyday functioning (SMD)"
+      pair:
+        n_tx: func_n_tx
+        mean_tx: func_mean_tx
+        sd_tx: func_sd_tx
+        n_ctrl: func_n_ctrl
+        mean_ctrl: func_mean_ctrl
+        sd_ctrl: func_sd_ctrl
+        median_tx: func_median_tx
+        q1_tx: func_q1_tx
+        q3_tx: func_q3_tx
+        median_ctrl: func_median_ctrl
+        q1_ctrl: func_q1_ctrl
+        q3_ctrl: func_q3_ctrl
+
+  # SECONDARY: quality of life (continuous, SMD across heterogeneous QoL scales).
+  quality_of_life:
+    - name: qol_score
+      level: fulltext
+      pool: continuous
+      label: "Quality of life (SMD)"
+      pair:
+        n_tx: qol_n_tx
+        mean_tx: qol_mean_tx
+        sd_tx: qol_sd_tx
+        n_ctrl: qol_n_ctrl
+        mean_ctrl: qol_mean_ctrl
+        sd_ctrl: qol_sd_ctrl
+
+  # SECONDARY: adverse effects / tolerability (binary proportions).
+  safety:
+    - {name: any_adverse_event_pct, level: abstract, pool: proportion, label: "Any adverse event"}
+    - {name: serious_adverse_event_pct, level: fulltext, pool: proportion, label: "Serious adverse event"}
+    - {name: discontinuation_due_to_ae_pct, level: fulltext, pool: proportion, label: "Discontinuation due to adverse events"}
+
+  # SECONDARY: treatment adherence / retention (binary proportions).
+  adherence:
+    - {name: completion_rate_pct, level: abstract, pool: proportion, label: "Study completion / retention"}
+    - {name: adherence_rate_pct, level: fulltext, pool: proportion, label: "Treatment adherence"}
+
+# Rules the extraction prompt enforces.
+rules:
+  - "Copy values verbatim from the source text only. Do not use outside knowledge."
+  - "If a field is not stated in the source, set value to 'NR' (not reported)."
+  - "If a value is inferred/derived rather than stated, prefix with 'ESTIMATED:' and note the method."
+  - "For each non-NR numeric value, include the EXACT verbatim quote from the source that supports it."
+  - "For continuous outcomes, record per-arm n, mean, and SD; if only median/IQR or median/range are reported, record those in the median/q1/q3 (or lo/hi) sub-fields and leave mean/sd as NR — do not convert."
+  - "Record which EF instrument each ef_test_score came from (ef_measure_used); never pool different instruments without standardization."
+  - "When a trial reports multiple EF tests, record the protocol-designated primary EF endpoint; if none is designated, flag for human selection rather than averaging."

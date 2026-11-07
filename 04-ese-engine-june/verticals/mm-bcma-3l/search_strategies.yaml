@@ -1,0 +1,31 @@
+disclaimer: >
+  Benchmark search, date-bounded to <= 2024-05-31 to match the reference protocol's
+  cut-off. Broad recall-oriented strategy (no outcome filter).
+
+pubmed:
+  executed: true
+  query: >
+    ("multiple myeloma"[tiab] OR myeloma[tiab] OR "plasma cell"[tiab]) AND
+    ("BCMA"[tiab] OR "B-cell maturation antigen"[tiab] OR "TNFRSF17"[tiab] OR
+    ciltacabtagene[tiab] OR "cilta-cel"[tiab] OR idecabtagene[tiab] OR "ide-cel"[tiab]
+    OR teclistamab[tiab] OR elranatamab[tiab] OR linvoseltamab[tiab] OR
+    "chimeric antigen receptor"[tiab] OR "CAR-T"[tiab] OR "CAR T"[tiab] OR
+    bispecific[tiab] OR "T-cell engager"[tiab] OR "bispecific antibod*"[tiab]))
+    AND ("1990/01/01"[dp] : "2024/05/31"[dp])
+  retmax: 4000
+
+europepmc:
+  executed: false   # free-text query returned ~41k (too broad to be a usable source);
+                    # excluded from this benchmark, which runs PubMed-only for clean recall.
+  note: "Europe PMC free-text matched ~41,000 records (insufficiently specific); excluded."
+
+named_trials:
+  - CARTITUDE-1
+  - CARTITUDE-4
+  - KarMMa
+  - KarMMa-3
+  - MajesTEC-1
+  - MagnetisMM-3
+  - LINKER-MM1
+
+reference_mining_seeds: []

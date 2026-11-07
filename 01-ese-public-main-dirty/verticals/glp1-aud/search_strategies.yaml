@@ -1,0 +1,31 @@
+# Search strategy — glp1-aud vertical. GLP-1 receptor agonists for alcohol use disorder, RCTs.
+# PubMed TIAB + design filter; no date cutoff (current). Europe PMC enabled per the multi-DB default.
+disclaimer: >
+  Fresh SR/MA run (not a blind reproduction). PubMed primary + Europe PMC supplementary.
+  Scopus/WoS not executed (add via ImportedConnector if needed).
+
+pubmed:
+  executed: true
+  query: >
+    ("GLP-1"[tiab] OR "glucagon-like peptide-1"[tiab] OR "glucagon like peptide"[tiab] OR
+    semaglutide[tiab] OR liraglutide[tiab] OR exenatide[tiab] OR dulaglutide[tiab] OR
+    tirzepatide[tiab] OR "GLP-1 receptor agonist"[tiab] OR "GLP-1 agonist"[tiab] OR incretin[tiab]) AND
+    ("alcohol use disorder"[tiab] OR "alcohol dependence"[tiab] OR "alcohol drinking"[tiab] OR
+    "heavy drinking"[tiab] OR alcoholism[tiab] OR "alcohol consumption"[tiab] OR "alcohol abuse"[tiab] OR
+    "alcohol intake"[tiab] OR "alcohol craving"[tiab]) AND
+    (randomized[tiab] OR randomised[tiab] OR "randomized controlled trial"[pt] OR placebo[tiab] OR
+    "clinical trial"[pt] OR "double-blind"[tiab])
+  retmax: 500
+
+europepmc:
+  executed: true
+  query: >
+    (GLP-1 OR "glucagon-like peptide-1" OR semaglutide OR liraglutide OR exenatide OR dulaglutide OR
+    tirzepatide OR "GLP-1 receptor agonist" OR incretin) AND
+    ("alcohol use disorder" OR "alcohol dependence" OR "alcohol drinking" OR "heavy drinking" OR
+    alcoholism OR "alcohol consumption" OR "alcohol craving") AND
+    (randomized OR randomised OR placebo OR "controlled trial")
+  page_size: 500
+
+named_trials: []
+reference_mining_seeds: []

@@ -1,0 +1,112 @@
+{
+  "built_at_utc": "2026-07-30T08:32:02.197165+00:00",
+  "status": {
+    "secondary_ai_reviewer_claude": "complete",
+    "ai_ai_reconciliation": "not started",
+    "human_reviewer_2": "pending",
+    "full_text_screening": "pending",
+    "formal_risk_of_bias": "pending",
+    "clinical_sign_off": "pending",
+    "official_engine_export": "withheld"
+  },
+  "role_statement": "Claude served as a blinded secondary AI reviewer under the same frozen rapid-review protocol. This is an AI-AI comparison input, not Human Reviewer 2 screening, full-text adjudication, formal risk-of-bias/GRADE completion, treating-clinician sign-off, diagnosis, treatment guidance, or authorization to unlock conclusions. All disagreements remain pending human adjudication.",
+  "blind_input_manifest_sha256": "a1609d3ab9dee374ae559faf79deb103300736b26d662928fab7e708982d3e6c",
+  "scientific_seal_sha256": "66532ac1f644a4d141894c159dc999aa2fb5bbd662e3b7a641db9a99af7164e7",
+  "source_integrity": {
+    "scientific_seal": {
+      "path": "/Users/neurologic/Projects/ndem-claude-secondary-review-20260730/provenance/claude_scientific_output_seal.json",
+      "bytes": 48550,
+      "sha256": "66532ac1f644a4d141894c159dc999aa2fb5bbd662e3b7a641db9a99af7164e7"
+    },
+    "scientific_seal_created_at_utc": "2026-07-30T08:29:32.250189+00:00",
+    "blind_input_manifest": {
+      "path": "/Users/neurologic/Projects/ndem-claude-secondary-review-20260730/provenance/blind_input_manifest.json",
+      "bytes": 29919,
+      "sha256": "a1609d3ab9dee374ae559faf79deb103300736b26d662928fab7e708982d3e6c"
+    },
+    "builder_script": {
+      "path": "/Users/neurologic/Projects/evidence-synthesis-engine-neurodevelopmental-review/review_inputs/neurodevelopmental-environmental-mismatch/build_claude_secondary_review.py",
+      "bytes": 47644,
+      "sha256": "7cd5de5756333fcb39c93b4d965df1aed769f57a3b273e9c8f8f850529fe9ae7"
+    },
+    "manifest_files_verified": 56,
+    "sealed_files_verified": 62
+  },
+  "metadata_verification": {
+    "build_started_at_utc": "2026-07-30T08:31:52.979294+00:00",
+    "pubmed_efetch_completed_at_utc": "2026-07-30T08:32:02.095735+00:00",
+    "source": "NCBI PubMed EFetch",
+    "doi_resolution_requested": true
+  },
+  "screening": {
+    "include": 228,
+    "exclude": 634,
+    "uncertain": 118
+  },
+  "extracted_occurrences": 98,
+  "unique_verified_pmids": 93,
+  "claim_assessments": 66,
+  "artifacts": {
+    "selected_pubmed_efetch.xml": {
+      "bytes": 2426239,
+      "sha256": "05a4ca36f8e5eb3acf3cd8ece55dd9731f74bb01eaa637d80abc4634b0adafda"
+    },
+    "selected_pubmed_metadata.json": {
+      "bytes": 319549,
+      "sha256": "36549e3714801915dda24d2f5c8756eb73407ecd4f6208c6c9d15fbd7e93b6e7"
+    },
+    "verified_references.csv": {
+      "bytes": 76940,
+      "sha256": "f6887939cca4048d2eab04e678167f878e89b5deb21a1222cac81385eb0d6c4e"
+    },
+    "claim_evidence_matrix.csv": {
+      "bytes": 773744,
+      "sha256": "24514e427158f61c3a217b47782b428b61b11fffa6218e2b3447e3e1a45f1c97"
+    },
+    "systematic_evidence_review_full.md": {
+      "bytes": 260515,
+      "sha256": "a333a3ed282c4ac13244e967943d33fba83e1f55c3bad1de3d1885a13e113261"
+    },
+    "psychiatrist_brief.md": {
+      "bytes": 14397,
+      "sha256": "5400a83af114d4b12f63345babb5ff5867adc356443860aa7df6e26427bfd74d"
+    },
+    "search_strategy.md": {
+      "bytes": 12116,
+      "sha256": "92d9399dc1c34a697c7f994062861e835d59c4c9b4b6b477fef781e5032755ab"
+    },
+    "excluded_studies.md": {
+      "bytes": 179002,
+      "sha256": "29ce78ca8bb35aa5e7fbea132c9bfcd661e50e98a2c0027401342d31c51de1a3"
+    },
+    "unverified_or_rejected_references.md": {
+      "bytes": 6679,
+      "sha256": "4568e8b9bdc74c25bbbe41c33e7a3952106fd79acd6038a434e3f70d2f9d3da4"
+    },
+    "systematic_evidence_review_full.pdf": {
+      "bytes": 324051,
+      "sha256": "7b89ac7354ffe88d0cafa51af55fb0dbff08d27c72b4b0cd37a03d9169141384"
+    }
+  },
+  "pdf_render": {
+    "rendered_at_utc": "2026-07-30T08:33:58.522495+00:00",
+    "source_markdown": {
+      "path": "/Users/neurologic/Projects/evidence-synthesis-engine-neurodevelopmental-review/review_outputs/neurodevelopmental-environmental-mismatch-20260729/claude_ai_reviewer_2/systematic_evidence_review_full.md",
+      "bytes": 260515,
+      "sha256": "a333a3ed282c4ac13244e967943d33fba83e1f55c3bad1de3d1885a13e113261"
+    },
+    "rendered_pdf": {
+      "path": "/Users/neurologic/Projects/evidence-synthesis-engine-neurodevelopmental-review/review_outputs/neurodevelopmental-environmental-mismatch-20260729/claude_ai_reviewer_2/systematic_evidence_review_full.pdf",
+      "bytes": 324051,
+      "sha256": "7b89ac7354ffe88d0cafa51af55fb0dbff08d27c72b4b0cd37a03d9169141384"
+    },
+    "renderer_script": {
+      "path": "/Users/neurologic/Projects/evidence-synthesis-engine-neurodevelopmental-review/review_inputs/neurodevelopmental-environmental-mismatch/render_claude_review_pdf.py",
+      "bytes": 8706,
+      "sha256": "1ffda4adb6f50eaf4e74890e5eef8520b83c95a9a0b642fade6d7e1d79c819f6"
+    },
+    "reportlab_version": "4.4.9",
+    "human_reviewer_2": "pending",
+    "clinical_sign_off": "pending"
+  }
+}

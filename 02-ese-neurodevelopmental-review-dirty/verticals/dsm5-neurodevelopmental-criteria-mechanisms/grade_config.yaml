@@ -1,0 +1,30 @@
+version: "1.0.0"
+levels: [High, Moderate, Low, "Very Low"]
+start:
+  with_rct: High
+  observational_only: Low
+rules:
+  indirectness:
+    always_downgrade: 0
+    reason: "Indirectness is assessed per criterion and outcome, not assumed globally."
+  risk_of_bias:
+    serious_fraction_threshold: 0.5
+    reason: "Most contributing studies have serious or high risk of bias."
+    require_complete: true
+  require_full_text: true
+  imprecision:
+    min_studies: 3
+    reason: "Few contributing studies or sparse estimates."
+deferred_domains:
+  - "Inconsistency is assessed only when compatible quantitative estimates can be pooled."
+  - "Publication bias is not assessed below k=10 and is otherwise interpreted cautiously."
+  - "Indirectness and applicability require criterion-, age-, and setting-specific human review."
+outcomes:
+  - {name: "Criterion construct validity", field: construct_validity_estimate}
+  - {name: "Diagnostic discrimination", field: diagnostic_discrimination_estimate}
+  - {name: "Functional relevance", field: functional_association_estimate}
+  - {name: "Mechanism evidence", field: mechanism_effect_estimate}
+  - {name: "Symptom change", field: symptom_change_estimate}
+  - {name: "Function change", field: function_change_estimate}
+  - {name: "Harms", field: harms_estimate}
+stratify_by: [evidence_stream, diagnosis, criterion_ids, age_stratum]

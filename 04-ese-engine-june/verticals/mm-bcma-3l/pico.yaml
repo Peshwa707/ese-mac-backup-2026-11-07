@@ -1,0 +1,72 @@
+# Benchmark vertical — faithful to the supplied protocol (mm-bcma-cart-vs-bispecific).
+# Run BLIND (engine has no knowledge of the reference paper). Search date-bounded to
+# the benchmark cut-off (2024-05-31).
+
+review:
+  title: >
+    BCMA-directed CAR-T vs BCMA×CD3 bispecific antibodies as third-line or later
+    therapy for relapsed/refractory multiple myeloma: a systematic review and
+    meta-analysis of single-arm proportions
+  short_id: mm-bcma-3l
+  registration: "PROSPERO: [benchmark protocol supplied]"
+  output_base: "~/Documents/Systematic Reviews/MM-BCMA-Benchmark"
+
+pico:
+  population: >
+    Adults with relapsed/refractory multiple myeloma (RRMM), generally third-line or
+    later. Trials enrolling earlier lines are eligible if they report RP2D efficacy in
+    RRMM (e.g. the pivotal CARTITUDE-4 [1–3 lines] and KarMMa-3 [2–4 lines] are included).
+  intervention: >
+    BCMA-directed CAR-T cell therapy (e.g. ciltacabtagene autoleucel, idecabtagene
+    vicleucel, HDS269B, HBI0101) OR BCMA×CD3 bispecific antibodies (teclistamab,
+    elranatamab, linvoseltamab). Single agent only.
+  comparator: >
+    Between-class comparison (CAR-T vs bispecific) by naive/unadjusted indirect
+    pooling of single-arm proportions across subgroups (no shared comparator arm).
+  outcomes:
+    primary:
+      - complete response rate (CR)
+    secondary:
+      - overall response rate (ORR)
+      - CRS (any grade)
+      - CRS (grade >=3)
+      - neutropenia (grade >=3)
+      - anemia (grade >=3)
+
+# Comparator framing for the (naive indirect) NMA hook — all single-arm, so no
+# shared comparator; the engine will pool by class and report NMA infeasible.
+
+# Synthesis axis: studies are stratified by treatment class (the `modality`
+# extracted field). subgroup_map normalizes free-text class labels to two arms.
+synthesis:
+  subgroup_field: modality
+  subgroup_map:
+    CAR-T: [car]
+    BsAb: [bsab, bispecific, both]
+  arms: [CAR-T, BsAb]
+  indirect_comparison: true
+
+eligibility:
+  inclusion:
+    - "Prospective interventional trial reporting a therapeutic / RP2D dose AND efficacy."
+    - "Phase I trials are eligible IF they use the RP2D and report efficacy."
+    - "Single-arm trials; an RCT intervention arm may be extracted as single-arm."
+    - "Intervention is a BCMA-directed CAR-T OR a BCMA×CD3 bispecific antibody (single agent)."
+    - "Reports adverse-event (safety) data."
+  exclusion:
+    - "Intervention used as first- or second-line therapy (exclusively earlier-line use)."
+    - "Prior exposure to another BCMA-targeted therapy required/baseline."
+    - "No adverse-event data reported."
+    - "Dual-target or non-BCMA CAR-T."
+    - "Dual-target or non-BCMA bispecific."
+    - "Combination therapy (single agent only)."
+    - "Non-English; review/editorial/protocol-only with no primary efficacy+safety data."
+  # Domain-specific PRISMA exclusion-reason buckets (generic study-type buckets are built in).
+  exclusion_buckets:
+    - {label: "non-BCMA target", keywords: ["non-bcma", "gprc5d", "fcrh5", "not bcma"]}
+    - {label: ">=4 prior lines only", keywords: [">=4", "4 prior", "four prior", "later line", "heavily pretreated"]}
+
+disclaimer: >
+  BLIND benchmark run (AI Reviewer 1 only). Search date-bounded to 2024-05-31 to match
+  the reference protocol. Every PMID live-verified; values abstract/full-text-anchored or
+  marked NR. Requires human Reviewer 2 verification; results are for engine validation.

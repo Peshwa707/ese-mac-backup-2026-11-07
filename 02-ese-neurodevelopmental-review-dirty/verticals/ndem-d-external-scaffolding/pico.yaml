@@ -1,0 +1,29 @@
+review:
+  title: External Cognitive Scaffolding for ADHD and Executive Dysfunction
+  short_id: ndem-d-external-scaffolding
+  registration: Protocol frozen for AI-assisted rapid review on 2026-07-29; not prospectively registered.
+  output_base: /Users/neurologic/Documents/EvidenceEngine/neurodevelopmental-environmental-mismatch
+pico:
+  population: Adolescents and adults with ADHD or clinically meaningful executive dysfunction.
+  intervention: Coaching, executive-function-focused CBT, checklists, reminders, organizational-skills
+    training, digital aids, assistive technology, structured deadlines, or occupational/educational redesign.
+  comparator: Usual care, waitlist, active control, alternative intervention, or pre-intervention baseline.
+  outcomes:
+    primary:
+    - Real-world task completion, omissions, functioning, or quality of life
+    - Durability, acceptability, dependence, and harms
+    secondary:
+    - ADHD symptoms, adherence, academic or occupational performance, and evidence for AI assistance
+eligibility:
+  inclusion:
+  - Adolescent or adult ADHD or executive-dysfunction population.
+  - Evaluates an external scaffold or executive-function support intervention.
+  - Includes a functional, performance, quality-of-life, durability, acceptability, or harm outcome.
+  - Empirical intervention study or authoritative evidence synthesis.
+  exclusion:
+  - Medication-only intervention without an external scaffold.
+  - No separable ADHD or executive-dysfunction population.
+  - Protocol, opinion, or commercial treatment claim without empirical data.
+  - No outcome relevant to claim H4.
+disclaimer: AI Reviewer-1 rapid-review draft. Human Reviewer 2 and clinical sign-off remain pending. Not
+  diagnostic or treatment guidance.

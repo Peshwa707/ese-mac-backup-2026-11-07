@@ -1,0 +1,25 @@
+levels:
+- High
+- Moderate
+- Low
+- Very Low
+start:
+  with_rct: High
+  observational_only: Low
+rules:
+  indirectness:
+    always_downgrade: 0
+    reason: ''
+  risk_of_bias:
+    serious_fraction_threshold: 0.5
+    reason: Most contributing studies at high risk of bias (NOS).
+  imprecision:
+    min_studies: 3
+    reason: Few contributing studies / sparse data.
+deferred_domains:
+- Inconsistency (I^2) — confirm at Reviewer 2 once pooled.
+- Publication bias — not assessable below k>=10 (Egger/Begg/trim-and-fill underpowered).
+- Possible UPGRADE for large effect / exposure-response gradient — deferred to Reviewer 2.
+outcomes:
+- name: Primary outcome
+  field: ''

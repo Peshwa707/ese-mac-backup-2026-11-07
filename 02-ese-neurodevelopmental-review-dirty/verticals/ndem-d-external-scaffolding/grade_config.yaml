@@ -1,0 +1,27 @@
+levels:
+  - High
+  - Moderate
+  - Low
+  - Very Low
+start:
+  with_rct: High
+  observational_only: Low
+rules:
+  indirectness:
+    always_downgrade: 0
+    reason: ""
+  risk_of_bias:
+    serious_fraction_threshold: 0.5
+    reason: Most contributing studies are at serious or high risk of bias.
+  imprecision:
+    min_studies: 3
+    reason: Few contributing studies or sparse data.
+deferred_domains:
+  - Inconsistency requires outcome-specific quantitative synthesis.
+  - Publication bias is not assessed below ten comparable studies.
+  - All automated certainty judgments remain provisional pending human review.
+outcomes:
+  - name: Functional and performance outcomes
+    field: effect_estimate
+  - name: Harms, burden, or dependence
+    field: harms

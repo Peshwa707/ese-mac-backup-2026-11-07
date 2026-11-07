@@ -1,0 +1,26 @@
+disclaimer: Auto-generated from the protocol concept blocks; review the PubMed string and translate to
+  each non-PubMed database before importing.
+pubmed:
+  executed: true
+  query: '( "Attention Deficit Disorder with Hyperactivity"[Mesh] OR ADHD[tiab] OR "attention deficit
+    hyperactivity disorder"[tiab] ) AND ( persistence[tiab] OR longitudinal[tiab] OR follow-up[tiab] OR
+    "executive function"[tiab] OR "functional impairment"[tiab] OR intelligence[tiab] OR gifted[tiab]
+    OR achievement[tiab] OR compensation[tiab] OR masking[tiab] ) AND ( "Longitudinal Studies"[Mesh] OR
+    adult[tiab] OR adolescent[tiab] OR cohort[tiab] OR prospective[tiab] OR retrospective[tiab] OR "Systematic
+    Review"[pt] OR "Meta-Analysis"[pt] ) AND ("1800/01/01"[dp] : "2026/07/29"[dp])'
+  retmax: 300
+other_databases:
+- name: Europe PMC
+  executed: false
+  note: translate concept blocks to this database; import exported records (provenance-attested).
+- name: PsycINFO
+  executed: false
+  note: translate concept blocks to this database; import exported records (provenance-attested).
+- name: Embase
+  executed: false
+  note: translate concept blocks to this database; import exported records (provenance-attested).
+- name: Web of Science
+  executed: false
+  note: translate concept blocks to this database; import exported records (provenance-attested).
+named_trials: []
+reference_mining_seeds: []

@@ -1,0 +1,30 @@
+# Data dictionary — sleep-bipolar-adhd vertical. Co-primary: sleep efficacy (continuous, SMD) +
+# disorder-specific safety (binary, RR). Pooling external (effect-estimate -> SMD; RR). Disorder-stratified.
+identity:
+  - first_author
+  - year
+  - study_name
+  - study_design        # RCT parallel | RCT crossover
+  - disorder            # bipolar | adhd
+  - agent               # melatonin | ramelteon | suvorexant | zolpidem | trazodone | quetiapine | clonidine | guanfacine | CBT-I | ...
+  - agent_class         # melatonergic | orexin-antagonist | z-drug | benzodiazepine | sedating-antidepressant | antipsychotic | gabapentinoid | alpha2-agonist | antihistamine | non-drug
+  - population_age      # adult | pediatric | mixed
+  - n_total
+
+fields:
+  efficacy_continuous:
+    - {name: sleep_outcome_effect, level: fulltext, pool: continuous,
+       label: "Sleep efficacy (SMD: sleep-onset latency / TST / WASO / sleep quality)"}
+  safety_binary:
+    - {name: mania_switch_events_tx, level: fulltext, pool: proportion, label: "Mood switch/mania (intervention) — bipolar"}
+    - {name: mania_switch_events_ctrl, level: fulltext, pool: proportion, label: "Mood switch/mania (control) — bipolar"}
+    - {name: any_ae_events_tx, level: abstract, pool: proportion, label: "Any adverse event / next-day sedation (intervention)"}
+    - {name: any_ae_events_ctrl, level: abstract, pool: proportion, label: "Any adverse event / next-day sedation (control)"}
+    - {name: dropout_tx, level: abstract, pool: proportion, label: "Discontinuation (intervention)"}
+    - {name: dropout_ctrl, level: abstract, pool: proportion, label: "Discontinuation (control)"}
+
+rules:
+  - "Extract the reported between-group EFFECT on the primary sleep outcome (adjusted MD / change-difference / Cohen's d) + 95% CI + arm n, NOT raw arm means (modern trials report effects)."
+  - "Record the sleep instrument + its direction (lower SOL/WASO = better; higher TST/quality = better)."
+  - "For binary safety outcomes record events and arm n; flag the disorder-specific harm (mania-switch in bipolar)."
+  - "Copy verbatim or mark 'NR'; include the supporting quote; never invent. Record disorder + agent_class for stratification."

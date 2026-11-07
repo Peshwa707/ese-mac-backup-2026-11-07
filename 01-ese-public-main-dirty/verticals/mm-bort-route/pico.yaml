@@ -1,0 +1,27 @@
+review:
+  title: "Subcutaneous vs Intravenous Bortezomib in MM — engine recreation"
+  short_id: sr-bort-route
+  registration: "Engine validation vs Mu 2018 (PMID 30074150)"
+pico:
+  population: "Patients with multiple myeloma."
+  intervention: "Subcutaneous bortezomib."
+  comparator: "Intravenous bortezomib."
+  outcomes:
+    primary: ["Overall response rate (RR)", "Peripheral neuropathy (RR)", "Thrombocytopenia (RR)"]
+    secondary: ["CR, VGPR"]
+synthesis:
+  subgroup_field: outcome
+  subgroup_map: {orr: [orr, response], neuropathy: [neuropathy, bipn], thrombocytopenia: [thrombocytopenia]}
+  arms: [orr, neuropathy, thrombocytopenia]
+  indirect_comparison: false
+eligibility:
+  inclusion:
+    - "RCT or observational study comparing SC vs IV bortezomib."
+    - "Population has multiple myeloma."
+    - "Reports response or adverse-event outcomes by route."
+  exclusion:
+    - "Not a SC-vs-IV bortezomib comparison."
+    - "Review, protocol-only, no extractable outcome."
+  exclusion_buckets:
+    - {label: not-comparison, keywords: [review, protocol, animal]}
+disclaimer: "Engine recreation; RR pooled (SC vs IV); RCT+observational per the reference MA."

@@ -1,0 +1,29 @@
+review:
+  title: "Lenalidomide Maintenance after ASCT in NDMM — engine recreation"
+  short_id: sr-len-maint
+  registration: "Engine validation vs McCarthy 2017 (PMID 28742454)"
+pico:
+  population: "Adults with newly diagnosed multiple myeloma after autologous stem-cell transplantation."
+  intervention: "Lenalidomide maintenance therapy."
+  comparator: "Placebo or observation."
+  outcomes:
+    primary: ["Progression-free survival (hazard ratio)", "Overall survival (hazard ratio)"]
+    secondary: ["Second primary malignancy, discontinuation"]
+synthesis:
+  subgroup_field: outcome
+  subgroup_map: {pfs: [pfs, progression], os: [os, overall survival]}
+  arms: [pfs, os]
+  indirect_comparison: false
+eligibility:
+  inclusion:
+    - "Randomized controlled trial."
+    - "Newly diagnosed multiple myeloma after autologous stem-cell transplant."
+    - "Lenalidomide maintenance vs placebo or observation."
+    - "Reports PFS or OS as a hazard ratio (or data to compute it)."
+  exclusion:
+    - "Non-randomized / observational / single-arm."
+    - "Not post-transplant maintenance, or not lenalidomide."
+    - "Review, protocol-only, editorial, no survival outcome."
+  exclusion_buckets:
+    - {label: not-rct, keywords: [observational, retrospective, review, single-arm]}
+disclaimer: "Engine recreation; AI R1 + Codex R2 + human verify; HR pooled on log scale; published HRs (their study used IPD)."

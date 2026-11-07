@@ -1,0 +1,112 @@
+# Search strategy for the executive-dysfunction (transdiagnostic) vertical (Step 3).
+# core/sr reads this. PubMed is executed live; the other database strings are
+# produced for the reproducible record and flagged "not executed" until run
+# through an institutional gateway.
+
+disclaimer: >
+  Search executed without outcome, date, or language filters per protocol, to
+  avoid missing eligible studies. The PubMed string below was size-checked live
+  via NCBI E-utilities esearch (count only) on 2026-06-26 and returned 1496
+  records — a tractable corpus expected to screen down to roughly 100-800
+  includable RCTs. Embase/Web-of-Science/conference coverage is partial in the
+  automated pass and is flagged for manual search.
+
+# --- PubMed / MEDLINE (executed live) -------------------------------------
+# CHOSEN query = "tighter" variant (see size-check note below). Three blocks
+# AND-ed: (1) disorder, (2) executive-function / EF-test terms, (3) randomized.
+# Intervention terms are intentionally NOT constrained (both drug and non-drug
+# treatments are in scope), so the EF + RCT blocks carry the precision.
+pubmed:
+  executed: true
+  query: >
+    ("bipolar disorder"[tiab] OR schizophrenia[tiab] OR schizoaffective[tiab] OR
+    "attention deficit hyperactivity disorder"[tiab] OR ADHD[tiab]) AND
+    ("executive function"[tiab] OR "executive dysfunction"[tiab] OR
+    "working memory"[tiab] OR "cognitive remediation"[tiab] OR
+    "Wisconsin Card Sorting"[tiab] OR Stroop[tiab] OR "Trail Making"[tiab] OR
+    "n-back"[tiab] OR "set-shifting"[tiab] OR "cognitive flexibility"[tiab] OR
+    "inhibitory control"[tiab]) AND ("randomized controlled trial"[Publication Type]
+    OR randomized[tiab] OR randomised[tiab])
+  # retmax set to capture the full size-checked corpus (~1,496) — fetching is
+  # free (no LLM), and capping it would defeat Version B's high-recall rationale.
+  retmax: 2000
+
+# Size-check record (esearch rettype=count, FREE, no records fetched, no LLM):
+#   A (broad: + cognition/cognitive/attention, + placebo) ......... 8595  [too broad]
+#   B (CHOSEN, EF-specific + EF-test names + randomized) .......... 1496  [tractable]
+#   C (tightest: literal "executive function" phrase + RCT pubtype)  351  [risk: lower recall]
+# Rationale: B keeps recall by including EF-test instrument names (WCST, Stroop,
+# Trail-Making, n-back) and cognitive remediation, while dropping the bare
+# "cognition"/"attention" terms that inflated A. C is clean but the strict
+# literal-phrase requirement would miss trials that report EF only via test names.
+
+# --- ClinicalTrials.gov (executed live; free; trial registrations) ---------
+clinicaltrials:
+  executed: true
+  query: "executive function bipolar schizophrenia ADHD cognitive remediation randomized"
+
+# --- Europe PMC (executed live; free; broader than PubMed) -----------------
+europepmc:
+  executed: true
+  query: >
+    ("bipolar disorder" OR schizophrenia OR schizoaffective OR
+    "attention deficit hyperactivity disorder" OR ADHD) AND
+    ("executive function" OR "executive dysfunction" OR "working memory" OR
+    "cognitive remediation" OR "Wisconsin Card Sorting" OR Stroop OR
+    "Trail Making" OR "n-back" OR "set-shifting" OR "cognitive flexibility" OR
+    "inhibitory control") AND (randomized OR randomised OR "controlled trial")
+  page_size: 1000
+
+# --- Databases requiring institutional access (strings only, NOT executed) -
+# Produced so the search record is reproducible and honest. Marked not-executed.
+other_databases:
+  - name: Embase
+    executed: false
+    note: "Run via institutional Embase (Emtree). Not executed in automated pass."
+    query: >
+      ('bipolar disorder':ab,ti OR schizophrenia:ab,ti OR schizoaffective:ab,ti OR
+      'attention deficit hyperactivity disorder':ab,ti OR adhd:ab,ti) AND
+      ('executive function':ab,ti OR 'executive dysfunction':ab,ti OR
+      'working memory':ab,ti OR 'cognitive remediation':ab,ti OR
+      'wisconsin card sorting':ab,ti OR stroop:ab,ti OR 'trail making':ab,ti OR
+      'n-back':ab,ti OR 'cognitive flexibility':ab,ti) AND
+      ('randomized controlled trial'/exp OR randomized:ab,ti OR randomised:ab,ti)
+  - name: CENTRAL
+    executed: false
+    note: "Cochrane CENTRAL (free text). Not executed in automated pass."
+    query: >
+      ("bipolar disorder":ti,ab OR schizophrenia:ti,ab OR ADHD:ti,ab) AND
+      ("executive function":ti,ab OR "executive dysfunction":ti,ab OR
+      "working memory":ti,ab OR "cognitive remediation":ti,ab OR Stroop:ti,ab OR
+      "Trail Making":ti,ab OR "n-back":ti,ab)
+  - name: PsycINFO
+    executed: false
+    note: "APA PsycINFO (psychology-specific; high yield for this topic). Not executed in automated pass."
+    query: >
+      (DE "Bipolar Disorder" OR DE "Schizophrenia" OR DE "Attention Deficit
+      Disorder with Hyperactivity") AND ("executive function" OR
+      "executive dysfunction" OR "working memory" OR "cognitive remediation")
+      AND (randomized OR randomised OR "controlled trial")
+  - name: Web of Science
+    executed: false
+    note: "Topic search (TS=). Not executed in automated pass."
+    query: >
+      TS=(("bipolar disorder" OR schizophrenia OR schizoaffective OR ADHD) AND
+      ("executive function" OR "executive dysfunction" OR "working memory" OR
+      "cognitive remediation" OR Stroop OR "Trail Making" OR "n-back") AND
+      (randomized OR randomised OR "controlled trial"))
+
+# --- Supplementary searches ------------------------------------------------
+# Anchor trials/programs to confirm the search captures (cross-checked against
+# PubMed results; misses are flagged for manual retrieval). Left empty pending
+# the protocol team's named-trial list.
+named_trials: []
+
+# Prior transdiagnostic / disorder-specific cognition meta-analyses to
+# reference-mine (Step 3b). PMIDs are verified live before use.
+reference_mining_seeds: []
+
+conference_abstract_targets:
+  executed: false
+  note: "Psychiatry/neuropsychology congresses are not in the PubMed API; flagged for manual search."
+  venues: [ECNP, SIRS, APA, "World Congress of Psychiatry", INS]

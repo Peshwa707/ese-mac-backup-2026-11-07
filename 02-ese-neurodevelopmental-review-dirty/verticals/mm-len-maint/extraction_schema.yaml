@@ -1,0 +1,12 @@
+identity: [first_author, year, study_name, study_design, n_total]
+fields:
+  survival:
+    - {name: pfs_hr, level: abstract}
+    - {name: pfs_ci_low, level: abstract}
+    - {name: pfs_ci_high, level: abstract}
+    - {name: os_hr, level: abstract}
+    - {name: os_ci_low, level: abstract}
+    - {name: os_ci_high, level: abstract}
+rules:
+  - "Extract the adjusted hazard ratio (HR) with 95 percent CI for PFS and OS, lenalidomide vs placebo/observation."
+  - "Copy verbatim or NR; include the supporting quote; never invent."

@@ -1,0 +1,55 @@
+# GRADE certainty-of-evidence config — antithrombin / pre-eclampsia vertical.
+# core/sr/grade.py computes per-outcome certainty deterministically from the
+# contributing studies, their designs, and the risk-of-bias profile. Without this
+# file the engine falls back to the shared systematic-review grade_config, whose
+# outcome list is the myeloma review's — this file supplies THIS review's outcomes.
+
+# Certainty ladder (highest -> lowest); downgrades step down this list.
+levels: [High, Moderate, Low, "Very Low"]
+
+# Starting certainty by design presence among contributing studies.
+start:
+  with_rct: High            # >=1 randomized trial contributes the outcome
+  observational_only: Low   # non-randomized only
+
+# Deterministic downgrade rules.
+rules:
+  indirectness:
+    # Antithrombin vs placebo is a DIRECT head-to-head comparison in every included
+    # trial — unlike the myeloma review, there is no indirect-comparison penalty.
+    always_downgrade: 0
+    reason: "Direct antithrombin-vs-placebo RCT comparison; no indirectness penalty by design."
+  risk_of_bias:
+    serious_fraction_threshold: 0.5   # >50% of contributors at Serious/High/Critical -> -1
+    reason: "Most contributing studies at serious/high risk of bias."
+  imprecision:
+    min_studies: 3            # fewer than this contributing -> -1 (sparse evidence)
+    reason: "Few contributing trials / sparse data (small early-onset pre-eclampsia RCTs)."
+
+# Domains not computable without Phase B (reported honestly, no downgrade guessed).
+deferred_domains:
+  - "Inconsistency (I^2) — pending quantitative synthesis (Phase B)."
+  - "Publication bias (funnel/Egger) — pending Phase B (needs >=10 studies/outcome)."
+
+# Outcomes to grade, each mapped to its extraction field (see extraction_schema.yaml).
+outcomes:
+  # primary
+  - {name: "Pregnancy prolongation (days to delivery)", field: prolongation_days}
+  # secondary efficacy
+  - {name: "Birth weight", field: birth_weight_g}
+  - {name: "Fetal death", field: fetal_death_pct}
+  - {name: "Neonatal death (<=28 days)", field: neonatal_death_pct}
+  - {name: "SGA or IUGR (composite)", field: sga_iugr_pct}
+  - {name: "Cesarean delivery", field: cesarean_pct}
+  # neonatal complications
+  - {name: "Respiratory distress syndrome (RDS)", field: rds_pct}
+  - {name: "Intraventricular hemorrhage (IVH)", field: ivh_pct}
+  - {name: "Necrotizing enterocolitis (NEC)", field: nec_pct}
+  - {name: "Retinopathy of prematurity (ROP)", field: rop_pct}
+  - {name: "Neonatal sepsis", field: neonatal_sepsis_pct}
+  # maternal safety
+  - {name: "Postpartum hemorrhage (PPH)", field: pph_pct}
+  - {name: "Red blood cell transfusion", field: rbc_transfusion_pct}
+  - {name: "HELLP syndrome", field: hellp_pct}
+  - {name: "Eclampsia", field: eclampsia_pct}
+  - {name: "Pulmonary edema", field: pulmonary_edema_pct}

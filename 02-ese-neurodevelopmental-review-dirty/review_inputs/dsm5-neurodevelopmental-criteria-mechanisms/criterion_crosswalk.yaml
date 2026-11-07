@@ -1,0 +1,72 @@
+version: "1.0.0"
+source_boundary: >
+  Stable criterion identifiers and controlled paraphrases only. The full DSM
+  text is not reproduced. A criterion is a review unit, not a conclusion.
+diagnoses:
+  ADHD:
+    display_name: Attention-Deficit/Hyperactivity Disorder
+    criteria:
+      - {id: ADHD-I1, type: symptom, domain: inattention, label: "Often misses important details or makes careless mistakes"}
+      - {id: ADHD-I2, type: symptom, domain: inattention, label: "Often struggles to sustain attention"}
+      - {id: ADHD-I3, type: symptom, domain: inattention, label: "Often seems not to listen when spoken to directly"}
+      - {id: ADHD-I4, type: symptom, domain: inattention, label: "Often does not complete tasks or follow through"}
+      - {id: ADHD-I5, type: symptom, domain: inattention, label: "Often has difficulty organizing tasks and activities"}
+      - {id: ADHD-I6, type: symptom, domain: inattention, label: "Often avoids or dislikes sustained mental effort"}
+      - {id: ADHD-I7, type: symptom, domain: inattention, label: "Often loses things needed for tasks"}
+      - {id: ADHD-I8, type: symptom, domain: inattention, label: "Often becomes easily distracted"}
+      - {id: ADHD-I9, type: symptom, domain: inattention, label: "Often forgets routine daily activities"}
+      - {id: ADHD-HI1, type: symptom, domain: hyperactivity_impulsivity, label: "Often fidgets or taps hands or feet"}
+      - {id: ADHD-HI2, type: symptom, domain: hyperactivity_impulsivity, label: "Often leaves seat when remaining seated is expected"}
+      - {id: ADHD-HI3, type: symptom, domain: hyperactivity_impulsivity, label: "Often runs about or feels internally driven to move"}
+      - {id: ADHD-HI4, type: symptom, domain: hyperactivity_impulsivity, label: "Often cannot engage quietly in leisure"}
+      - {id: ADHD-HI5, type: symptom, domain: hyperactivity_impulsivity, label: "Often acts as if driven by a motor"}
+      - {id: ADHD-HI6, type: symptom, domain: hyperactivity_impulsivity, label: "Often talks excessively"}
+      - {id: ADHD-HI7, type: symptom, domain: hyperactivity_impulsivity, label: "Often answers before a question is finished"}
+      - {id: ADHD-HI8, type: symptom, domain: hyperactivity_impulsivity, label: "Often has difficulty waiting for a turn"}
+      - {id: ADHD-HI9, type: symptom, domain: hyperactivity_impulsivity, label: "Often interrupts or intrudes on others"}
+      - {id: ADHD-B, type: gate, domain: onset, label: "Several symptoms were present during childhood"}
+      - {id: ADHD-C, type: gate, domain: settings, label: "Symptoms occur in at least two settings"}
+      - {id: ADHD-D, type: gate, domain: impairment, label: "Symptoms interfere with or reduce functioning"}
+      - {id: ADHD-E, type: gate, domain: exclusion, label: "Symptoms are not better explained by another condition"}
+  ASD:
+    display_name: Autism Spectrum Disorder
+    criteria:
+      - {id: ASD-A1, type: symptom, domain: social_communication, label: "Differences in social-emotional reciprocity"}
+      - {id: ASD-A2, type: symptom, domain: social_communication, label: "Differences in nonverbal social communication"}
+      - {id: ASD-A3, type: symptom, domain: social_communication, label: "Differences in developing or adjusting relationships"}
+      - {id: ASD-B1, type: symptom, domain: restricted_repetitive, label: "Repetitive movements, speech, or object use"}
+      - {id: ASD-B2, type: symptom, domain: restricted_repetitive, label: "Strong need for sameness or difficulty with transitions"}
+      - {id: ASD-B3, type: symptom, domain: restricted_repetitive, label: "Highly focused or unusually intense interests"}
+      - {id: ASD-B4, type: symptom, domain: restricted_repetitive, label: "Unusual sensory reactivity or sensory interests"}
+      - {id: ASD-C, type: gate, domain: onset, label: "Features were present in the early developmental period"}
+      - {id: ASD-D, type: gate, domain: impairment, label: "Features cause clinically meaningful impairment"}
+      - {id: ASD-E, type: gate, domain: exclusion, label: "Features are not better explained by global developmental delay or intellectual disability"}
+  SLD:
+    display_name: Specific Learning Disorder
+    criteria:
+      - {id: SLD-R1, type: symptom, domain: reading, label: "Inaccurate or slow effortful word reading"}
+      - {id: SLD-R2, type: symptom, domain: reading, label: "Difficulty understanding what is read"}
+      - {id: SLD-W1, type: symptom, domain: written_expression, label: "Spelling difficulties"}
+      - {id: SLD-W2, type: symptom, domain: written_expression, label: "Grammar, punctuation, or organization difficulties in writing"}
+      - {id: SLD-W3, type: symptom, domain: written_expression, label: "Unclear or poorly organized written expression"}
+      - {id: SLD-M1, type: symptom, domain: mathematics, label: "Difficulty with number concepts or calculation"}
+      - {id: SLD-M2, type: symptom, domain: mathematics, label: "Difficulty recalling arithmetic facts"}
+      - {id: SLD-M3, type: symptom, domain: mathematics, label: "Difficulty with mathematical reasoning"}
+      - {id: SLD-B, type: gate, domain: impairment, label: "Academic skills are substantially below age expectations and impair functioning"}
+      - {id: SLD-C, type: gate, domain: onset, label: "Difficulties begin during school-age learning"}
+      - {id: SLD-D, type: gate, domain: exclusion, label: "Difficulties are not better explained by other conditions or contextual barriers"}
+  DCD:
+    display_name: Developmental Coordination Disorder
+    criteria:
+      - {id: DCD-A1, type: symptom, domain: motor_coordination, label: "Motor skills are substantially below expected developmental level"}
+      - {id: DCD-B, type: gate, domain: impairment, label: "Motor difficulty interferes with daily activities or school participation"}
+      - {id: DCD-C, type: gate, domain: onset, label: "Motor difficulties begin during the early developmental period"}
+      - {id: DCD-D, type: gate, domain: exclusion, label: "Motor difficulty is not better explained by another neurological or medical condition"}
+
+validation_layers:
+  - {id: construct_validity, label: "Does the measure capture the intended construct?"}
+  - {id: diagnostic_discrimination, label: "Does it distinguish this diagnosis from overlapping diagnoses?"}
+  - {id: functional_relevance, label: "Is it associated with impairment, participation, or quality of life?"}
+  - {id: developmental_stability, label: "Does it persist or change across developmental stages?"}
+  - {id: context_dependence, label: "Does expression vary by setting, informant, or support?"}
+  - {id: treatment_responsiveness, label: "Does the symptom or function change after an intervention?"}

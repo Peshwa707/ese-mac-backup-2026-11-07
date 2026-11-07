@@ -1,0 +1,48 @@
+# GRADE certainty config for the oral-clonidine / spine-surgery vertical.
+# core/sr/grade.py computes per-outcome certainty deterministically from the
+# contributing studies, their designs, and the risk-of-bias profile.
+#
+# Contributor counting: each outcome's `field` points at the per-arm `mean_tx`
+# (or `events_tx`) sub-field — a study "contributes" an outcome when it has a
+# real value there (i.e. it supplied poolable arm-level data), which is the
+# correct denominator for GRADE, not the narrative top-level field.
+
+levels: [High, Moderate, Low, "Very Low"]
+
+start:
+  with_rct: High            # >=1 randomized trial contributes the outcome
+  observational_only: Low
+
+rules:
+  # Direct clonidine-vs-placebo/no-intervention RCTs — NOT an indirect comparison,
+  # so no automatic indirectness downgrade (unlike the oncology default).
+  indirectness:
+    always_downgrade: 0
+    reason: "Direct head-to-head oral-clonidine-vs-placebo RCTs."
+  risk_of_bias:
+    serious_fraction_threshold: 0.5   # >50% at Serious/High -> -1 ("Some concerns" alone does not downgrade)
+    reason: "Most contributing studies at serious/high risk of bias."
+  imprecision:
+    min_studies: 3            # fewer than 3 contributing studies -> -1 (sparse)
+    reason: "Few contributing studies / sparse data."
+
+# Inconsistency (I^2) and publication bias are computed at the stats stage but
+# not folded into this deterministic certainty pass — deferred honestly.
+# NOTE: blood loss I^2 = 96% would warrant an inconsistency downgrade in a full
+# manual GRADE assessment; that is flagged for the human reviewer.
+deferred_domains:
+  - "Inconsistency (I^2) — see forest-plot heterogeneity; blood-loss I^2=96% warrants review."
+  - "Publication bias — too few studies for funnel/Egger."
+
+# Outcomes to grade. `field` = the per-arm marker sub-field that signals a study
+# contributed poolable data for that outcome.
+outcomes:
+  - {name: "Intraoperative blood loss (mL)", field: bl_mean_tx}
+  - {name: "Postoperative pain (VAS 2h, SMD)", field: pain_mean_tx}
+  - {name: "Duration of surgery (min)", field: dur_mean_tx}
+  - {name: "Intraoperative heart rate (bpm)", field: hr_mean_tx}
+  - {name: "Intraoperative mean arterial pressure (mmHg)", field: map_mean_tx}
+  - {name: "Total postoperative analgesic consumption", field: anlg_mean_tx}
+  - {name: "Time to first analgesic request (min)", field: ttfa_mean_tx}
+  - {name: "Surgeon satisfaction score", field: sat_mean_tx}
+  - {name: "Complication rate", field: comp_events_tx}

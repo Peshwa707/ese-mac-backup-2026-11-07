@@ -1,0 +1,12 @@
+review: {title: "Daratumumab-based induction in NDMM", short_id: dara-induction, registration: MM-validation}
+pico:
+  population: "Multiple myeloma."
+  intervention: "daratumumab-based induction"
+  comparator: "non-daratumumab induction"
+  outcomes: {primary: ["progression-free survival HR + sCR"], secondary: []}
+synthesis: {subgroup_field: outcome, subgroup_map: {pfs: [pfs], cr: [cr, complete response], orr: [orr, response]}, arms: [pfs,cr,orr], indirect_comparison: false}
+eligibility:
+  inclusion: ["RCT or prospective trial in multiple myeloma.", "Intervention as specified.", "Reports a survival or response outcome."]
+  exclusion: ["Review/protocol/editorial.", "Not the specified intervention.", "No extractable outcome."]
+  exclusion_buckets: [{label: not-trial, keywords: [review, protocol, editorial]}]
+disclaimer: "Engine MM validation; AI R1 + Codex R2 + human verify."

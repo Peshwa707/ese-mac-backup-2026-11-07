@@ -1,0 +1,31 @@
+# Data dictionary — diet-pancreatic-cancer vertical (VALIDATION MA-1).
+# Observational exposure->outcome: extract the adjusted relative-risk estimate for
+# highest vs lowest intake, per exposure type. Pooling (random-effects on log-RR) is
+# done EXTERNALLY (the engine's continuous/proportion stats do not cover ratio measures).
+
+identity:
+  - first_author
+  - year
+  - study_name
+  - study_design        # prospective cohort | retrospective cohort | nested case-control | case-control
+  - country
+  - exposure_type       # total fat | saturated | monounsaturated | polyunsaturated | trans | cholesterol | specific FA
+  - comparison          # e.g. "highest vs lowest quintile" or "per 1 SD"
+
+fields:
+  effect:
+    - {name: effect_measure, level: abstract}   # RR | OR | HR
+    - {name: risk_estimate, level: abstract}     # point estimate (highest vs lowest, adjusted)
+    - {name: ci_lower, level: abstract}
+    - {name: ci_upper, level: abstract}
+    - {name: adjusted, level: abstract}          # yes/no (adjusted for confounders)
+  population:
+    - {name: n_cases, level: abstract}
+    - {name: n_total, level: abstract}
+
+rules:
+  - "Extract the MOST ADJUSTED relative-risk estimate (RR/OR/HR) for highest vs lowest intake category (or per-increment if that is what is reported), per exposure type."
+  - "Copy values verbatim from the source; if a field is not reported, set 'NR' (never invented)."
+  - "For each non-NR estimate, include the EXACT verbatim quote (sentence or table cell) supporting it."
+  - "If a study reports multiple exposure types (e.g. total fat, SFA, MUFA), record one row per exposure type."
+  - "Record the comparison contrast exactly (e.g. 'Q5 vs Q1', 'per 10 g/day')."

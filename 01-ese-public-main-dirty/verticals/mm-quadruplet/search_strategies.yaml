@@ -1,0 +1,8 @@
+disclaimer: Engine MM validation run.
+pubmed:
+  executed: true
+  query: >
+    ((quadruplet[tiab] OR "four-drug"[tiab] OR "4-drug"[tiab]) OR (daratumumab[tiab] OR isatuximab[tiab])) AND (bortezomib[tiab] OR carfilzomib[tiab]) AND (lenalidomide[tiab] OR thalidomide[tiab]) AND ("newly diagnosed"[tiab]) AND ("multiple myeloma"[tiab] OR myeloma[tiab]) AND (randomized[tiab] OR randomised[tiab] OR phase[tiab])
+  retmax: 800
+named_trials: []
+reference_mining_seeds: []

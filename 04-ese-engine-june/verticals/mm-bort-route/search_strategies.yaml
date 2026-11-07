@@ -1,0 +1,8 @@
+disclaimer: Engine recreation of Mu 2018 (SC vs IV bortezomib).
+pubmed:
+  executed: true
+  query: >
+    (bortezomib[tiab]) AND (subcutaneous[tiab] OR intravenous[tiab] OR "route of administration"[tiab] OR SC[tiab] OR IV[tiab]) AND ("multiple myeloma"[tiab] OR myeloma[tiab])
+  retmax: 600
+named_trials: []
+reference_mining_seeds: []

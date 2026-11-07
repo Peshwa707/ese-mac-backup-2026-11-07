@@ -1,0 +1,68 @@
+version: "1.0.0"
+search_status: not_started
+date_range: "database inception through the date of each search"
+disclaimer: >
+  Database strings are reproducible drafts. PubMed and Europe PMC can be run by
+  the engine; PsycINFO, Embase, CENTRAL, ERIC, and Scopus require institutional
+  export/import or a connector. Every source must retain database, platform,
+  date, query, limits, export format, and record count.
+
+pubmed:
+  executed: false
+  retmax: 5000
+  query: >
+    (("Attention Deficit Disorder with Hyperactivity"[Mesh] OR
+      "Autism Spectrum Disorder"[Mesh] OR "Specific Learning Disorder"[tiab] OR
+      "Developmental Coordination Disorder"[Mesh] OR ADHD[tiab] OR
+      attention-deficit[tiab] OR autism[tiab] OR autistic[tiab] OR
+      dyslexia[tiab] OR dyscalculia[tiab] OR dysgraphia[tiab] OR dyspraxia[tiab] OR
+      "developmental coordination disorder"[tiab]) AND
+     (DSM-5[tiab] OR DSM5[tiab] OR symptom*[tiab] OR criterion[tiab] OR
+      "diagnostic validity"[tiab] OR "construct validity"[tiab] OR
+      "measurement invariance"[tiab] OR "differential diagnosis"[tiab] OR
+      overlap[tiab] OR comorbid*[tiab] OR transdiagnostic[tiab] OR
+      mechanism*[tiab] OR executive[tiab] OR attention[tiab] OR reward[tiab] OR
+      "social communication"[tiab] OR language[tiab] OR motor[tiab] OR sensory[tiab] OR
+      sleep[tiab] OR psychotherapy[tiab] OR medication[tiab] OR intervention*[tiab] OR
+      accommodation*[tiab] OR "assistive technolog*"[tiab] OR digital[tiab] OR
+      participation[tiab] OR "quality of life"[tiab]))
+
+europepmc:
+  executed: false
+  page_size: 200
+  query: >
+    ((ADHD OR "attention deficit" OR autism OR autistic OR "specific learning
+    disorder" OR dyslexia OR dyscalculia OR dysgraphia OR "developmental
+    coordination disorder" OR dyspraxia) AND (DSM-5 OR DSM5 OR symptom* OR
+    criterion OR "diagnostic validity" OR "construct validity" OR overlap OR
+    comorbid* OR transdiagnostic OR mechanism* OR intervention* OR treatment OR
+    accommodation* OR technology OR participation OR "quality of life"))
+
+other_databases:
+  - name: PsycINFO
+    executed: false
+    note: "Translate diagnosis, criterion, mechanism, and intervention blocks to APA thesaurus terms; export RIS."
+  - name: Embase
+    executed: false
+    note: "Translate to Emtree; export RIS with database-specific subject headings."
+  - name: CENTRAL
+    executed: false
+    note: "Search intervention and trial blocks separately; export CENTRAL records."
+  - name: ERIC
+    executed: false
+    note: "Search Specific Learning Disorder, accommodations, educational intervention, and participation blocks."
+  - name: Scopus
+    executed: false
+    note: "Run title/abstract/keyword translation and export RIS or CSV."
+
+supplementary_searches:
+  citation_chaining:
+    executed: false
+    methods: [backward_references, forward_citations, related_articles]
+  trial_registries:
+    executed: false
+    sources: [ClinicalTrials.gov, WHO-ICTRP]
+  guideline_sources:
+    executed: false
+    note: "Guidelines are context and implementation evidence, not pooled primary estimates."
+  named_seeds: []

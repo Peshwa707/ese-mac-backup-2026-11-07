@@ -1,0 +1,33 @@
+{
+  "status": "Targeted gap-filling searches run through the PubMed plugin; AI Reviewer-1 abstract inspection only",
+  "search_date": "2026-07-29",
+  "date_range": "1900/01/01 to 2026/07/29 unless otherwise stated",
+  "searches": [
+    {
+      "id": "TPS-NICOTINE-INTERACTION",
+      "module": "ndem-e2-mood-substances",
+      "query": "(nicotine[Title] OR tobacco[Title]) AND (attention deficit hyperactivity disorder[Title/Abstract] OR ADHD[Title/Abstract]) AND (attention[Title/Abstract] OR cognition[Title/Abstract] OR symptoms[Title/Abstract])",
+      "total_found": 195,
+      "selected_pmids": ["37216808", "40050542"],
+      "purpose": "Direct evidence for nicotine activation/attention effects and nicotine-prescription-stimulant interaction."
+    },
+    {
+      "id": "TPS-CANNABIS-HARM",
+      "module": "ndem-e2-mood-substances",
+      "query": "(cannabis OR THC) AND (psychosis OR bipolar OR mania) AND (systematic review[Publication Type] OR meta-analysis[Publication Type])",
+      "date_range": "2000/01/01 to 2026/07/29",
+      "total_found": 219,
+      "selected_pmids": ["37648266", "38655516"],
+      "purpose": "High-level current synthesis of psychiatric, psychosis, cognitive, mania, and mood-course outcomes."
+    },
+    {
+      "id": "TPS-RECALL-CONFIRMATION",
+      "module": "global",
+      "query": "((adult ADHD[Title/Abstract] OR adult autism[Title/Abstract]) AND (retrospective recall[Title/Abstract] OR childhood recall[Title/Abstract] OR self-report bias[Title/Abstract] OR diagnostic recall[Title/Abstract])) OR ((psychiatric diagnosis[Title/Abstract]) AND (confirmation bias[Title/Abstract] OR narrative bias[Title/Abstract]))",
+      "total_found": 3,
+      "selected_pmids": ["30843223", "35609443"],
+      "purpose": "Directly test retrospective-onset uncertainty and confirmation-bias counterclaims."
+    }
+  ],
+  "inspection_rule": "Each selected PMID was fetched with PubMed abstract_plus and its abstract inspected before evidence extraction. Full metadata is re-fetched by the local verification script."
+}

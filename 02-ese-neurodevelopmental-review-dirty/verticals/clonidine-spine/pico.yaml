@@ -1,0 +1,78 @@
+# PICO + eligibility for the oral-clonidine / spine-surgery vertical.
+# Swapping this file (plus search_strategies.yaml) re-points the engine at this
+# review. RoB / GRADE / prompts / templates fall back to the shared
+# systematic-review vertical (no engine/core changes).
+#
+# Clinical design: a focused SR/MA of oral clonidine premedication vs placebo /
+# no intervention in adults undergoing spinal surgery, across intraoperative and
+# postoperative outcomes.
+
+review:
+  title: >
+    Oral Clonidine Versus Placebo or No Intervention in Adults Undergoing Spinal
+    Surgery: A Systematic Review and Meta-Analysis
+  short_id: sr-clon-spine
+  registration: "PROSPERO: [DRAFT — not yet submitted]"
+  output_base: "~/Documents/Systematic Reviews/Clonidine-Spine"
+
+pico:
+  population: >
+    Adults (>=18 years) undergoing spinal surgery (e.g. discectomy/diskectomy,
+    laminectomy, spinal fusion/instrumentation, spinal decompression;
+    lumbar, thoracolumbar, or lumbosacral).
+  intervention: >
+    Oral clonidine administered at any dose (premedication or perioperative).
+  comparator: >
+    Placebo or no intervention.
+  outcomes:
+    # CO-PRIMARY outcomes are analyzed SEPARATELY (blood loss and postoperative
+    # pain measure different constructs and must not be pooled together).
+    primary:
+      - intraoperative estimated blood loss — continuous, analyzed separately
+      - postoperative pain (VAS / NRS) — continuous, analyzed separately
+    secondary:
+      - duration of surgery
+      - intraoperative heart rate
+      - intraoperative mean arterial pressure
+      - total postoperative analgesic consumption
+      - time to first analgesic request
+      - complication rate
+      - surgeon satisfaction score
+
+# Synthesis axis: direct head-to-head oral-clonidine-vs-placebo/no-intervention
+# comparisons. No subgroup stratification declared (all eligible studies pool
+# together); surgery-type heterogeneity is examined at the human-review stage.
+synthesis:
+  subgroup_field: ""
+  arms: []
+  indirect_comparison: false
+
+eligibility:
+  inclusion:
+    - "Randomized controlled trial."
+    - "Adults (>=18 years) undergoing spinal surgery."
+    - "Intervention is ORAL clonidine at any dose."
+    - "Comparator is placebo or no intervention (a clean oral-clonidine-vs-placebo/no-intervention contrast is extractable, even in a multi-arm trial)."
+    - "Reports at least one outcome of interest (blood loss, duration of surgery, heart rate, mean arterial pressure, postoperative pain, total analgesic consumption, time to first analgesic, complication rate, or surgeon satisfaction)."
+  exclusion:
+    - "Compares oral clonidine only with an active intervention such as dexmedetomidine (no placebo / no-intervention arm)."
+    - "Non-oral route of clonidine administration (epidural, intravenous, caudal, intrathecal, wound infiltration / field block, perineural)."
+    - "Quasi-randomized design."
+    - "Published solely as a conference abstract or proceedings."
+    - "Observational study, in vitro study, or review."
+  # Domain-specific PRISMA exclusion-reason buckets (generic study-type buckets are built in).
+  exclusion_buckets:
+    - {label: "non-oral route", keywords: ["epidural", "intravenous", "i.v.", "caudal", "intrathecal", "infiltration", "field block", "perineural", "spinal anaesthesia adjuvant"]}
+    - {label: "active comparator only", keywords: ["dexmedetomidine", "versus dexmedetomidine", "tizanidine", "atenolol", "active comparator"]}
+    - {label: "not spine surgery", keywords: ["hysterectomy", "orthopaedic surgery under spinal", "cesarean", "tympanoplasty", "rhinoplasty", "acetabular", "pelvic fracture"]}
+    - {label: "pediatric only", keywords: ["children", "adolescent", "pediatric", "paediatric", "under 18"]}
+
+disclaimer: >
+  Automated systematic-review FIRST PASS. The AI acts as Reviewer 1 only: every
+  screening decision and extracted value is a draft requiring independent human
+  (Reviewer 2) verification before any use. Every cited PMID/NCT is verified
+  against its live source; any value not found in the source is marked NR (not
+  reported), never invented. Clonidine trials use heterogeneous spinal procedures
+  and pain instruments; clinical and statistical heterogeneity are expected and
+  must be examined (standardized effect sizes for pain; mean differences in mL
+  for blood loss) before any pooled estimate is trusted.

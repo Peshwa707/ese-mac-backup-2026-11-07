@@ -1,0 +1,100 @@
+# PICO + eligibility for the executive-dysfunction (transdiagnostic) vertical.
+# Swapping this file (plus search_strategies.yaml) re-points the engine at this
+# review. RoB / GRADE / prompts / templates fall back to the shared
+# systematic-review vertical (no engine/core changes).
+#
+# Clinical design: a transdiagnostic SR/MA of treatments for executive
+# dysfunction across three disorders that share an executive-function deficit
+# but are usually studied in separate literatures.
+
+review:
+  title: >
+    Treatments for Executive Dysfunction Across Bipolar Disorder, Schizophrenia,
+    and ADHD: A Transdiagnostic Systematic Review and Meta-Analysis
+  short_id: sr-exec-dys
+  registration: "PROSPERO: [DRAFT — not yet submitted]"
+
+pico:
+  population: >
+    Adults (>=18) with bipolar disorder, a schizophrenia-spectrum disorder
+    (schizophrenia or schizoaffective disorder), or attention-deficit/
+    hyperactivity disorder (ADHD), who have measurable executive dysfunction
+    (impairment documented on an objective neuropsychological test of executive
+    function and/or a validated executive-function rating scale).
+  intervention: >
+    Any treatment whose target is executive function. Pharmacologic agents
+    (psychostimulants, atomoxetine and other non-stimulant ADHD agents, atypical
+    antipsychotics, mood stabilizers used for cognition, and putative cognitive
+    enhancers) AND non-pharmacologic interventions (cognitive remediation /
+    cognitive training, cognitive-behavioral therapy, executive-function
+    coaching, neurostimulation, exercise) are all in scope.
+  comparator: >
+    Placebo, usual care / treatment-as-usual / waitlist, or an active comparator
+    (a different pharmacologic or non-pharmacologic treatment).
+  outcomes:
+    # CO-PRIMARY outcomes are analyzed SEPARATELY (objective performance and
+    # real-world functioning measure different constructs and must not be pooled
+    # together).
+    primary:
+      - objective executive-function test performance (e.g. Wisconsin Card
+        Sorting Test, Stroop, Trail-Making Test B, n-back / working memory,
+        set-shifting, inhibitory control) — continuous, analyzed separately
+      - real-world / everyday functioning (validated functional-outcome or
+        daily-functioning scale) — continuous, analyzed separately
+    secondary:
+      - quality of life
+      - adverse effects / tolerability
+      - treatment adherence / retention
+
+# Synthesis axis. PRIMARY stratification is by DISORDER (bipolar / schizophrenia
+# / ADHD). subgroup_field is set to the extracted `disorder` field; subgroup_map
+# folds extracted free-text disorder labels into the three canonical strata.
+#
+# NOTE — SECOND SUBGROUP AXIS (intervention type: drug vs non-drug): the protocol
+# specifies a disorder x intervention-type factorial. The current engine pools by
+# a SINGLE subgroup_field, so intervention type is captured as the extracted
+# `intervention_type` field (drug | non-drug) and is handled as a SECOND,
+# separate stratified pass / interaction analysis at the human-review stage —
+# it is NOT auto-crossed with `disorder` by this config. See OUTSTANDING note.
+#
+# `subgroup_field: disorder` deliberately avoids the value "modality", which the
+# screening stage special-cases (core/sr/screen.py); "disorder" uses the generic
+# subgroup path.
+synthesis:
+  subgroup_field: disorder
+  subgroup_map:
+    bipolar: [bipolar, "bipolar disorder", "bipolar i", "bipolar ii", "bipolar affective"]
+    schizophrenia: [schizophrenia, schizophrenia-spectrum, "schizophrenia spectrum", schizoaffective, psychosis, "first-episode psychosis"]
+    ADHD: [adhd, "attention deficit", "attention-deficit", "attention deficit hyperactivity disorder", "hyperkinetic"]
+  arms: [bipolar, schizophrenia, ADHD]
+  indirect_comparison: false
+
+eligibility:
+  inclusion:
+    - "Randomized controlled trial (parallel-group or crossover)."
+    - "Adults (>=18) with bipolar disorder, a schizophrenia-spectrum disorder, or ADHD."
+    - "Participants have measurable executive dysfunction (objective EF test and/or validated EF rating scale)."
+    - "Intervention targets executive function (pharmacologic OR non-pharmacologic)."
+    - "Comparator is placebo, usual care/treatment-as-usual/waitlist, or an active comparator."
+    - "Reports at least one objective executive-function outcome OR a real-world functioning outcome."
+  exclusion:
+    - "Non-randomized design (observational, single-arm, pre-post without randomization)."
+    - "Population is exclusively <18 years (pediatric/adolescent) with no extractable adult subgroup."
+    - "Primary disorder is outside the three target disorders (e.g. dementia, TBI, depression-only, healthy volunteers) with no eligible subgroup."
+    - "No executive-function or functioning outcome reported (e.g. symptom-only trials)."
+    - "Review, editorial, commentary, protocol-only paper, or conference abstract with no extractable outcome data."
+  # Domain-specific PRISMA exclusion-reason buckets (generic study-type buckets are built in).
+  exclusion_buckets:
+    - {label: "pediatric only", keywords: ["children", "adolescent", "pediatric", "paediatric", "under 18", "school-age"]}
+    - {label: "non-target disorder", keywords: ["dementia", "alzheimer", "traumatic brain injury", "tbi", "stroke", "healthy volunteers", "major depressive disorder only"]}
+    - {label: "no EF/functioning outcome", keywords: ["symptom-only", "no cognitive outcome", "no executive"]}
+
+disclaimer: >
+  Automated systematic-review FIRST PASS. The AI acts as Reviewer 1 only: every
+  screening decision and extracted value is a draft requiring independent human
+  (Reviewer 2) verification before any use. Every cited PMID/NCT is verified
+  against its live source; any value not found in the source is marked NR (not
+  reported), never invented. Because this is a TRANSDIAGNOSTIC review pooling
+  heterogeneous disorders and heterogeneous EF instruments, clinical and
+  statistical heterogeneity are expected and must be examined (subgroup by
+  disorder, standardized effect sizes) before any pooled estimate is trusted.

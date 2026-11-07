@@ -1,0 +1,72 @@
+# Search strategy for the RMZ-vs-propofol hysteroscopy validation vertical.
+# Terms are VERBATIM from the referent manuscript's reported search. The engine
+# live-searches PubMed (+ Europe PMC + ClinicalTrials.gov, all free); the paper's
+# other databases are recorded but not executed here (institutional access).
+#
+# DATE-CAP: the referent searched on 2025-02-11. The PubMed query is date-capped
+# to that day so included-set recall/precision (M3/M4) are apples-to-apples and
+# not biased by legitimately-newer studies (per validation protocol §2).
+
+disclaimer: >
+  Search date-capped to 2025-02-11 to match the referent's search date. Terms are
+  verbatim from the referent Methods. Engine executes PubMed + Europe PMC +
+  ClinicalTrials.gov live; the referent additionally searched Web of Science,
+  EMBASE, Scopus, Google Scholar, and CENTRAL (recorded below, not executed) —
+  any recall gap traceable to those databases is a logged FINDING, not a failure.
+
+# --- PubMed / MEDLINE (executed live, date-capped) -------------------------
+pubmed:
+  executed: true
+  query: >
+    (remimazolam[tiab] OR "CNS 7056"[tiab] OR "ONO 2745"[tiab] OR
+    "ONO-2745"[tiab] OR ONO2745[tiab]) AND (Hysteroscop*[tiab] OR
+    Uteroscop*[tiab]) AND ("1900/01/01"[Date - Publication] :
+    "2025/02/11"[Date - Publication])
+  # Spelling-robust recall (RCA fix): common misspelling 'remazolam' appears in real
+  # indexed records (e.g. Tang 2023, PMID 37152102) and is missed by the exact term.
+  variant_queries:
+    - >
+      (remazolam[tiab]) AND (Hysteroscop*[tiab] OR Uteroscop*[tiab]) AND
+      ("1900/01/01"[Date - Publication] : "2025/02/11"[Date - Publication])
+  retmax: 300
+
+# --- Europe PMC (executed live; free; broadens beyond PubMed) --------------
+europepmc:
+  executed: true
+  query: >
+    (remimazolam OR "CNS 7056" OR "ONO 2745" OR "ONO-2745" OR ONO2745) AND
+    (Hysteroscop* OR Uteroscop*) AND (PUB_YEAR:[1900 TO 2025])
+  page_size: 200
+
+# --- ClinicalTrials.gov (executed live; free) ------------------------------
+clinicaltrials:
+  executed: true
+  query: "remimazolam propofol hysteroscopy"
+
+# --- Databases the referent searched but not executed here (record only) ---
+other_databases:
+  - name: Web of Science
+    executed: false
+    note: "Referent searched WOS (2025-02-11). Not executed in automated pass."
+    query: 'TS=((remimazolam OR "CNS 7056" OR "ONO 2745") AND (Hysteroscop* OR Uteroscop*))'
+  - name: EMBASE
+    executed: false
+    note: "Referent searched EMBASE. Not executed in automated pass."
+    query: "(remimazolam:ab,ti) AND (hysteroscop*:ab,ti OR uteroscop*:ab,ti)"
+  - name: Scopus
+    executed: false
+    note: "Referent confined Scopus to title/abstract/keywords. Not executed."
+    query: 'TITLE-ABS-KEY((remimazolam OR "CNS 7056" OR "ONO 2745") AND (hysteroscop* OR uteroscop*))'
+  - name: CENTRAL
+    executed: false
+    note: "Cochrane CENTRAL. Not executed in automated pass."
+    query: "(remimazolam):ti,ab AND (hysteroscop* OR uteroscop*):ti,ab"
+  - name: Google Scholar
+    executed: false
+    note: "Referent hand-searched Google Scholar + reference lists. Not executed."
+    query: "remimazolam propofol hysteroscopy randomized"
+
+conference_abstract_targets:
+  executed: false
+  note: "Not in the PubMed API; flagged for manual search (referent excluded conference proceedings anyway)."
+  venues: [ASA, ESA, CSA]

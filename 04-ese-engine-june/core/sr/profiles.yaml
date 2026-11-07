@@ -1,0 +1,35 @@
+# Review-type profiles. A profile declares the question FRAMING and which pipeline
+# PHASES run, so the same engine produces different review types as a data choice
+# (Research rec #1). Domain stays in the vertical (pico/pcc, search); type lives here.
+
+profiles:
+  systematic:
+    label: "Systematic review (PRISMA 2020)"
+    framing: pico
+    phases: [screen, fulltext, extract, rob, grade, meta, prospero, narrative]
+    reporting: "PRISMA 2020"
+
+  scoping:
+    label: "Scoping review (PRISMA-ScR)"
+    framing: pcc            # Population–Concept–Context
+    phases: [screen, fulltext, extract, chart, narrative]
+    reporting: "PRISMA-ScR"
+    note: "No formal risk-of-bias / GRADE / meta-analysis; charting + concept map instead."
+
+  rapid:
+    label: "Rapid review"
+    framing: pico
+    phases: [screen, extract, meta, narrative]
+    reporting: "PRISMA 2020 (rapid)"
+    options: {single_reviewer: true, restricted_sources: true}
+    note: "Documented methodological shortcuts: single-reviewer screening, restricted sources."
+
+  living:
+    label: "Living systematic review"
+    framing: pico
+    phases: [screen, fulltext, extract, rob, grade, meta, narrative]
+    reporting: "PRISMA 2020"
+    options: {delta: true}
+    note: "Re-runnable; surfaces only the delta since the last run."
+
+default: systematic

@@ -1,0 +1,58 @@
+{
+  "title": "Mood and Substance State Modifiers in ADHD and Bipolar-Spectrum Differential Diagnosis",
+  "short_id": "ndem-e2-mood-substances",
+  "framing": "pico",
+  "profile": "rapid",
+  "background": "This module evaluates episodic mood effects and the cognitive, psychotic, activation, and mood-stability effects of cannabis/THC, prescription stimulants, and nicotine in ADHD and bipolar-spectrum contexts.",
+  "population": "Adolescents and adults with ADHD, bipolar-spectrum disorder, both conditions, substance exposure, or relevant control groups.",
+  "intervention": "Hypomanic, manic, mixed, or psychotic state; cannabis or THC; prescribed stimulant; nicotine; medication change; or interactions among these exposures.",
+  "comparator": "Euthymia, abstinence, placebo, adequate sleep, unexposed controls, or within-person baseline.",
+  "outcomes_primary": [
+    {"name": "Attention, executive function, speech, irritability, salience, impulsivity, psychosis, and mood instability", "pool_field": ""},
+    {"name": "Evidence distinguishing lifelong traits from episodic state effects", "pool_field": ""}
+  ],
+  "outcomes_secondary": [
+    {"name": "Dose, timing, interaction, confounding, and vulnerability factors", "pool_field": ""}
+  ],
+  "designs": ["guideline", "systematic review", "meta-analysis", "randomized controlled trial", "longitudinal cohort", "case-control", "within-person", "pharmacovigilance"],
+  "inclusion": [
+    "Adolescent or adult sample relevant to ADHD, bipolar-spectrum illness, cannabis/THC, prescription stimulants, or nicotine.",
+    "Reports cognitive, activation, manic, psychotic, speech, salience, impulse-control, or functional outcomes.",
+    "Provides empirical results or an authoritative professional guideline/evidence synthesis."
+  ],
+  "exclusion": [
+    "Non-prescription stimulant exposure with no relevance to prescribed ADHD treatment or bipolar differential diagnosis.",
+    "No separable exposure or outcome relevant to claim H8.",
+    "Opinion, commercial treatment page, protocol, or unsourced narrative.",
+    "Case report retained only as a safety signal, not as causal or incidence evidence."
+  ],
+  "search": {
+    "concept_blocks": [
+      {"name": "conditions_or_exposures", "terms": ["ADHD", "\"bipolar disorder\"", "mania", "hypomania", "cannabis", "THC", "marijuana", "methylphenidate", "amphetamine", "stimulant", "nicotine"], "mesh": ["Attention Deficit Disorder with Hyperactivity", "Bipolar Disorder", "Cannabis", "Central Nervous System Stimulants", "Nicotine"]},
+      {"name": "state_outcomes", "terms": ["psychosis", "mania", "hypomania", "\"mood destabilization\"", "activation", "impulsivity", "salience", "\"rapid speech\"", "cognition", "\"executive function\"", "irritability"], "mesh": []},
+      {"name": "evidence", "terms": ["guideline", "longitudinal", "cohort", "trial", "\"Systematic Review\"[pt]", "\"Meta-Analysis\"[pt]"], "mesh": []}
+    ],
+    "databases": ["PubMed", "Europe PMC", "ClinicalTrials.gov", "PsycINFO", "Embase", "Cochrane Library"],
+    "date_from": "",
+    "date_to": "2026/07/29",
+    "retmax": 350
+  },
+  "rob_tool": "auto",
+  "analysis": {
+    "effect_measure": "Narrative safety and differential-diagnosis synthesis; no cross-exposure pooling.",
+    "dose_response": false,
+    "subgroups": ["ADHD versus bipolar disorder", "mood state", "substance or medication", "dose and timing", "sleep status", "psychosis or mania vulnerability"],
+    "publication_bias": false
+  },
+  "extraction_groups": [
+    {"group": "identity", "fields": [{"name": "claim_ids"}, {"name": "study_design"}, {"name": "country"}, {"name": "funding_conflicts", "level": "fulltext"}]},
+    {"group": "population", "fields": [{"name": "total_n"}, {"name": "age_range"}, {"name": "diagnostic_method"}, {"name": "baseline_mood_state"}]},
+    {"group": "exposure", "fields": [{"name": "exposure"}, {"name": "dose"}, {"name": "timing"}, {"name": "coexposures"}, {"name": "sleep_status"}]},
+    {"group": "findings", "fields": [{"name": "outcome_measure"}, {"name": "effect_estimate"}, {"name": "confidence_interval"}, {"name": "absolute_risk"}, {"name": "temporal_direction"}, {"name": "adjusted_covariates", "level": "fulltext"}, {"name": "direction"}, {"name": "supporting_quote"}]},
+    {"group": "appraisal", "fields": [{"name": "major_limitations"}, {"name": "confounding_by_indication"}, {"name": "alternative_explanations"}, {"name": "directness_to_claim"}]}
+  ],
+  "registration": "Protocol frozen for AI-assisted rapid review on 2026-07-29; not prospectively registered.",
+  "output_base": "/Users/neurologic/Documents/EvidenceEngine/neurodevelopmental-environmental-mismatch",
+  "disclaimer": "AI Reviewer-1 rapid-review draft. Human Reviewer 2 and clinical sign-off remain pending. Not diagnostic or treatment guidance."
+}
+

@@ -1,0 +1,191 @@
+# Data dictionary for extraction — oral-clonidine / spine-surgery vertical.
+# core/sr reads this to build the extraction prompt and the output tables.
+#
+# HONESTY NOTE: the automated first pass extracts at the ABSTRACT level. Per-arm
+# continuous numbers (mean, SD, n) usually live in full-text tables and will
+# correctly come back "NR" until full text is retrieved — a known limitation
+# (full-text extraction is a human / Milestone-2 step), not a gap to hide.
+#
+# POOLING:
+#   * Continuous two-arm outcomes (pool: continuous) declare a `pair` mapping to
+#     per-arm sub-fields (n/mean/sd per arm; median/IQR optional fallback). Blood
+#     loss (mL) is pooled as a MEAN DIFFERENCE at the stats stage (--measure MD);
+#     pain (heterogeneous VAS/NRS scales) as a STANDARDIZED mean difference.
+#   * Complication rate is a binary two-arm outcome (pool: binary_2x2).
+
+identity:
+  - first_author
+  - year
+  - study_name
+  - study_design        # RCT (parallel / crossover)
+  - surgery_type        # e.g. lumbar fusion, laminectomy, discectomy
+  - clonidine_dose      # e.g. 200 mcg, 0.2 mg
+  - clonidine_route     # must be oral to be eligible
+  - comparator_label    # placebo | no intervention
+  - nct                 # registration number, verified live
+
+fields:
+  population:
+    - {name: total_n, level: abstract}
+    - {name: n_intervention_arm, level: abstract}
+    - {name: n_comparator_arm, level: abstract}
+    - {name: median_age, level: fulltext}
+    - {name: pct_female, level: fulltext}
+    - {name: asa_class, level: fulltext}
+
+  # PRIMARY 1: intraoperative estimated blood loss (continuous; pooled as MD in mL).
+  blood_loss:
+    - name: blood_loss_ml
+      level: fulltext
+      pool: continuous
+      label: "Intraoperative estimated blood loss (mL)"
+      measure: MD
+      beneficial: false          # lower is better
+      pair:
+        n_tx: bl_n_tx
+        mean_tx: bl_mean_tx
+        sd_tx: bl_sd_tx
+        n_ctrl: bl_n_ctrl
+        mean_ctrl: bl_mean_ctrl
+        sd_ctrl: bl_sd_ctrl
+        median_tx: bl_median_tx
+        q1_tx: bl_q1_tx
+        q3_tx: bl_q3_tx
+        median_ctrl: bl_median_ctrl
+        q1_ctrl: bl_q1_ctrl
+        q3_ctrl: bl_q3_ctrl
+
+  # PRIMARY 2: postoperative pain (continuous; SMD across VAS/NRS scales).
+  pain:
+    - name: postop_pain_score
+      level: fulltext
+      pool: continuous
+      label: "Postoperative pain (VAS/NRS, SMD)"
+      beneficial: false          # lower is better
+      pair:
+        n_tx: pain_n_tx
+        mean_tx: pain_mean_tx
+        sd_tx: pain_sd_tx
+        n_ctrl: pain_n_ctrl
+        mean_ctrl: pain_mean_ctrl
+        sd_ctrl: pain_sd_ctrl
+        median_tx: pain_median_tx
+        q1_tx: pain_q1_tx
+        q3_tx: pain_q3_tx
+        median_ctrl: pain_median_ctrl
+        q1_ctrl: pain_q1_ctrl
+        q3_ctrl: pain_q3_ctrl
+
+  # SECONDARY: duration of surgery (continuous, minutes).
+  surgery_duration:
+    - name: duration_min
+      level: fulltext
+      pool: continuous
+      label: "Duration of surgery (min)"
+      measure: MD
+      pair:
+        n_tx: dur_n_tx
+        mean_tx: dur_mean_tx
+        sd_tx: dur_sd_tx
+        n_ctrl: dur_n_ctrl
+        mean_ctrl: dur_mean_ctrl
+        sd_ctrl: dur_sd_ctrl
+
+  # SECONDARY: intraoperative heart rate (continuous, bpm).
+  heart_rate:
+    - name: intraop_hr
+      level: fulltext
+      pool: continuous
+      label: "Intraoperative heart rate (bpm)"
+      measure: MD
+      pair:
+        n_tx: hr_n_tx
+        mean_tx: hr_mean_tx
+        sd_tx: hr_sd_tx
+        n_ctrl: hr_n_ctrl
+        mean_ctrl: hr_mean_ctrl
+        sd_ctrl: hr_sd_ctrl
+
+  # SECONDARY: intraoperative mean arterial pressure (continuous, mmHg).
+  map:
+    - name: intraop_map
+      level: fulltext
+      pool: continuous
+      label: "Intraoperative mean arterial pressure (mmHg)"
+      measure: MD
+      pair:
+        n_tx: map_n_tx
+        mean_tx: map_mean_tx
+        sd_tx: map_sd_tx
+        n_ctrl: map_n_ctrl
+        mean_ctrl: map_mean_ctrl
+        sd_ctrl: map_sd_ctrl
+
+  # SECONDARY: total postoperative analgesic consumption (continuous).
+  analgesic_consumption:
+    - name: analgesic_consumption
+      level: fulltext
+      pool: continuous
+      label: "Total postoperative analgesic consumption (SMD)"
+      beneficial: false          # lower is better
+      pair:
+        n_tx: anlg_n_tx
+        mean_tx: anlg_mean_tx
+        sd_tx: anlg_sd_tx
+        n_ctrl: anlg_n_ctrl
+        mean_ctrl: anlg_mean_ctrl
+        sd_ctrl: anlg_sd_ctrl
+
+  # SECONDARY: time to first analgesic request (continuous, min).
+  time_to_first_analgesic:
+    - name: time_to_first_analgesic
+      level: fulltext
+      pool: continuous
+      label: "Time to first analgesic request (min)"
+      measure: MD
+      beneficial: true           # longer is better
+      pair:
+        n_tx: ttfa_n_tx
+        mean_tx: ttfa_mean_tx
+        sd_tx: ttfa_sd_tx
+        n_ctrl: ttfa_n_ctrl
+        mean_ctrl: ttfa_mean_ctrl
+        sd_ctrl: ttfa_sd_ctrl
+
+  # SECONDARY: surgeon satisfaction score (continuous).
+  surgeon_satisfaction:
+    - name: surgeon_satisfaction
+      level: fulltext
+      pool: continuous
+      label: "Surgeon satisfaction score (SMD)"
+      beneficial: true           # higher is better
+      pair:
+        n_tx: sat_n_tx
+        mean_tx: sat_mean_tx
+        sd_tx: sat_sd_tx
+        n_ctrl: sat_n_ctrl
+        mean_ctrl: sat_mean_ctrl
+        sd_ctrl: sat_sd_ctrl
+
+  # SECONDARY: complication rate (binary two-arm).
+  complications:
+    - name: complication_rate
+      level: fulltext
+      pool: binary_2x2
+      label: "Complication rate"
+      beneficial: false          # fewer events is better
+      pair:
+        events_tx: comp_events_tx
+        n_tx: comp_n_tx
+        events_ctrl: comp_events_ctrl
+        n_ctrl: comp_n_ctrl
+
+# Rules the extraction prompt enforces.
+rules:
+  - "Copy values verbatim from the source text only. Do not use outside knowledge."
+  - "If a field is not stated in the source, set value to 'NR' (not reported)."
+  - "If a value is inferred/derived rather than stated, prefix with 'ESTIMATED:' and note the method."
+  - "For each non-NR numeric value, include the EXACT verbatim quote from the source that supports it."
+  - "For continuous outcomes, record per-arm n, mean, and SD; if only median/IQR or median/range are reported, record those in the median/q1/q3 sub-fields and leave mean/sd as NR — do not convert."
+  - "clonidine_route MUST be recorded verbatim; a non-oral route makes the study ineligible."
+  - "In a multi-arm trial, extract only the oral-clonidine arm and the placebo / no-intervention arm; ignore active-drug arms (e.g. dexmedetomidine, pregabalin, tizanidine, atenolol)."

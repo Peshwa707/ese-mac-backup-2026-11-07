@@ -1,0 +1,12 @@
+review: {title: "Quadruplet regimens in NDMM", short_id: quadruplet, registration: MM-validation}
+pico:
+  population: "Multiple myeloma."
+  intervention: "anti-CD38 quadruplet (PI+IMiD+steroid)"
+  comparator: "triplet"
+  outcomes: {primary: ["progression-free survival HR"], secondary: []}
+synthesis: {subgroup_field: outcome, subgroup_map: {pfs: [pfs], cr: [cr, complete response], orr: [orr, response]}, arms: [pfs,cr,orr], indirect_comparison: false}
+eligibility:
+  inclusion: ["RCT or prospective trial in multiple myeloma.", "Intervention as specified.", "Reports a survival or response outcome."]
+  exclusion: ["Review/protocol/editorial.", "Not the specified intervention.", "No extractable outcome."]
+  exclusion_buckets: [{label: not-trial, keywords: [review, protocol, editorial]}]
+disclaimer: "Engine MM validation; AI R1 + Codex R2 + human verify."

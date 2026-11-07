@@ -1,0 +1,4 @@
+identity: [first_author, year, study_name, study_design, n_total]
+fields:
+  o: [{name: outcome, level: abstract}]
+rules: ["Extract effect/events per protocol; verbatim or NR."]

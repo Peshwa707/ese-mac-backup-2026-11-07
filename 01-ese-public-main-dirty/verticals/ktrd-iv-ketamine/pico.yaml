@@ -1,0 +1,70 @@
+review:
+  title: >
+    Intravenous Ketamine for Treatment-Resistant Depression: Efficacy, Safety,
+    Dosing, and Time to Symptomatic Improvement in Unipolar and Bipolar
+    Depression — A Systematic Review and Pairwise Meta-Analysis
+  short_id: sr-ktrd-iv-ketamine
+  registration: "Fresh SR/MA (PRISMA 2020 + PRISMA-S). PROSPERO registration pending human sign-off before final analysis."
+
+pico:
+  population: >
+    Adults (>=18y) with a current depressive episode meeting a study-stated definition of
+    treatment resistance, in either unipolar major depressive disorder OR bipolar depression.
+    Unipolar and bipolar strata are analyzed SEPARATELY and never pooled. Excludes primary
+    psychotic disorders, healthy-volunteer studies, and studies where depressive outcomes
+    cannot be separated from another indication.
+  intervention: >
+    Intravenous racemic ketamine is the PRIMARY intervention. Intravenous esketamine and
+    intravenous arketamine are eligible only as SEPARATE molecule strata and must never be
+    pooled with racemic ketamine. Non-intravenous ketamine is excluded from the quantitative
+    review. Record molecule, dose (mg/kg and total mg), bolus/loading dose, infusion duration,
+    frequency, number of administrations, adjuncts, and maintenance schedule.
+  comparator: >
+    Placebo or saline; active placebo including midazolam; standard care or another active
+    treatment. Uncontrolled safety/durability cohorts require no comparator and are synthesized
+    separately from comparative efficacy.
+  outcomes:
+    primary:
+      - "Response (study-defined, commonly >=50% improvement) pooled as RR"
+      - "Remission (study-defined) pooled as RR"
+      - "Change in a validated depression-rating scale (continuous) pooled as SMD across scales, oriented so improvement is the same direction"
+    secondary:
+      - "Serious adverse events, any/treatment-emergent adverse events, discontinuation due to AE, dissociation/perceptual disturbance, mania/hypomania (esp. bipolar), suicidal ideation/behavior, misuse/craving/dependence, mortality — binary, RR (or proportion for uncontrolled cohorts)"
+      - "Time to symptomatic improvement (earliest prespecified assessment with clinically meaningful/statistically supported improvement); quality of life/functioning; relapse/durability after final infusion"
+
+synthesis:
+  # Engine natively stratifies ONE subgroup axis. Diagnosis (unipolar vs bipolar) is the
+  # hard-required primary split (separate GRADE per protocol). Molecule, study design
+  # (RCT vs observational), time window, and single-vs-repeated are captured as extraction
+  # identity fields and kept separate via extraction rules + narrative/meta configuration.
+  subgroup_field: diagnosis
+  subgroup_map:
+    unipolar: [unipolar, "major depressive disorder", mdd, "unipolar depression", "treatment-resistant depression"]
+    bipolar: [bipolar, "bipolar depression", "bipolar disorder", "bipolar i", "bipolar ii", "bipolar depression"]
+  arms: [unipolar, bipolar]
+  indirect_comparison: false
+
+eligibility:
+  inclusion:
+    - "Adults (>=18y) with a current depressive episode and a study-stated treatment-resistance definition."
+    - "Unipolar major depressive disorder OR bipolar depression (analyzed separately)."
+    - "Intervention is INTRAVENOUS ketamine (racemic primary; esketamine/arketamine as separate molecule strata)."
+    - "Randomized parallel-group or crossover trial for primary efficacy; prospective/retrospective observational cohort (n>=5) for separate safety/dosing/durability/maintenance."
+    - "Reports response, remission, a continuous depression-scale outcome, and/or a safety outcome."
+  exclusion:
+    - "Non-intravenous ketamine (oral, intranasal, IM, SC) for the quantitative review."
+    - "Primary psychotic disorder; healthy-volunteer study; depressive outcomes inseparable from another indication."
+    - "Case report; uncontrolled case series with fewer than 5 participants."
+    - "Review, editorial, protocol without results, animal study, in-vitro study."
+  exclusion_buckets:
+    - {label: "not intravenous", keywords: ["intranasal", "oral ketamine", "sublingual", "intramuscular", "subcutaneous", "esketamine nasal", "spravato"]}
+    - {label: "wrong population", keywords: ["healthy volunteers", "psychotic disorder", "schizophrenia", "postoperative", "chronic pain", "anesthesia only"]}
+    - {label: "not primary study/animal", keywords: ["animal", "rat", "mouse", "preclinical", "in vitro", "review", "editorial", "case report"]}
+
+disclaimer: >
+  Fresh SR/MA of intravenous ketamine for treatment-resistant depression. AI = Reviewer 1;
+  independent human (Osama) = Reviewer 2 / reviewer-of-record — required before final inclusion,
+  statistical judgments, and conclusions. Unipolar vs bipolar analyzed separately (never pooled);
+  racemic vs esketamine vs arketamine kept as separate molecule strata; randomized efficacy kept
+  separate from observational safety/durability; time windows kept separate. Never invents a
+  citation or value; NR / clearly-labeled calculated values only.

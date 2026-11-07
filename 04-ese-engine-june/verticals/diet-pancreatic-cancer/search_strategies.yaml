@@ -1,0 +1,39 @@
+# Search strategy — diet-pancreatic-cancer vertical (VALIDATION MA-1, blind).
+# Replicates the reference manuscript's PubMed Supplementary Table 1 EXACTLY:
+# Title/Abstract only (NO MeSH), three blocks AND-ed, date-bounded to the May-2026 cutoff.
+# Scopus/Web-of-Science/Google-Scholar are NOT executable by the engine (flagged).
+
+disclaimer: >
+  Reproduction of an unpublished reference MA's PubMed strategy for blind validation.
+  TIAB-only (no MeSH) to match recall faithfully. Date upper bound 2026/05/31.
+  Scopus, Web of Science, and Google Scholar (used by the reference) are not executed.
+
+pubmed:
+  executed: true
+  query: >
+    ("Dietary Fat"[tiab] OR "Unsaturated Dietary Fat"[tiab] OR "Dietary Oils"[tiab] OR
+    "Dietary Oil"[tiab] OR "fat"[tiab] OR "fatty"[tiab] OR "monounsaturated fatty acid"[tiab] OR
+    "polyunsaturated fatty acid"[tiab] OR "MUFA"[tiab] OR "PUFA"[tiab] OR "saturated fatty acid"[tiab] OR
+    "SFA"[tiab] OR "trans fatty acid"[tiab] OR "fat intake"[tiab] OR "high-fat diet"[tiab] OR
+    "linoleic"[tiab] OR "linolenic"[tiab] OR "eicosapentaenoic"[tiab] OR "arachidonic"[tiab] OR
+    "EPA"[tiab] OR "docosahexaenoic"[tiab] OR "DHA"[tiab] OR "trans"[tiab] OR "fatty acids"[tiab] OR
+    "elaidic"[tiab] OR "cholesterol"[tiab] OR "lipids"[tiab] OR "total cholesterol"[tiab] OR
+    "dietary cholesterol"[tiab] OR "cholesterol intake"[tiab]) AND
+    ("Pancreatic Neoplasm"[tiab] OR "Pancreas Neoplasms"[tiab] OR "Pancreas Neoplasm"[tiab] OR
+    "Cancer of Pancreas"[tiab] OR "Pancreas Cancer"[tiab] OR "Pancreatic Cancer"[tiab] OR
+    "Cancer of the Pancreas"[tiab]) AND
+    ("case control"[tiab] OR "cohort"[tiab] OR "prospective"[tiab] OR "retrospective"[tiab] OR
+    "epidemiology"[tiab]) AND ("1000/01/01"[dp] : "2026/05/31"[dp])
+  retmax: 6000
+
+europepmc:
+  executed: false
+  note: "Optional supplementary; not run in the faithful PubMed-match pass."
+
+other_databases:
+  - {name: Scopus, executed: false, note: "Not accessible to the engine."}
+  - {name: Web of Science, executed: false, note: "Not accessible to the engine."}
+  - {name: Google Scholar, executed: false, note: "No structured string; not executable."}
+
+named_trials: []
+reference_mining_seeds: []

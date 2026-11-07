@@ -1,0 +1,510 @@
+{
+  "status": {
+    "secondary_ai_reviewer_claude": "complete",
+    "ai_ai_reconciliation": "draft",
+    "human_reviewer_2": "pending",
+    "full_text_screening": "pending",
+    "formal_risk_of_bias": "pending",
+    "clinical_sign_off": "pending",
+    "official_engine_export": "withheld"
+  },
+  "role_statement": "Claude served as a blinded secondary AI reviewer under the same frozen rapid-review protocol. This is an AI-AI comparison, not Human Reviewer 2 screening, full-text adjudication, formal risk-of-bias/GRADE completion, treating-clinician sign-off, diagnosis, treatment guidance, or authorization to unlock conclusions. All disagreements remain pending human adjudication.",
+  "scientific_seal": {
+    "path": "/Users/neurologic/Projects/ndem-claude-secondary-review-20260730/provenance/claude_scientific_output_seal.json",
+    "sha256": "66532ac1f644a4d141894c159dc999aa2fb5bbd662e3b7a641db9a99af7164e7",
+    "sealed_at_utc": "2026-07-30T08:29:32.250189+00:00",
+    "verified_files": 62,
+    "models_observed": [
+      "claude-haiku-4-5-20251001",
+      "claude-opus-5"
+    ],
+    "transports_observed": [
+      "api",
+      "cli"
+    ]
+  },
+  "screening": {
+    "pooled": {
+      "n": 980,
+      "primary_pairing_key": [
+        "module",
+        "occurrence_position"
+      ],
+      "reviewer_1_distribution": {
+        "include": 206,
+        "exclude": 747,
+        "uncertain": 27
+      },
+      "reviewer_2_distribution": {
+        "include": 228,
+        "exclude": 634,
+        "uncertain": 118
+      },
+      "exact_agreement": 0.7877551020408163,
+      "nominal_llm_llm_agreement_kappa": 0.5331708836408274,
+      "linear_weighted_llm_llm_agreement_kappa": 0.6000639940995272,
+      "advance_vs_exclude_agreement": 0.8255102040816327,
+      "hard_include_exclude_conflicts": 93,
+      "any_disagreements": 208,
+      "claim_id_annotation_nonempty_union_pairs": 375,
+      "mean_claim_id_jaccard_nonempty_union": 0.37944761904761903,
+      "claim_id_annotation_both_empty_pairs": 605,
+      "claim_id_annotation_both_empty_prevalence": 0.6173469387755102,
+      "confusion_matrix": {
+        "exclude": {
+          "exclude": 605,
+          "uncertain": 74,
+          "include": 68
+        },
+        "uncertain": {
+          "exclude": 4,
+          "uncertain": 15,
+          "include": 8
+        },
+        "include": {
+          "exclude": 25,
+          "uncertain": 29,
+          "include": 152
+        }
+      },
+      "within_module_unique_pmid_sensitivity_analysis": {
+        "n": 979,
+        "pairing_key": [
+          "module",
+          "pmid"
+        ],
+        "excluded_duplicate_occurrences": 1,
+        "duplicate_occurrences": [
+          {
+            "module": "ndem-f-daydreaming-rejection",
+            "module_code": "F",
+            "pmid": "42424684",
+            "occurrence_positions": [
+              112,
+              113
+            ],
+            "extra_occurrences": 1
+          }
+        ],
+        "exact_agreement": 0.7885597548518897,
+        "nominal_llm_llm_agreement_kappa": 0.5345055702308487
+      }
+    },
+    "per_module": {
+      "ndem-a-persistence-compensation": {
+        "module_code": "A",
+        "n": 140,
+        "reviewer_1_distribution": {
+          "include": 34,
+          "exclude": 104,
+          "uncertain": 2
+        },
+        "reviewer_2_distribution": {
+          "include": 29,
+          "exclude": 103,
+          "uncertain": 8
+        },
+        "exact_agreement": 0.8071428571428572,
+        "nominal_llm_llm_agreement_kappa": 0.5206695409586609,
+        "linear_weighted_llm_llm_agreement_kappa": 0.5723410163843377,
+        "advance_vs_exclude_agreement": 0.8357142857142857,
+        "hard_include_exclude_conflicts": 17,
+        "claim_id_annotation_nonempty_union_pairs": 48,
+        "mean_claim_id_jaccard_nonempty_union": 0.31894841269841273,
+        "claim_id_annotation_both_empty_pairs": 92,
+        "claim_id_annotation_both_empty_prevalence": 0.6571428571428571,
+        "confusion_matrix": {
+          "exclude": {
+            "exclude": 92,
+            "uncertain": 6,
+            "include": 6
+          },
+          "uncertain": {
+            "exclude": 0,
+            "uncertain": 0,
+            "include": 2
+          },
+          "include": {
+            "exclude": 11,
+            "uncertain": 2,
+            "include": 21
+          }
+        }
+      },
+      "ndem-b-overlap-social-dcd": {
+        "module_code": "B",
+        "n": 140,
+        "reviewer_1_distribution": {
+          "uncertain": 2,
+          "include": 37,
+          "exclude": 101
+        },
+        "reviewer_2_distribution": {
+          "exclude": 89,
+          "include": 39,
+          "uncertain": 12
+        },
+        "exact_agreement": 0.7071428571428572,
+        "nominal_llm_llm_agreement_kappa": 0.37226596675415585,
+        "linear_weighted_llm_llm_agreement_kappa": 0.4015632633121641,
+        "advance_vs_exclude_agreement": 0.7285714285714285,
+        "hard_include_exclude_conflicts": 29,
+        "claim_id_annotation_nonempty_union_pairs": 64,
+        "mean_claim_id_jaccard_nonempty_union": 0.2916666666666667,
+        "claim_id_annotation_both_empty_pairs": 76,
+        "claim_id_annotation_both_empty_prevalence": 0.5428571428571428,
+        "confusion_matrix": {
+          "exclude": {
+            "exclude": 76,
+            "uncertain": 8,
+            "include": 17
+          },
+          "uncertain": {
+            "exclude": 1,
+            "uncertain": 1,
+            "include": 0
+          },
+          "include": {
+            "exclude": 12,
+            "uncertain": 3,
+            "include": 22
+          }
+        }
+      },
+      "ndem-c-context-motivation-strengths": {
+        "module_code": "C",
+        "n": 140,
+        "reviewer_1_distribution": {
+          "include": 12,
+          "exclude": 126,
+          "uncertain": 2
+        },
+        "reviewer_2_distribution": {
+          "include": 11,
+          "exclude": 119,
+          "uncertain": 10
+        },
+        "exact_agreement": 0.9071428571428571,
+        "nominal_llm_llm_agreement_kappa": 0.5913785361472833,
+        "linear_weighted_llm_llm_agreement_kappa": 0.6917996697853606,
+        "advance_vs_exclude_agreement": 0.9214285714285714,
+        "hard_include_exclude_conflicts": 3,
+        "claim_id_annotation_nonempty_union_pairs": 23,
+        "mean_claim_id_jaccard_nonempty_union": 0.3463768115942029,
+        "claim_id_annotation_both_empty_pairs": 117,
+        "claim_id_annotation_both_empty_prevalence": 0.8357142857142857,
+        "confusion_matrix": {
+          "exclude": {
+            "exclude": 117,
+            "uncertain": 7,
+            "include": 2
+          },
+          "uncertain": {
+            "exclude": 1,
+            "uncertain": 1,
+            "include": 0
+          },
+          "include": {
+            "exclude": 1,
+            "uncertain": 2,
+            "include": 9
+          }
+        }
+      },
+      "ndem-d-external-scaffolding": {
+        "module_code": "D",
+        "n": 140,
+        "reviewer_1_distribution": {
+          "exclude": 106,
+          "uncertain": 8,
+          "include": 26
+        },
+        "reviewer_2_distribution": {
+          "uncertain": 22,
+          "exclude": 85,
+          "include": 33
+        },
+        "exact_agreement": 0.7928571428571428,
+        "nominal_llm_llm_agreement_kappa": 0.5751360401841774,
+        "linear_weighted_llm_llm_agreement_kappa": 0.6698113207547169,
+        "advance_vs_exclude_agreement": 0.8357142857142857,
+        "hard_include_exclude_conflicts": 7,
+        "claim_id_annotation_nonempty_union_pairs": 56,
+        "mean_claim_id_jaccard_nonempty_union": 0.4345238095238095,
+        "claim_id_annotation_both_empty_pairs": 84,
+        "claim_id_annotation_both_empty_prevalence": 0.6,
+        "confusion_matrix": {
+          "exclude": {
+            "exclude": 84,
+            "uncertain": 15,
+            "include": 7
+          },
+          "uncertain": {
+            "exclude": 1,
+            "uncertain": 4,
+            "include": 3
+          },
+          "include": {
+            "exclude": 0,
+            "uncertain": 3,
+            "include": 23
+          }
+        }
+      },
+      "ndem-e1-sleep-circadian": {
+        "module_code": "E1",
+        "n": 140,
+        "reviewer_1_distribution": {
+          "uncertain": 8,
+          "exclude": 97,
+          "include": 35
+        },
+        "reviewer_2_distribution": {
+          "uncertain": 34,
+          "exclude": 79,
+          "include": 27
+        },
+        "exact_agreement": 0.7642857142857142,
+        "nominal_llm_llm_agreement_kappa": 0.5690298507462686,
+        "linear_weighted_llm_llm_agreement_kappa": 0.6696472925981123,
+        "advance_vs_exclude_agreement": 0.8428571428571429,
+        "hard_include_exclude_conflicts": 5,
+        "claim_id_annotation_nonempty_union_pairs": 63,
+        "mean_claim_id_jaccard_nonempty_union": 0.3653439153439153,
+        "claim_id_annotation_both_empty_pairs": 77,
+        "claim_id_annotation_both_empty_prevalence": 0.55,
+        "confusion_matrix": {
+          "exclude": {
+            "exclude": 77,
+            "uncertain": 16,
+            "include": 4
+          },
+          "uncertain": {
+            "exclude": 1,
+            "uncertain": 7,
+            "include": 0
+          },
+          "include": {
+            "exclude": 1,
+            "uncertain": 11,
+            "include": 23
+          }
+        }
+      },
+      "ndem-e2-mood-substances": {
+        "module_code": "E2",
+        "n": 140,
+        "reviewer_1_distribution": {
+          "include": 44,
+          "exclude": 93,
+          "uncertain": 3
+        },
+        "reviewer_2_distribution": {
+          "include": 45,
+          "exclude": 74,
+          "uncertain": 21
+        },
+        "exact_agreement": 0.8071428571428572,
+        "nominal_llm_llm_agreement_kappa": 0.6459016393442623,
+        "linear_weighted_llm_llm_agreement_kappa": 0.7372488408037094,
+        "advance_vs_exclude_agreement": 0.8642857142857143,
+        "hard_include_exclude_conflicts": 7,
+        "claim_id_annotation_nonempty_union_pairs": 66,
+        "mean_claim_id_jaccard_nonempty_union": 0.5984848484848485,
+        "claim_id_annotation_both_empty_pairs": 74,
+        "claim_id_annotation_both_empty_prevalence": 0.5285714285714286,
+        "confusion_matrix": {
+          "exclude": {
+            "exclude": 74,
+            "uncertain": 12,
+            "include": 7
+          },
+          "uncertain": {
+            "exclude": 0,
+            "uncertain": 2,
+            "include": 1
+          },
+          "include": {
+            "exclude": 0,
+            "uncertain": 7,
+            "include": 37
+          }
+        }
+      },
+      "ndem-f-daydreaming-rejection": {
+        "module_code": "F",
+        "n": 140,
+        "reviewer_1_distribution": {
+          "include": 18,
+          "uncertain": 2,
+          "exclude": 120
+        },
+        "reviewer_2_distribution": {
+          "include": 44,
+          "exclude": 85,
+          "uncertain": 11
+        },
+        "exact_agreement": 0.7285714285714285,
+        "nominal_llm_llm_agreement_kappa": 0.3803866759841603,
+        "linear_weighted_llm_llm_agreement_kappa": 0.427123928293063,
+        "advance_vs_exclude_agreement": 0.75,
+        "hard_include_exclude_conflicts": 25,
+        "claim_id_annotation_nonempty_union_pairs": 55,
+        "mean_claim_id_jaccard_nonempty_union": 0.24545454545454545,
+        "claim_id_annotation_both_empty_pairs": 85,
+        "claim_id_annotation_both_empty_prevalence": 0.6071428571428571,
+        "confusion_matrix": {
+          "exclude": {
+            "exclude": 85,
+            "uncertain": 10,
+            "include": 25
+          },
+          "uncertain": {
+            "exclude": 0,
+            "uncertain": 0,
+            "include": 2
+          },
+          "include": {
+            "exclude": 0,
+            "uncertain": 1,
+            "include": 17
+          }
+        }
+      }
+    }
+  },
+  "evidence_selection": {
+    "per_module": {
+      "ndem-a-persistence-compensation": {
+        "module_code": "A",
+        "reviewer_1_unique_pmids_before_frozen_candidate_filter": 14,
+        "reviewer_1_unique_pmids": 14,
+        "reviewer_1_outside_frozen_candidate_pmids_excluded": [],
+        "reviewer_2_unique_pmids": 14,
+        "shared_pmids": 8,
+        "pmid_jaccard": 0.4
+      },
+      "ndem-b-overlap-social-dcd": {
+        "module_code": "B",
+        "reviewer_1_unique_pmids_before_frozen_candidate_filter": 14,
+        "reviewer_1_unique_pmids": 14,
+        "reviewer_1_outside_frozen_candidate_pmids_excluded": [],
+        "reviewer_2_unique_pmids": 14,
+        "shared_pmids": 7,
+        "pmid_jaccard": 0.3333333333333333
+      },
+      "ndem-c-context-motivation-strengths": {
+        "module_code": "C",
+        "reviewer_1_unique_pmids_before_frozen_candidate_filter": 14,
+        "reviewer_1_unique_pmids": 14,
+        "reviewer_1_outside_frozen_candidate_pmids_excluded": [],
+        "reviewer_2_unique_pmids": 14,
+        "shared_pmids": 9,
+        "pmid_jaccard": 0.47368421052631576
+      },
+      "ndem-d-external-scaffolding": {
+        "module_code": "D",
+        "reviewer_1_unique_pmids_before_frozen_candidate_filter": 14,
+        "reviewer_1_unique_pmids": 14,
+        "reviewer_1_outside_frozen_candidate_pmids_excluded": [],
+        "reviewer_2_unique_pmids": 14,
+        "shared_pmids": 10,
+        "pmid_jaccard": 0.5555555555555556
+      },
+      "ndem-e1-sleep-circadian": {
+        "module_code": "E1",
+        "reviewer_1_unique_pmids_before_frozen_candidate_filter": 14,
+        "reviewer_1_unique_pmids": 14,
+        "reviewer_1_outside_frozen_candidate_pmids_excluded": [],
+        "reviewer_2_unique_pmids": 14,
+        "shared_pmids": 11,
+        "pmid_jaccard": 0.6470588235294118
+      },
+      "ndem-e2-mood-substances": {
+        "module_code": "E2",
+        "reviewer_1_unique_pmids_before_frozen_candidate_filter": 14,
+        "reviewer_1_unique_pmids": 10,
+        "reviewer_1_outside_frozen_candidate_pmids_excluded": [
+          "37216808",
+          "37648266",
+          "38655516",
+          "40050542"
+        ],
+        "reviewer_2_unique_pmids": 14,
+        "shared_pmids": 7,
+        "pmid_jaccard": 0.4117647058823529
+      },
+      "ndem-f-daydreaming-rejection": {
+        "module_code": "F",
+        "reviewer_1_unique_pmids_before_frozen_candidate_filter": 12,
+        "reviewer_1_unique_pmids": 12,
+        "reviewer_1_outside_frozen_candidate_pmids_excluded": [],
+        "reviewer_2_unique_pmids": 14,
+        "shared_pmids": 7,
+        "pmid_jaccard": 0.3684210526315789
+      }
+    },
+    "pooled_module_pmid_occurrence_jaccard": 0.45038167938931295,
+    "reviewer_1_module_pmid_pairs": 92,
+    "reviewer_1_outside_frozen_candidate_pairs_excluded": 4,
+    "reviewer_2_module_pmid_pairs": 98,
+    "shared_module_pmid_pairs": 59
+  },
+  "claims": {
+    "n_claims": 66,
+    "verdict_exact_agreement": 0.7878787878787878,
+    "verdict_nominal_llm_llm_agreement_kappa": 0.6269681065805409,
+    "verdict_linear_weighted_llm_llm_agreement_kappa": 0.6762589928057554,
+    "verdict_confusion_matrix": {
+      "contradicted": {
+        "contradicted": 0,
+        "unsupported": 0,
+        "indeterminate": 0,
+        "partially supported": 0,
+        "supported": 0
+      },
+      "unsupported": {
+        "contradicted": 0,
+        "unsupported": 1,
+        "indeterminate": 0,
+        "partially supported": 1,
+        "supported": 0
+      },
+      "indeterminate": {
+        "contradicted": 0,
+        "unsupported": 2,
+        "indeterminate": 10,
+        "partially supported": 3,
+        "supported": 0
+      },
+      "partially supported": {
+        "contradicted": 0,
+        "unsupported": 0,
+        "indeterminate": 1,
+        "partially supported": 34,
+        "supported": 5
+      },
+      "supported": {
+        "contradicted": 0,
+        "unsupported": 0,
+        "indeterminate": 0,
+        "partially supported": 2,
+        "supported": 7
+      }
+    },
+    "certainty_exact_agreement": 0.6212121212121212,
+    "certainty_linear_weighted_llm_llm_agreement_kappa": 0.4758704948075748,
+    "directness_to_case_exact_agreement": 0.030303030303030304,
+    "directness_to_case_linear_weighted_llm_llm_agreement_kappa": 0.016470588235294015,
+    "calibration_confidence_exact_agreement": 0.7727272727272727,
+    "calibration_confidence_linear_weighted_llm_llm_agreement_kappa": 0.09174311926605505,
+    "material_disagreements": 9,
+    "claim_evidence_nonempty_union_claims": 65,
+    "mean_claim_evidence_occurrence_jaccard_nonempty_union": 0.3433943256341447,
+    "claim_evidence_both_empty_claims": 1,
+    "claim_evidence_both_empty_prevalence": 0.015151515151515152,
+    "reviewer_1_evidence_module_pmid_pairs_excluded_outside_frozen_candidates": 6,
+    "shared_claim_module_pmid_pairs_with_direction": 141,
+    "shared_claim_module_pmid_direction_exact_agreement": 0.41134751773049644
+  }
+}

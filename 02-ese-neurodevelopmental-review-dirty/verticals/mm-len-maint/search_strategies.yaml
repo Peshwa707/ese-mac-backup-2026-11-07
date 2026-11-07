@@ -1,0 +1,9 @@
+disclaimer: >
+  Engine recreation of McCarthy 2017 (lenalidomide maintenance post-ASCT IPD-MA). PubMed primary.
+pubmed:
+  executed: true
+  query: >
+    (lenalidomide[tiab]) AND (maintenance[tiab]) AND ("multiple myeloma"[tiab] OR myeloma[tiab]) AND (autologous[tiab] OR "stem cell transplant"[tiab] OR ASCT[tiab] OR transplant[tiab]) AND (randomized[tiab] OR randomised[tiab] OR placebo[tiab] OR "randomized controlled trial"[pt])
+  retmax: 400
+named_trials: []
+reference_mining_seeds: []

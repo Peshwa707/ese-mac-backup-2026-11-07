@@ -1,0 +1,8 @@
+disclaimer: Engine MM validation run.
+pubmed:
+  executed: true
+  query: >
+    (daratumumab[tiab]) AND (induction[tiab] OR "newly diagnosed"[tiab] OR frontline[tiab] OR "first-line"[tiab]) AND ("multiple myeloma"[tiab] OR myeloma[tiab]) AND (randomized[tiab] OR randomised[tiab] OR phase[tiab] OR placebo[tiab])
+  retmax: 800
+named_trials: []
+reference_mining_seeds: []

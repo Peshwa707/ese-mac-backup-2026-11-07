@@ -1,0 +1,36 @@
+# GRADE certainty config — carbetocin-vs-misoprostol / open-myomectomy vertical.
+# core/sr/grade.py computes per-outcome certainty from contributing studies, their
+# designs, and the RoB profile. Without this file the engine would fall back to the
+# shared systematic-review grade_config (a myeloma outcome list) — this file supplies
+# THIS review's outcomes so GRADE grades the right things.
+
+levels: [High, Moderate, Low, "Very Low"]
+
+start:
+  with_rct: High
+  observational_only: Low
+
+rules:
+  indirectness:
+    # Carbetocin vs misoprostol is a DIRECT head-to-head comparison in every included
+    # trial — no indirect-comparison penalty by design.
+    always_downgrade: 0
+    reason: "Direct carbetocin-vs-misoprostol RCT comparison; no indirectness penalty by design."
+  risk_of_bias:
+    serious_fraction_threshold: 0.5
+    reason: "Most contributing studies at serious/high risk of bias."
+  imprecision:
+    min_studies: 3
+    reason: "Few contributing trials / sparse data (direct carbetocin-vs-misoprostol open-myomectomy RCTs are few)."
+
+deferred_domains:
+  - "Inconsistency (I^2) — pending quantitative synthesis (Phase B / full-text extraction)."
+  - "Publication bias (funnel/Egger) — pending Phase B (needs >=10 studies/outcome)."
+
+outcomes:
+  - {name: "Intra-/peri-operative blood loss (mL)", field: blood_loss_ml}
+  - {name: "Haemoglobin change (g/dL)", field: hb_change_g}
+  - {name: "Haematocrit change (%)", field: hct_change_pct}
+  - {name: "Operative time (min)", field: operative_time_min}
+  - {name: "Blood transfusion", field: transfusion_events}
+  - {name: "Uterotonic adverse effects", field: adverse_events}

@@ -1,0 +1,59 @@
+{
+  "title": "External Cognitive Scaffolding for ADHD and Executive Dysfunction",
+  "short_id": "ndem-d-external-scaffolding",
+  "framing": "pico",
+  "profile": "rapid",
+  "background": "This module evaluates coaching, executive-function-focused CBT, organizational-skills interventions, checklists, reminders, digital aids, assistive technology, and occupational redesign, including durability and harms.",
+  "population": "Adolescents and adults with ADHD or clinically meaningful executive dysfunction.",
+  "intervention": "Coaching, executive-function-focused CBT, checklists, reminders, organizational-skills training, digital aids, assistive technology, structured deadlines, or occupational/educational redesign.",
+  "comparator": "Usual care, waitlist, active control, alternative intervention, or pre-intervention baseline.",
+  "outcomes_primary": [
+    {"name": "Real-world task completion, omissions, functioning, or quality of life", "pool_field": ""},
+    {"name": "Durability, acceptability, dependence, and harms", "pool_field": ""}
+  ],
+  "outcomes_secondary": [
+    {"name": "ADHD symptoms, adherence, academic or occupational performance, and evidence for AI assistance", "pool_field": ""}
+  ],
+  "designs": ["systematic review", "meta-analysis", "randomized controlled trial", "controlled trial", "prospective cohort", "qualitative"],
+  "inclusion": [
+    "Adolescent or adult ADHD or executive-dysfunction population.",
+    "Evaluates an external scaffold or executive-function support intervention.",
+    "Includes a functional, performance, quality-of-life, durability, acceptability, or harm outcome.",
+    "Empirical intervention study or authoritative evidence synthesis."
+  ],
+  "exclusion": [
+    "Medication-only intervention without an external scaffold.",
+    "No separable ADHD or executive-dysfunction population.",
+    "Protocol, opinion, or commercial treatment claim without empirical data.",
+    "No outcome relevant to claim H4."
+  ],
+  "search": {
+    "concept_blocks": [
+      {"name": "population", "terms": ["ADHD", "\"executive dysfunction\""], "mesh": ["Attention Deficit Disorder with Hyperactivity"]},
+      {"name": "intervention", "terms": ["coaching", "\"cognitive behavioral therapy\"", "\"organizational skills\"", "checklist", "reminder", "\"digital intervention\"", "\"assistive technology\"", "\"cognitive aid\"", "\"external scaffold\"", "\"occupational redesign\"", "\"educational accommodation\"", "\"artificial intelligence\""], "mesh": []},
+      {"name": "design", "terms": ["randomized", "randomised", "trial", "controlled", "\"Systematic Review\"[pt]", "\"Meta-Analysis\"[pt]"], "mesh": []}
+    ],
+    "databases": ["PubMed", "Europe PMC", "ClinicalTrials.gov", "PsycINFO", "Embase", "CENTRAL"],
+    "date_from": "",
+    "date_to": "2026/07/29",
+    "retmax": 300
+  },
+  "rob_tool": "auto",
+  "analysis": {
+    "effect_measure": "Intervention-specific narrative synthesis; pool only homogeneous outcomes after human review.",
+    "dose_response": false,
+    "subgroups": ["intervention type", "age", "diagnostic method", "objective versus self-report outcome", "follow-up duration"],
+    "publication_bias": false
+  },
+  "extraction_groups": [
+    {"group": "identity", "fields": [{"name": "claim_ids"}, {"name": "study_design"}, {"name": "country"}, {"name": "funding_conflicts", "level": "fulltext"}, {"name": "registration"}]},
+    {"group": "population", "fields": [{"name": "total_n"}, {"name": "age_range"}, {"name": "diagnostic_method"}]},
+    {"group": "intervention", "fields": [{"name": "intervention_type"}, {"name": "duration"}, {"name": "comparator"}]},
+    {"group": "findings", "fields": [{"name": "outcome_measure"}, {"name": "effect_estimate"}, {"name": "confidence_interval"}, {"name": "follow_up"}, {"name": "harms"}, {"name": "direction"}, {"name": "supporting_quote"}]},
+    {"group": "appraisal", "fields": [{"name": "major_limitations"}, {"name": "alternative_explanations"}, {"name": "directness_to_claim"}]}
+  ],
+  "registration": "Protocol frozen for AI-assisted rapid review on 2026-07-29; not prospectively registered.",
+  "output_base": "/Users/neurologic/Documents/EvidenceEngine/neurodevelopmental-environmental-mismatch",
+  "disclaimer": "AI Reviewer-1 rapid-review draft. Human Reviewer 2 and clinical sign-off remain pending. Not diagnostic or treatment guidance."
+}
+

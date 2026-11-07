@@ -1,0 +1,34 @@
+# GRADE config for the BCMA CAR-T vs bispecific benchmark vertical. Evidence is
+# single-arm trials -> start Low, and the between-class comparison is INDIRECT
+# (no head-to-head RCT) -> always -1. Outcomes map to this vertical's own fields,
+# including the PRIMARY outcome `complete_response_rate` (regression: the shared
+# config graded `cr_or_better_rate`, so the primary CR endpoint was never graded).
+
+levels: [High, Moderate, Low, "Very Low"]
+
+start:
+  with_rct: High
+  observational_only: Low      # single-arm proportion data -> start Low
+
+rules:
+  indirectness:
+    always_downgrade: 1
+    reason: "Indirect comparison — no head-to-head CAR-T vs bispecific RCTs; cross-study/indirect evidence."
+  risk_of_bias:
+    serious_fraction_threshold: 0.5
+    reason: "Most contributing studies at serious/high risk of bias."
+  imprecision:
+    min_studies: 3
+    reason: "Few contributing studies / sparse data."
+
+deferred_domains:
+  - "Inconsistency (I^2) — pending quantitative synthesis (Phase B)."
+  - "Publication bias (funnel/Egger) — pending Phase B (needs >=10 studies/outcome)."
+
+outcomes:
+  - {name: "Complete response rate (CR)", field: complete_response_rate}   # PRIMARY
+  - {name: "Overall response rate (ORR)", field: orr}
+  - {name: "CRS (any grade)", field: crs_any_grade}
+  - {name: "CRS (grade >=3)", field: crs_grade_3plus}
+  - {name: "Neutropenia (grade >=3)", field: neutropenia_grade_3plus}
+  - {name: "Anemia (grade >=3)", field: anemia_grade_3plus}

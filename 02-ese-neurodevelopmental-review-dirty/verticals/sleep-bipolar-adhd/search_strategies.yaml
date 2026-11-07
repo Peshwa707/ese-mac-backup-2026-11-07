@@ -1,0 +1,22 @@
+disclaimer: >
+  Fresh SR/MA. PubMed primary (TIAB + design filter). Europe PMC supplementary (engine runs PubMed only;
+  add via ImportedConnector if broader recall needed).
+
+pubmed:
+  executed: true
+  query: >
+    ("bipolar disorder"[tiab] OR bipolar[tiab] OR "attention deficit"[tiab] OR "attention-deficit"[tiab] OR
+    ADHD[tiab] OR hyperkinetic[tiab]) AND (insomnia[tiab] OR "sleep disturbance"[tiab] OR "sleep quality"[tiab] OR
+    "sleep onset"[tiab] OR "sleep problems"[tiab] OR "sleep disorder"[tiab] OR hypnotic[tiab] OR sedative[tiab] OR
+    melatonin[tiab] OR ramelteon[tiab] OR suvorexant[tiab] OR lemborexant[tiab] OR zolpidem[tiab] OR
+    eszopiclone[tiab] OR zaleplon[tiab] OR trazodone[tiab] OR quetiapine[tiab] OR gabapentin[tiab] OR
+    pregabalin[tiab] OR clonidine[tiab] OR guanfacine[tiab] OR diphenhydramine[tiab] OR benzodiazepine[tiab]) AND
+    (randomized[tiab] OR randomised[tiab] OR placebo[tiab] OR "randomized controlled trial"[pt] OR "double-blind"[tiab])
+  retmax: 1500
+
+europepmc:
+  executed: false
+  note: "Engine search dispatches PubMed only; supplementary import path documented in SEARCH_DEFAULT.md."
+
+named_trials: []
+reference_mining_seeds: []

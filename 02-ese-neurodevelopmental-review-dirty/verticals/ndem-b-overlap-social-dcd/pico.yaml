@@ -1,0 +1,31 @@
+review:
+  title: ADHD, Autism, Developmental Coordination Disorder, and Adult Social Functioning
+  short_id: ndem-b-overlap-social-dcd
+  registration: Protocol frozen for AI-assisted rapid review on 2026-07-29; not prospectively registered.
+  output_base: /Users/neurologic/Documents/EvidenceEngine/neurodevelopmental-environmental-mismatch
+pico:
+  population: Adolescents and adults with ADHD, autism-spectrum disorder or traits, developmental coordination
+    disorder, or overlapping profiles.
+  intervention: Single or co-occurring neurodevelopmental profiles, social-communication features, motor
+    coordination, and developmental overlap.
+  comparator: Neurotypical controls, single-diagnosis groups, or alternative psychiatric and contextual
+    explanations.
+  outcomes:
+    primary:
+    - Diagnostic or trait overlap among ADHD, autism, and developmental coordination disorder
+    - Social-communication, peer, adaptive, and motor outcomes
+    secondary:
+    - Incremental explanatory value and alternative explanations
+eligibility:
+  inclusion:
+  - Adolescent or adult sample with ADHD, autism, developmental coordination disorder, or validated traits.
+  - Reports overlap, differential diagnosis, social communication, peer functioning, adaptive functioning,
+    or motor coordination.
+  - Provides empirical comparative data or an authoritative evidence synthesis.
+  exclusion:
+  - Pediatric-only sample with no relevance to persistence beyond adolescence.
+  - No separable target neurodevelopmental group.
+  - Opinion or advocacy without empirical data.
+  - No outcome relevant to claims H5 or H11.
+disclaimer: AI Reviewer-1 rapid-review draft. Human Reviewer 2 and clinical sign-off remain pending. Not
+  diagnostic or treatment guidance.

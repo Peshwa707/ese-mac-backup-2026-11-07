@@ -1,0 +1,85 @@
+# PICO + eligibility for the carbetocin-vs-misoprostol / open-myomectomy vertical.
+# Translated a-priori from the operator's blind-validation pack
+# (protocol_id: carb-vs-miso-open-myomectomy-2026). Head-to-head contrast:
+# carbetocin (tx) vs misoprostol (ctrl) for intra-operative blood loss in OPEN
+# (abdominal) myomectomy. RoB / prompts / templates fall back to the shared
+# systematic-review vertical; GRADE uses this vertical's grade_config.yaml.
+#
+# BLINDING: candidate trials are deliberately NOT named here (named_trials: [])
+# to preserve the pack's blind lock-then-validate design. tx = carbetocin,
+# ctrl = misoprostol is fixed by the extraction pair fields.
+
+review:
+  title: >
+    Carbetocin versus Misoprostol for Blood Loss in Open Myomectomy:
+    A Systematic Review and Meta-Analysis of Randomized Controlled Trials
+  short_id: sr-carb-miso-myomectomy
+  registration: "PROSPERO: [DRAFT — not yet submitted]"
+
+pico:
+  population: >
+    Adult women undergoing open (abdominal / laparotomic) myomectomy for uterine
+    leiomyoma (fibroid). Excludes laparoscopic / hysteroscopic / robotic routes
+    unless an open subgroup is separately extractable.
+  intervention: >
+    Carbetocin, any dose, any route (intravenous bolus or infusion, intramuscular,
+    or intramyometrial).
+  comparator: >
+    Misoprostol, any dose, any route (oral, vaginal, rectal, or sublingual).
+  outcomes:
+    # PRIMARY: intra-/peri-operative blood loss (continuous, mL, mean difference).
+    primary:
+      - intra-/peri-operative blood loss — mL (continuous)
+    secondary:
+      - haemoglobin change (continuous, g/dL)
+      - haematocrit change (continuous, %)
+      - blood transfusion (binary, RR)
+      - operative time (continuous, min)
+      - uterotonic adverse effects (binary, RR)
+
+# Synthesis axis. Direct head-to-head carbetocin (tx) vs misoprostol (ctrl); NOT a
+# dose gradient (dose_response N/A by design). The pre-specified stratifier is the
+# COMPARATOR ROUTE (oral vs vaginal vs rectal vs sublingual misoprostol) — the
+# classic effect-modifier in uterotonic blood-loss trials. subgroup_field maps to
+# the extracted `misoprostol_route` field; the main pool is carbetocin-vs-misoprostol
+# regardless of subgroup populating.
+synthesis:
+  subgroup_field: misoprostol_route
+  subgroup_map:
+    oral: [oral, "per oral", "PO", "by mouth"]
+    vaginal: [vaginal, "per vaginal", "PV", intravaginal, "per vagina"]
+    rectal: [rectal, "per rectal", "PR", "per rectum"]
+    sublingual: [sublingual, "SL", "under the tongue"]
+  arms: [oral, vaginal, rectal, sublingual]
+  indirect_comparison: false
+
+eligibility:
+  inclusion:
+    - "Randomized controlled trial (parallel-group or multi-arm containing both arms)."
+    - "Adult women undergoing open / abdominal myomectomy for uterine fibroid."
+    - "Intervention arm is carbetocin (any dose, any route)."
+    - "Comparator arm is misoprostol (any dose, any route)."
+    - "Reports intra-/peri-operative blood loss (mL) or a directly convertible bleeding metric."
+    - "Direct carbetocin-vs-misoprostol contrast extractable (including within a multi-arm RCT)."
+  exclusion:
+    - "Non-open route only (laparoscopic / hysteroscopic / robotic) with no extractable open subgroup."
+    - "Non-RCT design (cohort, case-control, case series, review, editorial, protocol-only)."
+    - "No carbetocin-vs-misoprostol contrast (e.g. vs placebo / oxytocin / tourniquet only) unless head-to-head extractable."
+    - "Blood loss neither reported nor convertible."
+    - "Non-myomectomy surgical context (cesarean / PPH, hysterectomy)."
+    - "Duplicate / overlapping cohort (retain the most complete primary report)."
+  exclusion_buckets:
+    - {label: "non-open route only (lap/hyst/robotic)", keywords: ["laparoscopic", "hysteroscopic", "robotic", "laparoscopy", "minimally invasive"]}
+    - {label: "no carbetocin-vs-misoprostol contrast", keywords: ["vs placebo", "vs oxytocin", "tourniquet", "vasopressin", "tranexamic", "single arm"]}
+    - {label: "wrong surgical context (not myomectomy)", keywords: ["cesarean", "caesarean", "postpartum", "hysterectomy", "PPH", "delivery"]}
+    - {label: "observational design", keywords: ["cohort", "case-control", "case series", "retrospective", "observational", "registry"]}
+    - {label: "duplicate cohort / re-analysis", keywords: ["secondary analysis", "post hoc", "re-analysis", "previously reported cohort"]}
+
+disclaimer: >
+  Automated systematic-review FIRST PASS. The AI acts as Reviewer 1 only: every
+  screening decision and extracted value is a draft requiring independent human
+  (Reviewer 2) verification before use. Every cited PMID/NCT is verified against its
+  live source; any value not found in the source is marked NR, never invented.
+  Contrast is head-to-head carbetocin-vs-misoprostol (dose-response N/A). This vertical
+  is wrapped by an external blind lock-then-validate harness; the sealed gold standard
+  is physically withheld from this workspace until the engine locks its own result.

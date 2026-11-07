@@ -1,0 +1,52 @@
+{
+  "available": true,
+  "note": "",
+  "outcomes": [
+    {
+      "field": "cr_or_better_rate",
+      "label": ">=Complete response",
+      "results": [
+        {
+          "group": "ALL",
+          "k": 2,
+          "prop": 64.5,
+          "ci_lb": 61.6,
+          "ci_ub": 67.3,
+          "I2": 8.9,
+          "tau2": 0.0,
+          "Q": 1.0973,
+          "I2_lb": null,
+          "I2_ub": null,
+          "pi_lb": null,
+          "pi_ub": null
+        }
+      ],
+      "n_pooled": 2,
+      "n_excluded": 0,
+      "forest_png": "forest_cr_or_better_rate.png"
+    }
+  ],
+  "hr_outcomes": [],
+  "bin_outcomes": [],
+  "cont_outcomes": [],
+  "nma": {
+    "feasible": false,
+    "reason": "Network missing a target node (CAR-T / BsAb not both present).",
+    "nodes": [
+      "BsAb",
+      "investigator's choice of pomalidomide, b"
+    ],
+    "league": [],
+    "network_png": ""
+  },
+  "dose_response": {
+    "feasible": false,
+    "reason": "No per-dose-level data extracted (abstract-level run); none fabricated.",
+    "outcome": "",
+    "dose_unit": "",
+    "curve": [],
+    "p_nonlinearity": null,
+    "plot_png": ""
+  },
+  "meta_regression": null
+}

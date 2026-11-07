@@ -1,0 +1,133 @@
+{
+  "created_at_utc": "2026-07-30T08:35:59.154592+00:00",
+  "role_statement": "Claude served as a blinded secondary AI reviewer under the same frozen rapid-review protocol. This is an AI-AI comparison, not Human Reviewer 2 screening, full-text adjudication, formal risk-of-bias/GRADE completion, treating-clinician sign-off, diagnosis, treatment guidance, or authorization to unlock conclusions. All disagreements remain pending human adjudication.",
+  "scientific_seal_sha256": "66532ac1f644a4d141894c159dc999aa2fb5bbd662e3b7a641db9a99af7164e7",
+  "sources": [
+    {
+      "path": "/Users/neurologic/Projects/ndem-claude-secondary-review-20260730/provenance/claude_scientific_output_seal.json",
+      "bytes": 48550,
+      "sha256": "66532ac1f644a4d141894c159dc999aa2fb5bbd662e3b7a641db9a99af7164e7"
+    },
+    {
+      "path": "/Users/neurologic/Projects/evidence-synthesis-engine-neurodevelopmental-review/review_inputs/neurodevelopmental-environmental-mismatch/compare_ai_reviewers.py",
+      "bytes": 41805,
+      "sha256": "f076c1ca246ca073af89feadf7c2d2341ad76dcfd045bec8dd560cda8ef4a4fb"
+    },
+    {
+      "path": "/Users/neurologic/Projects/evidence-synthesis-engine-neurodevelopmental-review/review_outputs/neurodevelopmental-environmental-mismatch-20260729/systematic_evidence_review_full.md",
+      "bytes": 176001,
+      "sha256": "d318966b82672b75f7faccccb251a9ba8890065212f669f59d78b6185cc5065b"
+    },
+    {
+      "path": "/Users/neurologic/Projects/evidence-synthesis-engine-neurodevelopmental-review/review_outputs/neurodevelopmental-environmental-mismatch-20260729/claim_evidence_matrix.csv",
+      "bytes": 508322,
+      "sha256": "684785d6f1013aae9ded0ed0671e18799738e234828bea3d0f7c24f1ad0866ca"
+    },
+    {
+      "path": "/Users/neurologic/Projects/evidence-synthesis-engine-neurodevelopmental-review/review_outputs/neurodevelopmental-environmental-mismatch-20260729/claude_ai_reviewer_2/claim_evidence_matrix.csv",
+      "bytes": 773744,
+      "sha256": "24514e427158f61c3a217b47782b428b61b11fffa6218e2b3447e3e1a45f1c97"
+    },
+    {
+      "path": "/Users/neurologic/Projects/evidence-synthesis-engine-neurodevelopmental-review/runs/ndem-rapid-20260729/ndem-a-persistence-compensation/screening_ai_r1.json",
+      "bytes": 47565,
+      "sha256": "b658f68528a9b6836e20153a9321b3c9163ed4e70e661a7af19e80fb2ca59b92"
+    },
+    {
+      "path": "/Users/neurologic/Projects/evidence-synthesis-engine-neurodevelopmental-review/runs/ndem-rapid-20260729/ndem-a-persistence-compensation/evidence_extraction_ai_r1.json",
+      "bytes": 22455,
+      "sha256": "67f7e8212e891ea71ee95510a012bafa7f298c37804c09f24eb359855d0076b7"
+    },
+    {
+      "path": "/Users/neurologic/Projects/evidence-synthesis-engine-neurodevelopmental-review/runs/ndem-rapid-20260729/ndem-b-overlap-social-dcd/screening_ai_r1.json",
+      "bytes": 47258,
+      "sha256": "494a0fbe0076e5d7354df154e77961eff4ae65dbead89824988f57f9ed829263"
+    },
+    {
+      "path": "/Users/neurologic/Projects/evidence-synthesis-engine-neurodevelopmental-review/runs/ndem-rapid-20260729/ndem-b-overlap-social-dcd/evidence_extraction_ai_r1.json",
+      "bytes": 22007,
+      "sha256": "386b240477364d7dcdcf04bd64f90bf33c85b989aa4127fa79da6daada15f511"
+    },
+    {
+      "path": "/Users/neurologic/Projects/evidence-synthesis-engine-neurodevelopmental-review/runs/ndem-rapid-20260729/ndem-c-context-motivation-strengths/screening_ai_r1.json",
+      "bytes": 57595,
+      "sha256": "92e4fbed47d477a35035b319abe35fbd45df644fa5057ee6cad7fc4d4913fbf2"
+    },
+    {
+      "path": "/Users/neurologic/Projects/evidence-synthesis-engine-neurodevelopmental-review/runs/ndem-rapid-20260729/ndem-c-context-motivation-strengths/evidence_extraction_ai_r1.json",
+      "bytes": 29866,
+      "sha256": "c76eaf839990b403168ef2273756ac08d8d7cbb223b8e9b6fd087402b59bf2fe"
+    },
+    {
+      "path": "/Users/neurologic/Projects/evidence-synthesis-engine-neurodevelopmental-review/runs/ndem-rapid-20260729/ndem-d-external-scaffolding/screening_ai_r1.json",
+      "bytes": 56684,
+      "sha256": "07500f3e13cb436195e0c94dd0cc55750369569849b4c4ef2671b5687b572eed"
+    },
+    {
+      "path": "/Users/neurologic/Projects/evidence-synthesis-engine-neurodevelopmental-review/runs/ndem-rapid-20260729/ndem-d-external-scaffolding/evidence_extraction_ai_r1.json",
+      "bytes": 28910,
+      "sha256": "4a9d3143d259a5028711fe4f06b41542e72764daacac50f6bf78aa11c4f9d444"
+    },
+    {
+      "path": "/Users/neurologic/Projects/evidence-synthesis-engine-neurodevelopmental-review/runs/ndem-rapid-20260729/ndem-e1-sleep-circadian/screening_ai_r1.json",
+      "bytes": 53122,
+      "sha256": "79e48e2f606a9b88d4a096163e17b8d64c5369a328be647254bac3dee1c377d5"
+    },
+    {
+      "path": "/Users/neurologic/Projects/evidence-synthesis-engine-neurodevelopmental-review/runs/ndem-rapid-20260729/ndem-e1-sleep-circadian/evidence_extraction_ai_r1.json",
+      "bytes": 24065,
+      "sha256": "e9f87110e2775d01161213b7377c832b81924cc547b294f8da4f97e47e4533e3"
+    },
+    {
+      "path": "/Users/neurologic/Projects/evidence-synthesis-engine-neurodevelopmental-review/runs/ndem-rapid-20260729/ndem-e2-mood-substances/screening_ai_r1.json",
+      "bytes": 52820,
+      "sha256": "c7a6541bd311a6fe36fb1885a0f32d81f832ad233e24fd6743ce7fc21af92a75"
+    },
+    {
+      "path": "/Users/neurologic/Projects/evidence-synthesis-engine-neurodevelopmental-review/runs/ndem-rapid-20260729/ndem-e2-mood-substances/evidence_extraction_ai_r1.json",
+      "bytes": 20967,
+      "sha256": "96347800e46751f285fcc3bfd2543edf03ef993001779c3bc3a0ef74abf66c99"
+    },
+    {
+      "path": "/Users/neurologic/Projects/evidence-synthesis-engine-neurodevelopmental-review/runs/ndem-rapid-20260729/ndem-f-daydreaming-rejection/screening_ai_r1.json",
+      "bytes": 56313,
+      "sha256": "c9fa7727dd5acc4bdf660bea36660eeeaf203f7bac95fd1ea50c7535e9508416"
+    },
+    {
+      "path": "/Users/neurologic/Projects/evidence-synthesis-engine-neurodevelopmental-review/runs/ndem-rapid-20260729/ndem-f-daydreaming-rejection/evidence_extraction_ai_r1.json",
+      "bytes": 20138,
+      "sha256": "86e6c7abae9f0d9a614b77efed8bbc42ea217a50b5164e4c1523980662d63333"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "/Users/neurologic/Projects/evidence-synthesis-engine-neurodevelopmental-review/review_outputs/neurodevelopmental-environmental-mismatch-20260729/ai_ai_comparison/ai_reviewer_comparison.md",
+      "bytes": 8759,
+      "sha256": "cc9a8a4b906e8f428c71b17ccfabf300d2e97b5d33fc1e5087ae5924d7b5be8d"
+    },
+    {
+      "path": "/Users/neurologic/Projects/evidence-synthesis-engine-neurodevelopmental-review/review_outputs/neurodevelopmental-environmental-mismatch-20260729/ai_ai_comparison/comparison_metrics.json",
+      "bytes": 16903,
+      "sha256": "da0a697ff194fb1ca8f5433fc16bed31780261f911a551c16e21272d3ac3b73b"
+    },
+    {
+      "path": "/Users/neurologic/Projects/evidence-synthesis-engine-neurodevelopmental-review/review_outputs/neurodevelopmental-environmental-mismatch-20260729/ai_ai_comparison/screening_disagreements.csv",
+      "bytes": 78033,
+      "sha256": "4f31bb272afaf8d13d11b63efb3d70308812c7057608be7a7e19f56785b2c449"
+    },
+    {
+      "path": "/Users/neurologic/Projects/evidence-synthesis-engine-neurodevelopmental-review/review_outputs/neurodevelopmental-environmental-mismatch-20260729/ai_ai_comparison/claim_level_comparison.csv",
+      "bytes": 51616,
+      "sha256": "f4c96926ff0bd7bf15bad26b361aadbd6743b04653b55c76175c7778e8825d6e"
+    }
+  ],
+  "gate_status": {
+    "secondary_ai_reviewer_claude": "complete",
+    "ai_ai_reconciliation": "draft",
+    "human_reviewer_2": "pending",
+    "full_text_screening": "pending",
+    "formal_risk_of_bias": "pending",
+    "clinical_sign_off": "pending",
+    "official_engine_export": "withheld"
+  }
+}

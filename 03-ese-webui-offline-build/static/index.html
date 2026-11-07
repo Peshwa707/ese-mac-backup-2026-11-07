@@ -1,0 +1,307 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ESE Offline Workbench</title>
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+  <main>
+    <header>
+      <p class="eyebrow">Evidence Synthesis Engine</p>
+      <h1>Offline Workbench</h1>
+      <p class="lede">Operate frozen evidence runs through the engine without live APIs, credentials, or subscriptions.</p>
+    </header>
+
+    <section class="panel">
+      <div class="section-title"><h2>1. Start a run</h2><span id="health" class="badge">Checking…</span></div>
+      <form id="new-run-form">
+        <input id="run-name" name="name" placeholder="Protocol or review name" required maxlength="120">
+        <button type="submit">Create offline run</button>
+      </form>
+      <select id="run-select"><option value="">Select a run</option></select>
+    </section>
+
+    <section class="panel stages">
+      <div class="section-title"><h2>2. Offline boundary</h2><span id="run-state" class="muted">No run selected</span></div>
+      <p class="lede">This is a stage-9 offline package: on top of stage 1's operator shell (create/select a run, offline-only
+      status, artifact listing), stage 2's import (uploading a RIS or NBIB source file), stage 3's deterministic
+      deduplication and protocol locking, and stage 4's cached screening and human adjudication, it adds source-anchored
+      extraction with NR/ESTIMATED handling, a bounded risk-of-bias assessment, bounded single-study synthesis
+      (risk ratio, risk difference, or odds ratio, with explicit insufficient-data flags), packaging and replaying
+      screened artifacts to verify byte-stable reproduction, plus byte-for-byte artifact inspection.</p>
+      <div class="stage-grid">
+        <button data-action="doctor">Run engine doctor</button>
+      </div>
+      <pre id="diagnostic-result">No diagnostic has been run yet.</pre>
+    </section>
+
+    <section class="panel" id="providers-panel">
+      <div class="section-title"><h2>3. Provider control surface</h2><span class="muted">Offline planning only</span></div>
+      <p class="lede">Inspect the available provider modes and build a redacted validation, health-plan, or request-manifest view. API credentials are represented only by an environment-variable name; this panel never reads it. ChatGPT and Claude subscriptions remain manual browser sessions.</p>
+      <label>Provider
+        <select id="provider-id">
+          <option value="openai_api">OpenAI API</option>
+          <option value="anthropic_api">Anthropic API</option>
+          <option value="ollama_local">Ollama (local)</option>
+          <option value="ollama_cloud">Ollama (cloud API)</option>
+          <option value="moonshot_kimi_api">Moonshot / Kimi API</option>
+          <option value="deepseek_api">DeepSeek API</option>
+          <option value="interactive_subscription">Interactive subscription</option>
+        </select>
+      </label>
+      <label id="provider-env-label">Credential reference: environment-variable name
+        <input id="provider-env-name" type="text" placeholder="OPENAI_API_KEY" autocomplete="off">
+      </label>
+      <label id="provider-service-label" hidden>Manual subscription service
+        <select id="provider-service">
+          <option value="chatgpt">ChatGPT</option>
+          <option value="claude">Claude</option>
+        </select>
+      </label>
+      <div class="stage-grid">
+        <button id="provider-validate" type="button">Validate reference</button>
+        <button id="provider-health" type="button">Build offline health plan</button>
+        <button id="provider-manifest" type="button">Build request manifest</button>
+      </div>
+      <pre id="provider-result">Loading provider registry…</pre>
+      <label class="toggle">
+        <input id="provider-gate-confirm" type="checkbox">
+        I explicitly authorize one per-run health-check gate for this provider
+      </label>
+      <div class="stage-grid">
+        <button id="provider-gate" type="button">Issue operator gate</button>
+        <button id="provider-call-plan" type="button">Build gate-bound plan</button>
+      </div>
+      <pre id="provider-gate-result">No operator gate has been issued.</pre>
+      <pre id="provider-plan-result">No gate-bound plan has been built.</pre>
+      <p class="muted">Issuing a gate or plan is an offline control action and does not send a live request. Live execution remains disabled; subscriptions remain manual and API credentials are never read here.</p>
+      <p class="muted">Execution fixture <code>provider-health-v1</code> is available only to a separately authorized runtime that supplies its own resolver and transport; this WebUI does not invoke it.</p>
+      <p class="muted">Manual subscription session: the operator opens their own ChatGPT or Claude session and performs any live check themselves; this tool has no automation button for it.</p>
+    </section>
+
+    <section class="panel" id="full-text-panel">
+      <div class="section-title"><h2>4. Full-text access routing</h2><span class="muted">Offline route planning only</span></div>
+      <p class="lede">Build a lawful routing plan from a citation. Scholar, Scopus, Embase, EZproxy, publisher, and library routes are classified here; none proves full-text availability, logs in, reads browser sessions, or automates 2FA.</p>
+      <div class="two-column">
+        <label>DOI <input id="full-text-doi" type="text" placeholder="10.xxxx/example"></label>
+        <label>PMID <input id="full-text-pmid" type="text" placeholder="39551604"></label>
+      </div>
+      <label>Title <input id="full-text-title" type="text" placeholder="Article title"></label>
+      <div class="stage-grid">
+        <button id="full-text-connectors" type="button">Show connector catalog</button>
+        <button id="full-text-plan" type="button">Build access plan</button>
+        <button id="full-text-probe-plan" type="button">Build Scopus/Embase probe plan</button>
+      </div>
+      <pre id="full-text-result">No full-text route plan has been built.</pre>
+      <details>
+        <summary>Record a manual access result</summary>
+        <p class="muted">Use this only after you personally inspect an authorized browser, publisher, library, or document-delivery result. The record verifies identity; it does not assess license or reuse rights.</p>
+        <div class="two-column">
+          <label>Route
+            <select id="manual-record-route">
+              <option value="google_scholar">Google Scholar</option>
+              <option value="ezproxy">EZproxy</option>
+              <option value="publisher">Publisher</option>
+              <option value="interlibrary_loan">Interlibrary loan</option>
+              <option value="manual_browser">Manual browser</option>
+              <option value="scopus">Scopus</option>
+              <option value="embase">Embase</option>
+            </select>
+          </label>
+          <label>Access state
+            <select id="manual-record-state">
+              <option value="full_text_observed">Full text observed</option>
+              <option value="abstract_only">Abstract only</option>
+              <option value="login_required">Login required</option>
+              <option value="not_found">Not found</option>
+              <option value="ill_requested">ILL requested</option>
+            </select>
+          </label>
+        </div>
+        <div class="two-column">
+          <label>Observed DOI <input id="manual-record-doi" type="text" placeholder="10.xxxx/example"></label>
+          <label>Observed PMID <input id="manual-record-pmid" type="text" placeholder="39551604"></label>
+        </div>
+        <label>Observed title <input id="manual-record-title" type="text" placeholder="Article title"></label>
+        <label>Source URL (HTTPS, no credentials/query) <input id="manual-record-url" type="url" placeholder="https://publisher.example/article"></label>
+        <button id="manual-record-submit" type="button">Create manual access record</button>
+        <pre id="manual-record-result">No manual access record has been created.</pre>
+      </details>
+      <details>
+        <summary>Add a reference-only institutional access profile</summary>
+        <p class="muted">This records only an environment-variable name, a safe HTTPS proxy URL, and routing mode. It never reads the variable or opens the proxy.</p>
+        <div class="two-column">
+          <label>Connector
+            <select id="full-text-config-connector">
+              <option value="scopus">Scopus</option>
+              <option value="embase">Embase</option>
+              <option value="ezproxy">EZproxy</option>
+            </select>
+          </label>
+          <label>Mode
+            <select id="full-text-config-mode">
+              <option value="api_key_reference">API key reference</option>
+              <option value="manual_browser">Manual browser session</option>
+              <option value="proxy_url">EZproxy URL</option>
+            </select>
+          </label>
+        </div>
+        <div class="two-column">
+          <label>Institution label <input id="full-text-config-institution" type="text" placeholder="My institution"></label>
+          <label>Environment-variable name <input id="full-text-config-env" type="text" placeholder="SCOPUS_API_KEY" autocomplete="off"></label>
+        </div>
+        <label>EZproxy base URL <input id="full-text-config-proxy" type="url" placeholder="https://library.example.edu/login"></label>
+        <button id="full-text-config-validate" type="button">Validate access profile</button>
+        <pre id="full-text-config-result">No access profile has been validated.</pre>
+      </details>
+      <p class="muted">Institutional login, publisher access, and interlibrary loan remain user-owned workflows. Verify DOI/PMID/title against any retrieved article before extraction.</p>
+    </section>
+
+    <section class="panel">
+      <div class="section-title"><h2>5. Import source records</h2><span id="import-state" class="muted">No run selected</span></div>
+      <p class="lede">Upload a RIS (<code>.ris</code>) or NBIB (<code>.nbib</code>) export exactly as produced by your
+      source database. The raw upload is preserved unmodified as a source artifact before the offline engine is asked
+      to produce the frozen import artifact from it.</p>
+      <label class="file-input">Source file (.ris or .nbib)
+        <input id="import-file" type="file" accept=".ris,.nbib">
+      </label>
+      <button id="import-submit" type="button">Import records</button>
+      <pre id="import-result">No import has been run yet.</pre>
+    </section>
+
+    <section class="panel">
+      <div class="section-title"><h2>6. Deduplicate &amp; lock</h2><span id="dedup-lock-state" class="muted">No run selected</span></div>
+      <p class="lede">Deterministically deduplicate the run's frozen import artifact, then lock the protocol against
+      that deduplicated record set. Locking requires deduplication to be complete first; re-running an earlier stage
+      (import or dedup) invalidates any dedup/lock artifacts and stage completions built on top of it, so they never
+      silently go stale. Every produced artifact's sha256 content hash is shown below and in the artifact
+      listing.</p>
+      <div class="stage-grid">
+        <button data-action="dedup">Run deduplication</button>
+        <button data-action="lock">Lock protocol</button>
+      </div>
+      <pre id="diagnostic-result-dedup-lock">No deduplication or lock has been run yet.</pre>
+    </section>
+
+    <section class="panel">
+      <div class="section-title"><h2>7. Screen &amp; adjudicate</h2><span id="screen-state" class="muted">No run selected</span></div>
+      <p class="lede">Run the offline engine's cached screening against the run's locked protocol; it produces one
+      include/exclude/abstain decision per record. Human adjudication defaults to <strong>off</strong>: an abstained
+      record never blocks the screen stage unless you explicitly turn adjudication on below. When adjudication is
+      on, every unresolved abstention opens a blocking queue entry that must be resolved (include/exclude) before
+      the screen stage reads complete. Re-running screening always invalidates any earlier adjudications, and
+      flipping the toggle re-evaluates any already-screened run immediately, including retroactively.</p>
+      <label class="toggle">
+        <input id="human-adjudication-toggle" type="checkbox">
+        Require human adjudication for abstentions
+      </label>
+      <div class="stage-grid">
+        <button data-action="screen">Run screening</button>
+      </div>
+      <pre id="screen-result">No screening has been run yet.</pre>
+      <div id="adjudication-queue"></div>
+    </section>
+
+    <section class="panel">
+      <div class="section-title"><h2>8. Extract source-anchored data</h2><span id="extraction-state" class="muted">No run selected</span></div>
+      <p class="lede">Provide one frozen UTF-8 full-text source and a field specification. Reported values are anchored to exact source spans; use <code>not_reported</code> for NR and <code>estimated</code> only with a visible calculation note.</p>
+      <label class="file-input">Full-text source (.txt, .html, or .xml)
+        <input id="extract-file" type="file" accept=".txt,.html,.xml,.text">
+      </label>
+      <label>Record ID
+        <input id="extract-record-id" type="text" value="study-1" maxlength="120">
+      </label>
+      <label>Fields JSON
+        <textarea id="extract-fields" rows="9">[
+  {"field": "sample_size", "status": "reported", "start": 0, "end": 10},
+  {"field": "blinding_method", "status": "not_reported"}
+]</textarea>
+      </label>
+      <button id="extract-submit" data-action="extract" type="button">Build extraction record</button>
+      <pre id="extraction-result">No extraction has been run yet.</pre>
+    </section>
+
+    <section class="panel">
+      <div class="section-title"><h2>9. Risk of bias</h2><span id="rob-state" class="muted">No run selected</span></div>
+      <p class="lede">Assess the positively included extracted record with bounded domain judgments. Use <code>not_assessed</code> when the source is insufficient; every judgment requires a rationale, and source links are recorded only for assessed domains.</p>
+      <label>Record ID
+        <input id="rob-record-id" type="text" value="rec-1" maxlength="120">
+      </label>
+      <label>Tool
+        <input id="rob-tool" type="text" value="protocol-rob-v1" maxlength="120">
+      </label>
+      <label>Overall judgment
+        <select id="rob-overall">
+          <option value="not_assessed">not_assessed</option>
+          <option value="low_risk">low_risk</option>
+          <option value="some_concerns">some_concerns</option>
+          <option value="high_risk">high_risk</option>
+          <option value="unclear_risk">unclear_risk</option>
+        </select>
+      </label>
+      <label>Domains JSON
+        <textarea id="rob-domains" rows="10">[
+  {"domain": "randomization", "judgment": "not_assessed", "rationale": "The supplied source does not report this domain.", "source_links": []}
+]</textarea>
+      </label>
+      <button data-action="rob" type="button">Build risk-of-bias assessment</button>
+      <pre id="rob-result">No risk-of-bias assessment has been run yet.</pre>
+    </section>
+
+    <section class="panel">
+      <div class="section-title"><h2>10. Single-study synthesis</h2><span id="synthesis-state" class="muted">No run selected</span></div>
+      <p class="lede">Run one protocol-supplied 2x2 calculation for the extracted, risk-of-bias assessed record. This offline stage does not pool studies; zero-event ratio cases remain <code>insufficient_data</code> with an explicit uncertainty flag.</p>
+      <label>Record ID
+        <input id="synthesis-record-id" type="text" value="rec-1" maxlength="120">
+      </label>
+      <label>Effect measure
+        <select id="synthesis-measure">
+          <option value="risk_difference">risk_difference</option>
+          <option value="risk_ratio">risk_ratio</option>
+          <option value="odds_ratio">odds_ratio</option>
+        </select>
+      </label>
+      <label>Counts JSON
+        <textarea id="synthesis-counts" rows="7">{
+  "treated_events": 2,
+  "treated_total": 10,
+  "control_events": 1,
+  "control_total": 10
+}</textarea>
+      </label>
+      <button data-action="synthesize" type="button">Calculate single-study effect</button>
+      <pre id="synthesis-result">No synthesis calculation has been run yet.</pre>
+    </section>
+
+    <section class="panel">
+      <div class="section-title"><h2>11. Package &amp; replay</h2><span id="package-replay-state" class="muted">No run selected</span></div>
+      <p class="lede">Bundle a fully-screened run's stage artifacts (frozen import, dedup, lock, and screen) into a
+      single package artifact, then replay that package and compare the reproduced artifacts against the originals,
+      byte for byte. Packaging requires screening to be complete (and unblocked); replaying requires a package to be
+      complete. Re-running an earlier stage invalidates any package/replay artifacts and stage completions built on
+      top of it, exactly like the dedup/lock/screen cascade above. A replay that runs successfully but reproduces
+      different bytes reads <strong>mismatched</strong>, not complete, and the mismatching output is kept on disk for
+      audit instead of being discarded.</p>
+      <div class="stage-grid">
+        <button data-action="package">Build package</button>
+        <button data-action="replay">Run replay</button>
+      </div>
+      <pre id="package-replay-result">No package or replay has been run yet.</pre>
+    </section>
+
+    <section class="panel">
+      <div class="section-title"><h2>12. Artifacts</h2><button id="refresh">Refresh</button></div>
+      <p class="lede">Inspect the exact on-disk bytes of any artifact listed below.</p>
+      <label class="file-input">Artifact name (for example <code>frozen.json</code> or <code>source/records.ris</code>)
+        <input id="artifact-inspect-name" type="text" placeholder="frozen.json">
+      </label>
+      <button id="artifact-inspect-submit" type="button">Inspect artifact</button>
+      <pre id="artifact-inspect-result">No artifact inspected yet.</pre>
+      <pre id="artifacts">Create or select a run.</pre>
+    </section>
+  </main>
+  <script src="/static/app.js"></script>
+</body>
+</html>

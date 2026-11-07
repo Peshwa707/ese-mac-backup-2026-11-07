@@ -1,0 +1,78 @@
+# Search strategy for the oral-clonidine / spine-surgery vertical.
+# core/sr reads this. PubMed is executed live; institutional-access database
+# strings are produced for the reproducible record and flagged "not executed".
+
+disclaimer: >
+  Search executed without outcome, date, or language filters per protocol, to
+  avoid missing eligible studies. The PubMed string is the protocol's registered
+  string (procedure block AND clonidine block); a live PubMed run on 2026-07-09
+  returned 107 records. Scopus / Web of Science / Cochrane CENTRAL coverage is
+  not executed in the automated pass (institutional access) and is flagged for
+  manual search; a Google Scholar supplementary pass surfaced 4 eligible RCTs
+  not indexed in PubMed (imported via the import connector).
+
+# --- PubMed / MEDLINE (executed live) -------------------------------------
+pubmed:
+  executed: true
+  query: >
+    ("spine surgery"[tiab] OR "spinal surgery"[tiab] OR "spine fusion"[tiab] OR
+    "spine fusion surgery"[tiab] OR "lumbar spine surgery"[tiab] OR
+    "lumbar spine fusion surgery"[tiab] OR "lumbar fusion surgery"[tiab] OR
+    discectomy[tiab] OR laminectomy[tiab] OR "lumbar laminectomy"[tiab] OR
+    spondylosyndesis[tiab] OR "lumbar fusion"[tiab] OR thoracolumbar[tiab] OR
+    lumbosacral[tiab] OR "spinal decompression"[tiab] OR diskectomy[tiab]) AND
+    (clonidine[tiab] OR catapres[tiab] OR catapresan[tiab] OR catapressan[tiab] OR
+    clonidin[tiab] OR clonidina[tiab] OR "alpha-2 adrenergic agonist"[tiab] OR
+    "alpha-2 agonist"[tiab] OR "α2 agonist"[tiab])
+  retmax: 200
+
+# --- Europe PMC (executed live; free; broader than PubMed) -----------------
+europepmc:
+  executed: true
+  query: >
+    ("spine surgery" OR "spinal surgery" OR "spinal fusion" OR "lumbar fusion" OR
+    discectomy OR laminectomy OR spondylosyndesis OR thoracolumbar OR lumbosacral OR
+    "spinal decompression" OR diskectomy) AND
+    (clonidine OR catapres OR "alpha-2 adrenergic agonist" OR "alpha-2 agonist")
+  page_size: 500
+
+# --- ClinicalTrials.gov (executed live; free; trial registrations) ---------
+clinicaltrials:
+  executed: true
+  query: "oral clonidine spine surgery lumbar fusion laminectomy blood loss pain"
+
+# --- Databases requiring institutional access (strings only, NOT executed) -
+other_databases:
+  - name: Scopus
+    executed: false
+    note: "Run via institutional Scopus. Not executed in automated pass."
+    query: >
+      TITLE-ABS-KEY(("spine surgery" OR "spinal surgery" OR "spinal fusion" OR
+      "lumbar fusion" OR discectomy OR laminectomy OR thoracolumbar OR lumbosacral OR
+      "spinal decompression") AND (clonidine OR catapres OR "alpha-2 agonist"))
+  - name: Web of Science
+    executed: false
+    note: "Topic search (TS=). Not executed in automated pass."
+    query: >
+      TS=(("spine surgery" OR "spinal surgery" OR "spinal fusion" OR "lumbar fusion" OR
+      discectomy OR laminectomy OR thoracolumbar OR lumbosacral OR "spinal decompression")
+      AND (clonidine OR catapres OR "alpha-2 adrenergic agonist" OR "alpha-2 agonist"))
+  - name: CENTRAL
+    executed: false
+    note: "Cochrane CENTRAL (free text). Not executed in automated pass."
+    query: >
+      ("spine surgery" OR "spinal surgery" OR "spinal fusion" OR "lumbar fusion" OR
+      discectomy OR laminectomy OR "spinal decompression"):ti,ab,kw AND
+      (clonidine OR catapres OR "alpha-2 agonist"):ti,ab,kw
+
+# --- Supplementary searches ------------------------------------------------
+# Google Scholar (grey-literature / non-PubMed) surfaced these eligible RCTs;
+# imported via the import connector (see _search_imports/GoogleScholar/).
+named_trials: []
+
+reference_mining_seeds: []
+
+conference_abstract_targets:
+  executed: false
+  note: "Anaesthesia congresses not in the PubMed API; flagged for manual search."
+  venues: [ASA, ESA, "World Congress of Anaesthesiologists"]

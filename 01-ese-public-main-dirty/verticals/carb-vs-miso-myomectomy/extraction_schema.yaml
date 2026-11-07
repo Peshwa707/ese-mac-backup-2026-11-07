@@ -1,0 +1,146 @@
+# Data dictionary for extraction (Step 6) — carbetocin-vs-misoprostol / open myomectomy.
+# tx = carbetocin, ctrl = misoprostol (fixed by the *_tx / *_ctrl pair keys below).
+#
+# HONESTY NOTE: the automated first pass extracts at the ABSTRACT level. The primary
+# outcome (blood loss, mL) and most secondaries live in full-text tables and will
+# correctly come back "NR" here — full-text extraction is a human / Milestone-2 step,
+# a known limitation, not a gap to hide.
+#
+# POOLING (engine contract):
+#   pool: continuous   -> meta::metacont, pair keys n_tx/mean_tx/sd_tx/n_ctrl/mean_ctrl/sd_ctrl
+#                         (+ median_tx/q1_tx/q3_tx/lo_tx/hi_tx fallbacks). measure: MD forced
+#                         where arms share natural units (mL, g/dL, %, min).
+#   pool: binary_2x2   -> meta::metabin (RR), pair keys events_tx/n_tx/events_ctrl/n_ctrl.
+
+identity:
+  - first_author
+  - year
+  - study_name
+  - study_design          # RCT (parallel / multi-arm)
+  - carbetocin_route       # IV | IM | intramyometrial   (tx route)
+  - carbetocin_dose        # e.g. 100 ug IV — free text
+  - misoprostol_route      # oral | vaginal | rectal | sublingual  (ctrl route; SUBGROUP axis)
+  - misoprostol_dose       # e.g. 400 ug vaginal — free text
+  - comparator_label       # misoprostol
+  - nct                    # registration number, verified live
+
+fields:
+  population:
+    - {name: total_n, level: abstract}
+    - {name: n_carbetocin_arm, level: abstract}
+    - {name: n_misoprostol_arm, level: abstract}
+    - {name: blood_loss_ascertainment, level: fulltext}   # measured (gravimetric/suction) vs estimated
+
+  # PRIMARY: intra-/peri-operative blood loss (continuous, mL, MD). Less = better.
+  blood_loss:
+    - name: blood_loss_ml
+      level: fulltext
+      pool: continuous
+      measure: MD
+      label: "Intra-/peri-operative blood loss (mL, MD)"
+      beneficial: lower
+      pair:
+        n_tx: bl_n_tx
+        mean_tx: bl_mean_tx
+        sd_tx: bl_sd_tx
+        n_ctrl: bl_n_ctrl
+        mean_ctrl: bl_mean_ctrl
+        sd_ctrl: bl_sd_ctrl
+        median_tx: bl_median_tx
+        q1_tx: bl_q1_tx
+        q3_tx: bl_q3_tx
+        lo_tx: bl_lo_tx
+        hi_tx: bl_hi_tx
+        median_ctrl: bl_median_ctrl
+        q1_ctrl: bl_q1_ctrl
+        q3_ctrl: bl_q3_ctrl
+        lo_ctrl: bl_lo_ctrl
+        hi_ctrl: bl_hi_ctrl
+
+  # SECONDARY continuous.
+  haemodynamic_continuous:
+    - name: hb_change_g
+      level: fulltext
+      pool: continuous
+      measure: MD
+      label: "Haemoglobin change (g/dL, MD)"
+      beneficial: higher      # smaller drop / higher post-op Hb = better
+      pair:
+        n_tx: hb_n_tx
+        mean_tx: hb_mean_tx
+        sd_tx: hb_sd_tx
+        n_ctrl: hb_n_ctrl
+        mean_ctrl: hb_mean_ctrl
+        sd_ctrl: hb_sd_ctrl
+        median_tx: hb_median_tx
+        q1_tx: hb_q1_tx
+        q3_tx: hb_q3_tx
+        median_ctrl: hb_median_ctrl
+        q1_ctrl: hb_q1_ctrl
+        q3_ctrl: hb_q3_ctrl
+    - name: hct_change_pct
+      level: fulltext
+      pool: continuous
+      measure: MD
+      label: "Haematocrit change (%, MD)"
+      beneficial: higher
+      pair:
+        n_tx: hct_n_tx
+        mean_tx: hct_mean_tx
+        sd_tx: hct_sd_tx
+        n_ctrl: hct_n_ctrl
+        mean_ctrl: hct_mean_ctrl
+        sd_ctrl: hct_sd_ctrl
+    - name: operative_time_min
+      level: fulltext
+      pool: continuous
+      measure: MD
+      label: "Operative time (min, MD)"
+      beneficial: lower
+      pair:
+        n_tx: op_n_tx
+        mean_tx: op_mean_tx
+        sd_tx: op_sd_tx
+        n_ctrl: op_n_ctrl
+        mean_ctrl: op_mean_ctrl
+        sd_ctrl: op_sd_ctrl
+        median_tx: op_median_tx
+        q1_tx: op_q1_tx
+        q3_tx: op_q3_tx
+        median_ctrl: op_median_ctrl
+        q1_ctrl: op_q1_ctrl
+        q3_ctrl: op_q3_ctrl
+
+  # SECONDARY binary (two-arm RR via metabin).
+  binary_events:
+    - name: transfusion_events
+      level: abstract
+      pool: binary_2x2
+      label: "Blood transfusion (RR)"
+      beneficial: lower
+      pair:
+        events_tx: transf_events_tx
+        n_tx: transf_n_tx
+        events_ctrl: transf_events_ctrl
+        n_ctrl: transf_n_ctrl
+    - name: adverse_events
+      level: abstract
+      pool: binary_2x2
+      label: "Uterotonic adverse effects (RR)"
+      beneficial: lower
+      pair:
+        events_tx: ae_events_tx
+        n_tx: ae_n_tx
+        events_ctrl: ae_events_ctrl
+        n_ctrl: ae_n_ctrl
+
+rules:
+  - "Copy values verbatim from the source text only. Do not use outside knowledge."
+  - "If a field is not stated in the source, set value to 'NR' (not reported). Preserve source typos; note them."
+  - "If a value is inferred/derived rather than stated, prefix with 'ESTIMATED:' and note the method."
+  - "For each non-NR numeric value, include the EXACT verbatim quote from the source that supports it."
+  - "tx = carbetocin arm, ctrl = misoprostol arm. Never swap; if arm labels are ambiguous, mark NR."
+  - "For continuous outcomes record per-arm n, mean, SD; if only median/IQR or median/range are reported, record those in the median/q1/q3 (or lo/hi) sub-fields and leave mean/sd NR — do not convert (the engine converts via Wan2014/Luo2018/Hozo2005)."
+  - "For binary outcomes record events and the arm denominator (events / n); never a percentage without its denominator."
+  - "Record carbetocin route/dose and misoprostol route/dose exactly as reported; misoprostol_route drives the subgroup axis."
+  - "For blood loss, record how it was ascertained (measured — gravimetric/suction — vs estimated) in blood_loss_ascertainment."

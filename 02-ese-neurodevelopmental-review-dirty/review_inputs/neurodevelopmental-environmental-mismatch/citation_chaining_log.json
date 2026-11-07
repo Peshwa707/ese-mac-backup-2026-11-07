@@ -1,0 +1,33 @@
+{
+  "date": "2026-07-29",
+  "method": "PubMed ELink Similar Articles through the PubMed plugin",
+  "role": "Gap detection only. Returned titles were not cited unless they independently entered the verified extraction set and their abstract was inspected.",
+  "seeds": [
+    {
+      "pmid": "37648266",
+      "topic": "Cannabis risks and benefits umbrella review",
+      "results_returned": 20,
+      "relevant_pmids_noted": ["31672337", "25314586", "26103030"],
+      "disposition": "No new source added. The seed umbrella review already synthesized the relevant psychiatric meta-analyses; unrelated treatment/pain results were not advanced."
+    },
+    {
+      "pmid": "42365682",
+      "topic": "Childhood ADHD to adult functional outcomes",
+      "results_returned": 20,
+      "relevant_pmids_noted": ["29957167", "27192174", "33059383", "31718730", "40287009"],
+      "disposition": "No new primary source added solely from the related-article list. The late-onset/persistence uncertainty was separately covered by an inspected critical review (PMID 30843223), and PMID 40287009 was already in the screened evidence set."
+    }
+  ],
+  "failed_links": [
+    {
+      "pmid": "37648266",
+      "relationship": "references",
+      "result": "No ELink results returned"
+    },
+    {
+      "pmid": "37648266",
+      "relationship": "cited-in",
+      "result": "No ELink results returned"
+    }
+  ]
+}

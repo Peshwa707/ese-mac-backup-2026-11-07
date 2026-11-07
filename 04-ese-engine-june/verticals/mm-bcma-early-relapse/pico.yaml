@@ -1,0 +1,96 @@
+# =============================================================================
+# VERTICAL: mm-bcma-early-relapse
+# Source protocol: Protocol_CART_vs_Bispecific_Early_Relapse_MM_V1.docx (v1.0, 5 Jun 2026)
+# This file is the protocol's PICO + eligibility, translated for the engine.
+# (Teaching note: every key below maps to a section of your written protocol.)
+# =============================================================================
+
+review:
+  title: >
+    BCMA-directed CAR-T cell therapy versus bispecific antibodies in early-relapse
+    multiple myeloma (1-3 prior lines): a systematic review, anchored indirect
+    comparison, and network meta-analysis
+  short_id: mm-bcma-early-relapse
+  registration: "PROSPERO: registration pending (to be registered before screening)"
+  output_base: "~/Documents/Systematic Reviews/MM-BCMA-EarlyRelapse"
+
+# --- PICO (protocol section 1.2) -------------------------------------------------
+pico:
+  population: >
+    Adults (>=18y) with relapsed/refractory multiple myeloma after 1-3 prior lines
+    of therapy (lenalidomide- and proteasome-inhibitor-exposed). Eligible if the whole
+    population is 1-3 prior lines OR an extractable 1-3 line subgroup is reported.
+  intervention: >
+    BCMA-directed CAR-T cell therapy: ciltacabtagene autoleucel (cilta-cel) or
+    idecabtagene vicleucel (ide-cel).
+  comparator: >
+    BCMA-directed T-cell-engaging bispecific antibodies: teclistamab (+/- daratumumab),
+    elranatamab, or linvoseltamab. Non-BCMA bispecifics (e.g. talquetamab/GPRC5D)
+    excluded from primary scope (sensitivity analysis only).
+  # The anchor is what makes the indirect comparison possible (protocol 1.1, 2.9.1).
+  anchor: >
+    Physician/investigator-choice daratumumab- or pomalidomide-based standard of care
+    (DPd, DVd, PVd, Kd) serves as the shared network reference node.
+  outcomes:
+    primary:
+      - progression-free survival (PFS) [hazard ratio, ITT]
+      - overall survival (OS) [hazard ratio, ITT]
+    secondary:
+      - overall response rate (ORR)
+      - ">=complete response (>=CR)"
+      - ">=very good partial response (>=VGPR)"
+      - MRD-negativity (10^-5 / 10^-6, denominator recorded)
+      - cytokine release syndrome (any grade; grade >=3)
+      - neurotoxicity / ICANS (any grade; grade >=3)
+      - grade >=3 infection
+      - grade >=3 neutropenia / thrombocytopenia / anaemia
+
+# --- Synthesis axis (protocol 2.9.1 + 2.9.4) ------------------------------------
+# For Rung 1 (pooled proportions) the engine stratifies single-arm data into the two
+# modalities. The full anchored NMA over hazard ratios (the protocol's PRIMARY analysis)
+# is handled separately in R once extraction is complete.
+synthesis:
+  subgroup_field: modality
+  subgroup_map:
+    CAR-T: [car, car-t, cart]
+    BsAb: [bsab, bispecific, bite, t-cell engager]
+  arms: [CAR-T, BsAb]
+  indirect_comparison: true   # anchored (NOT naive) -- via shared SOC node
+  # Shared SOC anchor comparator terms: HR pooling drops studies whose comparator
+  # is not one of these (fail-closed on missing/non-anchor comparator). SPECIFIC
+  # regimen identifiers only — NOT generic phrases like "standard of care" /
+  # "physician's choice" (those would pass any unverified label). The real control
+  # arms all name a regimen (e.g. "physician's choice PVd or DPd").
+  anchor_terms: [dpd, pvd, dvd, kd, daratumumab, pomalidomide, bortezomib, carfilzomib]
+
+# --- Eligibility (protocol 2.2) -------------------------------------------------
+eligibility:
+  # IMPORTANT (anchored-NMA design): no head-to-head CAR-T-vs-bispecific trial exists.
+  # The eligible Tier-1 studies are RCTs of EITHER modality vs a shared SOC anchor;
+  # they connect indirectly through that anchor. Criteria must NOT require both
+  # modalities in one study (that flaw silently excluded pivotal trials in pilot screening).
+  inclusion:
+    - "Study design in Tier 1-3."
+    - "Adults with RRMM, 1-3 prior lines (whole population OR extractable 1-3 line subgroup), lenalidomide/PI-exposed."
+    - "Evaluates a BCMA-directed T-cell-redirecting therapy in >=1 arm: EITHER a BCMA CAR-T (cilta-cel, ide-cel) OR a BCMA bispecific (teclistamab +/- dara, elranatamab, linvoseltamab). A study need NOT contain both modalities."
+    - "Has an eligible comparison structure (ANY ONE): (a) TIER 1 PRIMARY NODE = randomized phase-3 trial comparing the BCMA therapy (CAR-T OR bispecific) vs a daratumumab- or pomalidomide-based SOC regimen (DPd, DVd, PVd, Kd) -- ELIGIBLE AS A NETWORK NODE even though it is NOT a direct CAR-T-vs-bispecific comparison (indirect comparison via the shared SOC anchor); this is the core of the review. (b) TIER 1 DIRECT = head-to-head RCT of BCMA CAR-T vs BCMA bispecific, if any. (c) TIER 2 SUPPORTIVE = single-arm trial of a BCMA CAR-T or bispecific (pooled proportions by modality). (d) TIER 3 SENSITIVITY = real-world/registry/propensity-matched cohort."
+    - "Reports >=1 pre-specified efficacy or safety outcome."
+    - "ide-cel / KarMMa-3 (2-4 line) records: do NOT exclude for line mismatch at screening -- mark UNCERTAIN to advance; its primary-vs-sensitivity role is decided at full-text once a 1-3 line subgroup is assessed."
+  exclusion:
+    - "Preclinical, in vitro, or animal studies."
+    - "Case reports / case series with <10 patients."
+    - "Narrative reviews, editorials, commentaries, letters, news (reference mining only)."
+    - "Exclusively GPRC5D-/FcRH5-directed bispecifics (talquetamab, cevostamab) in primary analysis (sensitivity analysis only)."
+    - "Population entirely outside 1-3 prior lines with no extractable subgroup."
+    - "A study evaluating ONLY a non-BCMA or non-listed agent (the intervention must be one of the named BCMA CAR-T / bispecific agents)."
+  exclusion_buckets:
+    - {label: "non-BCMA target", keywords: ["gprc5d", "fcrh5", "talquetamab", "cevostamab", "non-bcma"]}
+    - {label: "outside 1-3 lines, no subgroup", keywords: ["4 prior", "four prior", "heavily pretreated", "newly diagnosed", "maintenance"]}
+    - {label: "<10 patients", keywords: ["case report", "case series"]}
+
+disclaimer: >
+  AI Reviewer 1 only. Every PMID live-verified (cite-or-omit); every value
+  abstract/full-text-anchored or marked NR/ESTIMATED. Requires human Reviewer 2 +
+  clinical sign-off before any conclusion is drawn. Primary synthesis (anchored NMA)
+  rests on the transitivity assumption (protocol 2.9.2), which must be appraised
+  before any indirect estimate is reported.

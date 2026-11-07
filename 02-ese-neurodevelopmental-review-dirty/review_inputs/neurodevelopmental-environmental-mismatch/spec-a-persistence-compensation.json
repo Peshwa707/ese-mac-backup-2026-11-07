@@ -1,0 +1,58 @@
+{
+  "title": "Developmental Persistence, Executive Function, and Intellectual Compensation in ADHD",
+  "short_id": "ndem-a-persistence-compensation",
+  "framing": "pico",
+  "profile": "rapid",
+  "background": "This module evaluates persistence of ADHD-related executive and functional impairment and whether intelligence or achievement may compensate for, mask, or delay recognition of impairment.",
+  "population": "Adolescents and adults with diagnosed ADHD or validated ADHD traits, including high-intelligence or high-achievement subgroups.",
+  "intervention": "Developmental persistence, executive dysfunction, intelligence, achievement, compensation, masking, or delayed recognition.",
+  "comparator": "Controls without ADHD, lower-intelligence or lower-achievement groups, remitted ADHD, or within-person developmental follow-up.",
+  "outcomes_primary": [
+    {"name": "Persistence of symptoms or executive/functional impairment", "pool_field": ""},
+    {"name": "Evidence for or against intelligence-related compensation or delayed recognition", "pool_field": ""}
+  ],
+  "outcomes_secondary": [
+    {"name": "Cross-setting impairment, effort, instability, quality of life, and alternative explanations", "pool_field": ""}
+  ],
+  "designs": ["systematic review", "meta-analysis", "longitudinal cohort", "prospective", "retrospective", "cross-sectional"],
+  "inclusion": [
+    "Adolescent or adult ADHD population, or developmental follow-up into adulthood.",
+    "Evaluates persistence, executive/functional outcomes, intelligence, achievement, compensation, masking, or recognition.",
+    "Uses a defined diagnostic or validated trait measure.",
+    "Reports empirical results or an authoritative evidence synthesis."
+  ],
+  "exclusion": [
+    "Pediatric-only report without developmental relevance beyond adolescence.",
+    "No separable ADHD population or validated ADHD-trait analysis.",
+    "Opinion, advocacy, protocol, or unsourced narrative without systematic empirical data.",
+    "No outcome relevant to claims H1 or H2."
+  ],
+  "search": {
+    "concept_blocks": [
+      {"name": "population", "terms": ["ADHD", "\"attention deficit hyperactivity disorder\""], "mesh": ["Attention Deficit Disorder with Hyperactivity"]},
+      {"name": "construct", "terms": ["persistence", "longitudinal", "follow-up", "\"executive function\"", "\"functional impairment\"", "intelligence", "gifted", "achievement", "compensation", "masking"], "mesh": []},
+      {"name": "age_or_design", "terms": ["adult", "adolescent", "cohort", "prospective", "retrospective", "\"Systematic Review\"[pt]", "\"Meta-Analysis\"[pt]"], "mesh": ["Longitudinal Studies"]}
+    ],
+    "databases": ["PubMed", "Europe PMC", "PsycINFO", "Embase", "Web of Science"],
+    "date_from": "",
+    "date_to": "2026/07/29",
+    "retmax": 300
+  },
+  "rob_tool": "auto",
+  "analysis": {
+    "effect_measure": "Narrative synthesis; no cross-construct pooling.",
+    "dose_response": false,
+    "subgroups": ["age", "diagnostic method", "intelligence or achievement", "objective versus self-report outcome"],
+    "publication_bias": false
+  },
+  "extraction_groups": [
+    {"group": "identity", "fields": [{"name": "claim_ids"}, {"name": "study_design"}, {"name": "country"}, {"name": "funding_conflicts", "level": "fulltext"}]},
+    {"group": "population", "fields": [{"name": "total_n"}, {"name": "age_range"}, {"name": "diagnostic_method"}, {"name": "intelligence_or_achievement_definition"}]},
+    {"group": "findings", "fields": [{"name": "outcome_measure"}, {"name": "effect_estimate"}, {"name": "confidence_interval"}, {"name": "direction"}, {"name": "adjusted_covariates", "level": "fulltext"}, {"name": "supporting_quote"}]},
+    {"group": "appraisal", "fields": [{"name": "major_limitations"}, {"name": "alternative_explanations"}, {"name": "directness_to_claim"}]}
+  ],
+  "registration": "Protocol frozen for AI-assisted rapid review on 2026-07-29; not prospectively registered.",
+  "output_base": "/Users/neurologic/Documents/EvidenceEngine/neurodevelopmental-environmental-mismatch",
+  "disclaimer": "AI Reviewer-1 rapid-review draft. Human Reviewer 2 and clinical sign-off remain pending. Not diagnostic or treatment guidance."
+}
+

@@ -1,0 +1,25 @@
+disclaimer: Auto-generated from the protocol concept blocks; review the PubMed string and translate to
+  each non-PubMed database before importing.
+pubmed:
+  executed: true
+  query: '( "maladaptive daydreaming"[tiab] OR "immersive daydreaming"[tiab] OR ADHD[tiab] OR autism[tiab]
+    ) AND ( loneliness[tiab] OR rejection[tiab] OR bullying[tiab] OR shame[tiab] OR boredom[tiab] OR anxiety[tiab]
+    OR trauma[tiab] OR dissociation[tiab] OR "rejection sensitivity"[tiab] OR "emotion regulation"[tiab]
+    ) AND ( association[tiab] OR longitudinal[tiab] OR prospective[tiab] OR mediation[tiab] OR qualitative[tiab]
+    OR "Systematic Review"[pt] ) AND ("1800/01/01"[dp] : "2026/07/29"[dp])'
+  retmax: 250
+other_databases:
+- name: Europe PMC
+  executed: false
+  note: translate concept blocks to this database; import exported records (provenance-attested).
+- name: PsycINFO
+  executed: false
+  note: translate concept blocks to this database; import exported records (provenance-attested).
+- name: Embase
+  executed: false
+  note: translate concept blocks to this database; import exported records (provenance-attested).
+- name: Web of Science
+  executed: false
+  note: translate concept blocks to this database; import exported records (provenance-attested).
+named_trials: []
+reference_mining_seeds: []

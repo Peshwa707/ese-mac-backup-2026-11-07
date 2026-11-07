@@ -1,0 +1,29 @@
+# Data dictionary — glp1-aud vertical. Primary continuous (alcohol consumption, SMD) +
+# binary safety/abstinence (RR). Pooling done externally (smart_pool: SMD + RR).
+identity:
+  - first_author
+  - year
+  - study_name
+  - study_design        # RCT parallel | RCT crossover
+  - agent               # semaglutide | liraglutide | exenatide | dulaglutide | tirzepatide
+  - n_total
+
+fields:
+  efficacy_continuous:
+    - name: alcohol_consumption
+      level: fulltext
+      pool: continuous
+      label: "Alcohol consumption (SMD: drinks/day, % heavy drinking days, g/day, etc.)"
+      pair: {n_tx: ac_n_tx, mean_tx: ac_mean_tx, sd_tx: ac_sd_tx,
+             n_ctrl: ac_n_ctrl, mean_ctrl: ac_mean_ctrl, sd_ctrl: ac_sd_ctrl}
+  safety_binary:
+    - {name: any_ae_events_tx, level: abstract, pool: proportion, label: "Any adverse event (intervention arm)"}
+    - {name: any_ae_events_ctrl, level: abstract, pool: proportion, label: "Any adverse event (control arm)"}
+    - {name: nausea_events_tx, level: fulltext, pool: proportion, label: "Nausea (intervention)"}
+    - {name: nausea_events_ctrl, level: fulltext, pool: proportion, label: "Nausea (control)"}
+
+rules:
+  - "Extract per-arm n, mean, SD for the primary alcohol-consumption outcome at the primary endpoint."
+  - "Record which consumption measure was used (drinks/day, % heavy drinking days, g/day) and its direction (lower = less drinking = better)."
+  - "For binary safety outcomes record events and arm n."
+  - "Copy verbatim or mark 'NR'; include the supporting quote for every non-NR value; never invent."

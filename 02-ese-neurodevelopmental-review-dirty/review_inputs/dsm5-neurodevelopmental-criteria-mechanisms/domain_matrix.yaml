@@ -1,0 +1,33 @@
+version: "1.0.0"
+overlap_policy: >
+  Shared domains are the primary overlap unit. Pairwise diagnostic claims are
+  permitted only when the study includes both diagnoses and a comparable measure.
+domains:
+  - {id: attention_executive, label: "Attention and executive function", diagnoses: [ADHD, ASD, SLD, DCD]}
+  - {id: social_communication, label: "Social communication and interaction", diagnoses: [ADHD, ASD, SLD, DCD]}
+  - {id: learning_language, label: "Learning, language, and academic skills", diagnoses: [ADHD, ASD, SLD, DCD]}
+  - {id: motor_coordination, label: "Motor coordination and praxis", diagnoses: [ADHD, ASD, SLD, DCD]}
+  - {id: sensory_processing, label: "Sensory processing and reactivity", diagnoses: [ADHD, ASD, SLD, DCD]}
+  - {id: emotional_regulation, label: "Emotional regulation and reactivity", diagnoses: [ADHD, ASD, SLD, DCD]}
+  - {id: sleep_arousal, label: "Sleep, arousal, and circadian regulation", diagnoses: [ADHD, ASD, SLD, DCD]}
+  - {id: functional_participation, label: "Daily functioning and participation", diagnoses: [ADHD, ASD, SLD, DCD]}
+mechanism_classes:
+  - cognitive_attention
+  - executive_control
+  - reward_motivation
+  - social_cognition
+  - language_learning
+  - motor_control
+  - sensory_processing
+  - arousal_sleep
+  - emotional_regulation
+  - environmental_transactional
+  - medication_substance_modifier
+intervention_categories:
+  - {id: medication, label: "Medication"}
+  - {id: psychotherapy_behavioral, label: "Psychotherapy and behavioral intervention"}
+  - {id: education_occupational, label: "Educational, occupational, and environmental support"}
+  - {id: assistive_digital, label: "Assistive and digital technology"}
+  - {id: lifestyle_sleep_participation, label: "Lifestyle, sleep, and participation support"}
+intervention_statuses: [established, experimental, off_label, unclear]
+mechanism_levels: [direct_human, indirect_human, preclinical, theoretical]

@@ -1,0 +1,60 @@
+# Structured screening criteria — clonidine-spine (RCT-only)
+# Enrichment of the engine vertical's flat eligibility with F10 boundaries + design gate.
+# Authored by DA from verticals/clonidine-spine/pico.yaml; RCT-only confirmed by Syed.
+vertical: clonidine-spine
+
+design_eligibility:
+  eligible: [rct]
+  excluded: [quasi_randomized, observational, cohort, case_series, in_vitro, animal, narrative_review, editorial, conference_abstract_only]
+  rationale: >
+    A drug-vs-placebo perioperative question with a clean randomized contrast; only
+    randomized controlled trials are eligible. Quasi-randomized (e.g. alternation,
+    odd/even) and non-randomized designs are excluded, as are abstract-only reports.
+  tier_notes: {rct: "sole eligible design"}
+
+criteria:
+  - id: population
+    kind: include
+    text: Adults (>=18 years) undergoing spinal surgery.
+    definitions:
+      spinal surgery: "surgery on the vertebral column — discectomy/diskectomy, laminectomy, spinal fusion/instrumentation, or spinal decompression (lumbar, thoracolumbar, or lumbosacral)."
+      adult: ">=18 years old."
+    boundaries:
+      in: ["elective lumbar posterior fusion", "cervical/lumbar decompression", "spinal disc surgery in adults"]
+      out: ["pediatric / paediatric / children / adolescent populations", "non-spine surgery: hysterectomy, cesarean, tympanoplasty, rhinoplasty, acetabular/pelvic-fracture, general orthopaedic"]
+    near_misses:
+      - "Orthopaedic surgery performed UNDER spinal anaesthesia is NOT spine surgery — the operative site, not the anaesthetic technique, decides this criterion."
+      - "A mixed adult+paediatric cohort is eligible only if an adult (>=18) subgroup is extractable."
+
+  - id: intervention
+    kind: include
+    text: Intervention arm receives ORAL clonidine at any dose (premedication or perioperative).
+    definitions:
+      oral clonidine: "clonidine given by mouth (tablet/syrup), at any dose, as premedication or perioperatively."
+    boundaries:
+      in: ["oral clonidine 0.2 mg tablet premedication", "oral clonidine 200 microgram pre-anaesthesia"]
+      out: ["epidural, intravenous (i.v.), caudal, intrathecal, wound infiltration / field block, perineural, or spinal-anaesthesia-adjuvant clonidine"]
+    near_misses:
+      - "If the abstract does NOT state the route of clonidine, this criterion is UNCLEAR (not a pass) — do not assume oral."
+
+  - id: comparator
+    kind: include
+    text: A clean contrast of oral clonidine vs placebo or no intervention is extractable.
+    definitions:
+      eligible comparator: "placebo or no intervention (a saline/identical-tablet control, or an untreated control arm)."
+    boundaries:
+      in: ["oral clonidine vs placebo", "oral clonidine vs no premedication", "multi-arm trial with BOTH an oral-clonidine arm and a placebo/no-intervention arm"]
+      out: ["oral clonidine compared ONLY with an active drug (dexmedetomidine, tizanidine, atenolol) with NO placebo / no-intervention arm"]
+    near_misses:
+      - "A multi-arm trial (e.g. clonidine vs dexmedetomidine vs placebo) IS eligible — the oral-clonidine-vs-placebo contrast is extractable even though an active arm is also present."
+
+  - id: outcomes
+    kind: include
+    text: Reports at least one outcome of interest.
+    definitions:
+      outcomes of interest: "intraoperative blood loss, duration of surgery, intraoperative heart rate, mean arterial pressure, postoperative pain (VAS/NRS), total postoperative analgesic consumption, time to first analgesic request, complication rate, or surgeon satisfaction."
+    boundaries:
+      in: ["reports intraoperative blood loss", "reports postoperative VAS pain and analgesic consumption"]
+      out: ["reports none of the listed outcomes (e.g. only a pharmacokinetic endpoint)"]
+    near_misses:
+      - "Any ONE listed outcome suffices; a study need not report all of them."

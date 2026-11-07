@@ -1,0 +1,57 @@
+# =============================================================================
+# SEARCH STRATEGY -- mm-bcma-early-relapse
+# Faithful to protocol section 2.4 (draft MEDLINE strategy).
+# Deliberately OMITS outcome, date, and language filters to maximize SENSITIVITY
+# (recall). Population AND (intervention OR comparator). We screen out the noise later.
+# =============================================================================
+
+disclaimer: >
+  Recall-oriented strategy (no outcome/date/language filter), per PRISMA-S. PubMed
+  + Europe PMC + ClinicalTrials.gov run live and verified. MEDLINE-via-Embase (Emtree),
+  CENTRAL, and Web of Science from the protocol require manual RIS/NBIB export into
+  _search_imports/<db>/ (a later step) -- flagged here so coverage is not overstated.
+
+pubmed:
+  executed: true
+  query: >
+    ("multiple myeloma"[MeSH] OR "multiple myeloma"[tiab] OR "myeloma"[tiab]
+     OR "plasma cell neoplasm"[tiab] OR "plasma cell myeloma"[tiab])
+    AND
+    (
+      ("Receptors, Chimeric Antigen"[MeSH] OR "Immunotherapy, Adoptive"[MeSH]
+       OR "chimeric antigen receptor"[tiab] OR "CAR-T"[tiab] OR "CAR T"[tiab]
+       OR "CAR-T cell"[tiab] OR "ciltacabtagene"[tiab] OR "cilta-cel"[tiab]
+       OR "idecabtagene"[tiab] OR "ide-cel"[tiab] OR "CARTITUDE"[tiab] OR "KarMMa"[tiab])
+      OR
+      ("Antibodies, Bispecific"[MeSH] OR "bispecific antibody*"[tiab] OR "bispecific"[tiab]
+       OR "T-cell engager"[tiab] OR "T cell engager"[tiab] OR "BiTE"[tiab]
+       OR "teclistamab"[tiab] OR "elranatamab"[tiab] OR "linvoseltamab"[tiab]
+       OR "MajesTEC"[tiab] OR "MagnetisMM"[tiab] OR "LINKER"[tiab])
+    )
+  retmax: 4000
+
+europepmc:
+  executed: true
+  query: >
+    (multiple myeloma OR myeloma OR plasma cell) AND
+    (ciltacabtagene OR cilta-cel OR idecabtagene OR ide-cel OR "chimeric antigen receptor"
+     OR CAR-T OR teclistamab OR elranatamab OR linvoseltamab OR bispecific
+     OR "T-cell engager" OR CARTITUDE OR KarMMa OR MajesTEC OR MagnetisMM)
+  retmax: 4000
+
+clinicaltrials:
+  executed: true
+  query: "multiple myeloma BCMA (CAR-T OR bispecific)"
+
+# Named pivotal trials (protocol Table; ensures the key RCTs are retrieved even if
+# free-text recall misses them). These are the spine of the network.
+named_trials:
+  - CARTITUDE-4
+  - MajesTEC-3
+  - MajesTEC-9
+  - KarMMa-3
+
+# Backward/forward citation mining (protocol 2.3 "other sources") is a later
+# supplementary step; seeds (Liang 2024 10.1136/jitc-2024-010064 and
+# Techaapornkun 2025 10.1007/s00277-025-06524-6) are run after screening.
+reference_mining_seeds: []

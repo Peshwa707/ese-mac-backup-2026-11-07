@@ -1,0 +1,59 @@
+{
+  "title": "Sleep and Circadian Modifiers of ADHD and Bipolar-Spectrum Functioning",
+  "short_id": "ndem-e1-sleep-circadian",
+  "framing": "pico",
+  "profile": "rapid",
+  "background": "This module evaluates whether sleep duration, sleep quality, circadian irregularity, and shift work modify attention, executive functioning, irritability, mood, and mania risk.",
+  "population": "Adolescents and adults with ADHD, bipolar-spectrum disorder, both conditions, or relevant control groups.",
+  "intervention": "Short sleep, sleep deprivation, insomnia, circadian disruption, irregular sleep, delayed sleep phase, or shift work.",
+  "comparator": "Adequate or regular sleep, euthymia, non-shift work, within-person baseline, or unexposed controls.",
+  "outcomes_primary": [
+    {"name": "Attention, executive function, irritability, and real-world functioning", "pool_field": ""},
+    {"name": "Hypomanic, manic, mixed, or psychotic symptoms and mood instability", "pool_field": ""}
+  ],
+  "outcomes_secondary": [
+    {"name": "Temporal direction, within-person effects, and reverse causation", "pool_field": ""}
+  ],
+  "designs": ["systematic review", "meta-analysis", "longitudinal cohort", "within-person", "experimental sleep deprivation", "prospective", "cross-sectional"],
+  "inclusion": [
+    "Adolescent or adult ADHD or bipolar-spectrum sample, or a study directly relevant to differential diagnosis.",
+    "Measures sleep duration, quality, circadian timing, irregularity, insomnia, or shift work.",
+    "Reports cognitive, functional, mood, mania, psychosis, or irritability outcomes.",
+    "Empirical study or authoritative evidence synthesis."
+  ],
+  "exclusion": [
+    "Sleep-treatment efficacy study without information on sleep as a modifier.",
+    "No separable ADHD or bipolar-spectrum result and no direct differential-diagnosis relevance.",
+    "Opinion or protocol without empirical results.",
+    "No outcome relevant to claim H7."
+  ],
+  "search": {
+    "concept_blocks": [
+      {"name": "conditions", "terms": ["ADHD", "\"bipolar disorder\"", "mania", "hypomania"], "mesh": ["Attention Deficit Disorder with Hyperactivity", "Bipolar Disorder"]},
+      {"name": "sleep", "terms": ["sleep", "insomnia", "circadian", "\"sleep deprivation\"", "\"sleep duration\"", "\"sleep quality\"", "\"shift work\"", "\"delayed sleep phase\""], "mesh": ["Sleep Deprivation", "Circadian Rhythm Sleep Disorders"]},
+      {"name": "outcome_or_design", "terms": ["attention", "\"executive function\"", "cognition", "irritability", "mood", "mania", "psychosis", "longitudinal", "prospective", "\"Systematic Review\"[pt]", "\"Meta-Analysis\"[pt]"], "mesh": []}
+    ],
+    "databases": ["PubMed", "Europe PMC", "ClinicalTrials.gov", "PsycINFO", "Embase", "Web of Science"],
+    "date_from": "",
+    "date_to": "2026/07/29",
+    "retmax": 300
+  },
+  "rob_tool": "auto",
+  "analysis": {
+    "effect_measure": "Narrative synthesis separating trait, state, and temporal-direction evidence.",
+    "dose_response": false,
+    "subgroups": ["ADHD versus bipolar disorder", "objective versus self-report sleep", "within-person versus between-person", "age", "mood state"],
+    "publication_bias": false
+  },
+  "extraction_groups": [
+    {"group": "identity", "fields": [{"name": "claim_ids"}, {"name": "study_design"}, {"name": "country"}, {"name": "funding_conflicts", "level": "fulltext"}]},
+    {"group": "population", "fields": [{"name": "total_n"}, {"name": "age_range"}, {"name": "diagnostic_method"}, {"name": "mood_state"}]},
+    {"group": "exposure", "fields": [{"name": "sleep_measure"}, {"name": "sleep_exposure"}, {"name": "timing"}]},
+    {"group": "findings", "fields": [{"name": "outcome_measure"}, {"name": "effect_estimate"}, {"name": "confidence_interval"}, {"name": "temporal_direction"}, {"name": "adjusted_covariates", "level": "fulltext"}, {"name": "direction"}, {"name": "supporting_quote"}]},
+    {"group": "appraisal", "fields": [{"name": "major_limitations"}, {"name": "reverse_causation"}, {"name": "directness_to_claim"}]}
+  ],
+  "registration": "Protocol frozen for AI-assisted rapid review on 2026-07-29; not prospectively registered.",
+  "output_base": "/Users/neurologic/Documents/EvidenceEngine/neurodevelopmental-environmental-mismatch",
+  "disclaimer": "AI Reviewer-1 rapid-review draft. Human Reviewer 2 and clinical sign-off remain pending. Not diagnostic or treatment guidance."
+}
+

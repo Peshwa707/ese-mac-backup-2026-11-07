@@ -1,0 +1,68 @@
+# PICO + eligibility for the RMZ-vs-propofol hysteroscopy validation vertical.
+# BLINDED EXTRACTION: every field below is reverse-engineered from the referent
+# manuscript's Methods + eligibility ONLY. Results/Discussion were sealed and NOT
+# used to build this protocol (engine-validation protocol-replay, study #1).
+
+review:
+  title: >
+    Remimazolam Versus Propofol for Sedation During Hysteroscopy:
+    A Systematic Review and Meta-Analysis of Randomized Controlled Trials
+  short_id: sr-rmz-hystero
+  registration: "N/A — engine replay of a published SR/MA (validation run)"
+
+pico:
+  population: >
+    Patients undergoing hysteroscopy, regardless of indication.
+  intervention: >
+    Remimazolam (RMZ), regardless of the dosing protocol.
+  comparator: >
+    Propofol, regardless of the dosing protocol.
+  outcomes:
+    primary:
+      - sedation success
+      - recovery duration
+      - procedure duration
+    secondary:
+      - injection pain
+      - body movement
+      - low SpO2 / respiratory depression
+      - bradycardia
+      - hypotension
+      - hiccough
+      - postoperative nausea and vomiting (PONV)
+      - postoperative dizziness
+
+# Synthesis axis: a single head-to-head comparison (RMZ vs propofol within each
+# RCT). No study-level subgroup — all included trials share one comparison.
+synthesis:
+  subgroup_field: modality
+  subgroup_map:
+    RMZ-vs-propofol: [rmz, remimazolam, propofol, all, both]
+  arms: [RMZ-vs-propofol]
+  indirect_comparison: false
+
+eligibility:
+  inclusion:
+    - "Randomized controlled trial (RCT)."
+    - "Population: patients undergoing hysteroscopy, regardless of indication."
+    - "Intervention: remimazolam (RMZ), regardless of dosing protocol."
+    - "Comparator: propofol, regardless of dosing protocol."
+    - "Reports at least one procedural outcome (sedation success, recovery duration, procedure duration) or safety outcome (injection pain, body movement, low SpO2/respiratory depression, bradycardia, hypotension, hiccough, PONV, postoperative dizziness)."
+  exclusion:
+    - "Quasi-randomized trial."
+    - "Conference presentation or proceedings."
+    - "Observational study."
+    - "In vitro research."
+    - "Review article."
+  exclusion_buckets:
+    - {label: "quasi-randomized", keywords: ["quasi-random", "quasi randomized", "non-randomized", "nonrandomized"]}
+    - {label: "not hysteroscopy", keywords: ["colonoscopy", "gastroscopy", "endoscopy", "bronchoscopy", "hysterectomy", "cesarean", "labor", "egd", "ercp"]}
+    - {label: "not RMZ vs propofol", keywords: ["dexmedetomidine only", "etomidate only", "midazolam only", "ketamine only"]}
+
+disclaimer: >
+  Automated systematic-review replay for ENGINE VALIDATION. The AI acts as
+  Reviewer 1 only: every screening decision and extracted value is a draft
+  requiring independent human (Reviewer 2) verification. Every cited PMID/NCT is
+  verified against its live source; unverifiable items are dropped, and any value
+  not found in the source is marked NR, never invented. This run's protocol was
+  extracted blind to the referent paper's Results.

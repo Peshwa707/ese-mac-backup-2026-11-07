@@ -1,0 +1,105 @@
+# PICO + eligibility for the antithrombin / early-onset pre-eclampsia vertical.
+# Swapping this file (plus search_strategies.yaml) re-points the engine at this
+# review. RoB / GRADE / prompts / templates fall back to the shared
+# systematic-review vertical (no engine/core changes).
+#
+# Clinical design: an SR/MA of RCTs testing intravenous antithrombin (AT)
+# supplementation vs placebo for early-onset (typically <32-34 weeks) severe /
+# preterm pre-eclampsia. Primary outcome = pregnancy prolongation (days from
+# randomization to delivery).
+
+review:
+  title: >
+    Antithrombin Supplementation for the Management of Early-Onset Pre-Eclampsia:
+    A Systematic Review and Meta-Analysis of Randomized Controlled Trials
+  short_id: sr-at-preeclampsia
+  registration: "PROSPERO: [DRAFT — not yet submitted]"
+
+pico:
+  population: >
+    Pregnant women diagnosed with early-onset severe or preterm pre-eclampsia,
+    typically presenting before 32 to 34 weeks of gestation. Includes HELLP
+    syndrome and toxaemia-of-pregnancy presentations meeting the early-onset
+    severe/preterm criterion.
+  intervention: >
+    Intravenous administration of antithrombin (AT), including both recombinant
+    human and plasma-derived formulations, irrespective of the specific dosing
+    regimen.
+  comparator: >
+    Placebo.
+  outcomes:
+    # PRIMARY: pregnancy prolongation (continuous — mean days from randomization
+    # to delivery). Analyzed on its own.
+    primary:
+      - pregnancy prolongation — mean number of days from randomization to
+        delivery (continuous)
+    secondary:
+      # efficacy
+      - birth weight (continuous)
+      - fetal death (binary proportion)
+      - neonatal death (binary proportion)
+      - small-for-gestational-age (SGA) or intrauterine growth restriction (IUGR),
+        analyzed as a COMPOSITE outcome (binary proportion)
+      - cesarean delivery rate (binary proportion)
+      # neonatal complications
+      - respiratory distress syndrome (RDS) (binary proportion)
+      - intraventricular hemorrhage (IVH) (binary proportion)
+      - necrotizing enterocolitis (NEC) (binary proportion)
+      - retinopathy of prematurity (ROP) (binary proportion)
+      - neonatal sepsis (binary proportion)
+      # maternal safety
+      - postpartum hemorrhage (PPH) (binary proportion)
+      - red blood cell transfusion (binary proportion)
+      - HELLP syndrome (binary proportion)
+      - eclampsia (binary proportion)
+      - pulmonary edema (binary proportion)
+
+# Synthesis axis. Single intervention (AT) vs a single comparator (placebo), so
+# the primary analysis is a direct pooled AT-vs-placebo comparison. The pre-
+# specified stratifier is AT FORMULATION (recombinant vs plasma-derived), a
+# clinically meaningful subgroup that the trials differ on. subgroup_field is set
+# to the extracted `formulation` field; subgroup_map folds extracted free-text
+# formulation labels into the two canonical strata.
+#
+# NOTE — the value "modality" is special-cased by the screening stage
+# (core/sr/screen.py); "formulation" deliberately avoids it and uses the generic
+# subgroup path.
+synthesis:
+  subgroup_field: formulation
+  subgroup_map:
+    recombinant: [recombinant, "recombinant human", "recombinant antithrombin", "rhAT", "rh-AT", "recombinant human antithrombin"]
+    plasma_derived: [plasma-derived, "plasma derived", "plasma-derived antithrombin", "human plasma", "pdAT", "plasma antithrombin", "AT concentrate"]
+  arms: [recombinant, plasma_derived]
+  indirect_comparison: false
+
+eligibility:
+  inclusion:
+    - "Randomized controlled trial (parallel-group or crossover)."
+    - "Pregnant women with early-onset severe or preterm pre-eclampsia (typically <32-34 weeks gestation), including HELLP."
+    - "Intervention is intravenous antithrombin (recombinant human OR plasma-derived), any dosing regimen."
+    - "Comparator is placebo."
+    - "Reports at least one of the pre-specified efficacy or safety outcomes (pregnancy prolongation, birth weight, fetal/neonatal death, SGA/IUGR, cesarean, neonatal complications, or maternal safety outcomes)."
+  exclusion:
+    - "Observational study (cohort, case-control, case series, single-arm)."
+    - "Active-comparator trial with no placebo group (e.g. standard heparin as the comparator without a placebo arm)."
+    - "Subgroup or secondary re-analysis of a previously published trial cohort (avoid duplication of patient data)."
+    - "Population is not early-onset severe/preterm pre-eclampsia (e.g. late-onset only, term pre-eclampsia only, or non-pre-eclampsia pregnancy) with no extractable eligible subgroup."
+    - "Intervention is not intravenous antithrombin (e.g. heparin, LMWH, aspirin, or another agent as the experimental intervention)."
+    - "Review, editorial, commentary, protocol-only paper, or conference abstract with no extractable outcome data."
+  # Domain-specific PRISMA exclusion-reason buckets (generic study-type buckets are built in).
+  exclusion_buckets:
+    - {label: "no placebo arm / active comparator only", keywords: ["heparin comparator", "active comparator", "no placebo", "open-label vs standard care", "usual care only"]}
+    - {label: "observational design", keywords: ["cohort", "case-control", "case series", "retrospective", "registry", "observational"]}
+    - {label: "duplicate cohort / re-analysis", keywords: ["secondary analysis", "post hoc", "re-analysis", "subgroup of", "previously reported cohort"]}
+    - {label: "wrong population (not early-onset PE)", keywords: ["late-onset", "term pre-eclampsia", "gestational hypertension only", "healthy pregnancy"]}
+    - {label: "wrong intervention (not IV antithrombin)", keywords: ["heparin", "enoxaparin", "aspirin", "LMWH", "dalteparin"]}
+
+disclaimer: >
+  Automated systematic-review FIRST PASS. The AI acts as Reviewer 1 only: every
+  screening decision and extracted value is a draft requiring independent human
+  (Reviewer 2) verification before any use. Every cited PMID/NCT is verified
+  against its live source; any value not found in the source is marked NR (not
+  reported), never invented. SGA and IUGR are combined as a single COMPOSITE
+  outcome because of overlapping reporting across the included trials. Antithrombin
+  formulation (recombinant vs plasma-derived) is the pre-specified subgroup and
+  should be examined before any pooled estimate is trusted.

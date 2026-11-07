@@ -1,0 +1,95 @@
+# Structured screening criteria — mm-bcma-early-relapse (TIERED NMA, not RCT-only)
+# Enrichment of the engine vertical's flat eligibility with F10 boundaries + an
+# EXPLICIT tiered design gate. Authored by DA from verticals/mm-bcma-early-relapse/
+# pico.yaml; "stick to the protocol" (tiered) confirmed by Syed. The explicit design
+# criterion below is the fix for the diagnosed 42284467 false-exclude: a real-world
+# cohort is Tier-3 ELIGIBLE and must NOT be excluded for being non-randomized.
+vertical: mm-bcma-early-relapse
+
+design_eligibility:
+  eligible: [rct, single_arm_trial, real_world_cohort, registry, propensity_matched]
+  excluded: [preclinical, in_vitro, animal, narrative_review, editorial, commentary, letter, news, case_series_lt10]
+  rationale: >
+    Anchored network meta-analysis with three eligible design tiers: Tier 1 =
+    randomized phase-3 trial vs a daratumumab-/pomalidomide-based SOC anchor
+    (primary node); Tier 2 = single-arm trial of a BCMA CAR-T or bispecific
+    (supportive, pooled proportions); Tier 3 = real-world / registry /
+    propensity-matched cohort (sensitivity analysis). All three tiers are
+    ELIGIBLE at screening; the tier only decides the downstream analysis role.
+  tier_notes:
+    rct: "Tier 1 — primary network node"
+    single_arm_trial: "Tier 2 — supportive pooled proportions"
+    real_world_cohort: "Tier 3 — sensitivity analysis"
+    registry: "Tier 3 — sensitivity analysis"
+    propensity_matched: "Tier 3 — sensitivity analysis"
+
+criteria:
+  - id: design
+    kind: include
+    text: The study uses a design eligible under the tiered NMA (any of the three tiers qualifies).
+    definitions:
+      Tier 1 (RCT): "randomized controlled trial of a BCMA therapy versus a daratumumab-/pomalidomide-based standard-of-care regimen."
+      Tier 2 (single-arm): "single-arm interventional trial of a BCMA CAR-T or bispecific at the recommended dose reporting efficacy."
+      Tier 3 (real-world): "real-world, retrospective, registry, or propensity-matched COMPARATIVE cohort of an eligible BCMA therapy."
+      NOT eligible: "preclinical / in-vitro / animal studies; narrative reviews, editorials, commentaries, letters, news; case series with <10 patients."
+    boundaries:
+      in: ["randomized phase-3 trial vs SOC", "single-arm phase-1/2 trial at RP2D", "retrospective / real-world comparative cohort", "national registry analysis", "propensity-matched cohort"]
+      out: ["preclinical / in-vitro / animal study", "narrative review / editorial / commentary / letter / news", "case report or case series with <10 patients"]
+    near_misses:
+      - "A RETROSPECTIVE, real-world, or registry cohort IS ELIGIBLE here (Tier 3) — do NOT exclude it merely for being non-randomized. This is a tiered NMA, not an RCT-only review."
+      - "A narrative review that summarizes several randomized trials is still a review (exclude) — classify by the article's OWN design, not the trials it cites."
+
+  - id: population
+    kind: include
+    text: Adults (>=18y) with relapsed/refractory multiple myeloma (RRMM) after 1-3 prior lines of therapy.
+    definitions:
+      eligible population: "RRMM, 1-3 prior lines (lenalidomide- and proteasome-inhibitor-exposed) — the WHOLE population is 1-3 lines OR an extractable 1-3 line subgroup is reported."
+    boundaries:
+      in: ["RRMM after 1, 2, or 3 prior lines", "mixed-line study reporting an extractable 1-3 line subgroup"]
+      out: ["population entirely >3 prior lines (heavily pretreated) with NO extractable 1-3 line subgroup", "newly diagnosed / frontline / maintenance settings"]
+    near_misses:
+      - "ide-cel / KarMMa-3 (2-4 line) records: do NOT exclude for line mismatch at screening — mark UNCERTAIN to advance; the 1-3 line subgroup is assessed at full-text."
+
+  - id: intervention
+    kind: include
+    text: At least one arm evaluates a BCMA-directed T-cell-redirecting therapy.
+    definitions:
+      eligible intervention: "a BCMA CAR-T (ciltacabtagene autoleucel / cilta-cel, or idecabtagene vicleucel / ide-cel) OR a BCMA×CD3 bispecific (teclistamab +/- daratumumab, elranatamab, or linvoseltamab). A study need NOT contain both modalities."
+    boundaries:
+      in: ["cilta-cel or ide-cel CAR-T", "teclistamab (+/- dara), elranatamab, or linvoseltamab bispecific"]
+      out: ["exclusively GPRC5D- or FcRH5-directed bispecifics (talquetamab, cevostamab) — non-BCMA target", "only a non-BCMA / non-listed agent"]
+    near_misses:
+      - "Talquetamab and cevostamab target GPRC5D/FcRH5, NOT BCMA — out of primary scope even in a randomized trial."
+
+  - id: outcomes
+    kind: include
+    text: Reports at least one pre-specified efficacy or safety outcome.
+    definitions:
+      eligible outcomes: "efficacy — PFS, OS, ORR, >=CR, >=VGPR, MRD-negativity; safety — CRS, neurotoxicity/ICANS, grade>=3 infection, grade>=3 neutropenia/thrombocytopenia/anaemia."
+    boundaries:
+      in: ["reports PFS or OS hazard ratio", "reports ORR / response depth", "reports CRS / ICANS / grade>=3 cytopenia rates"]
+      out: ["reports none of the listed efficacy or safety outcomes"]
+    near_misses:
+      - "A safety-only real-world study (e.g. neurotoxicity incidence) DOES report an eligible outcome — CRS/ICANS/neurotoxicity are listed safety outcomes."
+
+  - id: wrong_target
+    kind: exclude
+    text: Study evaluates ONLY a non-BCMA (GPRC5D/FcRH5) or non-listed agent.
+    definitions:
+      trigger: "the sole redirecting agent targets GPRC5D or FcRH5 (talquetamab, cevostamab) or is otherwise not one of the named BCMA CAR-T / bispecific agents."
+    boundaries:
+      in: ["talquetamab-only or cevostamab-only study (excluded from primary analysis)"]
+      out: ["a study that includes an eligible BCMA agent in >=1 arm (not triggered)"]
+    near_misses:
+      - "If ANY arm has an eligible BCMA agent, this exclusion does NOT trigger — judge the intervention criterion instead."
+
+  - id: small_case_series
+    kind: exclude
+    text: Case report or case series with fewer than 10 patients.
+    definitions:
+      trigger: "a case report, or a case series enrolling <10 patients."
+    boundaries:
+      in: ["single-patient case report", "case series of 6 patients"]
+      out: ["a cohort or trial of >=10 patients (not triggered)"]
+    near_misses:
+      - "A real-world cohort of >=10 patients is NOT a case series — do not trigger this on Tier-3 cohorts."

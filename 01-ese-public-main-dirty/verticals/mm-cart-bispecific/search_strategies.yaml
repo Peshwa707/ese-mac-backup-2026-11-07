@@ -1,0 +1,8 @@
+disclaimer: Engine MM validation run.
+pubmed:
+  executed: true
+  query: >
+    (BCMA[tiab] OR "B-cell maturation"[tiab]) AND ("CAR-T"[tiab] OR "CAR T"[tiab] OR "chimeric antigen"[tiab] OR bispecific[tiab] OR teclistamab[tiab] OR elranatamab[tiab] OR ciltacabtagene[tiab] OR idecabtagene[tiab] OR talquetamab[tiab]) AND ("multiple myeloma"[tiab] OR myeloma[tiab]) AND (refractory[tiab] OR relapsed[tiab])
+  retmax: 800
+named_trials: []
+reference_mining_seeds: []

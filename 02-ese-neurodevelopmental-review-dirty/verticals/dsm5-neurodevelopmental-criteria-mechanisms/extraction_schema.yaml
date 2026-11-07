@@ -1,0 +1,83 @@
+version: "1.0.0"
+fields:
+  identity:
+    - {name: study_id, level: abstract}
+    - {name: first_author, level: abstract}
+    - {name: year, level: abstract}
+    - {name: study_design, level: abstract}
+    - {name: evidence_stream, level: abstract}
+    - {name: diagnosis, level: abstract}
+    - {name: criterion_ids, level: abstract}
+    - {name: shared_domain_ids, level: abstract}
+    - {name: country_setting, level: abstract}
+    - {name: funding_conflicts, level: fulltext}
+  population:
+    - {name: total_n, level: abstract}
+    - {name: age_stratum, level: abstract}
+    - {name: age_range, level: abstract}
+    - {name: sex_gender_representation, level: fulltext}
+    - {name: diagnostic_method, level: abstract}
+    - {name: informant, level: abstract}
+    - {name: comparison_group, level: abstract}
+    - {name: setting, level: abstract}
+  validation:
+    - {name: construct_definition, level: abstract}
+    - {name: instrument_or_task, level: abstract}
+    - {name: reliability_estimate, level: abstract}
+    - {name: construct_validity_estimate, level: abstract, pool: narrative}
+    - {name: diagnostic_discrimination_estimate, level: abstract, pool: narrative}
+    - {name: incremental_validity_estimate, level: fulltext}
+    - {name: measurement_invariance_estimate, level: fulltext}
+    - {name: developmental_stability_estimate, level: fulltext}
+    - {name: context_dependence_estimate, level: fulltext}
+    - {name: supporting_quote, level: abstract}
+  function:
+    - {name: impairment_measure, level: abstract}
+    - {name: participation_measure, level: abstract}
+    - {name: academic_work_measure, level: abstract}
+    - {name: adaptive_function_measure, level: abstract}
+    - {name: quality_of_life_measure, level: abstract}
+    - {name: functional_association_estimate, level: abstract, pool: narrative}
+    - {name: function_timepoint, level: abstract}
+  mechanism:
+    - {name: mechanism_class, level: abstract}
+    - {name: mechanism_level, level: abstract}
+    - {name: mechanism_measure, level: abstract}
+    - {name: mechanism_direction, level: abstract}
+    - {name: mechanism_effect_estimate, level: abstract, pool: narrative}
+    - {name: alternative_explanations, level: fulltext}
+    - {name: causal_design_features, level: fulltext}
+  intervention:
+    - {name: intervention_category, level: abstract}
+    - {name: intervention_status, level: abstract}
+    - {name: intervention_target_domain, level: abstract}
+    - {name: intervention_comparator, level: abstract}
+    - {name: symptom_change_estimate, level: abstract, pool: narrative}
+    - {name: function_change_estimate, level: abstract, pool: narrative}
+    - {name: participation_change_estimate, level: fulltext}
+    - {name: quality_of_life_change_estimate, level: fulltext}
+    - {name: harms_estimate, level: abstract, pool: narrative}
+    - {name: durability_timepoint, level: fulltext}
+    - {name: acceptability_equity, level: fulltext}
+  appraisal:
+    - {name: major_limitations, level: abstract}
+    - {name: risk_of_bias_summary, level: fulltext}
+    - {name: directness_to_claim, level: abstract}
+    - {name: certainty_domain, level: abstract}
+    - {name: claim_status, level: abstract}
+    - {name: reviewer_1_notes, level: abstract}
+    - {name: reviewer_2_decision, level: fulltext}
+    - {name: reconciliation_record, level: fulltext}
+    - {name: clinical_signoff_status, level: fulltext}
+
+rules:
+  - "Copy values only from the source text; do not use outside knowledge."
+  - "If a field is not stated, use NR. Never infer an effect estimate without labeling it ESTIMATED and recording the method."
+  - "Every non-NR numeric value requires an exact supporting quote and locator."
+  - "Use criterion IDs and controlled paraphrases; do not reproduce DSM text."
+  - "Keep symptom, function, participation, quality-of-life, harm, and durability results in separate fields."
+  - "Mechanism level must be one of direct_human, indirect_human, preclinical, or theoretical."
+  - "Intervention status must be one of established, experimental, off_label, or unclear."
+  - "Claim status must be one of supported, intermediate, indeterminate, or rejected."
+  - "A missing study or missing estimate is not evidence against the criterion."
+  - "Reviewer-1 output remains draft until Reviewer 2 and clinical sign-off fields are complete."

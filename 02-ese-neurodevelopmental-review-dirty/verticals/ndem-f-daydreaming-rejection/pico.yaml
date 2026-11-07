@@ -1,0 +1,29 @@
+review:
+  title: Maladaptive Daydreaming, Social Rejection, Anxiety, and Emotional Compensation
+  short_id: ndem-f-daydreaming-rejection
+  registration: Protocol frozen for AI-assisted rapid review on 2026-07-29; not prospectively registered.
+  output_base: /Users/neurologic/Documents/EvidenceEngine/neurodevelopmental-environmental-mismatch
+pico:
+  population: Adolescents and adults, including ADHD, autism, trauma, anxiety, and mood-disorder subgroups.
+  intervention: Loneliness, bullying, rejection, shame, boredom, anxiety, trauma, or unmet attachment/recognition
+    needs.
+  comparator: Lower exposure, controls, alternative explanatory constructs, or within-person baseline.
+  outcomes:
+    primary:
+    - Maladaptive or immersive daydreaming, dissociation, distress, and functional impairment
+    - Evidence for emotional-compensation function or temporal mediation
+    secondary:
+    - Anxiety, rejection sensitivity, avoidance, social functioning, and alternative explanations
+eligibility:
+  inclusion:
+  - Adolescent or adult empirical study of maladaptive or immersive daydreaming, or rejection/anxiety
+    mediation relevant to neurodevelopmental functioning.
+  - Uses an operational definition or validated/explicit measure.
+  - Reports association, temporal, mediation, qualitative-function, or impairment outcomes.
+  exclusion:
+  - Normative mind-wandering study with no maladaptive/immersive daydreaming or emotional-burden relevance.
+  - Opinion, popular media, commercial page, or unsourced narrative.
+  - No operational definition of the focal construct.
+  - No outcome relevant to claims H9 or H12.
+disclaimer: AI Reviewer-1 rapid-review draft. Human Reviewer 2 and clinical sign-off remain pending. Not
+  diagnostic or treatment guidance.

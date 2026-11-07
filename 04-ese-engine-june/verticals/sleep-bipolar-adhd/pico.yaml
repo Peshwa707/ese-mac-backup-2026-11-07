@@ -1,0 +1,53 @@
+review:
+  title: >
+    Safety and Efficacy of Sleep Agents for Sleep Disturbances in Bipolar Disorder
+    and ADHD: A Disorder-Stratified Systematic Review and Meta-Analysis of RCTs
+  short_id: sr-sleep-bp-adhd
+  registration: "Fresh SR/MA (upgraded engine; BeCreative-scoped, safety-elevated, disorder-stratified)"
+
+pico:
+  population: >
+    Patients with bipolar disorder OR attention-deficit/hyperactivity disorder (ADHD) who have
+    sleep disturbance / insomnia. Adults primary; pediatric ADHD eligible and flagged as an age subgroup.
+  intervention: >
+    Pharmacologic sleep agents (melatonin, ramelteon; orexin antagonists suvorexant/lemborexant;
+    Z-drugs zolpidem/eszopiclone/zaleplon; benzodiazepines; sedating antidepressants/trazodone;
+    atypical antipsychotics used for sleep e.g. quetiapine; gabapentinoids; antihistamines;
+    alpha-2 agonists clonidine/guanfacine) or non-pharmacologic (CBT-I).
+  comparator: >
+    Placebo or usual care (head-to-head active comparators recorded if present).
+  outcomes:
+    primary:
+      - "Sleep efficacy (continuous; sleep-onset latency, total sleep time, WASO, or sleep quality/PSQI) pooled as SMD"
+      - "Disorder-specific SAFETY harm (bipolar: mood switch/mania induction, discontinuation; ADHD: misuse/abuse, next-day sedation/function, stimulant interaction) pooled as RR"
+    secondary:
+      - "Alcohol/substance interactions, daytime functioning, dropout for any reason"
+
+synthesis:
+  subgroup_field: disorder
+  subgroup_map:
+    bipolar: [bipolar, "bipolar disorder", "bipolar i", "bipolar ii"]
+    adhd: [adhd, "attention deficit", "attention-deficit", hyperkinetic]
+  arms: [bipolar, adhd]
+  indirect_comparison: false
+
+eligibility:
+  inclusion:
+    - "Randomized controlled trial (parallel or crossover)."
+    - "Population has bipolar disorder OR ADHD."
+    - "Participants have sleep disturbance / insomnia (or sleep is an explicit outcome)."
+    - "Intervention is a pharmacologic sleep agent or CBT-I."
+    - "Reports a sleep-efficacy outcome and/or a safety outcome vs comparator."
+  exclusion:
+    - "Non-randomized design (observational, single-arm, preclinical/animal)."
+    - "Population without bipolar or ADHD (e.g. primary insomnia, MDD-only, general population)."
+    - "Agent not used for sleep and no sleep/safety outcome reported."
+    - "Review, protocol-only, editorial, or secondary analysis without extractable outcome data."
+  exclusion_buckets:
+    - {label: "not randomized/animal", keywords: ["animal", "rat", "mouse", "preclinical", "in vitro", "observational", "case report"]}
+    - {label: "wrong population", keywords: ["primary insomnia", "healthy volunteers", "general population", "depression only"]}
+
+disclaimer: >
+  Upgraded-engine SR/MA. AI = Reviewer 1; independent cross-vendor AI = Reviewer 2; human verifies.
+  Disorder-stratified (bipolar vs ADHD, NEVER pooled across). Full-text-first effect-estimate extraction.
+  Sleep efficacy pooled as SMD (heterogeneous instruments); safety as RR. Pediatric ADHD flagged as a subgroup.

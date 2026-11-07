@@ -1,0 +1,30 @@
+disclaimer: Auto-generated from the protocol concept blocks; review the PubMed string and translate to
+  each non-PubMed database before importing.
+pubmed:
+  executed: true
+  query: '( "Attention Deficit Disorder with Hyperactivity"[Mesh] OR ADHD[tiab] OR "executive dysfunction"[tiab]
+    ) AND ( coaching[tiab] OR "cognitive behavioral therapy"[tiab] OR "organizational skills"[tiab] OR
+    checklist[tiab] OR reminder[tiab] OR "digital intervention"[tiab] OR "assistive technology"[tiab]
+    OR "cognitive aid"[tiab] OR "external scaffold"[tiab] OR "occupational redesign"[tiab] OR "educational
+    accommodation"[tiab] OR "artificial intelligence"[tiab] ) AND ( randomized[tiab] OR randomised[tiab]
+    OR trial[tiab] OR controlled[tiab] OR "Systematic Review"[pt] OR "Meta-Analysis"[pt] ) AND ("1800/01/01"[dp]
+    : "2026/07/29"[dp])'
+  retmax: 300
+other_databases:
+- name: Europe PMC
+  executed: false
+  note: translate concept blocks to this database; import exported records (provenance-attested).
+- name: ClinicalTrials.gov
+  executed: false
+  note: translate concept blocks to this database; import exported records (provenance-attested).
+- name: PsycINFO
+  executed: false
+  note: translate concept blocks to this database; import exported records (provenance-attested).
+- name: Embase
+  executed: false
+  note: translate concept blocks to this database; import exported records (provenance-attested).
+- name: CENTRAL
+  executed: false
+  note: translate concept blocks to this database; import exported records (provenance-attested).
+named_trials: []
+reference_mining_seeds: []

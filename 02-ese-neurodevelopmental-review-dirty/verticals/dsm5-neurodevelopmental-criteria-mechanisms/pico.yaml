@@ -1,0 +1,87 @@
+review:
+  title: >
+    DSM-5 Neurodevelopmental Criteria: Symptom Validation, Transdiagnostic
+    Overlap, Mechanisms, and Supports Across the Lifespan
+  short_id: dsm5-nd-criteria-mechanisms
+  registration: "Protocol draft; prospective registration required before screening."
+  output_base: /Users/neurologic/Documents/EvidenceEngine/dsm5-neurodevelopmental-criteria-mechanisms
+  update_model: "staged snapshot then living review"
+  protocol_version: "1.0.0"
+  strict_stream_validation: true
+
+pico:
+  population: >
+    People across the lifespan with ADHD, Autism Spectrum Disorder, Specific
+    Learning Disorder (reading, written expression, or mathematics),
+    Developmental Coordination Disorder, or validated symptom-level traits;
+    neurotypical, clinical, and alternative-diagnosis comparison groups are
+    eligible when they address a prespecified criterion or shared domain.
+  intervention: >
+    Mechanisms associated with diagnostic criteria or functional difficulties,
+    and interventions or supports intended to reduce symptoms or improve
+    functioning, participation, quality of life, or safety.
+  comparator: >
+    Neurotypical controls, alternative neurodevelopmental diagnoses,
+    comorbid or single-diagnosis groups, waitlist/usual care, active controls,
+    baseline, or no exposure, as appropriate to the stream.
+  outcomes:
+    primary:
+      - Criterion construct or measurement validity
+      - Diagnostic discrimination and incremental validity
+      - Association with impairment, participation, and quality of life
+      - Mechanism evidence linked to a named criterion or shared domain
+      - Symptom and functional effects of interventions, reported separately
+    secondary:
+      - Developmental stability and context dependence
+      - Harms, burden, acceptability, equity, and durability
+
+synthesis:
+  subgroup_field: evidence_stream
+  subgroup_map:
+    criterion_validation: [criterion, validation, diagnostic]
+    overlap: [overlap, transdiagnostic, shared-domain]
+    mechanism: [mechanism, mechanistic]
+    intervention: [intervention, treatment, support]
+  arms: [criterion_validation, overlap, mechanism, intervention]
+  indirect_comparison: false
+  pooling_policy: >
+    Narrative synthesis is the default. Quantitative pooling is permitted only
+    after prespecified compatibility checks for construct, population, design,
+    comparator, instrument, outcome, and time point; incompatible estimates
+    remain unpooled.
+
+eligibility:
+  inclusion:
+    - >
+      Empirical human study, systematic review, meta-analysis, guideline, or
+      trial registry record that addresses at least one mapped criterion,
+      shared-domain comparison, mechanism, intervention, or harm outcome.
+    - >
+      Reports a separable target diagnosis, criterion, domain, age stratum,
+      or intervention effect, or provides a usable diagnostic comparator.
+    - >
+      Uses a defined diagnostic interview, validated instrument, educational
+      assessment, clinical examination, experimental task, or transparent
+      mechanistic measure.
+    - Reports at least one prespecified validity, discrimination, function,
+      mechanism, intervention, participation, quality-of-life, or harm outcome.
+  exclusion:
+    - Opinion, advocacy, commentary, or theoretical paper without extractable evidence.
+    - Case report or case series with no criterion, mechanism, or intervention relevance.
+    - Study with no separable target diagnosis, criterion, domain, or comparator.
+    - Duplicate publication or secondary analysis with no new relevant information.
+    - >
+      Animal, in-vitro, or computational-only evidence for a clinical claim;
+      such evidence may be retained in a clearly labelled preclinical mechanism
+      evidence map but cannot support clinical validity or treatment claims.
+  exclusion_buckets:
+    - {label: "no mapped target", keywords: ["not relevant", "unrelated"]}
+    - {label: "no extractable outcome", keywords: ["no outcome", "protocol only"]}
+    - {label: "duplicate", keywords: ["duplicate", "duplicate publication"]}
+
+disclaimer: >
+  AI Reviewer-1 protocol and extraction configuration. This package does not
+  establish diagnosis, clinical validity, or treatment recommendations. Human
+  Reviewer 2, reconciliation, and qualified clinical sign-off are mandatory.
+  Unverified records, missing full texts, provider failures, and NR values are
+  retained as limitations rather than silently substituted.

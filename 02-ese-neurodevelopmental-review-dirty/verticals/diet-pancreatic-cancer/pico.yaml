@@ -1,0 +1,65 @@
+# PICO + eligibility — diet-pancreatic-cancer vertical (VALIDATION MA-1, blind).
+# Observational exposure->outcome review: dietary fat / fatty acids / cholesterol intake
+# and pancreatic cancer risk. Effect measure = relative risk (RR/OR/HR), highest vs lowest
+# intake (or per-increment). Pooling is done externally (random-effects on log-RR).
+
+review:
+  title: >
+    Dietary Fat, Fatty Acids, and Cholesterol Intake and Risk of Pancreatic Cancer:
+    A Systematic Review and Meta-Analysis of Observational Studies
+  short_id: sr-diet-panc
+  registration: "VALIDATION (blind benchmark vs unpublished reference MA)"
+
+pico:
+  population: >
+    Adult human populations (general population, cohorts, or case-control sources),
+    no restriction on baseline health, assessed for pancreatic cancer.
+  intervention: >
+    Dietary intake (from food-frequency questionnaires/diet records) of total fat or a
+    fat sub-type or related lipid: total fat, saturated fat (SFA), monounsaturated fat
+    (MUFA), polyunsaturated fat (PUFA), trans fat, specific fatty acids (linoleic,
+    linolenic, EPA, DHA, arachidonic, elaidic), dietary cholesterol, or total lipids —
+    compared across intake levels (highest vs lowest category, or per-increment).
+  comparator: >
+    Lowest intake category (reference) for the same exposure, or per-unit increment.
+  outcomes:
+    primary:
+      - pancreatic cancer incidence or mortality (relative risk: RR, OR, or HR with 95% CI)
+    secondary: []
+
+# Synthesis axis = exposure type (each fat sub-type pooled separately; never pool across
+# different exposures). Handled externally on log-RR; subgroup_field is informational here.
+synthesis:
+  subgroup_field: exposure_type
+  subgroup_map:
+    total_fat: ["total fat", "dietary fat", "fat intake"]
+    saturated: ["saturated", "sfa"]
+    monounsaturated: ["monounsaturated", "mufa"]
+    polyunsaturated: ["polyunsaturated", "pufa"]
+    cholesterol: ["cholesterol"]
+    trans: ["trans"]
+  arms: [total_fat, saturated, monounsaturated, polyunsaturated, cholesterol, trans]
+  indirect_comparison: false
+
+eligibility:
+  inclusion:
+    - "Observational design: prospective cohort, retrospective cohort, nested case-control, or case-control."
+    - "Human adult population."
+    - "Exposure is dietary intake of total fat, a fat sub-type, specific fatty acid(s), or dietary cholesterol."
+    - "Outcome is pancreatic cancer incidence or mortality."
+    - "Reports a relative-risk estimate (RR, OR, or HR) with a 95% confidence interval (or data to compute it) comparing intake levels."
+  exclusion:
+    - "Randomized controlled trial / interventional supplement trial (not dietary-intake observational)."
+    - "Review, meta-analysis, editorial, comment, ecological/correlational study, case report, or animal/in-vitro study."
+    - "Exposure is a circulating biomarker / blood lipid level rather than DIETARY intake."
+    - "Outcome is not pancreatic cancer, or no risk estimate (RR/OR/HR) reported."
+  exclusion_buckets:
+    - {label: "not observational", keywords: ["randomized", "randomised", "trial", "review", "meta-analysis", "ecological", "animal", "in vitro", "case report"]}
+    - {label: "wrong exposure (biomarker not diet)", keywords: ["serum", "plasma", "circulating", "blood level"]}
+    - {label: "wrong outcome / no risk estimate", keywords: ["no risk estimate", "not pancreatic"]}
+
+disclaimer: >
+  Automated FIRST PASS for blind engine validation. AI = Reviewer 1; independent
+  cross-vendor AI = Reviewer 2; human verifies. Every risk estimate is extracted from
+  the source with a verbatim quote or marked NR; nothing invented. Pooling is
+  random-effects on log-RR, separately per exposure type (never pooled across exposures).

@@ -1,0 +1,57 @@
+# =============================================================================
+# SEARCH STRATEGY -- ktrd-iv-ketamine
+# Faithful to KTRD_PROTOCOL.md section "Search strategy" (three-concept, high-recall).
+# Concept 1 (depression/TRD) AND concept 2 (ketamine/esketamine/arketamine)
+# AND concept 3 (intravenous/infusion). No outcome/date/language filter → maximize recall.
+# =============================================================================
+
+disclaimer: >
+  Recall-oriented three-concept strategy (no outcome/date/language filter), per PRISMA-S.
+  LIVE and verified: PubMed/MEDLINE + Europe PMC + ClinicalTrials.gov. NOT yet covered
+  (require manual RIS/NBIB/CSV export into _search_imports/<db>/ — a documented later step,
+  flagged so recall is NOT overstated): Embase, Cochrane CENTRAL, PsycINFO, WHO ICTRP.
+  Reference-list and forward-citation mining of included studies + relevant reviews pending.
+
+pubmed:
+  executed: true
+  query: >
+    (
+      "Depressive Disorder, Major"[Mesh] OR "Bipolar Disorder"[Mesh] OR
+      depress*[tiab] OR "major depressive disorder"[tiab] OR
+      "bipolar depression"[tiab] OR "treatment resistant"[tiab] OR
+      "treatment-resistant"[tiab] OR refractory[tiab]
+    )
+    AND
+    (
+      "Ketamine"[Mesh] OR ketamine[tiab] OR esketamine[tiab] OR arketamine[tiab]
+    )
+    AND
+    (
+      "Infusions, Intravenous"[Mesh] OR intravenous[tiab] OR infusion*[tiab]
+    )
+  retmax: 4000
+
+europepmc:
+  executed: true
+  note: "Supplementary recall via Europe PMC connector (live)."
+  query: >
+    (depression OR "major depressive disorder" OR "bipolar depression" OR
+     "treatment-resistant depression" OR refractory) AND
+    (ketamine OR esketamine OR arketamine) AND
+    (intravenous OR infusion)
+  retmax: 2000
+
+clinicaltrials:
+  executed: true
+  note: "Trial-registry recall for unpublished/registered IV ketamine depression trials."
+  query: "intravenous ketamine depression treatment-resistant"
+
+# Databases from the protocol NOT dispatched live by the engine — require manual import.
+imported_pending:
+  - {db: "Embase", platform: "Elsevier", status: "not run — needs RIS/NBIB export to _search_imports/embase/"}
+  - {db: "Cochrane CENTRAL", platform: "Cochrane Library", status: "not run — needs CSV/RIS export"}
+  - {db: "PsycINFO", platform: "APA/Ovid", status: "not run — needs RIS export"}
+  - {db: "WHO ICTRP", platform: "WHO", status: "not run — needs CSV export"}
+
+named_trials: []
+reference_mining_seeds: []

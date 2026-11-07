@@ -1,0 +1,55 @@
+# =============================================================================
+# DATA DICTIONARY -- mm-bcma-early-relapse (protocol section 2.6)
+# What we extract from every included study. `pool:` markers tell the meta-analysis
+# which fields are poolable:  pool: hr -> hazard ratios (PFS/OS, the PRIMARY outcomes)
+#                            pool: proportion -> binary outcomes (ORR, CR, CRS, ...)
+# `comparator_label` is required for the anchored network meta-analysis (it names the
+# control/SOC arm each experimental arm connects through).
+# =============================================================================
+fields:
+  # --- Study identity & transitivity effect-modifiers (protocol 2.6) ---
+  population:
+    - {name: total_n, level: abstract}
+    - {name: n_per_arm, level: abstract}
+    - {name: study_design, level: abstract}             # phase 3 RCT / phase 2 single-arm / RWD
+    - {name: modality, level: abstract}                 # CAR-T or bispecific (synthesis axis)
+    - {name: comparator_label, level: abstract}         # SOC arm (DPd/PVd/DVd/Kd) -- NMA anchor
+    - {name: median_prior_lines, level: abstract}
+    - {name: pct_prior_lines_1_to_3, level: abstract}
+    - {name: pct_anti_cd38_refractory, level: abstract} # KEY transitivity modifier (protocol 2.9.2)
+    - {name: pct_lenalidomide_refractory, level: abstract}
+    - {name: pct_triple_class_refractory, level: abstract}
+    - {name: pct_high_risk_cytogenetics, level: fulltext}
+    - {name: pct_extramedullary_disease, level: fulltext}
+    - {name: median_followup_months, level: abstract}
+
+  # --- PRIMARY outcomes: hazard ratios vs the trial's comparator (ITT) ---
+  efficacy_primary:
+    - {name: pfs_hr_vs_comparator, level: abstract, pool: hr, label: "PFS hazard ratio (vs SOC, ITT)"}
+    - {name: os_hr_vs_comparator,  level: abstract, pool: hr, label: "OS hazard ratio (vs SOC, ITT)"}
+
+  # --- SECONDARY efficacy: binary response outcomes (proportions) ---
+  efficacy_secondary:
+    - {name: orr, level: abstract, pool: proportion, label: "Overall response rate (ORR)"}
+    - {name: cr_rate, level: abstract, pool: proportion, label: ">=Complete response (>=CR)"}
+    - {name: vgpr_rate, level: fulltext, pool: proportion, label: ">=VGPR"}
+    - {name: mrd_neg_rate, level: fulltext, pool: proportion, label: "MRD-negativity"}
+
+  # --- SECONDARY safety: adverse events (proportions) ---
+  safety:
+    - {name: crs_any_grade, level: abstract, pool: proportion, label: "CRS (any grade)"}
+    - {name: crs_grade_3plus, level: abstract, pool: proportion, label: "CRS (grade >=3)"}
+    - {name: icans_any_grade, level: abstract, pool: proportion, label: "Neurotoxicity/ICANS (any grade)"}
+    - {name: icans_grade_3plus, level: fulltext, pool: proportion, label: "Neurotoxicity/ICANS (grade >=3)"}
+    - {name: infection_grade_3plus, level: fulltext, pool: proportion, label: "Grade >=3 infection"}
+    - {name: neutropenia_grade_3plus, level: fulltext, pool: proportion, label: "Neutropenia (grade >=3)"}
+    - {name: thrombocytopenia_grade_3plus, level: fulltext, pool: proportion, label: "Thrombocytopenia (grade >=3)"}
+    - {name: anemia_grade_3plus, level: fulltext, pool: proportion, label: "Anaemia (grade >=3)"}
+
+rules:
+  - "Copy values verbatim from the source text only. Do not use outside knowledge."
+  - "If a field is not stated, set value to 'NR'. Derived/figure-read values: prefix 'ESTIMATED:'."
+  - "For each non-NR numeric value, include the exact verbatim supporting quote."
+  - "Hazard ratios: record as 'point (low-high)', e.g. '0.29 (0.18-0.46)', with the CI."
+  - "Record the class (CAR-T or bispecific) in `modality` and the control regimen in `comparator_label`."
+  - "Prefer ITT/randomized estimates; record treated-population values separately where given."

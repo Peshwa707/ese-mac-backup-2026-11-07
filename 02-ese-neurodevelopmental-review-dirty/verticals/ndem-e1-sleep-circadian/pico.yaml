@@ -1,0 +1,32 @@
+review:
+  title: Sleep and Circadian Modifiers of ADHD and Bipolar-Spectrum Functioning
+  short_id: ndem-e1-sleep-circadian
+  registration: Protocol frozen for AI-assisted rapid review on 2026-07-29; not prospectively registered.
+  output_base: /Users/neurologic/Documents/EvidenceEngine/neurodevelopmental-environmental-mismatch
+pico:
+  population: Adolescents and adults with ADHD, bipolar-spectrum disorder, both conditions, or relevant
+    control groups.
+  intervention: Short sleep, sleep deprivation, insomnia, circadian disruption, irregular sleep, delayed
+    sleep phase, or shift work.
+  comparator: Adequate or regular sleep, euthymia, non-shift work, within-person baseline, or unexposed
+    controls.
+  outcomes:
+    primary:
+    - Attention, executive function, irritability, and real-world functioning
+    - Hypomanic, manic, mixed, or psychotic symptoms and mood instability
+    secondary:
+    - Temporal direction, within-person effects, and reverse causation
+eligibility:
+  inclusion:
+  - Adolescent or adult ADHD or bipolar-spectrum sample, or a study directly relevant to differential
+    diagnosis.
+  - Measures sleep duration, quality, circadian timing, irregularity, insomnia, or shift work.
+  - Reports cognitive, functional, mood, mania, psychosis, or irritability outcomes.
+  - Empirical study or authoritative evidence synthesis.
+  exclusion:
+  - Sleep-treatment efficacy study without information on sleep as a modifier.
+  - No separable ADHD or bipolar-spectrum result and no direct differential-diagnosis relevance.
+  - Opinion or protocol without empirical results.
+  - No outcome relevant to claim H7.
+disclaimer: AI Reviewer-1 rapid-review draft. Human Reviewer 2 and clinical sign-off remain pending. Not
+  diagnostic or treatment guidance.

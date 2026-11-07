@@ -1,0 +1,12 @@
+#!/bin/sh
+set -eu
+
+# Keep the parked reviewer independent of interactive user model overrides.
+REAL_CODEX=/Users/neurologic/.local/bin/codex
+
+if [ "${1:-}" = "exec" ]; then
+    shift
+    exec "$REAL_CODEX" exec --ignore-user-config "$@"
+fi
+
+exec "$REAL_CODEX" "$@"

@@ -1,0 +1,12 @@
+review: {title: "CAR-T vs bispecific (RRMM)", short_id: cart-bispecific, registration: MM-validation}
+pico:
+  population: "Multiple myeloma."
+  intervention: "BCMA CAR-T or BCMAxCD3 bispecific"
+  comparator: "(single-arm; modality compared)"
+  outcomes: {primary: ["complete response + ORR rate (proportion)"], secondary: []}
+synthesis: {subgroup_field: outcome, subgroup_map: {pfs: [pfs], cr: [cr, complete response], orr: [orr, response]}, arms: [pfs,cr,orr], indirect_comparison: false}
+eligibility:
+  inclusion: ["RCT or prospective trial in multiple myeloma.", "Intervention as specified.", "Reports a survival or response outcome."]
+  exclusion: ["Review/protocol/editorial.", "Not the specified intervention.", "No extractable outcome."]
+  exclusion_buckets: [{label: not-trial, keywords: [review, protocol, editorial]}]
+disclaimer: "Engine MM validation; AI R1 + Codex R2 + human verify."

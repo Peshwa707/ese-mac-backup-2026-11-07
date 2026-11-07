@@ -1,0 +1,108 @@
+# Search strategy — carbetocin-vs-misoprostol / open-myomectomy vertical (Step 3).
+# Transcribed from protocol.yaml (three concept blocks #1 AND #2 AND #3):
+#   #1 population/procedure (myomectomy / leiomyoma)
+#   #2 drugs (carbetocin OR misoprostol)  — head-to-head restriction applied at SCREENING
+#   #3 RCT filter
+# PubMed / Europe PMC / ClinicalTrials.gov are executed live (free). WoS / Scopus
+# run only when credentialed (self-skip otherwise). Embase / CENTRAL are produced
+# as reproducible strings (not executed; run via institutional gateway / export).
+
+disclaimer: >
+  Head-to-head restriction (both a carbetocin AND a misoprostol arm) is applied at
+  SCREENING, not in-query, so trials indexed under only one drug are not dropped.
+  Search runs without outcome/date/language filters per protocol (inception →
+  2026-07-10). Reference lists of eligible trials + trial registries are hand-mined
+  at the human step. The PubMed string is size-checked live before the screen pass;
+  direct carbetocin-vs-misoprostol open-myomectomy RCTs are expected to be few.
+
+# --- PubMed / MEDLINE (executed live) --------------------------------------
+pubmed:
+  executed: true
+  query: >
+    (("Uterine Myomectomy"[Mesh] OR "Leiomyoma"[Mesh] OR myomectomy[tiab] OR
+    myomectomies[tiab] OR leiomyoma[tiab] OR leiomyomas[tiab] OR leiomyomata[tiab]
+    OR fibroid[tiab] OR fibroids[tiab] OR myoma[tiab] OR myomas[tiab] OR
+    myomata[tiab] OR fibromyoma[tiab]) AND ("Misoprostol"[Mesh] OR misoprostol[tiab]
+    OR Cytotec[tiab] OR Misoprost[tiab] OR carbetocin[Supplementary Concept] OR
+    carbetocin[tiab] OR carbetocine[tiab] OR Duratocin[tiab] OR Pabal[tiab] OR
+    Lonactene[tiab]) AND (randomized controlled trial[pt] OR controlled clinical
+    trial[pt] OR randomized[tiab] OR randomised[tiab] OR placebo[tiab] OR
+    randomly[tiab] OR trial[ti] OR "clinical trials as topic"[Mesh:noexp]))
+  retmax: 2000
+
+# --- Europe PMC (executed live; free) --------------------------------------
+# TITLE_ABS: restricts to title/abstract (comparable to PubMed [tiab]); an
+# unfielded Europe PMC query would search full text and be far broader.
+europepmc:
+  executed: true
+  query: >
+    ((TITLE_ABS:myomectomy OR TITLE_ABS:myomectomies OR TITLE_ABS:leiomyoma OR
+    TITLE_ABS:leiomyomas OR TITLE_ABS:fibroid OR TITLE_ABS:fibroids OR
+    TITLE_ABS:myoma OR TITLE_ABS:myomas OR TITLE_ABS:fibromyoma) AND
+    (TITLE_ABS:carbetocin OR TITLE_ABS:carbetocine OR TITLE_ABS:duratocin OR
+    TITLE_ABS:pabal OR TITLE_ABS:misoprostol OR TITLE_ABS:cytotec OR
+    TITLE_ABS:misoprost) AND (TITLE_ABS:randomized OR TITLE_ABS:randomised OR
+    TITLE_ABS:placebo OR TITLE_ABS:randomly OR TITLE_ABS:trial))
+  page_size: 1000
+
+# --- ClinicalTrials.gov (executed live; free; trial registrations) ---------
+clinicaltrials:
+  executed: true
+  query: "myomectomy carbetocin misoprostol randomized"
+
+# --- Web of Science (Clarivate Starter API; credentialed) ------------------
+# Live only when WOS_STARTER_KEY is in ~/.config/ese/providers.env; else self-skips.
+webofscience:
+  executed: true
+  db: WOS
+  query: >
+    TS=((myomectom* OR leiomyoma* OR fibroid* OR myoma* OR fibromyoma) AND
+    (carbetocin* OR duratocin OR pabal OR misoprostol OR cytotec OR misoprost) AND
+    (random* OR placebo OR trial))
+
+# --- Scopus (Elsevier Search API; credentialed) ----------------------------
+# Live only when SCOPUS_API_KEY (+ optional SCOPUS_INSTTOKEN) is set; else self-skips.
+scopus:
+  executed: true
+  view: STANDARD
+  query: >
+    TITLE-ABS-KEY((myomectom* OR leiomyoma* OR fibroid* OR myoma* OR fibromyoma) AND
+    (carbetocin* OR duratocin OR pabal OR misoprostol OR cytotec OR misoprost) AND
+    (random* OR placebo OR trial))
+
+# --- Databases requiring institutional access (strings only, NOT executed) -
+other_databases:
+  - name: Embase
+    executed: false
+    note: "Emtree search. Not executed in the automated pass; run via institutional gateway or export→import."
+    query: >
+      ('uterine myoma'/exp OR 'leiomyoma'/exp OR 'uterus myomectomy'/exp OR
+      myomectom*:ab,ti OR fibroid*:ab,ti OR leiomyom*:ab,ti OR myoma*:ab,ti) AND
+      ('carbetocin'/exp OR carbetocin*:ab,ti OR duratocin:ab,ti OR pabal:ab,ti OR
+      'misoprostol'/exp OR misoprostol:ab,ti OR cytotec:ab,ti OR misoprost:ab,ti) AND
+      ('randomized controlled trial'/exp OR 'controlled clinical trial'/exp OR
+      random*:ab,ti OR placebo:ab,ti OR 'crossover procedure'/exp OR trial:ti)
+  - name: CENTRAL
+    executed: false
+    note: "Cochrane CENTRAL (trials-only → #1 AND #2; design filter omitted). Not executed; run via gateway."
+    query: >
+      ([mh "Uterine Myomectomy"] OR [mh Leiomyoma] OR myomectom*:ti,ab,kw OR
+      fibroid*:ti,ab,kw OR leiomyom*:ti,ab,kw OR myoma*:ti,ab,kw) AND
+      ([mh Misoprostol] OR misoprostol:ti,ab,kw OR cytotec:ti,ab,kw OR
+      carbetocin*:ti,ab,kw OR duratocin:ti,ab,kw OR pabal:ti,ab,kw)
+  - name: Google Scholar
+    executed: false
+    note: >
+      Supplementary only — NOT machine-queryable reproducibly (no field tags,
+      personalized, ~256-char cap). Operator runs logged-out, records date/time,
+      hand-screens; engine must NOT fabricate hits.
+    query: "myomectomy OR fibroid OR leiomyoma OR myoma  carbetocin OR misoprostol  randomized OR randomised OR RCT"
+
+# Candidate trials deliberately withheld to preserve the pack's blind.
+named_trials: []
+reference_mining_seeds: []
+
+conference_abstract_targets:
+  executed: false
+  note: "Gynaecology/obstetrics congresses are not in the PubMed API; flagged for manual search."
+  venues: [FIGO, ESGE, AAGL, "RCOG World Congress"]

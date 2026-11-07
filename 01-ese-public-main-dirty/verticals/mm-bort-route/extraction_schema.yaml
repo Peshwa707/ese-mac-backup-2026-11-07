@@ -1,0 +1,8 @@
+identity: [first_author, year, study_name, study_design, n_total]
+fields:
+  outcomes:
+    - {name: orr_sc, level: abstract}
+    - {name: orr_iv, level: abstract}
+    - {name: neuropathy_sc, level: abstract}
+    - {name: neuropathy_iv, level: abstract}
+rules: ["Extract events/n by route for ORR and peripheral neuropathy; verbatim or NR."]

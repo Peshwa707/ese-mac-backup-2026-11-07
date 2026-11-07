@@ -1,0 +1,112 @@
+version: "1.0.0"
+default_tool: other
+tool_by_design:
+  rct: rob2
+  randomized: rob2
+  cohort: robins_i
+  prospective: robins_i
+  case-control: robins_i
+  cross-sectional: cross_sectional
+  diagnostic: quadas2
+  diagnostic_accuracy: quadas2
+  qualitative: qualitative
+  measurement_property: cosmin
+  measurement-invariance: cosmin
+  prognostic: quips
+  developmental_stability: quips
+  systematic_review: amstar2
+  meta-analysis: amstar2
+  registry: robins_i
+  single-arm: robins_i
+  other: other
+judgments:
+  rob2: [Low, "Some concerns", High]
+  robins_i: [Low, Moderate, Serious, Critical, "No information"]
+  cross_sectional: [Low, Moderate, High, "No information"]
+  quadas2: [Low, High, "Unclear"]
+  qualitative: [Low, Moderate, High, "No information"]
+  amstar2: [High, Moderate, Low, "Critically low"]
+  other: ["No information"]
+  cosmin: ["Very Low", Low, Moderate, High, "No information"]
+  quips: [Low, Moderate, High, "No information"]
+# Exact normalized judgments by tool. AMSTAR-2's High rating is favorable;
+# Low/Critically low are the high-risk judgments for that tool.
+high_rob_overall:
+  rob2: [high]
+  robins_i: [serious, critical, "no information"]
+  cross_sectional: [high, "no information"]
+  quadas2: [high, unclear]
+  qualitative: [high, "no information"]
+  amstar2: [low, "critically low"]
+  cosmin: [very_low, low, "no information"]
+  quips: [high, "no information"]
+  other: ["no information"]
+tools:
+  rob2:
+    name: "Cochrane RoB 2.0"
+    domains:
+      - {key: D1, label: "Bias arising from the randomization process"}
+      - {key: D2, label: "Bias due to deviations from intended interventions"}
+      - {key: D3, label: "Bias due to missing outcome data"}
+      - {key: D4, label: "Bias in measurement of the outcome"}
+      - {key: D5, label: "Bias in selection of the reported result"}
+  robins_i:
+    name: "ROBINS-I"
+    domains:
+      - {key: D1, label: "Bias due to confounding"}
+      - {key: D2, label: "Bias in selection of participants"}
+      - {key: D3, label: "Bias in classification of intervention or exposure"}
+      - {key: D4, label: "Bias due to deviations from intended intervention"}
+      - {key: D5, label: "Bias due to missing data"}
+      - {key: D6, label: "Bias in measurement of outcomes"}
+      - {key: D7, label: "Bias in selection of reported result"}
+  cross_sectional:
+    name: "Cross-sectional appraisal: sampling, measurement, confounding, and reporting"
+    domains:
+      - {key: S1, label: "Sampling and representativeness"}
+      - {key: S2, label: "Criterion or exposure measurement"}
+      - {key: S3, label: "Outcome measurement and informant bias"}
+      - {key: C1, label: "Confounding and alternative explanations"}
+      - {key: R1, label: "Selective reporting and missing data"}
+  quadas2:
+    name: "QUADAS-2 diagnostic accuracy appraisal"
+    domains:
+      - {key: P1, label: "Patient selection"}
+      - {key: I1, label: "Index test"}
+      - {key: R1, label: "Reference standard"}
+      - {key: F1, label: "Flow and timing"}
+  qualitative:
+    name: "Qualitative evidence appraisal"
+    domains:
+      - {key: Q1, label: "Sampling and reflexivity"}
+      - {key: Q2, label: "Data collection and analysis transparency"}
+      - {key: Q3, label: "Credibility and transferability"}
+  amstar2:
+    name: "AMSTAR 2 systematic-review appraisal"
+    domains:
+      - {key: A1, label: "Protocol and eligibility"}
+      - {key: A2, label: "Search and study selection"}
+      - {key: A3, label: "Data extraction and risk of bias"}
+      - {key: A4, label: "Synthesis and publication bias"}
+  other:
+    name: "Unclassified design — no validated tool selected"
+    domains:
+      - {key: U1, label: "Design appraisal unavailable; human review required"}
+  cosmin:
+    name: "COSMIN Risk of Bias checklist"
+    domains:
+      - {key: C1, label: "Content validity"}
+      - {key: C2, label: "Structural validity"}
+      - {key: C3, label: "Internal consistency"}
+      - {key: C4, label: "Reliability"}
+      - {key: C5, label: "Measurement error"}
+      - {key: C6, label: "Construct validity and responsiveness"}
+  quips:
+    name: "QUIPS prognostic-factor appraisal"
+    domains:
+      - {key: QP1, label: "Study participation"}
+      - {key: QP2, label: "Study attrition"}
+      - {key: QP3, label: "Prognostic-factor measurement"}
+      - {key: QP4, label: "Outcome measurement"}
+      - {key: QP5, label: "Confounding"}
+      - {key: QP6, label: "Statistical analysis and reporting"}

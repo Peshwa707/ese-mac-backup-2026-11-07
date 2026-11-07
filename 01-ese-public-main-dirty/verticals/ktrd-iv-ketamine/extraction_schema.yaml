@@ -1,0 +1,49 @@
+# Data dictionary — ktrd-iv-ketamine vertical.
+# Co-primary efficacy: continuous depression-severity change (SMD) + binary response/remission (RR).
+# Safety: binary AE outcomes (RR) or proportions (uncontrolled cohorts). Diagnosis-stratified
+# (unipolar vs bipolar, NEVER pooled). Molecule / design / time-window / single-vs-repeated kept
+# as identity fields so racemic vs esketamine vs arketamine, RCT vs observational, and each time
+# window stay separate per protocol.
+identity:
+  - first_author
+  - year
+  - study_name
+  - study_design        # RCT parallel | RCT crossover | prospective cohort | retrospective cohort
+  - diagnosis           # unipolar | bipolar
+  - molecule            # racemic-ketamine | esketamine | arketamine
+  - route               # intravenous (eligibility gate; recorded for audit)
+  - trd_definition      # verbatim study-stated treatment-resistance definition
+  - dose_mg_kg          # e.g. 0.5 ; record NR if not reported
+  - infusion_duration   # minutes
+  - regimen             # single | repeated | maintenance
+  - n_administrations
+  - comparator          # placebo/saline | midazolam (active) | standard care | active drug | none (uncontrolled)
+  - time_window         # <=24h | >24-72h | >3-7d | >1-2wk | >2-4wk | >4wk/maintenance
+  - n_total
+
+fields:
+  efficacy_continuous:
+    - {name: depression_change_effect, level: fulltext, pool: SMD,
+       label: "Depression-severity change (SMD: MADRS / HDRS / BDI / QIDS etc.), oriented improvement=beneficial, at the stated time_window"}
+  efficacy_binary:
+    - {name: response_events_tx, level: fulltext, pool: proportion, label: "Response events (intervention) — study-defined, commonly >=50% improvement"}
+    - {name: response_events_ctrl, level: fulltext, pool: proportion, label: "Response events (control)"}
+    - {name: remission_events_tx, level: fulltext, pool: proportion, label: "Remission events (intervention) — study-defined"}
+    - {name: remission_events_ctrl, level: fulltext, pool: proportion, label: "Remission events (control)"}
+  safety_binary:
+    - {name: sae_events_tx, level: fulltext, pool: proportion, label: "Serious adverse events (intervention)"}
+    - {name: sae_events_ctrl, level: fulltext, pool: proportion, label: "Serious adverse events (control)"}
+    - {name: dissociation_events_tx, level: abstract, pool: proportion, label: "Dissociation / perceptual disturbance (intervention)"}
+    - {name: dissociation_events_ctrl, level: abstract, pool: proportion, label: "Dissociation / perceptual disturbance (control)"}
+    - {name: mania_switch_events_tx, level: fulltext, pool: proportion, label: "Mania/hypomania switch (intervention) — flag for bipolar stratum"}
+    - {name: mania_switch_events_ctrl, level: fulltext, pool: proportion, label: "Mania/hypomania switch (control)"}
+    - {name: discontinuation_ae_tx, level: abstract, pool: proportion, label: "Discontinuation due to AE (intervention)"}
+    - {name: discontinuation_ae_ctrl, level: abstract, pool: proportion, label: "Discontinuation due to AE (control)"}
+
+rules:
+  - "Extract the between-group EFFECT on the primary continuous outcome (adjusted MD / change-difference / Cohen's d) + 95% CI + arm n, oriented so improvement is beneficial; record the depression scale + its direction."
+  - "Record response/remission as events + arm n at the stated time_window; use the study's own definition and record it."
+  - "Bin every reported time point into exactly one time_window; do NOT infer onset from an arbitrary first measurement — record the earliest PRESPECIFIED clinically/statistically supported time separately."
+  - "Record molecule (racemic vs esketamine vs arketamine) and diagnosis (unipolar vs bipolar) on EVERY row — these strata are never pooled together."
+  - "For uncontrolled safety/durability cohorts record proportions with exact denominators; synthesize separately from comparative effects."
+  - "Copy verbatim or mark 'NR'; include the supporting quote and source location for every critical value; label any calculated/imputed value and retain the method; never invent."

@@ -1,0 +1,56 @@
+{
+  "title": "Maladaptive Daydreaming, Social Rejection, Anxiety, and Emotional Compensation",
+  "short_id": "ndem-f-daydreaming-rejection",
+  "framing": "pico",
+  "profile": "rapid",
+  "background": "This module evaluates associations and temporal evidence linking maladaptive or immersive daydreaming with loneliness, rejection, bullying, shame, boredom, trauma, anxiety, and neurodevelopmental traits, while testing normative fantasy and dissociative or compulsive alternatives.",
+  "population": "Adolescents and adults, including ADHD, autism, trauma, anxiety, and mood-disorder subgroups.",
+  "intervention": "Loneliness, bullying, rejection, shame, boredom, anxiety, trauma, or unmet attachment/recognition needs.",
+  "comparator": "Lower exposure, controls, alternative explanatory constructs, or within-person baseline.",
+  "outcomes_primary": [
+    {"name": "Maladaptive or immersive daydreaming, dissociation, distress, and functional impairment", "pool_field": ""},
+    {"name": "Evidence for emotional-compensation function or temporal mediation", "pool_field": ""}
+  ],
+  "outcomes_secondary": [
+    {"name": "Anxiety, rejection sensitivity, avoidance, social functioning, and alternative explanations", "pool_field": ""}
+  ],
+  "designs": ["systematic review", "longitudinal cohort", "prospective", "cross-sectional", "case-control", "qualitative"],
+  "inclusion": [
+    "Adolescent or adult empirical study of maladaptive or immersive daydreaming, or rejection/anxiety mediation relevant to neurodevelopmental functioning.",
+    "Uses an operational definition or validated/explicit measure.",
+    "Reports association, temporal, mediation, qualitative-function, or impairment outcomes."
+  ],
+  "exclusion": [
+    "Normative mind-wandering study with no maladaptive/immersive daydreaming or emotional-burden relevance.",
+    "Opinion, popular media, commercial page, or unsourced narrative.",
+    "No operational definition of the focal construct.",
+    "No outcome relevant to claims H9 or H12."
+  ],
+  "search": {
+    "concept_blocks": [
+      {"name": "daydreaming_or_neurodevelopment", "terms": ["\"maladaptive daydreaming\"", "\"immersive daydreaming\"", "ADHD", "autism"], "mesh": []},
+      {"name": "social_or_emotional", "terms": ["loneliness", "rejection", "bullying", "shame", "boredom", "anxiety", "trauma", "dissociation", "\"rejection sensitivity\"", "\"emotion regulation\""], "mesh": []},
+      {"name": "evidence", "terms": ["association", "longitudinal", "prospective", "mediation", "qualitative", "\"Systematic Review\"[pt]"], "mesh": []}
+    ],
+    "databases": ["PubMed", "Europe PMC", "PsycINFO", "Embase", "Web of Science"],
+    "date_from": "",
+    "date_to": "2026/07/29",
+    "retmax": 250
+  },
+  "rob_tool": "auto",
+  "analysis": {
+    "effect_measure": "Narrative synthesis emphasizing temporal direction and construct validity.",
+    "dose_response": false,
+    "subgroups": ["ADHD", "autism", "trauma", "anxiety", "mood disorder", "objective versus self-report outcome"],
+    "publication_bias": false
+  },
+  "extraction_groups": [
+    {"group": "identity", "fields": [{"name": "claim_ids"}, {"name": "study_design"}, {"name": "country"}, {"name": "funding_conflicts", "level": "fulltext"}]},
+    {"group": "population", "fields": [{"name": "total_n"}, {"name": "age_range"}, {"name": "diagnostic_method"}, {"name": "construct_measure"}]},
+    {"group": "findings", "fields": [{"name": "exposure_measure"}, {"name": "outcome_measure"}, {"name": "effect_estimate"}, {"name": "confidence_interval"}, {"name": "mediation_estimate"}, {"name": "temporal_direction"}, {"name": "direction"}, {"name": "supporting_quote"}]},
+    {"group": "appraisal", "fields": [{"name": "construct_validity"}, {"name": "major_limitations"}, {"name": "alternative_explanations"}, {"name": "directness_to_claim"}]}
+  ],
+  "registration": "Protocol frozen for AI-assisted rapid review on 2026-07-29; not prospectively registered.",
+  "output_base": "/Users/neurologic/Documents/EvidenceEngine/neurodevelopmental-environmental-mismatch",
+  "disclaimer": "AI Reviewer-1 rapid-review draft. Human Reviewer 2 and clinical sign-off remain pending. Not diagnostic or treatment guidance."
+}

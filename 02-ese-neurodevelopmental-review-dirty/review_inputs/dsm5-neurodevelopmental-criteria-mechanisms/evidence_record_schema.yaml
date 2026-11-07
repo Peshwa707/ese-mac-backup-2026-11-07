@@ -1,0 +1,96 @@
+version: "1.0.0"
+description: >
+  Record-level contract for one study contribution. This schema is deliberately
+  separate from the engine's extraction dictionary so evidence streams cannot
+  be merged accidentally.
+required:
+  - record_id
+  - source_provenance
+  - evidence_stream
+  - diagnosis_or_domain
+  - criterion_ids
+  - age_stratum
+  - claim_status
+  - ai_reviewer_1
+  - ai_reviewer_2
+  - human_reviewer_2
+  - reconciliation
+  - clinical_signoff
+properties:
+  record_id: {type: string, non_empty: true}
+  source_provenance:
+    type: object
+    required: [database, source_identifier, retrieval_date, locator]
+  evidence_stream:
+    type: enum
+    values: [criterion_validation, overlap, mechanism, intervention]
+  diagnosis_or_domain: {type: string, non_empty: true}
+  criterion_ids: {type: array, item_type: string}
+  age_stratum:
+    type: enum
+    values: [preschool_childhood, adolescence, adulthood, mixed, not_reported]
+  mechanism_level:
+    type: enum
+    values: [direct_human, indirect_human, preclinical, theoretical, not_applicable]
+  intervention_status:
+    type: enum
+    values: [established, experimental, off_label, unclear, not_applicable]
+  outcomes:
+    type: object
+    separate_keys:
+      - symptom
+      - function
+      - participation
+      - academic_work
+      - quality_of_life
+      - harms
+      - durability
+  claim_status:
+    type: enum
+    values: [supported, intermediate, indeterminate, rejected]
+  certainty:
+    type: enum
+    values: [High, Moderate, Low, "Very Low", "No data", Draft]
+  ai_reviewer_1:
+    type: object
+    required: [decision, timestamp, provider]
+  ai_reviewer_2:
+    type: object
+    required: [decision, timestamp, provider]
+  human_reviewer_2:
+    type: object
+    required: [decision, timestamp, reviewer_name]
+  reconciliation:
+    type: object
+    required: [decision, timestamp, adjudicator]
+  # Legacy names are retained as non-authoritative aliases for older run files.
+  reviewer_1:
+    type: object
+    description: "Legacy alias; must not be used as human Reviewer 2 identity."
+  reviewer_2:
+    type: object
+    description: "Legacy alias; use human_reviewer_2 for new records."
+  clinical_signoff:
+    type: object
+    required: [status]
+    status_values: [pending, approved, declined, not_applicable]
+invariants:
+  - "Mechanism evidence cannot set intervention efficacy to supported without intervention data."
+  - "Preclinical or theoretical evidence cannot support a clinical validity claim."
+  - "Claim status cannot be published as final while human_reviewer_2.decision is pending."
+  - "Clinical package cannot unlock while clinical_signoff.status is pending."
+  - "NR values require no fabricated replacement; ESTIMATED values require method and quote."
+
+claim_status_rules:
+  supported:
+    requires: [directly_relevant_evidence, compatible_population_and_outcome, certainty_not_draft]
+    meaning: "Evidence supports the narrowly stated claim; association is not upgraded to causation."
+  intermediate:
+    requires: [some_relevant_evidence, material_uncertainty_or_indirectness]
+    meaning: "Evidence points in a direction but does not justify a stable conclusion."
+  indeterminate:
+    requires: [insufficient_or_inconsistent_evidence]
+    meaning: "The review cannot determine the claim; absence of evidence is not evidence against it."
+  rejected:
+    requires: [explicit_falsification_rule, direct_disconfirming_evidence, human_reviewer_2, clinical_signoff]
+    meaning: "Reserved for a claim directly disconfirmed under a pre-registered rule; never assigned for missing evidence."
