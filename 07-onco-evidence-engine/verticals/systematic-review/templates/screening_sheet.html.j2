@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<title>Screening Reconciliation — {{ run.review_title }}</title>
+<style>
+  body { font: 13px/1.45 -apple-system, Helvetica, Arial, sans-serif; color:#1c2b40; margin:28px; background:#fafbfd; }
+  h1 { font-size:19px; } h2 { font-size:15px; color:#5a6b85; margin-top:0; }
+  .banner { background:#fff7e6; border:1px solid #d8a93a; border-radius:8px; padding:10px 14px; margin:14px 0; }
+  .counts { margin:10px 0 18px; }
+  .counts span { display:inline-block; background:#eef2f8; border-radius:6px; padding:4px 10px; margin:2px 6px 2px 0; }
+  table { border-collapse:collapse; width:100%; font-size:12px; }
+  th, td { border:1px solid #dde4ef; padding:6px 8px; text-align:left; vertical-align:top; }
+  th { background:#34507a; color:#fff; position:sticky; top:0; }
+  tr.include td { background:#eef8ee; }
+  tr.exclude td { background:#fbf0f0; }
+  tr.uncertain td { background:#fff8e6; }
+  .pmid { font-family: ui-monospace, monospace; }
+  .r2 { background:#ffffff; min-width:120px; color:#9aa5b5; }
+  .foot { color:#6b7890; font-size:11px; margin-top:18px; }
+</style></head>
+<body>
+  <h1>Title/Abstract Screening — Reviewer 1 (AI) draft</h1>
+  <h2>{{ run.review_title }}</h2>
+  <div class="banner"><strong>{{ run.disclaimer }}</strong><br>
+    The <em>Reviewer 2</em> and <em>Consensus</em> columns are intentionally blank for a human to
+    complete. Decisions were made from the title + abstract only; every PMID below resolves on PubMed.</div>
+
+  <div class="counts">
+    <span>Identified (PubMed): {{ run.counts.identified_pubmed }}</span>
+    <span>After dedup: {{ run.counts.after_dedup }}</span>
+    <span>PMIDs unverified removed: {{ run.counts.id_unverified_removed }}</span>
+    <span>Screened: {{ run.counts.screened }}</span>
+    <span>Include: {{ run.counts.included }}</span>
+    <span>Exclude: {{ run.counts.excluded_screening }}</span>
+    <span>Uncertain: {{ run.counts.uncertain }}</span>
+  </div>
+
+  <table>
+    <thead><tr>
+      <th>#</th><th>PMID</th><th>R1 decision</th><th>Conf.</th><th>Modality</th>
+      <th>Design</th><th>1-3 lines?</th><th>R1 reason</th>
+      <th>Reviewer 2</th><th>Consensus</th>
+    </tr></thead>
+    <tbody>
+    {% for r in run.screening %}
+      <tr class="{{ r.decision.value }}">
+        <td>{{ loop.index }}</td>
+        <td class="pmid"><a href="https://pubmed.ncbi.nlm.nih.gov/{{ r.pmid }}/">{{ r.pmid }}</a></td>
+        <td>{{ r.decision.value }}</td>
+        <td>{{ "%.2f"|format(r.confidence) }}</td>
+        <td>{{ r.modality }}</td>
+        <td>{{ r.study_design }}</td>
+        <td>{{ r.population_1_3_lines }}</td>
+        <td>{{ r.reason }}</td>
+        <td class="r2">&nbsp;</td>
+        <td class="r2">&nbsp;</td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+
+  <div class="foot">
+    Named-trial capture: {% for t, hit in run.named_trial_capture.items() %}{{ t }}={{ "✓" if hit else "✗" }} {% endfor %}<br>
+    Seed verification: {% for s, ok in run.seed_verification.items() %}{{ s }}={{ "✓" if ok else "✗" }}; {% endfor %}<br>
+    Run {{ run.run_id[:8] }} · provenance {{ run.provenance_id[:8] }}
+  </div>
+</body></html>

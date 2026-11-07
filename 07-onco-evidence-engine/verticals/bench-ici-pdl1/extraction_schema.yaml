@@ -1,0 +1,27 @@
+# Prognostic data dictionary (blood-based PD-L1 in NSCLC on ICI). Field names align
+# with the engine's generic inverse-variance pooling: hr_os / hr_pfs are the
+# adjusted log-effect fields (parsed by parse_hr_ci); `marker_type` drives the
+# subgroup axis (sPD-L1 | exoPD-L1 | CTC PD-L1). Multivariate/adjusted HR preferred.
+fields:
+  population:
+    - {name: marker_type, level: abstract}     # sPD-L1 | exoPD-L1 | CTC PD-L1  (subgroup axis)
+    - {name: total_n, level: abstract}         # number of NSCLC patients analyzed
+    - {name: study_design, level: abstract}    # prospective cohort | retrospective cohort
+    - {name: nos_score, level: abstract}       # Newcastle-Ottawa Scale (>=7 = high quality)
+    - {name: timepoint, level: abstract}       # pre-treatment | post-treatment | dynamic
+    - {name: country, level: abstract}
+    - {name: ici_regimen, level: abstract}     # monotherapy | combination; agent if stated
+  efficacy:
+    # Adjusted HR (high vs low blood PD-L1) + 95% CI, per outcome. Verbatim,
+    # e.g. "HR 2.11 (95% CI 1.59-2.80)". NR if the study does not report it.
+    - {name: hr_os, level: abstract, pool: log_effect, label: "Blood PD-L1 (high vs low) vs OS (HR)"}
+    - {name: hr_pfs, level: abstract, pool: log_effect, label: "Blood PD-L1 (high vs low) vs PFS (HR)"}
+
+rules:
+  - "Copy values verbatim from the source text only. Do not use outside knowledge."
+  - "If a field is not stated, set value to 'NR'. Derived/computed values: prefix 'ESTIMATED:'."
+  - "For each non-NR numeric value, include the exact verbatim supporting quote."
+  - "hr_os / hr_pfs = the ADJUSTED hazard ratio (high vs low blood PD-L1) WITH its 95% CI; multivariate preferred over univariate."
+  - "Record the blood-based PD-L1 marker in `marker_type` (sPD-L1 / exoPD-L1 / CTC PD-L1)."
+  - "Record measurement time in `timepoint` (pre-treatment / post-treatment / dynamic)."
+  - "Do NOT invent quality scores. nos_score = NR unless the source gives a Newcastle-Ottawa rating."

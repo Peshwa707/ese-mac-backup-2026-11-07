@@ -1,0 +1,55 @@
+# Non-oncology vertical — domain-agnosticism validation (Phase G).
+# Only PICO + search + extraction are domain-specific; RoB/GRADE/prompts/templates
+# fall back to the shared systematic-review vertical (no engine/core changes).
+
+review:
+  title: >
+    SGLT2 Inhibitors Versus Placebo in Heart Failure with Reduced Ejection
+    Fraction: A Systematic Review and Meta-Analysis
+  short_id: hf-sglt2
+  registration: "PROSPERO: [DRAFT — not yet submitted]"
+  output_base: "~/Documents/Systematic Reviews/Cardiology"
+
+pico:
+  population: >
+    Adults with heart failure and reduced ejection fraction (HFrEF, LVEF <=40%),
+    with or without type 2 diabetes.
+  intervention: >
+    Sodium-glucose co-transporter-2 (SGLT2) inhibitors (dapagliflozin,
+    empagliflozin, sotagliflozin) added to guideline-directed therapy.
+  comparator: >
+    Placebo (added to guideline-directed medical therapy).
+  outcomes:
+    primary:
+      - composite of cardiovascular death or heart-failure hospitalization
+      - all-cause mortality
+    secondary:
+      - cardiovascular death
+      - heart-failure hospitalization
+      - KCCQ quality-of-life change
+      - eGFR decline / renal composite
+      - serious adverse events (volume depletion, DKA, genital infection)
+
+# Synthesis axis: direct head-to-head RCTs (SGLT2i vs placebo), no subgroup
+# stratification — all studies pool together; no indirect-comparison caveat.
+synthesis:
+  subgroup_field: ""
+  arms: []
+  indirect_comparison: false
+
+eligibility:
+  inclusion:
+    - "Randomized controlled trial."
+    - "Adults with HFrEF (LVEF <=40%)."
+    - "Compares an SGLT2 inhibitor vs placebo on top of standard therapy."
+    - "Reports at least one pre-specified efficacy or safety outcome."
+  exclusion:
+    - "Non-randomized / observational design."
+    - "Heart failure with preserved EF only (HFpEF) with no HFrEF subgroup."
+    - "Not an SGLT2 inhibitor, or active comparator (not placebo)."
+    - "Review, editorial, or protocol-only paper with no outcome data."
+
+disclaimer: >
+  Automated systematic-review FIRST PASS (domain-agnosticism validation run). AI
+  acts as Reviewer 1 only; every cited PMID is live-verified and every value is
+  abstract-anchored or marked NR. Requires human Reviewer 2 verification.

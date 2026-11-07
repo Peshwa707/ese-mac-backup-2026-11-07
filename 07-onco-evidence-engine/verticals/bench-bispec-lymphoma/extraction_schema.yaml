@@ -1,0 +1,24 @@
+# Data dictionary for the benchmark protocol (Kim et al., Blood 2024; PMID 38696731).
+# Field names match the engine's poolable PROPORTION_FIELDS so the meta-analysis
+# covers the protocol's primary (CR) and secondary (ORR) outcomes.
+fields:
+  population:
+    - {name: total_n, level: abstract}
+    - {name: agent_name, level: abstract}               # glofitamab / epcoritamab / mosunetuzumab / odronextamab
+    - {name: trial_name, level: abstract}                # e.g. NP30179, EPCORE NHL-1
+    - {name: median_prior_lines, level: abstract}
+    - {name: pct_prior_car_t, level: abstract}           # % with prior CAR-T (often NR in earlier trials)
+    - {name: pct_refractory, level: abstract}
+  efficacy:
+    - {name: complete_response_rate, level: abstract, pool: proportion, label: "Complete response rate (CR)"}
+    - {name: orr, level: abstract, pool: proportion, label: "Overall response rate (ORR)"}
+  safety:
+    - {name: crs_any_grade, level: abstract, pool: proportion, label: "CRS (any grade)"}
+    - {name: crs_grade_3plus, level: abstract, pool: proportion, label: "CRS (grade >=3)"}
+
+rules:
+  - "Copy values verbatim from the source text only. Do not use outside knowledge."
+  - "If a field is not stated, set value to 'NR'. Derived values: prefix 'ESTIMATED:'."
+  - "For each non-NR numeric value, include the exact verbatim supporting quote."
+  - "Record the agent name (glofitamab, epcoritamab, mosunetuzumab, odronextamab) in agent_name."
+  - "No fabrication: never invent numbers not present in the text."

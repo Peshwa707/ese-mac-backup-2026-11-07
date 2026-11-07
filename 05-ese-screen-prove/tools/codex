@@ -1,0 +1,14 @@
+#!/bin/sh
+set -eu
+
+# The parked reviewer must not inherit the user's interactive model override.
+# --ignore-user-config selects the subscription-compatible CLI default while
+# leaving repository files and the dual-review protocol in scope.
+REAL_CODEX=/Users/neurologic/.local/bin/codex
+
+if [ "${1:-}" = "exec" ]; then
+    shift
+    exec "$REAL_CODEX" exec --ignore-user-config "$@"
+fi
+
+exec "$REAL_CODEX" "$@"

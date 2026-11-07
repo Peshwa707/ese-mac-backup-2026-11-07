@@ -1,0 +1,118 @@
+{
+  "case_id": "bench-liang-39551604",
+  "status": "draft",
+  "expected_included_pmids": [],
+  "outcomes": [
+    {
+      "field": "complete_response_rate",
+      "label": "CR",
+      "family": "proportion",
+      "group": "CAR-T",
+      "estimate": 54,
+      "ci_lb": 42,
+      "ci_ub": 69
+    },
+    {
+      "field": "complete_response_rate",
+      "label": "CR",
+      "family": "proportion",
+      "group": "BsAb",
+      "estimate": 35,
+      "ci_lb": 30,
+      "ci_ub": 41
+    },
+    {
+      "field": "orr",
+      "label": "ORR",
+      "family": "proportion",
+      "group": "CAR-T",
+      "estimate": 83,
+      "ci_lb": 76,
+      "ci_ub": 90
+    },
+    {
+      "field": "orr",
+      "label": "ORR",
+      "family": "proportion",
+      "group": "BsAb",
+      "estimate": 65,
+      "ci_lb": 59,
+      "ci_ub": 71
+    },
+    {
+      "field": "crs_any_grade",
+      "label": "CRS any",
+      "family": "proportion",
+      "group": "CAR-T",
+      "estimate": 83,
+      "ci_lb": 70,
+      "ci_ub": 97
+    },
+    {
+      "field": "crs_any_grade",
+      "label": "CRS any",
+      "family": "proportion",
+      "group": "BsAb",
+      "estimate": 59,
+      "ci_lb": 43,
+      "ci_ub": 74
+    },
+    {
+      "field": "crs_grade_3plus",
+      "label": "CRS>=3",
+      "family": "proportion",
+      "group": "CAR-T",
+      "estimate": 7,
+      "ci_lb": 3,
+      "ci_ub": 14
+    },
+    {
+      "field": "crs_grade_3plus",
+      "label": "CRS>=3",
+      "family": "proportion",
+      "group": "BsAb",
+      "estimate": 1,
+      "ci_lb": 0,
+      "ci_ub": 2
+    },
+    {
+      "field": "neutropenia_grade_3plus",
+      "label": "Neutropenia>=3",
+      "family": "proportion",
+      "group": "CAR-T",
+      "estimate": 88,
+      "ci_lb": 81,
+      "ci_ub": 95
+    },
+    {
+      "field": "neutropenia_grade_3plus",
+      "label": "Neutropenia>=3",
+      "family": "proportion",
+      "group": "BsAb",
+      "estimate": 48,
+      "ci_lb": 30,
+      "ci_ub": 67
+    },
+    {
+      "field": "anemia_grade_3plus",
+      "label": "Anemia>=3",
+      "family": "proportion",
+      "group": "CAR-T",
+      "estimate": 55,
+      "ci_lb": 47,
+      "ci_ub": 62
+    },
+    {
+      "field": "anemia_grade_3plus",
+      "label": "Anemia>=3",
+      "family": "proportion",
+      "group": "BsAb",
+      "estimate": 34,
+      "ci_lb": 28,
+      "ci_ub": 40
+    }
+  ],
+  "caveats": [
+    "Published values from Liang 2024 abstract (PMID 39551604); proportions x100 to percent; draft pending human verification."
+  ]
+}

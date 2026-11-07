@@ -1,0 +1,61 @@
+disclaimer: >
+  Blind benchmark search for alectinib vs crizotinib RCTs in ALK+ NSCLC
+  (Zeng et al., Chemotherapy 2022; PMID 34915469; DOI 10.1159/000521452).
+  PubMed executed live (primary, recall-oriented, no outcome filter).
+  Search date-bounded to 2021-09-01 to match the approximate reference
+  cut-off (inception to September 2021). Target RCTs: ALEX, ALESIA, J-ALEX.
+
+pubmed:
+  executed: true
+  # Cutoff: 2021-12-31 (reference published December 14, 2021; we use
+  # end-of-year to ensure all source RCTs published before MA submission
+  # are captured; this is the SEARCH CUTOFF DATE for this benchmark).
+  query: >
+    ( "Carcinoma, Non-Small-Cell Lung"[Mesh]
+      OR NSCLC[tiab] OR non-small cell lung[tiab] OR non small cell lung[tiab]
+      OR non-small-cell lung[tiab] OR lung adenocarcinoma[tiab]
+      OR lung cancer[tiab] OR lung carcinoma[tiab] OR lung neoplasm*[tiab] )
+    AND
+    ( "Anaplastic Lymphoma Kinase"[Mesh]
+      OR ALK[tiab] OR ALK-positive[tiab] OR ALK positive[tiab]
+      OR anaplastic lymphoma kinase[tiab]
+      OR "ALK rearrangement"[tiab] OR "ALK gene"[tiab]
+      OR ALK-rearranged[tiab] OR ALK-inhibitor*[tiab] )
+    AND
+    ( alectinib[tiab] OR alectinib[nm]
+      OR crizotinib[tiab] OR crizotinib[nm]
+      OR brigatinib[tiab] OR brigatinib[nm]
+      OR lorlatinib[tiab] OR lorlatinib[nm]
+      OR ceritinib[tiab] OR ceritinib[nm]
+      OR ensartinib[tiab]
+      OR "CH5424802"[tiab] OR "AF-802"[tiab]
+      OR "PF-02341066"[tiab] OR "PF-06463922"[tiab]
+      OR "AP26113"[tiab]
+      OR ALK inhibitor*[tiab] OR ALK-TKI[tiab] OR ALK TKI[tiab] )
+    AND ("1990/01/01"[dp] : "2021/12/31"[dp])
+  retmax: 2000
+
+other_databases:
+  - name: embase
+    executed: false
+    note: >
+      Available as a live source; held supplementary on run #1 for clean
+      PubMed-only recall measurement.
+  - name: cochrane
+    executed: false
+    note: >
+      Cochrane Library (CENTRAL) available via export; held supplementary
+      on run #1.
+  - name: cnki
+    executed: false
+    note: >
+      Chinese databases (CNKI, Wanfang, VIP) searched in some Chinese-led
+      ALK/NSCLC reviews; held supplementary on run #1.
+
+# Landmark trials to confirm the search captures (hand-check, not asserted):
+named_trials:
+  - ALEX
+  - ALESIA
+  - J-ALEX
+
+reference_mining_seeds: []

@@ -1,0 +1,36 @@
+# PECO data dictionary (nutritional epidemiology). Field names align with the engine's
+# generic inverse-variance pooling: effect_total_fat / effect_cholesterol are the
+# highest-vs-lowest log-effect fields (parsed by parse_hr_ci); `design` drives the
+# four comparison cells (exposure x design). Dose-response fields are captured when a
+# study reports per-category data; absent at abstract level -> honest "no per-dose data".
+fields:
+  population:
+    - {name: country, level: abstract}
+    - {name: design, level: abstract}              # cohort | case-control | nested case-control | case-cohort
+    - {name: total_n, level: abstract}             # cohort N or (cases+controls)
+    - {name: cases, level: abstract}
+    - {name: follow_up_years, level: abstract}     # cohort only
+    - {name: mean_age, level: abstract}
+    - {name: exposure_assessment, level: abstract} # FFQ | diet interview | records
+    - {name: outcome_ascertainment, level: abstract} # registry | pathology | death certificate
+    - {name: energy_adjusted, level: abstract}     # yes | no  (subgroup axis)
+    - {name: bmi_adjusted, level: abstract}        # yes | no  (subgroup axis)
+    - {name: adjusted_covariates, level: abstract} # verbatim list (age, smoking, energy, diabetes, BMI...)
+  efficacy:
+    # Highest-vs-lowest ADJUSTED effect estimate + 95% CI, per exposure. Verbatim,
+    # e.g. "RR 1.42 (95% CI 1.05-1.92)". One per exposure the study reports; NR otherwise.
+    - {name: effect_total_fat, level: abstract, pool: log_effect, label: "Total fat, highest vs lowest"}
+    - {name: effect_cholesterol, level: abstract, pool: log_effect, label: "Dietary cholesterol, highest vs lowest"}
+  dose_response:
+    # Per-category dose table (median/midpoint intake; cases; person-years OR non-cases;
+    # category effect + variance). Usually a full-text table -> NR at abstract level.
+    - {name: dose_levels_total_fat, level: fulltext}
+    - {name: dose_levels_cholesterol, level: fulltext}
+
+rules:
+  - "Copy values verbatim from the source text only. Do not use outside knowledge."
+  - "If a field is not stated, set value to 'NR'. Derived/computed values: prefix 'ESTIMATED:'."
+  - "For each non-NR numeric value, include the exact verbatim supporting quote."
+  - "effect_total_fat / effect_cholesterol = the ADJUSTED highest-vs-lowest estimate WITH its 95% CI."
+  - "Record the study design in `design` (cohort / case-control / nested case-control / case-cohort)."
+  - "Do NOT invent dose tiers. dose_levels_* = NR unless the source gives a per-category table."

@@ -1,0 +1,65 @@
+{
+  "case_id": "bench-heme-leuk",
+  "status": "draft",
+  "reference_pmid": "37036307",
+  "reference_doi": "10.1080/16078454.2023.2198098",
+  "reference_citation": "Du Y, Li C, Yan J. The efficacy and safety of venetoclax and azacytidine combination treatment in patients with acute myeloid leukemia and myelodysplastic syndrome: systematic review and meta-analysis. Hematology. 2023;28(1):2198098.",
+  "search_cutoff": "2022-06-30",
+  "stat_family": "proportion",
+  "expected_included_pmids": [],
+  "expected_included_trial_ids": [],
+  "outcomes": [
+    {
+      "field": "cr_cri_rate",
+      "label": "CR/CRi rate — overall (AML+MDS)",
+      "family": "proportion",
+      "group": "ALL",
+      "estimate": 57.9,
+      "ci_lb": 49.5,
+      "ci_ub": 65.9,
+      "i2": 83.0,
+      "k": 19,
+      "note": "Published: pooled overall CR/CRi 57.9% (49.5-65.9%), I2=83%, k=19. Source: Du 2023 abstract. DRAFT — human verification required."
+    },
+    {
+      "field": "cr_cri_rate",
+      "label": "CR/CRi rate — ND-AML",
+      "family": "proportion",
+      "group": "ND-AML",
+      "estimate": 67.5,
+      "ci_lb": 61.1,
+      "ci_ub": 73.3,
+      "i2": 54.0,
+      "note": "Published: ND-AML subgroup CR/CRi 67.5% (61.1-73.3%), I2=54%. Source: Du 2023 abstract. DRAFT — human verification required."
+    },
+    {
+      "field": "cr_cri_rate",
+      "label": "CR/CRi rate — R/R AML",
+      "family": "proportion",
+      "group": "RR-AML",
+      "estimate": 30.0,
+      "ci_lb": 20.0,
+      "ci_ub": 44.1,
+      "i2": 66.0,
+      "note": "Published: R/R AML subgroup CR/CRi 30% (20-44.1%), I2=66%. Source: Du 2023 abstract. DRAFT — human verification required."
+    },
+    {
+      "field": "cr_cri_rate",
+      "label": "CR/CRi rate — MDS",
+      "family": "proportion",
+      "group": "MDS",
+      "estimate": 67.6,
+      "ci_lb": 52.6,
+      "ci_ub": 79.8,
+      "i2": 65.0,
+      "note": "Published: MDS subgroup CR/CRi 67.6% (52.6-79.8%), I2=65%. Source: Du 2023 abstract. DRAFT — human verification required."
+    }
+  ],
+  "caveats": [
+    "DRAFT answer key: values from Du 2023 (PMID 37036307) abstract. Human verification required before sealing.",
+    "Published paper pooled k=19 studies; engine benchmark run with PubMed search cutoff 2022-06-30.",
+    "The overall pooled estimate (ALL group, k=19) is a secondary reference; primary comparison targets are the three subgroups (ND-AML, RR-AML, MDS).",
+    "I2 values for R/R AML and MDS are approximate from abstract text; exact values may differ in published supplementary.",
+    "Published ORR not reported in abstract; neutropenia rate reported separately (grade 3-4: 53.7%, 95% CI 61.1-73.3%) but CI range appears anomalous in abstract — likely a typographic error in the published source."
+  ]
+}

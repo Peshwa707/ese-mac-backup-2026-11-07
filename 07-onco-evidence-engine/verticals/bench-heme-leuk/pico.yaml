@@ -1,0 +1,88 @@
+# Benchmark vertical — blind reproduction of Du 2023 (PMID 37036307).
+# DOI: 10.1080/16078454.2023.2198098
+# Venetoclax + azacitidine in AML and MDS — pooled single-arm CR/CRi proportion.
+# Search date-bounded to <= 2022-06-30 to match the reference protocol cut-off.
+
+review:
+  title: >
+    The efficacy and safety of venetoclax and azacytidine combination treatment
+    in patients with acute myeloid leukemia and myelodysplastic syndrome:
+    systematic review and meta-analysis (Du 2023 blind benchmark)
+  short_id: bench-heme-leuk
+  registration: "Benchmark protocol bench-heme-leuk (blind reproduction)"
+  output_base: "~/Documents/Systematic Reviews/Bench-Heme-Leuk"
+
+pico:
+  population: >
+    Adult patients with acute myeloid leukemia (AML) — either newly diagnosed (ND)
+    or relapsed/refractory (R/R) — and patients with myelodysplastic syndrome (MDS).
+    No age restriction.
+  intervention: >
+    Venetoclax (ABT-199) combined with azacitidine (AZA/5-azacytidine).
+    Single-arm studies and RCT intervention arms reporting efficacy data.
+  comparator: >
+    Single-arm pooling of proportions by disease line/status
+    (ND-AML vs R/R AML vs MDS). No direct comparator arm required.
+  outcomes:
+    primary:
+      - complete remission / complete remission with incomplete blood count recovery (CR/CRi) rate
+    secondary:
+      - neutropenia grade 3-4 adverse event rate
+
+# Synthesis axis: studies are stratified by disease line/status.
+# subgroup_map normalizes free-text disease labels extracted by the AI agent
+# to three canonical arms. Without this map, free-text labels become singletons
+# and nothing pools (LESSON from bench-mm).
+synthesis:
+  subgroup_field: disease_line
+  subgroup_map:
+    ND-AML:
+      - nd-aml
+      - nd aml
+      - newly diagnosed aml
+      - newly diagnosed
+      - untreated aml
+      - treatment-naive aml
+      - treatment naive aml
+      - newly diagnosed acute myeloid leukemia
+      - newly-diagnosed
+    RR-AML:
+      - rr-aml
+      - rr aml
+      - r/r aml
+      - relapsed
+      - refractory
+      - relapsed/refractory aml
+      - relapsed refractory aml
+      - relapsed or refractory aml
+      - relapsed/refractory
+    MDS:
+      - mds
+      - myelodysplastic syndrome
+      - myelodysplastic syndromes
+  arms: [ND-AML, RR-AML, MDS]
+  indirect_comparison: false
+
+eligibility:
+  inclusion:
+    - "Clinical trial or observational study reporting CR/CRi rate with venetoclax + azacitidine."
+    - "Population: AML (newly diagnosed or relapsed/refractory) OR MDS."
+    - "Single-arm design OR RCT intervention arm (efficacy of Ven+AZA)."
+    - "Reports total N and number/proportion achieving CR/CRi."
+    - "English language; peer-reviewed publication."
+  exclusion:
+    - "Venetoclax in combination with agents other than azacitidine (e.g. decitabine, LDAC, other) — unless azacitidine arm extractable separately."
+    - "Preclinical / in-vitro / animal study."
+    - "Abstract-only, letter, editorial, or conference abstract without full data."
+    - "Pediatric population (age <18 y) exclusively."
+    - "Duplicate population: retain most complete / longest follow-up report."
+    - "No usable CR/CRi numerator and denominator."
+  exclusion_buckets:
+    - {label: "non-azacitidine backbone", keywords: ["decitabine only", "ldac only", "low-dose cytarabine only", "not azacitidine"]}
+    - {label: "pediatric only", keywords: ["pediatric", "paediatric", "children", "child"]}
+
+disclaimer: >
+  BLIND benchmark run (AI Reviewer 1 only). Search date-bounded to 2022-06-30 to match
+  the Du 2023 reference protocol cut-off. Every PMID live-verified; values
+  abstract/full-text-anchored or marked NR. No fabrication permitted. Requires human
+  Reviewer 2 verification; results are for engine validation only.

@@ -1,0 +1,54 @@
+# Data dictionary for extraction (Step 6). core/sr reads this to build the
+# extraction prompt and the output tables.
+#
+# HONESTY NOTE: Milestone 1 extracts at the ABSTRACT level (what PubMed returns).
+# Many efficacy/safety numbers live only in full-text tables and will correctly
+# come back "NR" here — that is not a gap to hide but a known limitation; full-
+# text extraction is a Milestone 2 / human step. Every value is either copied
+# from the abstract, marked "NR", or marked "ESTIMATED" with method noted.
+
+# Fields the screening stage already captures (echoed into the table for context).
+identity:
+  - first_author
+  - year
+  - study_name        # e.g. CARTITUDE-4
+  - study_design      # RCT / single-arm / cohort / registry
+  - phase
+  - modality          # CAR-T | BsAb
+  - product           # cilta-cel, ide-cel, teclistamab, ...
+  - nct               # registration number, verified live
+
+# Core extraction fields. `level: abstract` = usually present in an abstract;
+# `level: fulltext` = usually only in full text (expect NR at Milestone 1).
+fields:
+  population:
+    - {name: total_n, level: abstract}
+    - {name: comparator_label, level: abstract}   # control arm (for network meta-analysis)
+    - {name: median_prior_lines, level: abstract}
+    - {name: pct_1_to_3_prior_lines, level: fulltext}
+    - {name: pct_high_risk_cytogenetics, level: fulltext}
+    - {name: pct_triple_class_refractory, level: abstract}
+    - {name: pct_extramedullary_disease, level: fulltext}
+  efficacy:
+    - {name: orr, level: abstract, pool: proportion, label: "Overall response rate (ORR)"}
+    - {name: cr_or_better_rate, level: abstract, pool: proportion, label: ">=Complete response"}
+    - {name: mrd_negativity_rate, level: fulltext, pool: proportion, label: "MRD negativity"}
+    - {name: median_pfs, level: abstract}
+    - {name: pfs_hr_vs_comparator, level: fulltext, pool: log_effect, label: "Progression-free survival (HR)"}
+    - {name: median_os, level: abstract}
+    - {name: median_dor, level: fulltext}
+  safety:
+    - {name: crs_any_grade, level: abstract, pool: proportion, label: "CRS (any grade)"}
+    - {name: crs_grade_3plus, level: abstract, pool: proportion, label: "CRS (grade >=3)"}
+    - {name: icans_any_grade, level: abstract, pool: proportion, label: "ICANS / neurotoxicity"}
+    - {name: infections_grade_3plus, level: fulltext, pool: proportion, label: "Infections (grade >=3)"}
+    - {name: neutropenia_grade_3plus, level: fulltext, pool: proportion, label: "Neutropenia (grade >=3)"}
+    - {name: treatment_related_mortality, level: fulltext, pool: proportion, label: "Treatment-related mortality"}
+
+# Rules the extraction prompt enforces.
+rules:
+  - "Copy values verbatim from the abstract text only. Do not use outside knowledge."
+  - "If a field is not stated in the abstract, set value to 'NR'."
+  - "If a value is inferred/derived rather than stated, prefix with 'ESTIMATED:' and note the method."
+  - "For each non-NR numeric value, include the exact verbatim quote from the abstract that supports it."
+  - "For studies with multiple data cuts, note which cut the abstract reports."

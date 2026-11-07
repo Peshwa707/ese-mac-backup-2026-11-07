@@ -1,0 +1,67 @@
+# Benchmark vertical (PROGNOSTIC, OBSERVATIONAL — log-effect) — blood-based PD-L1
+# in NSCLC patients on immune checkpoint inhibitor (ICI) therapy, pooled as HRs.
+# Target study: Cui Q et al., World J Surg Oncol 2023;21(1):318.
+# PMID 37821941; DOI 10.1186/s12957-023-03215-2; PROSPERO CRD42023402077.
+# Multi-marker prognostic MA: markers = sPD-L1 (soluble), exoPD-L1 (exosomal),
+# CTC PD-L1 (circulating-tumor-cell). Outcomes = OS and PFS hazard ratios.
+# Analysis = generic inverse-variance pooling of log effect sizes (parse_hr_ci),
+# stratified by marker_type. NOT proportions, NOT NMA. RoB = Newcastle-Ottawa.
+
+review:
+  title: >
+    Prognostic significance of blood-based PD-L1 analysis in NSCLC patients
+    undergoing immune checkpoint inhibitor therapy: a systematic review and
+    meta-analysis of hazard ratios
+  short_id: bench-ici-pdl1-37821941
+  registration: "PROSPERO: CRD42023402077"
+  output_base: "~/Documents/Systematic Reviews/ICI-PDL1-NSCLC"
+
+# PICO (prognostic exposure framing; 'intervention' = the prognostic exposure/marker).
+pico:
+  population: >
+    NSCLC patients undergoing immune checkpoint inhibitor (ICI) therapy, as
+    monotherapy or in combination (any line).
+  intervention: >
+    Blood-based PD-L1 marker (high vs low): soluble sPD-L1, exosomal exoPD-L1,
+    or circulating-tumor-cell (CTC) PD-L1, measured pre- or post-treatment.
+  comparator: >
+    Low (or reference) level of the blood-based PD-L1 marker.
+  outcomes:
+    primary:
+      - overall survival (OS) hazard ratio (HR, 95% CI)
+      - progression-free survival (PFS) hazard ratio (HR, 95% CI)
+
+# Synthesis axis: stratify by marker_type (sPD-L1 / exoPD-L1 / CTC PD-L1).
+# Labels pass through unchanged (identity; no subgroup_map remap).
+# Observational/prognostic evidence — no indirect-RCT caveat.
+synthesis:
+  subgroup_field: marker_type
+  # Canonicalize free-text marker labels into the 3 published buckets. Order matters:
+  # exoPD-L1/EV checked before sPD-L1 so "EV-PD-L1" doesn't fall into soluble.
+  subgroup_map:
+    exoPD-L1: ["exosomal", "exopd", "ev pd-l1", "ev-pd-l1", "extracellular vesicle", "exosome"]
+    CTC PD-L1: ["ctc", "circulating tumor cell", "circulating tumour cell", "tac pd-l1"]
+    sPD-L1: ["soluble", "spd-l1", "spd l1", "s pd-l1"]
+  arms: []
+  indirect_comparison: false
+
+eligibility:
+  inclusion:
+    - "Observational design: prospective or retrospective cohort of NSCLC patients on ICI therapy (mono or combination)."
+    - "Correlates a blood-based PD-L1 marker (sPD-L1, exoPD-L1, or CTC PD-L1) with OS and/or PFS."
+    - "Reports a hazard ratio (HR) with 95% CI (directly, or derivable from Kaplan-Meier; multivariate/adjusted preferred)."
+    - "Adults; English language; full text available."
+  exclusion:
+    - "Review, meta-analysis, editorial, case report, letter, or conference abstract."
+    - "Animal / laboratory / in-vitro study."
+    - "Non-English; full text not downloadable."
+    - "No usable hazard ratio + 95% CI and insufficient data to compute one."
+    - "PD-L1 measured only on tissue/tumor (not a blood-based marker)."
+
+disclaimer: >
+  BLIND prognostic-observational benchmark (AI Reviewer 1 only). Pooling = generic
+  inverse-variance of log hazard ratios, stratified by marker_type. RoB by
+  Newcastle-Ottawa. PubMed executed live, recall-oriented, no outcome filter;
+  search frozen at the published cutoff 2023-02-23. Every PMID live-verified;
+  values abstract/full-text-anchored or marked NR. Human Reviewer 2 verification
+  required before any output is final.

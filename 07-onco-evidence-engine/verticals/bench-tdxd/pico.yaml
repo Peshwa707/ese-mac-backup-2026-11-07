@@ -1,0 +1,67 @@
+# Benchmark vertical — faithful to the reference protocol (Soares et al., ESMO Open
+# 2023; PMID 37481956; DOI 10.1016/j.esmoop.2023.101613; PROSPERO CRD42022370504).
+# Run BLIND (engine has no knowledge of the reference paper's results).
+# Search date-bounded to the reference cut-off: 2023-05-25 (inception to 25 May 2023).
+# This is a SINGLE-ARM POOLED-PROPORTION meta-analysis (no subgroup synthesis axis).
+
+review:
+  title: >
+    Incidence of interstitial lung disease and cardiotoxicity with trastuzumab
+    deruxtecan (T-DXd) in breast cancer patients: a systematic review and
+    single-arm meta-analysis of pooled proportions
+  short_id: bench-tdxd
+  registration: "PROSPERO: CRD42022370504 [benchmark protocol supplied]"
+  output_base: "~/Documents/Systematic Reviews/TDxd-Benchmark"
+
+pico:
+  population: >
+    Patients with metastatic breast cancer (mBC) — HER2-positive or HER2-low — who
+    received at least one dose of trastuzumab deruxtecan (T-DXd) in the metastatic
+    setting, regardless of treatment line, without restriction on age, histology, or
+    site of metastasis.
+  intervention: >
+    Trastuzumab deruxtecan (T-DXd; DS-8201; DS-8201a) single agent at 5.4 mg/kg or
+    6.4 mg/kg in the metastatic setting.
+  comparator: >
+    None — single-arm pooled-proportion synthesis (incidence of safety events across
+    studies); no shared comparator arm and no between-class comparison.
+  outcomes:
+    primary:
+      - incidence of interstitial lung disease / pneumonitis (ILD)
+    secondary:
+      - decreased left ventricular ejection fraction (LVEF)
+      - QT interval (QTi) prolongation
+
+# Synthesis axis: single-arm pooled proportions; no subgroup axis (the reference's
+# dose / study-type / HER2 subgroups are reported descriptively, not as the synthesis
+# arms). subgroup_field empty -> no subgrouping; arms empty; not an indirect comparison.
+synthesis:
+  subgroup_field: ""
+  subgroup_map: {}
+  arms: []
+  indirect_comparison: false
+
+eligibility:
+  inclusion:
+    - "Randomized controlled trials (RCTs) and non-randomized studies of interventions (NRSI) in any phase (I/II/III), plus real-world observational cohort studies."
+    - "Patients with metastatic breast cancer (HER2-positive or HER2-low) who received >=1 dose of T-DXd."
+    - "T-DXd single agent at 5.4 mg/kg or 6.4 mg/kg in the metastatic setting, any line of therapy."
+    - "Reports at least one outcome of interest (ILD/pneumonitis, decreased LVEF, or QTi prolongation) with usable incidence (numerator/denominator or proportion)."
+    - "Published in English; published manuscripts and unpublished studies (abstracts/conference presentations) with usable safety data are eligible."
+  exclusion:
+    - "Reviews, case reports, case-control studies, and nonhuman studies."
+    - "HER2-negative tumors or early (non-metastatic) breast cancer."
+    - "T-DXd used in combination, neoadjuvant, or adjuvant therapy."
+    - "Non-English."
+    - "No usable incidence data for any outcome of interest."
+  # Domain-specific PRISMA exclusion-reason buckets (generic study-type buckets are built in).
+  exclusion_buckets:
+    - {label: "not metastatic / early BC", keywords: ["early breast", "neoadjuvant", "adjuvant", "non-metastatic", "her2-negative"]}
+    - {label: "combination therapy", keywords: ["combination", "plus", "combined with", "in combination"]}
+    - {label: "not T-DXd / wrong drug", keywords: ["t-dm1", "trastuzumab emtansine", "sacituzumab", "not t-dxd"]}
+
+disclaimer: >
+  BLIND benchmark run (AI Reviewer 1 only). Search date-bounded to 2023-05-25 to match
+  the reference protocol's cut-off (inception to 25 May 2023). Every PMID live-verified;
+  values abstract/full-text-anchored or marked NR. Requires human Reviewer 2 verification;
+  results are for engine validation against PMID 37481956.

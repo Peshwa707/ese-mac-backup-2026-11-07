@@ -1,0 +1,53 @@
+# Risk-of-bias tool definitions. core/sr/rob.py selects the tool per study by
+# study_design, then an agent judges each domain from the study text with a
+# rationale + supporting quote. Judgments are drafts requiring human confirmation.
+
+# study_design (from screening) -> tool key
+tool_by_design:
+  RCT: rob2
+  randomized: rob2
+  cohort: robins_i
+  registry: robins_i
+  comparative: robins_i
+  "non-randomized": robins_i
+  single-arm: nos
+  other: nos          # default for unclear designs (most conservative, single-arm-style)
+  review: nos
+
+judgments:
+  rob2: [Low, "Some concerns", High]
+  robins_i: [Low, Moderate, Serious, Critical, "No information"]
+  nos: [Low, "Some concerns", High]
+
+# Overall-judgment substrings (case-insensitive) that count as HIGH risk of bias
+# for the GRADE risk-of-bias downgrade. Tool-dependent polarity lives here, not in
+# core: RoB2/ROBINS-I say "serious/high/critical"; a star-scale tool would instead
+# flag "low quality" (see the onco-diet NOS rob_config).
+high_rob_overall: [serious, high, critical]
+
+tools:
+  rob2:
+    name: "Cochrane RoB 2.0 (randomized trials)"
+    domains:
+      - {key: D1, label: "Bias arising from the randomization process"}
+      - {key: D2, label: "Bias due to deviations from intended interventions"}
+      - {key: D3, label: "Bias due to missing outcome data"}
+      - {key: D4, label: "Bias in measurement of the outcome"}
+      - {key: D5, label: "Bias in selection of the reported result"}
+  robins_i:
+    name: "ROBINS-I (non-randomized studies of interventions)"
+    domains:
+      - {key: D1, label: "Bias due to confounding"}
+      - {key: D2, label: "Bias in selection of participants into the study"}
+      - {key: D3, label: "Bias in classification of interventions"}
+      - {key: D4, label: "Bias due to deviations from intended interventions"}
+      - {key: D5, label: "Bias due to missing data"}
+      - {key: D6, label: "Bias in measurement of outcomes"}
+      - {key: D7, label: "Bias in selection of the reported result"}
+  nos:
+    name: "Newcastle-Ottawa / JBI-adapted (single-arm & non-comparative)"
+    domains:
+      - {key: S1, label: "Selection / representativeness of the cohort"}
+      - {key: S2, label: "Ascertainment of the intervention"}
+      - {key: S3, label: "Outcome assessment (objective / blinded)"}
+      - {key: S4, label: "Adequacy and completeness of follow-up"}

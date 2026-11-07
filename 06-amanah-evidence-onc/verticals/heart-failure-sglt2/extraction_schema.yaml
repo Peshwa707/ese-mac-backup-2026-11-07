@@ -1,0 +1,22 @@
+# Data dictionary for the HFrEF / SGLT2i validation vertical.
+fields:
+  population:
+    - {name: total_n, level: abstract}
+    - {name: median_lvef, level: abstract}
+    - {name: pct_diabetes, level: abstract}
+    - {name: median_age, level: fulltext}
+  efficacy:
+    - {name: cv_death_or_hhf_hr, level: abstract, pool: log_effect, label: "CV death or HF hospitalization (HR)"}     # primary composite HR
+    - {name: all_cause_mortality_hr, level: abstract, pool: log_effect, label: "All-cause mortality (HR)"}
+    - {name: cv_death_hr, level: fulltext, pool: log_effect, label: "Cardiovascular death (HR)"}
+    - {name: hhf_hr, level: fulltext, pool: log_effect, label: "Hospitalization for heart failure (HR)"}
+    - {name: kccq_change, level: fulltext}
+  safety:
+    - {name: volume_depletion_pct, level: fulltext, pool: proportion, label: "Volume depletion"}
+    - {name: dka_pct, level: fulltext, pool: proportion, label: "Diabetic ketoacidosis"}
+    - {name: genital_infection_pct, level: fulltext, pool: proportion, label: "Genital infection"}
+
+rules:
+  - "Copy values verbatim from the source text only. Do not use outside knowledge."
+  - "If a field is not stated, set value to 'NR'. Derived values: prefix 'ESTIMATED:'."
+  - "For each non-NR numeric value, include the exact verbatim supporting quote."

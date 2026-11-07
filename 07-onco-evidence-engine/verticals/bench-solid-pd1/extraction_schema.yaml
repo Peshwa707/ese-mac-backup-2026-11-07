@@ -1,0 +1,32 @@
+# Data dictionary (therapeutic RCT — atezolizumab vs docetaxel in NSCLC).
+# Field names align with the engine's generic inverse-variance pooling:
+# os_hr / pfs_hr are the adjusted log-effect fields (parsed by parse_hr_ci).
+# Single comparison: subgroup_field = "" so group = ALL for pooling.
+# Rules: verbatim extraction from source, NR if absent, no fabrication.
+
+fields:
+  population:
+    - {name: study_design, level: abstract}      # Phase II RCT | Phase III RCT | double-blind RCT
+    - {name: total_n, level: abstract}            # total randomized patients
+    - {name: n_atezolizumab, level: abstract}     # n in atezolizumab arm
+    - {name: n_docetaxel, level: abstract}        # n in docetaxel control arm
+    - {name: line_of_therapy, level: abstract}    # 1L | 2L | 2L+ | any
+    - {name: pd_l1_status, level: abstract}       # any | positive | negative | NR
+    - {name: histology, level: abstract}          # non-squamous | squamous | mixed | NR
+    - {name: country, level: abstract}
+    - {name: median_followup, level: abstract}    # median follow-up in months; NR if not stated
+    - {name: comparator, level: abstract}         # docetaxel (confirm)
+  efficacy:
+    # Adjusted HR (atezolizumab vs docetaxel) + 95% CI. Verbatim from source,
+    # e.g. "HR 0.73 (95% CI 0.62-0.87)". NR if the study does not report it.
+    - {name: os_hr, level: abstract, pool: log_effect, label: "Overall survival (HR)"}
+    - {name: pfs_hr, level: abstract, pool: log_effect, label: "PFS (HR)"}
+
+rules:
+  - "Copy values verbatim from the source text only. Do not use outside knowledge."
+  - "If a field is not stated, set value to 'NR'. Derived/computed values: prefix 'ESTIMATED:'."
+  - "For each non-NR numeric value, include the exact verbatim supporting quote."
+  - "os_hr = the ADJUSTED overall survival hazard ratio (atezolizumab vs docetaxel) WITH its 95% CI."
+  - "pfs_hr = the ADJUSTED progression-free survival hazard ratio WITH its 95% CI."
+  - "Do NOT invent or extrapolate hazard ratios. If a HR is not reported, set value to 'NR'."
+  - "Record comparator arm in `comparator`; if docetaxel is confirmed write 'docetaxel'."

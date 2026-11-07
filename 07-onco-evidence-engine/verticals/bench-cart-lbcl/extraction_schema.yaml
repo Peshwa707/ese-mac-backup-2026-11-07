@@ -1,0 +1,32 @@
+# Data dictionary for bench-cart-lbcl (CD19 CAR-T in r/r LBCL).
+# Mirrors Ying 2022 (PMID 35548364) primary and secondary outcomes.
+# All pool: proportion fields will be meta-analysed as single-arm proportions.
+
+fields:
+  population:
+    - {name: total_n, level: abstract}
+    - {name: median_prior_lines, level: abstract}
+    - {name: pct_refractory, level: abstract}
+    - {name: car_product, level: abstract}         # e.g. axi-cel, tisa-cel, liso-cel, investigational
+    - {name: costimulatory_domain, level: abstract} # CD28 or 4-1BB
+  efficacy:
+    - {name: orr, level: abstract, pool: proportion, label: "Overall response rate (ORR)"}
+    - {name: complete_response_rate, level: abstract, pool: proportion, label: "Complete response rate (CR)"}
+    - {name: partial_response_rate, level: abstract, pool: proportion, label: "Partial response rate (PR)"}
+    - {name: os_12mo_rate, level: abstract, pool: proportion, label: "12-month OS rate"}
+    - {name: cr_3mo_rate, level: abstract, pool: proportion, label: "3-month CR rate"}
+  safety:
+    - {name: crs_any_grade, level: abstract, pool: proportion, label: "CRS (any grade)"}
+    - {name: crs_grade_3plus, level: abstract, pool: proportion, label: "CRS (grade >=3)"}
+    - {name: icans_any_grade, level: abstract, pool: proportion, label: "ICANS/neurotoxicity (any grade)"}
+    - {name: icans_grade_3plus, level: abstract, pool: proportion, label: "ICANS/neurotoxicity (grade >=3)"}
+
+rules:
+  - "Copy values verbatim from the source text only. Do not use outside knowledge."
+  - "If a field is not stated in the abstract or full text, set value to 'NR'. Never fabricate."
+  - "For each non-NR numeric value, include the exact verbatim supporting quote from the source."
+  - "ORR includes CR + PR (partial response); record the best reported response."
+  - "If a study reports both 'best ORR' and a post-infusion ORR, prefer best ORR."
+  - "Record the 95% CI when reported; if not reported, set CI to NR."
+  - "For complete_response_rate, prefer 'best complete response (BCR)' or 'complete response rate (CRR)' over 3-month CR unless 3-month is the only available."
+  - "Derived values: prefix with 'ESTIMATED:'; avoid estimation unless essential."

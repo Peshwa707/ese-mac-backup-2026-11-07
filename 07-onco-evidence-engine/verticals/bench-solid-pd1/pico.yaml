@@ -1,0 +1,63 @@
+# Benchmark vertical (RCT, log-effect) — atezolizumab vs docetaxel in NSCLC.
+# Target study: Li X et al., Chin Clin Oncol 2025;14(5):51.
+# PMID 41208418; DOI 10.21037/cco-25-45; search cutoff 2024-12-31.
+# 10 double-blind RCTs, N=6463; outcomes = OS HR and PFS HR.
+# Analysis = generic inverse-variance pooling of log hazard ratios (parse_hr_ci).
+# Single comparison (ICI vs docetaxel) — subgroup_field: "" → group = ALL.
+# NOT network meta-analysis. NOT individual patient data.
+
+review:
+  title: >
+    Efficacy and safety of atezolizumab compared to docetaxel in non-small
+    cell lung cancer patients regardless of PD-L1 status: a systematic review
+    and meta-analysis
+  short_id: bench-solid-pd1-41208418
+  registration: "PROSPERO: [not reported]"
+  output_base: "~/Documents/Systematic Reviews/SolidTumor-PD1-Bench"
+
+# PICO (RCT framing)
+pico:
+  population: >
+    Adults with previously treated or treatment-naive non-small cell lung
+    cancer (NSCLC), any histology, any PD-L1 expression status.
+  intervention: >
+    Atezolizumab (PD-L1 immune checkpoint inhibitor), any dose/schedule,
+    monotherapy or within a combination in the experimental arm.
+  comparator: >
+    Docetaxel chemotherapy (standard-of-care control arm).
+  outcomes:
+    primary:
+      - overall survival (OS) hazard ratio (HR, 95% CI, vs docetaxel)
+      - progression-free survival (PFS) hazard ratio (HR, 95% CI, vs docetaxel)
+    secondary:
+      - objective response rate (ORR)
+      - grade 3-5 adverse events
+
+# Single comparison — no subgrouping axis (ICI vs docetaxel overall).
+synthesis:
+  subgroup_field: ""
+  arms: []
+  indirect_comparison: false
+
+eligibility:
+  inclusion:
+    - "Randomized controlled trial (RCT), any phase, comparing atezolizumab vs docetaxel in NSCLC."
+    - "Double-blind design preferred; includes open-label RCTs if eligible."
+    - "Reports OS and/or PFS hazard ratio (HR) with 95% CI (directly or derivable)."
+    - "Adults with NSCLC, any PD-L1 expression, any histology."
+    - "English language; full text available."
+  exclusion:
+    - "Non-RCT design (observational, single-arm, case series)."
+    - "Non-NSCLC tumor types (SCLC, mesothelioma, etc.)."
+    - "Network meta-analysis or individual patient data meta-analysis."
+    - "Duplicate population (retain the most complete/longest follow-up report)."
+    - "No usable hazard ratio + 95% CI and insufficient data to compute one."
+    - "Review, editorial, letter, or conference abstract without full-text data."
+
+disclaimer: >
+  BLIND therapeutic-RCT benchmark (AI Reviewer 1 only). Pooling = generic
+  inverse-variance of log hazard ratios (OS and PFS), single comparison
+  atezolizumab vs docetaxel. PubMed executed live, recall-oriented, no
+  outcome filter; search frozen at the published cutoff 2024-12-31. Every PMID
+  live-verified; values abstract/full-text-anchored or marked NR. Human
+  Reviewer 2 verification required before any output is final.

@@ -1,0 +1,60 @@
+# Search strategies — atezolizumab vs docetaxel in NSCLC (PMID 41208418).
+# Databases per protocol: PubMed, EMBASE, CNKI, Web of Science, Wanfang, Cochrane Library.
+# PubMed executed live (primary, recall-oriented, no outcome filter).
+# Other databases available via live or imported exports but held supplementary
+# for a CLEAN recall measurement on run #1.
+# Search CUTOFF: 2024-12-31 (published search cutoff for PMID 41208418).
+
+disclaimer: >
+  BLIND therapeutic-RCT benchmark. PubMed executed live (primary,
+  recall-oriented, no outcome filter). EMBASE / CNKI / Web of Science /
+  Wanfang / Cochrane Library available via live or institutional RIS/NBIB/CSV
+  exports dropped into _search_imports/<db>/ but held supplementary on run #1
+  for a clean PubMed recall measurement. Date: inception -> 2024-12-31.
+
+pubmed:
+  executed: true
+  # Cutoff: 2024-12-31 (published search cutoff for PMID 41208418).
+  query: >
+    ( "Carcinoma, Non-Small-Cell Lung"[Mesh]
+      OR NSCLC[tiab] OR "non-small cell lung cancer"[tiab]
+      OR "non-small-cell lung cancer"[tiab] OR "non-small cell lung"[tiab]
+      OR lung adenocarcinoma[tiab] OR "squamous cell lung"[tiab]
+      OR "lung squamous cell carcinoma"[tiab] )
+    AND
+    ( atezolizumab[tiab] OR MPDL3280A[tiab] OR Tecentriq[tiab]
+      OR "anti-PD-L1"[tiab] OR "anti PD-L1"[tiab]
+      OR "PD-L1 inhibitor"[tiab] OR "PD-L1 blockade"[tiab]
+      OR "immune checkpoint inhibitor"[tiab] OR "checkpoint inhibitor"[tiab]
+      OR "programmed death-ligand 1"[tiab] OR "B7-H1"[tiab] )
+    AND
+    ( docetaxel[tiab] OR Taxotere[tiab] )
+    AND
+    ( "Randomized Controlled Trial"[pt] OR "randomized"[tiab] OR "randomised"[tiab]
+      OR "phase 3"[tiab] OR "phase III"[tiab] OR "phase 2"[tiab] OR "phase II"[tiab]
+      OR "clinical trial"[tiab] )
+  retmax: 2000
+
+other_databases:
+  - name: embase
+    executed: false
+    note: >
+      Available as a live source or via institutional RIS/NBIB/CSV export dropped
+      into _search_imports/embase/ (provenance-logged); held supplementary on run #1.
+  - name: cochrane
+    executed: false
+    note: >
+      Cochrane Library (CENTRAL) available via export into _search_imports/cochrane/;
+      held supplementary on run #1 for clean PubMed recall.
+
+# Landmark atezolizumab vs docetaxel NSCLC trials to confirm search captures:
+named_trials:
+  - OAK
+  - POPLAR
+  - IMpower110
+  - IMpower111
+  - IMpower150
+  - BIRCH
+  - FIR
+
+reference_mining_seeds: []

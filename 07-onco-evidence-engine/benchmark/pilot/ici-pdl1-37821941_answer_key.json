@@ -1,0 +1,26 @@
+{
+  "case_id": "bench-ici-pdl1-37821941",
+  "source": {
+    "pmid": "37821941",
+    "doi": "10.1186/s12957-023-03215-2",
+    "citation": "Cui Q, et al. World J Surg Oncol. 2023;21(1):318.",
+    "prospero": "CRD42023402077",
+    "search_cutoff": "2023-02-23"
+  },
+  "status": "draft",
+  "expected_included_pmids": [],
+  "outcomes": [
+    {"field": "hr_os", "label": "sPD-L1 (high vs low) vs OS (HR)", "family": "log_effect", "group": "sPD-L1", "estimate": 2.11, "ci_lb": 1.59, "ci_ub": 2.80, "i2": 0.0},
+    {"field": "hr_pfs", "label": "sPD-L1 (high vs low) vs PFS (HR)", "family": "log_effect", "group": "sPD-L1", "estimate": 2.14, "ci_lb": 1.59, "ci_ub": 2.88, "i2": 0.0},
+    {"field": "hr_pfs", "label": "exoPD-L1 (high vs low) vs PFS (HR) — pre-treatment", "family": "log_effect", "group": "exoPD-L1", "estimate": 4.44, "ci_lb": 2.87, "ci_ub": 6.89, "i2": 0.0},
+    {"field": "hr_os", "label": "CTC PD-L1 (high vs low) vs OS (HR)", "family": "log_effect", "group": "CTC PD-L1", "estimate": 0.75, "ci_lb": 0.49, "ci_ub": 1.13, "i2": 33.5},
+    {"field": "hr_pfs", "label": "CTC PD-L1 (high vs low) vs PFS (HR)", "family": "log_effect", "group": "CTC PD-L1", "estimate": 0.79, "ci_lb": 0.59, "ci_ub": 1.06, "i2": 20.6}
+  ],
+  "caveats": [
+    "LLM-drafted from PMID 37821941 (Cui Q et al., World J Surg Oncol 2023;21(1):318; DOI 10.1186/s12957-023-03215-2); HUMAN-VERIFY before sealing.",
+    "Group labels (sPD-L1 / exoPD-L1 / CTC PD-L1) MUST match the engine's subgroup_map output for `marker_type`; the engine uses identity mapping (no subgroup_map remap), so extracted marker_type values must read exactly 'sPD-L1', 'exoPD-L1', 'CTC PD-L1'.",
+    "exoPD-L1 PFS uses the PRE-TREATMENT pooled estimate 4.44 [2.87-6.89] (I2=0%). The OVERALL pooled exoPD-L1 PFS was highly heterogeneous and non-significant: HR 0.97 [0.28-3.37], I2=94% — it mixes opposing pre-treatment (high baseline = worse) and dynamic post-treatment (upregulation = better) directions, so the pre-treatment cell is the interpretable benchmark target.",
+    "i2 null where not reported; single-study estimates omitted from primary rows.",
+    "14 studies / 928 patients (2018-2022); expected_included_pmids not enumerable from the available PMC text — left empty."
+  ]
+}

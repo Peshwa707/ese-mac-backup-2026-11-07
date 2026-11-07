@@ -1,0 +1,61 @@
+# Benchmark vertical — BLIND reproduction of Ying et al. 2022 (PMID 35548364).
+# CD19 CAR-T cell therapy in relapsed/refractory large B-cell lymphoma (DLBCL/LBCL).
+# Search date-bounded to benchmark cut-off (2021-07-31).
+
+review:
+  title: >
+    Effectiveness and safety of anti-CD19 chimeric antigen receptor T-cell therapy
+    in patients with relapsed/refractory large B-cell lymphoma: a systematic review
+    and meta-analysis of single-arm response proportions
+  short_id: bench-cart-lbcl
+  registration: "PROSPERO: [benchmark protocol supplied]"
+  output_base: "~/Documents/Systematic Reviews/bench-cart-lbcl"
+
+pico:
+  population: >
+    Adults with relapsed/refractory (r/r) diffuse large B-cell lymphoma (DLBCL)
+    or large B-cell lymphoma (LBCL). Prior lines of therapy typically ≥2.
+  intervention: >
+    Anti-CD19 chimeric antigen receptor T-cell (CAR-T) therapy, including but not
+    limited to axicabtagene ciloleucel (axi-cel), tisagenlecleucel (tisa-cel),
+    lisocabtagene maraleucel (liso-cel), and investigational CD19-directed CAR-T
+    constructs (4-1BB or CD28 costimulatory domains). Single-agent administration.
+  comparator: >
+    Single-arm; no shared comparator. Naive pooling of single-arm proportions.
+  outcomes:
+    primary:
+      - overall response rate (ORR / best overall response)
+    secondary:
+      - complete response rate (CR / best complete response)
+
+# No subgroup stratification — pool all CD19 CAR-T products together as "ALL".
+# subgroup_field is empty string; no subgroup_map needed.
+synthesis:
+  subgroup_field: ""
+  subgroup_map: {}
+  arms: []
+  indirect_comparison: false
+
+eligibility:
+  inclusion:
+    - "Prospective or retrospective study (clinical trial or observational) reporting anti-CD19 CAR-T cell therapy in r/r DLBCL/LBCL."
+    - "Reports at least one of: ORR, CR rate, partial response rate, disease control rate."
+    - "n ≥ 10 patients treated with CAR-T."
+    - "Full-length article or conference abstract with primary efficacy data."
+    - "English language."
+  exclusion:
+    - "Non-CD19-directed CAR-T (e.g., CD22-only, BCMA, CD20, other single-target non-CD19)."
+    - "Combination CAR-T with another CAR construct unless CD19-directed mono-arm extractable."
+    - "Review, editorial, protocol, commentary with no primary efficacy data."
+    - "Paediatric-only cohort (age <18 years exclusively)."
+    - "Non-DLBCL/LBCL primary disease (e.g., CLL, ALL, follicular lymphoma, Hodgkin) unless DLBCL/LBCL subgroup extractable."
+    - "Preclinical or animal studies."
+  exclusion_buckets:
+    - {label: "non-CD19 CAR-T", keywords: ["bcma", "cd22 only", "cd20", "gprc5d", "fcrh5", "not cd19"]}
+    - {label: "non-DLBCL/LBCL", keywords: ["cll", "all", "hodgkin", "follicular only", "mantle cell"]}
+
+disclaimer: >
+  BLIND benchmark run (AI Reviewer 1 only). Search date-bounded to 2021-07-31 to
+  match the reference protocol cut-off (Ying et al. Front Pharmacol 2022, PMID 35548364).
+  Every PMID live-verified; values abstract/full-text-anchored or marked NR.
+  Requires human Reviewer 2 verification; results are for engine validation only.

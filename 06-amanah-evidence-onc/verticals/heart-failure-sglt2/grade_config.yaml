@@ -1,0 +1,35 @@
+# GRADE config for the HFrEF / SGLT2i vertical. Evidence is randomized placebo-
+# controlled trials -> start High, and the comparison is DIRECT (head-to-head vs
+# placebo), so there is no automatic indirectness downgrade. Outcomes map to this
+# vertical's own extraction fields (regression: previously HF fell back to the
+# myeloma shared config and every GRADE row read "No data").
+
+levels: [High, Moderate, Low, "Very Low"]
+
+start:
+  with_rct: High
+  observational_only: Low
+
+rules:
+  indirectness:
+    always_downgrade: 0          # direct SGLT2i-vs-placebo RCTs; no indirectness
+    reason: ""
+  risk_of_bias:
+    serious_fraction_threshold: 0.5
+    reason: "Most contributing trials at high risk of bias."
+  imprecision:
+    min_studies: 3
+    reason: "Few contributing trials / sparse data."
+
+deferred_domains:
+  - "Inconsistency (I^2) — pending quantitative synthesis (Phase B)."
+  - "Publication bias (funnel/Egger) — pending Phase B (needs >=10 studies/outcome)."
+
+outcomes:
+  - {name: "CV death or HF hospitalization (HR)", field: cv_death_or_hhf_hr}
+  - {name: "All-cause mortality (HR)", field: all_cause_mortality_hr}
+  - {name: "Cardiovascular death (HR)", field: cv_death_hr}
+  - {name: "Hospitalization for heart failure (HR)", field: hhf_hr}
+  - {name: "Volume depletion", field: volume_depletion_pct}
+  - {name: "Diabetic ketoacidosis", field: dka_pct}
+  - {name: "Genital infection", field: genital_infection_pct}

@@ -1,0 +1,38 @@
+disclaimer: >
+  Benchmark search, date-bounded to <= 2022-06-30 to match the Du 2023 reference
+  protocol cut-off. Broad recall-oriented strategy (no outcome filter). PubMed-only
+  for clean recall measurement on run #1.
+
+pubmed:
+  executed: true
+  # Recall-oriented query: disease terms OR drug terms — no outcome filter.
+  # Date-bounded to 2022-06-30 per Du 2023 methods (inception to June 2022).
+  query: >
+    ( "acute myeloid leukemia"[tiab] OR "acute myelogenous leukemia"[tiab]
+      OR "AML"[tiab] OR "myelodysplastic syndrome"[tiab] OR "MDS"[tiab]
+      OR "myelodysplastic syndromes"[tiab] OR "Leukemia, Myeloid, Acute"[Mesh]
+      OR "Myelodysplastic Syndromes"[Mesh] )
+    AND
+    ( "venetoclax"[tiab] OR "ABT-199"[tiab] OR "Venclexta"[tiab]
+      OR "venetoclax"[Supplementary Concept] )
+    AND
+    ( "azacitidine"[tiab] OR "azacytidine"[tiab] OR "5-azacytidine"[tiab]
+      OR "AZA"[tiab] OR "Vidaza"[tiab]
+      OR "azacitidine"[Supplementary Concept] OR "azacitidine"[MeSH Terms] )
+    AND ("1990/01/01"[dp] : "2022/06/30"[dp])
+  retmax: 2000
+  comment: >
+    Date ceiling 2022-06-30 = Du 2023 search cut-off (methods: inception to June 2022).
+    No outcome keyword filter so recall is maximized. Expected yield: ~50-200 records;
+    after screening expect ~19 included (matching reference k=19).
+
+europepmc:
+  executed: false
+  note: "Held supplementary on run #1 for clean PubMed-only recall measurement."
+
+named_trials:
+  - VIALE-A
+  - VIALE-C
+  - M14-358
+
+reference_mining_seeds: []

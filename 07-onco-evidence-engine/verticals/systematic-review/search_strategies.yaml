@@ -1,0 +1,95 @@
+# Search strategy for the systematic-review vertical (Step 3).
+# core/sr reads this. PubMed is executed live in Milestone 1; the other
+# database strings are produced for the reproducible record and flagged
+# "not executed" until run through an institutional gateway.
+
+disclaimer: >
+  Search executed without outcome, date, or language filters per protocol, to
+  avoid missing eligible studies. Conference-abstract and Embase/Web-of-Science
+  coverage is partial in the automated pass and is flagged for manual search.
+
+# --- PubMed / MEDLINE (executed live) -------------------------------------
+# Verbatim from the protocol. core/sr passes this string straight to the NCBI
+# E-utilities connector. No outcome filter, no date restriction.
+pubmed:
+  executed: true
+  query: >
+    ("multiple myeloma"[MeSH] OR "multiple myeloma"[tiab] OR "myeloma"[tiab] OR
+    "plasma cell neoplasm"[tiab]) AND (("chimeric antigen receptor"[tiab] OR
+    "CAR-T"[tiab] OR "CAR T"[tiab] OR "ciltacabtagene"[tiab] OR "cilta-cel"[tiab]
+    OR "idecabtagene"[tiab] OR "ide-cel"[tiab] OR "CARTITUDE"[tiab] OR
+    "KarMMa"[tiab]) OR ("bispecific antibod*"[tiab] OR "bispecific"[tiab] OR
+    "T-cell engager"[tiab] OR "BiTE"[tiab] OR "teclistamab"[tiab] OR
+    "elranatamab"[tiab] OR "linvoseltamab"[tiab] OR "talquetamab"[tiab] OR
+    "MajesTEC"[tiab] OR "MagnetisMM"[tiab]))
+  # retmax for the live run; raise for a fuller corpus once the slice is validated.
+  retmax: 120
+
+# --- ClinicalTrials.gov (executed live; free; trial registrations) ---------
+clinicaltrials:
+  executed: true
+  query: "multiple myeloma BCMA CAR-T bispecific"
+
+# --- Europe PMC (executed live; free; broader than PubMed) -----------------
+europepmc:
+  executed: true
+  query: >
+    (multiple myeloma OR myeloma OR "plasma cell neoplasm") AND
+    ("chimeric antigen receptor" OR "CAR-T" OR "CAR T" OR ciltacabtagene OR
+    "cilta-cel" OR idecabtagene OR "ide-cel" OR "bispecific antibody" OR
+    bispecific OR "T-cell engager" OR teclistamab OR elranatamab OR
+    linvoseltamab OR talquetamab)
+  page_size: 200
+
+# --- Databases requiring institutional access (strings only, NOT executed) -
+# Produced so the search record is reproducible and honest. Marked not-executed.
+other_databases:
+  - name: Embase
+    executed: false
+    note: "Run via institutional Embase (Emtree). Not executed in automated pass."
+    query: >
+      ('multiple myeloma'/exp OR 'multiple myeloma':ab,ti OR myeloma:ab,ti OR
+      'plasma cell neoplasm':ab,ti) AND (('chimeric antigen receptor':ab,ti OR
+      'car-t':ab,ti OR 'car t':ab,ti OR ciltacabtagene:ab,ti OR 'cilta-cel':ab,ti
+      OR idecabtagene:ab,ti OR 'ide-cel':ab,ti) OR ('bispecific antibody':ab,ti OR
+      'bispecific':ab,ti OR 't-cell engager':ab,ti OR teclistamab:ab,ti OR
+      elranatamab:ab,ti OR linvoseltamab:ab,ti OR talquetamab:ab,ti))
+  - name: CENTRAL
+    executed: false
+    note: "Cochrane CENTRAL (MeSH + free text). Not executed in automated pass."
+    query: >
+      ([mh "Multiple Myeloma"] OR myeloma:ti,ab) AND ("chimeric antigen
+      receptor":ti,ab OR "CAR-T":ti,ab OR ciltacabtagene:ti,ab OR
+      idecabtagene:ti,ab OR "bispecific antibod*":ti,ab OR teclistamab:ti,ab OR
+      elranatamab:ti,ab OR linvoseltamab:ti,ab)
+  - name: Web of Science
+    executed: false
+    note: "Topic search (TS=). Not executed in automated pass."
+    query: >
+      TS=((myeloma) AND ("chimeric antigen receptor" OR "CAR-T" OR ciltacabtagene
+      OR idecabtagene OR "bispecific antibod*" OR teclistamab OR elranatamab OR
+      linvoseltamab OR talquetamab))
+
+# --- Supplementary searches ------------------------------------------------
+# Named pivotal trials to confirm are captured (cross-checked against PubMed
+# results; misses are flagged for manual retrieval).
+named_trials:
+  - CARTITUDE-4
+  - KarMMa-3
+  - MajesTEC-3
+  - MajesTEC-9
+  - MagnetisMM-3
+  - LINKER-MM1
+
+# Prior meta-analyses to reference-mine (Step 3b). PMIDs are verified live; their
+# reference lists are checked for studies the database search missed.
+reference_mining_seeds:
+  - pmid: "39551604"
+    label: "Liang et al. 2024"
+  - pmid: "40924178"
+    label: "Techaapornkun et al. 2025"
+
+conference_abstract_targets:
+  executed: false
+  note: "ASH/ASCO/EHA/ESMO 2020-2026 are not in the PubMed API; flagged for manual search."
+  venues: [ASH, ASCO, EHA, ESMO]

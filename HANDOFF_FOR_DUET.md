@@ -16,3 +16,13 @@ Already on GitHub (private), not copied here:
 Open items for the owner:
 - The public repo `Peshwa707/evidence-synthesis-engine` has not been pushed to. The proposal is to push only `feat/ese-recover` (one commit).
 - Screen-prove numbers its work packages differently from the request; see `MAC_INVENTORY.md`.
+
+## Added later (same repo)
+
+| Folder | Source | Notes |
+|---|---|---|
+| `05-ese-screen-prove/` | `Projects/evidence-synthesis-engine-screen-prove`, branch `backup/mac-2026-11-07` | Offline screen-and-prove tool; 348 tests pass |
+| `06-amanah-evidence-onc/` | `Projects/amanah-evidence-onc`, branch `backup/mac-2026-11-07` | Older oncology-named predecessor; 685 tests pass |
+| `07-onco-evidence-engine/` | `Projects/onco-evidence-engine`, branch `backup/mac-2026-11-07` | Older predecessor; 649 tests pass |
+
+Withheld from the public copy: the unpublished MM-BCMA project material (protocol document, `reviews/mm-bcma-early-relapse/`, `verticals/mm-bcma-*`). It stays in the private repos.

@@ -1,0 +1,38 @@
+disclaimer: >
+  Benchmark search, date-bounded to <= 2023-05-25 to match the reference protocol's
+  cut-off (Soares et al., ESMO Open 2023; PMID 37481956; searches carried out from
+  inception to 25 May 2023). Reference databases: PubMed, Cochrane CENTRAL, Scopus,
+  plus ESMO / ESMO Breast / ASCO / SABCS conference websites. This benchmark runs
+  PubMed-only for clean, deterministic recall; the reference's own PubMed-equivalent
+  term set was ('breast cancer') AND ('trastuzumab deruxtecan' OR 'trastuzumab-deruxtecan'
+  OR 'DS-8201a'). We broaden recall here (synonyms + safety/outcome terms, no outcome
+  filter) so the screen can reproduce the included-study list.
+
+pubmed:
+  executed: true
+  query: >
+    (("breast cancer"[tiab] OR "breast carcinoma"[tiab] OR "breast neoplasm"[tiab] OR
+    "breast neoplasms"[tiab] OR mBC[tiab] OR "breast tumour"[tiab] OR "breast tumor"[tiab])
+    AND ("trastuzumab deruxtecan"[tiab] OR "trastuzumab-deruxtecan"[tiab] OR "T-DXd"[tiab]
+    OR "DS-8201"[tiab] OR "DS-8201a"[tiab] OR "DS8201"[tiab] OR Enhertu[tiab])
+    AND ("interstitial lung disease"[tiab] OR pneumonitis[tiab] OR ILD[tiab] OR
+    cardiotoxicity[tiab] OR cardiotoxic[tiab] OR "left ventricular ejection fraction"[tiab]
+    OR LVEF[tiab] OR "QT"[tiab] OR "QTc"[tiab] OR "QT prolongation"[tiab] OR
+    safety[tiab] OR toxicity[tiab] OR "adverse event"[tiab] OR "adverse events"[tiab]))
+    AND ("1990/01/01"[dp] : "2023/05/25"[dp])
+  retmax: 2000
+
+# Reference databases that the source protocol searched but which this benchmark does
+# NOT execute (PubMed-only run for deterministic recall). Recorded for provenance.
+other_databases:
+  - {name: "Cochrane CENTRAL", executed: false, note: "Searched in the reference protocol; not executed in this PubMed-only benchmark."}
+  - {name: "Scopus", executed: false, note: "Searched in the reference protocol; not executed in this PubMed-only benchmark."}
+  - {name: "Conference websites (ESMO / ESMO Breast / ASCO / SABCS)", executed: false, note: "Hand-searched in the reference protocol; not machine-searchable here."}
+
+named_trials:
+  - DESTINY-Breast01
+  - DESTINY-Breast02
+  - DESTINY-Breast03
+  - DESTINY-Breast04
+
+reference_mining_seeds: []

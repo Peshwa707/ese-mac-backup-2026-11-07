@@ -1,0 +1,35 @@
+disclaimer: >
+  Benchmark search, date-bounded to <= 2023-07-31 to match the reference protocol's
+  cut-off (Kim et al., Blood 2024; PMID 38696731 searched MEDLINE/Embase until July 2023).
+  Broad recall-oriented strategy (no outcome filter).
+
+pubmed:
+  executed: true
+  query: >
+    ("large B-cell lymphoma"[tiab] OR "diffuse large B-cell lymphoma"[tiab] OR
+    "DLBCL"[tiab] OR "LBCL"[tiab] OR "large-cell lymphoma"[tiab]) AND
+    ("bispecific"[tiab] OR "bispecific antibod*"[tiab] OR "CD20xCD3"[tiab] OR
+    "CD20 x CD3"[tiab] OR "CD20/CD3"[tiab] OR "T-cell engager"[tiab] OR
+    "bispecific T-cell"[tiab] OR glofitamab[tiab] OR epcoritamab[tiab] OR
+    mosunetuzumab[tiab] OR odronextamab[tiab] OR mosun[tiab] OR
+    "RG6026"[tiab] OR "GEN3013"[tiab] OR "REGN1979"[tiab])
+    AND ("1990/01/01"[dp] : "2023/07/31"[dp])
+  retmax: 2000
+  comment: >
+    Cutoff 2023-07-31 matches the reference protocol (Kim et al. Blood 2024 searched
+    MEDLINE and Embase until July 2023). Broad tiab query to maximise recall.
+
+europepmc:
+  executed: false
+  note: "Not executed for this benchmark; PubMed-only for clean recall measurement."
+
+named_trials:
+  - LOTIS-5
+  - GO29781
+  - NP30179
+  - EPCORE NHL-1
+  - EPCORE NHL-2
+  - MajesTEC-2
+  - ODRONEXT
+
+reference_mining_seeds: []

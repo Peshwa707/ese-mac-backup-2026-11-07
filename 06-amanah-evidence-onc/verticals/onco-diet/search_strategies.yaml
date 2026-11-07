@@ -1,0 +1,39 @@
+disclaimer: >
+  Blind nutritional-epi benchmark. PubMed executed live (primary, recall-oriented, no
+  outcome filter). Europe PMC / Scopus / Web of Science available via live or imported
+  exports but held as supplementary for a CLEAN recall measurement on run #1 (matches the
+  mm-bcma benchmark precedent). Date: inception -> execution; frozen at the cutoff below.
+
+pubmed:
+  executed: true
+  query: >
+    ( "Pancreatic Neoplasms"[Mesh]
+      OR pancreatic cancer[tiab] OR pancreatic neoplasm*[tiab] OR pancreatic carcinoma[tiab]
+      OR pancreatic adenocarcinoma[tiab] OR pancreatic ductal adenocarcinoma[tiab]
+      OR PDAC[tiab] OR pancreatic tumo*[tiab] )
+    AND
+    ( "Dietary Fats"[Mesh] OR "Cholesterol, Dietary"[Mesh] OR "Fatty Acids"[Mesh]
+      OR dietary fat*[tiab] OR total fat[tiab] OR fat intake[tiab]
+      OR dietary cholesterol[tiab] OR cholesterol intake[tiab]
+      OR fatty acid*[tiab] OR saturated fat*[tiab] OR lipid intake[tiab] )
+    AND
+    ( "Cohort Studies"[Mesh] OR "Case-Control Studies"[Mesh] OR "Epidemiologic Studies"[Mesh]
+      OR cohort[tiab] OR case-control[tiab] OR "case control"[tiab] OR prospective[tiab]
+      OR nested case-control[tiab] OR case-cohort[tiab] OR observational[tiab]
+      OR follow-up stud*[tiab] )
+  retmax: 3000
+
+europepmc:
+  executed: false
+  note: >
+    Available as a live source; held supplementary on run #1 for clean PubMed recall.
+    Scopus / Web of Science ingested from institutional RIS/NBIB/CSV exports dropped into
+    _search_imports/<db>/ (provenance-logged). Google Scholar = supplementary hand-search.
+
+# Named exposures/landmark cohorts to confirm the search captures (hand-check, not asserted):
+named_trials:
+  - NIH-AARP
+  - Netherlands Cohort Study
+  - PanScan
+
+reference_mining_seeds: []

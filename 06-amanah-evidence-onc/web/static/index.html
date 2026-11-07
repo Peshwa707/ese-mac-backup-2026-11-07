@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Onco-Evidence — grounded clinical decision support</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true">◆</span>
+        <div class="brand-text">
+          <h1>Onco&#8209;Evidence</h1>
+          <p class="brand-sub">Grounded clinical decision support</p>
+        </div>
+      </div>
+      <nav class="header-nav" aria-label="App sections">
+        <button id="casesNav" class="ghost-btn nav-btn" type="button" aria-current="page">Cases</button>
+        <button id="calibrationNav" class="ghost-btn nav-btn" type="button">Calibration</button>
+        <button id="metaAnalysisNav" class="ghost-btn nav-btn" type="button">Meta-analysis</button>
+        <button id="settingsToggle" class="ghost-btn" type="button" aria-expanded="false">
+          Settings
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <div class="disclaimer-banner" role="note">
+    <span class="dot" aria-hidden="true"></span>
+    Decision <strong>support</strong> for clinicians — never autonomous or patient-facing advice.
+    Every claim is traced to a verified, cited source. Verify against primary sources before use.
+  </div>
+
+  <main class="wrap">
+
+    <!-- Settings drawer -->
+    <section id="settingsPanel" class="settings-panel" hidden>
+      <label class="field-label" for="apiToken">API token <span class="muted">(only if the server requires one)</span></label>
+      <input id="apiToken" class="text-input" type="password" placeholder="Bearer token — stored locally in your browser" autocomplete="off" />
+      <p class="hint">Stored in this browser's localStorage only. Leave blank in dev mode.</p>
+    </section>
+
+    <!-- INPUT -->
+    <section id="inputView" class="card input-card">
+      <div class="card-eyebrow">Step 01 — Case</div>
+      <h2 class="card-title">Enter a de&#8209;identified case</h2>
+      <p class="card-lede">
+        Paste a de&#8209;identified oncology case. A fail&#8209;closed scrubber runs server&#8209;side
+        before any external lookup — but please remove identifiers yourself first.
+      </p>
+
+      <textarea id="caseText" class="case-input" rows="9"
+        placeholder="e.g. A patient with metastatic non-small cell lung adenocarcinoma, stage IV. EGFR exon 19 deletion; PD-L1 TPS 10%. ECOG 1. No prior systemic therapy. What are the evidence-based first-line options?"></textarea>
+
+      <div class="phi-note" role="note">
+        <span aria-hidden="true">🔒</span>
+        Paste <strong>de&#8209;identified</strong> text only. No names, MRNs, dates of birth, contact details.
+      </div>
+
+      <div class="controls">
+        <label class="switch">
+          <input type="checkbox" id="manuscriptToggle" />
+          <span class="switch-track" aria-hidden="true"><span class="switch-thumb"></span></span>
+          <span class="switch-label">Also draft a CARE case&#8209;report manuscript</span>
+        </label>
+        <button id="analyzeBtn" class="primary-btn" type="button">
+          <span class="btn-label">Analyze case</span>
+          <span class="btn-arrow" aria-hidden="true">→</span>
+        </button>
+      </div>
+      <p id="inputError" class="inline-error" hidden></p>
+    </section>
+
+    <!-- WORKING -->
+    <section id="workingView" class="card working-card" hidden>
+      <div class="pulse" aria-hidden="true"><span></span><span></span><span></span></div>
+      <h2 class="card-title">Searching the evidence…</h2>
+      <p id="workingStatus" class="card-lede">Querying PubMed, ClinicalTrials.gov, openFDA &amp; NCI&nbsp;PDQ, then verifying every citation.</p>
+    </section>
+
+    <!-- REJECTED (PHI) -->
+    <section id="rejectedView" class="card rejected-card" hidden>
+      <div class="card-eyebrow danger">Blocked</div>
+      <h2 class="card-title">Case rejected — possible PHI</h2>
+      <p class="card-lede" id="rejectedMsg">The de&#8209;identification guard detected residual identifiers and stopped before any external call. Remove the identifiers and try again.</p>
+      <button class="secondary-btn restart-btn" type="button">Edit the case</button>
+    </section>
+
+    <!-- ERROR -->
+    <section id="errorView" class="card rejected-card" hidden>
+      <div class="card-eyebrow danger">Error</div>
+      <h2 class="card-title">Something went wrong</h2>
+      <p class="card-lede" id="errorMsg"></p>
+      <button class="secondary-btn restart-btn" type="button">Try again</button>
+    </section>
+
+    <!-- RESULTS -->
+    <section id="resultsView" hidden>
+      <div class="results-head">
+        <div>
+          <div class="card-eyebrow">Step 02 — Evidence</div>
+          <h2 class="results-title" id="resultsTitle">Decision support</h2>
+        </div>
+        <button class="secondary-btn restart-btn" type="button">New case</button>
+      </div>
+
+      <div id="sourcesRow" class="sources-row" aria-label="Source availability"></div>
+
+      <div id="emptyState" class="empty-state" hidden>
+        <p>No verified evidence was found for this case. Nothing is shown rather than anything unverified.</p>
+      </div>
+
+      <ol id="findingsList" class="findings"></ol>
+
+      <section id="manuscriptSection" class="card manuscript-card" hidden>
+        <div class="card-eyebrow">CARE manuscript</div>
+        <div id="manuscriptBody" class="manuscript-body"></div>
+      </section>
+
+      <div class="results-footer">
+        <div class="export-group" role="group" aria-label="Export">
+          <span class="export-label">Export</span>
+          <a id="exportHtml" class="chip-btn" target="_blank" rel="noopener">HTML</a>
+          <a id="exportJson" class="chip-btn" target="_blank" rel="noopener">JSON</a>
+          <a id="exportPdf" class="chip-btn" target="_blank" rel="noopener">PDF</a>
+          <a id="exportProv" class="chip-btn ghost" target="_blank" rel="noopener">Provenance</a>
+        </div>
+        <p class="disclaimer-foot" id="disclaimerFoot"></p>
+      </div>
+    </section>
+
+    <!-- CALIBRATION -->
+    <section id="calibrationView" hidden>
+      <div class="calibration-head">
+        <div>
+          <div class="card-eyebrow">Screening calibration</div>
+          <h2 class="results-title">Threshold &amp; ROC</h2>
+        </div>
+      </div>
+
+      <section id="calibrationLoading" class="card working-card" hidden>
+        <div class="pulse" aria-hidden="true"><span></span><span></span><span></span></div>
+        <h2 class="card-title">Loading calibration…</h2>
+        <p class="card-lede">Reading labeled screening scores and operating points.</p>
+      </section>
+
+      <section id="calibrationError" class="card rejected-card" hidden>
+        <div class="card-eyebrow danger">Error</div>
+        <h2 class="card-title">Could not load calibration</h2>
+        <p class="card-lede" id="calibrationErrorMsg"></p>
+        <button id="calibrationRetry" class="secondary-btn" type="button">Try again</button>
+      </section>
+
+      <section id="calibrationEmpty" class="card empty-state" hidden>
+        <p>No labeled calibration data yet</p>
+      </section>
+
+      <div id="calibrationContent" hidden>
+        <div id="calibrationStats" class="cal-stats" aria-label="Calibration summary"></div>
+
+        <section class="card cal-chart-card">
+          <div class="card-eyebrow">Operating curve</div>
+          <h3 class="cal-chart-title">Sensitivity &amp; specificity vs threshold</h3>
+          <div id="thresholdChart" class="cal-chart-wrap"></div>
+        </section>
+
+        <section class="card cal-chart-card">
+          <div class="card-eyebrow">Discrimination</div>
+          <h3 class="cal-chart-title">ROC curve</h3>
+          <div id="rocChart" class="cal-chart-wrap"></div>
+        </section>
+
+        <div id="calibrationCaveats" class="cal-caveats" hidden></div>
+      </div>
+    </section>
+
+    <!-- META-ANALYSIS -->
+    <section id="metaAnalysisView" hidden>
+      <div class="meta-head">
+        <div>
+          <div class="card-eyebrow">Quantitative synthesis</div>
+          <h2 class="results-title">Meta-analysis</h2>
+        </div>
+      </div>
+
+      <section id="metaAnalysisLoading" class="card working-card" hidden>
+        <div class="pulse" aria-hidden="true"><span></span><span></span><span></span></div>
+        <h2 class="card-title">Loading meta-analysis…</h2>
+        <p class="card-lede">Reading pooled estimates, indirect comparisons, and forest plots.</p>
+      </section>
+
+      <section id="metaAnalysisError" class="card rejected-card" hidden>
+        <div class="card-eyebrow danger">Error</div>
+        <h2 class="card-title">Could not load meta-analysis</h2>
+        <p class="card-lede" id="metaAnalysisErrorMsg"></p>
+        <button id="metaAnalysisRetry" class="secondary-btn" type="button">Try again</button>
+      </section>
+
+      <section id="metaAnalysisEmpty" class="card empty-state" hidden>
+        <p id="metaAnalysisEmptyMsg">No completed meta-analysis yet</p>
+      </section>
+
+      <div id="metaAnalysisContent" hidden>
+        <div id="metaAnalysisSource" class="meta-source" hidden></div>
+        <div id="metaProportions" class="meta-section" hidden></div>
+        <div id="metaHazardRatios" class="meta-section" hidden></div>
+        <div id="metaIndirect" class="meta-section" hidden></div>
+        <div id="metaNma" class="meta-section" hidden></div>
+        <div id="metaFigures" class="meta-section" hidden></div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-foot wrap">
+    <span>Onco&#8209;Evidence Engine · grounded · citation&#8209;verified · no fabrication</span>
+  </footer>
+
+  <script src="/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Case Report — {{ report.id }}</title>
+  <style>
+    body { font-family: Georgia, "Times New Roman", serif; margin: 3rem; color: #1a1a1a; line-height: 1.6; max-width: 48rem; }
+    h1 { font-size: 1.7rem; }
+    h2 { font-size: 1.2rem; margin-top: 1.8rem; border-bottom: 1px solid #ccc; padding-bottom: 0.2rem; }
+    .disclaimer { background: #fff4e5; border-left: 4px solid #c97a00; padding: 0.75rem 1rem; font-size: 0.9rem; margin: 1rem 0; }
+    .refs li { margin-bottom: 0.3rem; }
+    .empty { color: #777; font-style: italic; }
+  </style>
+</head>
+<body>
+  <h1>Case Report (CARE-guideline draft)</h1>
+  <div class="disclaimer">{{ report.disclaimer }}</div>
+
+  {% if report.manuscript %}
+    <h2>Introduction</h2>
+    <p>{{ report.manuscript.introduction }}</p>
+    <h2>Case Presentation</h2>
+    <p>{{ report.manuscript.case_presentation }}</p>
+    <h2>Discussion</h2>
+    <p>{{ report.manuscript.discussion }}</p>
+    <h2>Literature Review</h2>
+    <p>{{ report.manuscript.literature_review }}</p>
+  {% else %}
+    <p class="empty">No manuscript was generated for this report.</p>
+  {% endif %}
+
+  <h2>References</h2>
+  <ol class="refs">
+    {% for f in report.decision_support %}
+      {% for c in f.citations %}
+        <li>[{{ c.source }}:{{ c.id }}] {{ c.title }} — <a href="{{ c.url }}">{{ c.url }}</a></li>
+      {% endfor %}
+    {% endfor %}
+  </ol>
+
+  <p><small>Report {{ report.id }} · provenance {{ report.provenance_id }}</small></p>
+</body>
+</html>

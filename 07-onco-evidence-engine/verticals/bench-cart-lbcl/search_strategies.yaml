@@ -1,0 +1,29 @@
+disclaimer: >
+  Benchmark search, date-bounded to <= 2021-07-31 to match the reference protocol's
+  cut-off (Ying et al. Front Pharmacol 2022, PMID 35548364). Broad recall-oriented
+  strategy covering CD19 CAR-T and DLBCL/LBCL. No outcome filter applied.
+
+pubmed:
+  executed: true
+  # Cut-off: 2021-07-31 (Ying 2022 searched up to July 2021)
+  query: >
+    ("large B-cell lymphoma"[tiab] OR "large b cell lymphoma"[tiab] OR
+    "diffuse large B-cell"[tiab] OR "diffuse large B cell"[tiab] OR DLBCL[tiab] OR
+    LBCL[tiab] OR "B-cell lymphoma"[tiab] OR "aggressive lymphoma"[tiab]) AND
+    ("chimeric antigen receptor"[tiab] OR "CAR-T"[tiab] OR "CAR T"[tiab] OR
+    "CAR T-cell"[tiab] OR "CAR T cell"[tiab] OR axicabtagene[tiab] OR
+    tisagenlecleucel[tiab] OR lisocabtagene[tiab] OR "axi-cel"[tiab] OR
+    "tisa-cel"[tiab] OR "liso-cel"[tiab] OR "KTE-C19"[tiab] OR "CTL019"[tiab] OR
+    "JCAR014"[tiab] OR "JCAR017"[tiab] OR "bb2121"[tiab] OR "anti-CD19"[tiab] OR
+    "CD19 CAR"[tiab] OR "CD19-directed"[tiab]) AND
+    ("1990/01/01"[dp] : "2021/07/31"[dp])
+  retmax: 2000
+
+named_trials:
+  - ZUMA-1
+  - ZUMA-5
+  - JULIET
+  - TRANSCEND
+  - TRANSCEND-NHL-001
+
+reference_mining_seeds: []

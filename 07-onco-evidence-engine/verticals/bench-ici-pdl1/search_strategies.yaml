@@ -1,0 +1,57 @@
+# Search strategies — blood-based PD-L1 in NSCLC on ICI therapy (PMID 37821941).
+# Databases per protocol: PubMed, Embase, Cochrane Library. PubMed executed live
+# (primary, recall-oriented, no outcome filter). Embase/Cochrane available via live
+# or imported exports but held supplementary for a CLEAN recall measurement on run #1.
+# Search cutoff = 2023-02-23 (published cutoff; frozen at this date).
+
+disclaimer: >
+  BLIND prognostic-observational benchmark. PubMed executed live (primary,
+  recall-oriented, no outcome filter). Embase / Cochrane Library available via
+  live or imported RIS/NBIB/CSV exports dropped into _search_imports/<db>/ but
+  held supplementary on run #1 for a clean PubMed recall measurement.
+  Date: inception -> execution; frozen at the cutoff 2023-02-23.
+
+pubmed:
+  executed: true
+  # Cutoff: 2023-02-23 (published search cutoff for PMID 37821941).
+  query: >
+    ( "Carcinoma, Non-Small-Cell Lung"[Mesh]
+      OR NSCLC[tiab] OR non-small cell lung[tiab] OR non small cell lung[tiab]
+      OR non-small-cell lung[tiab] OR lung adenocarcinoma[tiab]
+      OR lung squamous cell carcinoma[tiab] )
+    AND
+    ( "Immune Checkpoint Inhibitors"[Mesh]
+      OR immune checkpoint inhibitor*[tiab] OR ICI[tiab] OR ICIs[tiab]
+      OR PD-1[tiab] OR PD1[tiab] OR PD-L1[tiab] OR PDL1[tiab]
+      OR programmed death[tiab] OR programmed cell death[tiab]
+      OR nivolumab[tiab] OR pembrolizumab[tiab] OR atezolizumab[tiab]
+      OR durvalumab[tiab] OR avelumab[tiab] OR cemiplimab[tiab]
+      OR camrelizumab[tiab] OR sintilimab[tiab] OR tislelizumab[tiab]
+      OR immunotherapy[tiab] )
+    AND
+    ( soluble PD-L1[tiab] OR sPD-L1[tiab] OR sPDL1[tiab]
+      OR exosomal PD-L1[tiab] OR exoPD-L1[tiab] OR exosome*[tiab]
+      OR circulating tumor cell PD-L1[tiab] OR CTC PD-L1[tiab]
+      OR circulating tumor cell*[tiab] OR circulating tumour cell*[tiab]
+      OR blood PD-L1[tiab] OR plasma PD-L1[tiab] OR serum PD-L1[tiab]
+      OR liquid biopsy[tiab] OR circulating PD-L1[tiab] )
+  retmax: 2000
+
+other_databases:
+  - name: embase
+    executed: false
+    note: >
+      Available as a live source or via institutional RIS/NBIB/CSV export dropped
+      into _search_imports/embase/ (provenance-logged); held supplementary on run #1.
+  - name: cochrane
+    executed: false
+    note: >
+      Cochrane Library (CENTRAL) available via export into _search_imports/cochrane/;
+      held supplementary on run #1 for clean PubMed recall.
+
+# Landmark blood-PD-L1 / ICI NSCLC reports to confirm capture (hand-check, not asserted):
+named_trials:
+  - CheckMate
+  - KEYNOTE
+
+reference_mining_seeds: []

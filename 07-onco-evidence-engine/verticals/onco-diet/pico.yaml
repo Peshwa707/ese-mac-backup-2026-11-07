@@ -1,0 +1,58 @@
+# Nutritional-epidemiology vertical (PECO, observational) — dietary fat/cholesterol
+# and pancreatic cancer risk. Distinct from the therapeutic-RCT oncology vertical.
+# Run BLIND. Analysis = generic inverse-variance pooling of log effect sizes (NOT
+# Freeman-Tukey proportions, NOT gemtc NMA). RoB = Newcastle-Ottawa (see rob_config).
+
+review:
+  title: >
+    Dietary total fat and dietary cholesterol intake and the risk of pancreatic
+    cancer in adults: a systematic review and dose-response meta-analysis of
+    observational studies
+  short_id: onco-diet-pc
+  registration: "PROSPERO: [DRAFT — not yet submitted]"
+  output_base: "~/Documents/Systematic Reviews/Diet-Pancreatic-Cancer"
+
+# PECO (Population / Exposure / Comparator / Outcome). 'intervention' = exposure.
+pico:
+  population: >
+    Adults (>=18 y), general or at-risk populations; pancreatic cancer as the outcome event.
+  intervention: >
+    Dietary EXPOSURE: (a) total fat intake (g/day) and (b) dietary cholesterol intake (mg/day).
+  comparator: >
+    Lowest intake category (reference).
+  outcomes:
+    primary:
+      - pancreatic cancer incidence (highest vs lowest intake; RR/OR/HR)
+    secondary:
+      - dose-response (per 20 g/day fat; per 100 mg/day cholesterol)
+
+# Four pre-specified comparison cells (exposure x design): cholesterol-cohort,
+# cholesterol-case-control, total fat-cohort, total fat-case-control.
+
+# Synthesis axis: stratify by study `design` (cohort vs case-control); labels pass
+# through unchanged (no remap). Observational evidence — no indirect-RCT caveat.
+synthesis:
+  subgroup_field: design
+  arms: []
+  indirect_comparison: false
+
+eligibility:
+  inclusion:
+    - "Observational design: prospective cohort, case-control, nested case-control, or case-cohort."
+    - "Examines dietary total fat AND/OR dietary cholesterol intake vs pancreatic cancer risk."
+    - "Reports OR/RR/HR with 95% CI, or sufficient data to compute them."
+    - "Adults >=18 y; English language."
+  exclusion:
+    - "Animal / laboratory / in-vitro study."
+    - "Review, editorial, case report, letter, or conference abstract."
+    - "Pregnant / lactating populations."
+    - "Overlapping population (retain the most complete / longest follow-up report)."
+    - "Gray literature (published studies only)."
+    - "No usable effect estimate and insufficient data to compute one."
+
+disclaimer: >
+  BLIND nutritional-epi benchmark (AI Reviewer 1 only). Observational evidence; RoB by
+  Newcastle-Ottawa. Pooling = generic inverse-variance of log effect sizes. Every PMID
+  live-verified; values abstract/full-text-anchored or marked NR. Dose-response runs only
+  if per-category data is extracted, else reported "no per-dose data" — no curve fabricated.
+  Human Reviewer 2 verification required before any output is final.

@@ -1,0 +1,402 @@
+[
+  {
+    "pmid": "42252797",
+    "decision": "exclude",
+    "reason": "Cost-effectiveness/economic modeling analysis, not a Tier 1-3 clinical study reporting primary efficacy/safety outcomes.",
+    "confidence": 0.85,
+    "modality": "CAR-T vs BsAb",
+    "study_design": "other"
+  },
+  {
+    "pmid": "42245625",
+    "decision": "exclude",
+    "reason": "Systematic review and meta-analysis (secondary literature) is explicitly excluded.",
+    "confidence": 0.97,
+    "modality": "BsAb",
+    "study_design": "review"
+  },
+  {
+    "pmid": "42244451",
+    "decision": "exclude",
+    "reason": "Narrative review of B-cell/plasma-cell targeting modalities, secondary literature.",
+    "confidence": 0.97,
+    "modality": "",
+    "study_design": "review"
+  },
+  {
+    "pmid": "42240912",
+    "decision": "exclude",
+    "reason": "Narrative review of CAR-NK therapy, not a BCMA CAR-T trial and is secondary literature.",
+    "confidence": 0.97,
+    "modality": "",
+    "study_design": "review"
+  },
+  {
+    "pmid": "42237881",
+    "decision": "exclude",
+    "reason": "Intervention is cesni-cel (ARI0002h), not the eligible cilta-cel or ide-cel products.",
+    "confidence": 0.85,
+    "modality": "CAR-T",
+    "study_design": "single-arm"
+  },
+  {
+    "pmid": "42236248",
+    "decision": "exclude",
+    "reason": "Narrative review on AL amyloidosis management, secondary literature outside PICO.",
+    "confidence": 0.96,
+    "modality": "",
+    "study_design": "review"
+  },
+  {
+    "pmid": "42236247",
+    "decision": "exclude",
+    "reason": "Narrative review of RRMM treatment sequencing, secondary literature.",
+    "confidence": 0.96,
+    "modality": "",
+    "study_design": "review"
+  },
+  {
+    "pmid": "42234959",
+    "decision": "exclude",
+    "reason": "Preclinical engineering study of a TACI\u00d7CD3 bispecific antibody.",
+    "confidence": 0.96,
+    "modality": "BsAb",
+    "study_design": "other"
+  },
+  {
+    "pmid": "42234936",
+    "decision": "exclude",
+    "reason": "Narrative review synthesizing BCMA-directed trials in early relapse, secondary literature.",
+    "confidence": 0.93,
+    "modality": "",
+    "study_design": "review"
+  },
+  {
+    "pmid": "42233419",
+    "decision": "exclude",
+    "reason": "Intervention is a GPRC5D-targeted CAR-T (arlo-cel), excluded as non-BCMA and population \u22653 prior lines.",
+    "confidence": 0.92,
+    "modality": "CAR-T",
+    "study_design": "single-arm"
+  },
+  {
+    "pmid": "42233022",
+    "decision": "exclude",
+    "reason": "Conceptual review of CAAR-T strategies, secondary literature without clinical data.",
+    "confidence": 0.96,
+    "modality": "",
+    "study_design": "review"
+  },
+  {
+    "pmid": "42232086",
+    "decision": "exclude",
+    "reason": "Preclinical target-discovery study in cell lines and xenograft models.",
+    "confidence": 0.97,
+    "modality": "CAR-T",
+    "study_design": "other"
+  },
+  {
+    "pmid": "42227265",
+    "decision": "uncertain",
+    "reason": "Real-world ide-cel CAR-T in RRMM is in scope, but no abstract is available to confirm a 1-3 prior-line population/subgroup or outcomes.",
+    "confidence": 0.5,
+    "modality": "CAR-T",
+    "study_design": "registry"
+  },
+  {
+    "pmid": "42227005",
+    "decision": "include",
+    "reason": "Real-world cilta-cel (BCMA CAR-T) with an extractable 1-3 prior-line subgroup (n=73) reporting safety outcomes; eligible single-modality for Tier 2.",
+    "confidence": 0.9,
+    "modality": "CAR-T",
+    "study_design": "registry"
+  },
+  {
+    "pmid": "42212933",
+    "decision": "include",
+    "reason": "RCT of teclistamab (BCMA BsAb) vs PVd/Kd SOC in RRMM with 1-3 prior lines reporting efficacy/safety, matching comparator and anchor criteria.",
+    "confidence": 0.97,
+    "modality": "BsAb",
+    "study_design": "RCT"
+  },
+  {
+    "pmid": "42209394",
+    "decision": "exclude",
+    "reason": "Narrative review (secondary literature), excluded per design criterion.",
+    "confidence": 0.97,
+    "modality": "",
+    "study_design": "review"
+  },
+  {
+    "pmid": "42206665",
+    "decision": "exclude",
+    "reason": "QSP modeling study of a trispecific CD38/BCMA T-cell engager, not a BCMA CAR-T or eligible bispecific.",
+    "confidence": 0.95,
+    "modality": "",
+    "study_design": "other"
+  },
+  {
+    "pmid": "42202046",
+    "decision": "exclude",
+    "reason": "Intervention is durcabtagene autoleucel, a BCMA CAR-T that is neither cilta-cel nor ide-cel, outside the specified intervention scope.",
+    "confidence": 0.9,
+    "modality": "CAR-T",
+    "study_design": "single-arm"
+  },
+  {
+    "pmid": "42192954",
+    "decision": "exclude",
+    "reason": "Mixed CD19-/BCMA-directed CAR-T across multiple hematologic malignancies without a specified 1-3 prior-line MM cohort or eligible products.",
+    "confidence": 0.85,
+    "modality": "CAR-T",
+    "study_design": "cohort"
+  },
+  {
+    "pmid": "42190708",
+    "decision": "exclude",
+    "reason": "Narrative review of immunotherapy in myeloma (secondary literature).",
+    "confidence": 0.96,
+    "modality": "",
+    "study_design": "review"
+  },
+  {
+    "pmid": "42187565",
+    "decision": "exclude",
+    "reason": "Real-world treatment-pattern study of high-risk myeloma not evaluating BCMA CAR-T or bispecific intervention.",
+    "confidence": 0.92,
+    "modality": "",
+    "study_design": "cohort"
+  },
+  {
+    "pmid": "42185842",
+    "decision": "exclude",
+    "reason": "Intervention is anti-BCMA CAR-T combined with auto-HSCT (not cilta-cel/ide-cel) in an EMD cohort, outside the specified intervention scope.",
+    "confidence": 0.85,
+    "modality": "CAR-T",
+    "study_design": "cohort"
+  },
+  {
+    "pmid": "42179323",
+    "decision": "exclude",
+    "reason": "Case series of n=4 in newly diagnosed myeloma, fails the n<10 and RRMM/1-3 prior-line criteria.",
+    "confidence": 0.96,
+    "modality": "CAR-T",
+    "study_design": "other"
+  },
+  {
+    "pmid": "42169674",
+    "decision": "include",
+    "reason": "Real-world comparative study of cilta-cel (CAR-T) versus BCMA-targeting bispecific antibodies in RRMM, directly matching the PICO comparison.",
+    "confidence": 0.9,
+    "modality": "CAR-T vs BsAb",
+    "study_design": "registry"
+  },
+  {
+    "pmid": "42166352",
+    "decision": "exclude",
+    "reason": "Intervention is a BCMA/GPRC5D bispecific CAR-T, not the specified cilta-cel or ide-cel products.",
+    "confidence": 0.85,
+    "modality": "CAR-T",
+    "study_design": "single-arm"
+  },
+  {
+    "pmid": "42163771",
+    "decision": "uncertain",
+    "reason": "No abstract available; cannot assess design, population prior lines, or outcomes for the imaging-based cilta-cel study.",
+    "confidence": 0.5,
+    "modality": "CAR-T",
+    "study_design": "unclear"
+  },
+  {
+    "pmid": "42163304",
+    "decision": "include",
+    "reason": "Real-world registry of cilta-cel BCMA CAR-T with an extractable 1-3 prior-line (Early) subgroup reporting PFS/safety.",
+    "confidence": 0.95,
+    "modality": "CAR-T",
+    "study_design": "registry"
+  },
+  {
+    "pmid": "42162873",
+    "decision": "exclude",
+    "reason": "Mixed CD19/BCMA CAR-T across hematologic malignancies with no extractable RRMM cilta-cel/ide-cel cohort for the PICO.",
+    "confidence": 0.8,
+    "modality": "CAR-T",
+    "study_design": "cohort"
+  },
+  {
+    "pmid": "42161729",
+    "decision": "exclude",
+    "reason": "Narrative review of neurologic events in CARTITUDE studies\u2014secondary literature.",
+    "confidence": 0.9,
+    "modality": "CAR-T",
+    "study_design": "review"
+  },
+  {
+    "pmid": "42161654",
+    "decision": "exclude",
+    "reason": "Expert consensus guideline\u2014secondary/narrative literature, not a primary study.",
+    "confidence": 0.92,
+    "modality": "",
+    "study_design": "review"
+  },
+  {
+    "pmid": "42159492",
+    "decision": "exclude",
+    "reason": "Economic MAIC analysis of bispecifics with no BCMA CAR-T intervention and no clinical efficacy/safety primary data.",
+    "confidence": 0.88,
+    "modality": "BsAb",
+    "study_design": "other"
+  },
+  {
+    "pmid": "42159085",
+    "decision": "exclude",
+    "reason": "Elranatamab MagnetisMM-3 heavily pretreated population entirely outside 1-3 prior lines with no extractable 1-3-line subgroup.",
+    "confidence": 0.7,
+    "modality": "BsAb",
+    "study_design": "RCT"
+  },
+  {
+    "pmid": "42157444",
+    "decision": "exclude",
+    "reason": "Talquetamab is a GPRC5D-directed bispecific, explicitly excluded from primary scope.",
+    "confidence": 0.95,
+    "modality": "BsAb",
+    "study_design": "registry"
+  },
+  {
+    "pmid": "42148087",
+    "decision": "exclude",
+    "reason": "Systematic review/meta-analysis of teclistamab infection\u2014secondary literature.",
+    "confidence": 0.93,
+    "modality": "BsAb",
+    "study_design": "review"
+  },
+  {
+    "pmid": "42144192",
+    "decision": "uncertain",
+    "reason": "Real-world ide-cel/cilta-cel cohort but prior-line distribution not stated; cannot confirm a 1-3-line population or extractable subgroup.",
+    "confidence": 0.55,
+    "modality": "CAR-T",
+    "study_design": "cohort"
+  },
+  {
+    "pmid": "42143506",
+    "decision": "exclude",
+    "reason": "Narrative review of CAR therapies across oncology/autoimmunity\u2014secondary literature.",
+    "confidence": 0.93,
+    "modality": "CAR-T",
+    "study_design": "review"
+  },
+  {
+    "pmid": "42141360",
+    "decision": "exclude",
+    "reason": "Narrative review of CAR-T toxicities, secondary literature excluded.",
+    "confidence": 0.97,
+    "modality": "CAR-T",
+    "study_design": "review"
+  },
+  {
+    "pmid": "42140377",
+    "decision": "exclude",
+    "reason": "Narrative review of MRD monitoring and therapies, secondary literature.",
+    "confidence": 0.97,
+    "modality": "",
+    "study_design": "review"
+  },
+  {
+    "pmid": "42137138",
+    "decision": "exclude",
+    "reason": "Systematic review/meta-analysis of CD38-directed CAR-T (not BCMA intervention of interest).",
+    "confidence": 0.96,
+    "modality": "CAR-T",
+    "study_design": "review"
+  },
+  {
+    "pmid": "42135141",
+    "decision": "exclude",
+    "reason": "Real-world SOC cohort with BCMA-therapy-naive patients; no BCMA CAR-T or bispecific intervention assessed.",
+    "confidence": 0.85,
+    "modality": "",
+    "study_design": "registry"
+  },
+  {
+    "pmid": "42134899",
+    "decision": "exclude",
+    "reason": "Preclinical in vitro/xenograft study of CD74 targeting with CAR-T.",
+    "confidence": 0.97,
+    "modality": "CAR-T",
+    "study_design": "other"
+  },
+  {
+    "pmid": "42130633",
+    "decision": "exclude",
+    "reason": "Case reports (n=2), below n<10 threshold.",
+    "confidence": 0.97,
+    "modality": "CAR-T",
+    "study_design": "other"
+  },
+  {
+    "pmid": "42129310",
+    "decision": "exclude",
+    "reason": "Expert consensus/review on bridging therapy, secondary literature.",
+    "confidence": 0.96,
+    "modality": "",
+    "study_design": "review"
+  },
+  {
+    "pmid": "42128857",
+    "decision": "exclude",
+    "reason": "ide-cel cohort with median 4 prior lines (range 3-6); population effectively outside 1-3 lines with no extractable subgroup.",
+    "confidence": 0.78,
+    "modality": "CAR-T",
+    "study_design": "cohort"
+  },
+  {
+    "pmid": "42115674",
+    "decision": "uncertain",
+    "reason": "CAR-T (ide-cel vs cilta-cel) cohort reporting PROs but prior-line eligibility (1-3) not stated, insufficient to confirm population.",
+    "confidence": 0.6,
+    "modality": "CAR-T",
+    "study_design": "cohort"
+  },
+  {
+    "pmid": "42115442",
+    "decision": "exclude",
+    "reason": "Single case report (n=1) in POEMS syndrome, not RRMM cohort.",
+    "confidence": 0.97,
+    "modality": "CAR-T",
+    "study_design": "other"
+  },
+  {
+    "pmid": "42112336",
+    "decision": "exclude",
+    "reason": "Meta-analysis/systematic review, secondary literature.",
+    "confidence": 0.97,
+    "modality": "CAR-T",
+    "study_design": "review"
+  },
+  {
+    "pmid": "42108083",
+    "decision": "exclude",
+    "reason": "GPRC5D-directed talquetamab retreatment, outside primary BCMA scope and no abstract/cohort data.",
+    "confidence": 0.9,
+    "modality": "BsAb",
+    "study_design": "other"
+  },
+  {
+    "pmid": "42106299",
+    "decision": "exclude",
+    "reason": "Narrative review of resistance biology, not an eligible primary study design (secondary literature).",
+    "confidence": 0.97,
+    "modality": "CAR-T",
+    "study_design": "review"
+  },
+  {
+    "pmid": "42099158",
+    "decision": "exclude",
+    "reason": "Narrative overview of elranatamab without original trial data; secondary literature, not a Tier 1-3 design.",
+    "confidence": 0.9,
+    "modality": "BsAb",
+    "study_design": "review"
+  }
+]

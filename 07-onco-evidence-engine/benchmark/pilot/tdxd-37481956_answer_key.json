@@ -1,0 +1,41 @@
+{
+  "case_id": "bench-tdxd-37481956",
+  "status": "draft",
+  "expected_included_pmids": [],
+  "outcomes": [
+    {
+      "field": "ild_incidence",
+      "label": "ILD incidence",
+      "family": "proportion",
+      "group": "ALL",
+      "estimate": 11.7,
+      "ci_lb": 9.1,
+      "ci_ub": 15.0,
+      "i2": 66
+    },
+    {
+      "field": "lvef_decrease",
+      "label": "Decreased LVEF",
+      "family": "proportion",
+      "group": "ALL",
+      "estimate": 1.95,
+      "ci_lb": 0.65,
+      "ci_ub": 3.73,
+      "i2": 59
+    },
+    {
+      "field": "qt_prolongation",
+      "label": "QT prolongation",
+      "family": "proportion",
+      "group": "ALL",
+      "estimate": 7.77,
+      "ci_lb": 2.74,
+      "ci_ub": 20.11,
+      "i2": 84
+    }
+  ],
+  "caveats": [
+    "Published pooled values from Soares et al., ESMO Open 2023 (PMID 37481956; DOI 10.1016/j.esmoop.2023.101613); k=15 studies, N=1970; single-arm random-effects (DerSimonian-Laird) pooled proportions in percent.",
+    "LLM-drafted; human-verify."
+  ]
+}

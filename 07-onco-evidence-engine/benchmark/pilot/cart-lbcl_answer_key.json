@@ -1,0 +1,105 @@
+{
+  "case_id": "bench-cart-lbcl",
+  "status": "draft",
+  "reference": {
+    "pmid": "35548364",
+    "doi": "10.3389/fphar.2022.834113",
+    "citation": "Ying Z, Song Y, Zhu J. Front Pharmacol. 2022 Apr 25;13:834113.",
+    "title": "Effectiveness and Safety of Anti-CD19 Chimeric Antigen Receptor-T Cell Immunotherapy in Patients With Relapsed/Refractory Large B-Cell Lymphoma: A Systematic Review and Meta-Analysis.",
+    "search_cutoff": "2021-07-31",
+    "k_studies": 27,
+    "n_patients": 1687,
+    "notes": "Single-arm proportions, random-effects model (DerSimonian & Laird). BOR=best overall response rate; BCR=best complete response rate. I2 not reported in abstract."
+  },
+  "expected_included_pmids": [],
+  "outcomes": [
+    {
+      "field": "orr",
+      "label": "ORR",
+      "family": "proportion",
+      "group": "ALL",
+      "estimate": 74,
+      "ci_lb": 67,
+      "ci_ub": 79,
+      "i2": null
+    },
+    {
+      "field": "complete_response_rate",
+      "label": "CR",
+      "family": "proportion",
+      "group": "ALL",
+      "estimate": 48,
+      "ci_lb": 42,
+      "ci_ub": 54,
+      "i2": null
+    },
+    {
+      "field": "cr_3mo_rate",
+      "label": "3-month CR rate",
+      "family": "proportion",
+      "group": "ALL",
+      "estimate": 41,
+      "ci_lb": 35,
+      "ci_ub": 47,
+      "i2": null
+    },
+    {
+      "field": "os_12mo_rate",
+      "label": "12-month OS rate",
+      "family": "proportion",
+      "group": "ALL",
+      "estimate": 63,
+      "ci_lb": 56,
+      "ci_ub": 70,
+      "i2": null
+    },
+    {
+      "field": "crs_any_grade",
+      "label": "CRS any grade",
+      "family": "proportion",
+      "group": "ALL",
+      "estimate": 78,
+      "ci_lb": 68,
+      "ci_ub": 87,
+      "i2": null
+    },
+    {
+      "field": "crs_grade_3plus",
+      "label": "CRS grade >=3",
+      "family": "proportion",
+      "group": "ALL",
+      "estimate": 6,
+      "ci_lb": 3,
+      "ci_ub": 10,
+      "i2": null
+    },
+    {
+      "field": "icans_any_grade",
+      "label": "Neurotoxicity any grade",
+      "family": "proportion",
+      "group": "ALL",
+      "estimate": 41,
+      "ci_lb": 31,
+      "ci_ub": 52,
+      "i2": null
+    },
+    {
+      "field": "icans_grade_3plus",
+      "label": "Severe neurotoxicity grade >=3",
+      "family": "proportion",
+      "group": "ALL",
+      "estimate": 16,
+      "ci_lb": 10,
+      "ci_ub": 24,
+      "i2": null
+    }
+  ],
+  "caveats": [
+    "LLM-drafted; human-verify against Ying 2022 full text (PMID 35548364, DOI 10.3389/fphar.2022.834113).",
+    "Published values extracted from abstract only; all values in percent scale.",
+    "I2 not reported in abstract; set to null throughout.",
+    "k=27 studies, n=1687 patients in reference; engine search bounded to 2021-07-31.",
+    "group=ALL because subgroup_field is empty (no stratification by product class).",
+    "BOR (best overall response) mapped to field 'orr'; BCR (best complete response) mapped to 'complete_response_rate'."
+  ]
+}

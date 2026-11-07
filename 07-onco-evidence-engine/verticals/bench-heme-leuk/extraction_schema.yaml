@@ -1,0 +1,36 @@
+# Data dictionary for Du 2023 benchmark (venetoclax + azacitidine in AML/MDS).
+# Field names align with the engine's poolable PROPORTION_FIELDS.
+# disease_line drives the three-arm subgroup pooling (ND-AML / RR-AML / MDS).
+fields:
+  population:
+    - {name: total_n, level: abstract}
+    - {name: disease_line, level: abstract}    # ND-AML | R/R AML | MDS — subgroup axis
+    - {name: median_age, level: abstract}
+    - {name: study_phase, level: abstract}     # Phase I | II | III | retrospective
+    - {name: prior_therapy, level: abstract}   # lines of prior therapy (R/R only)
+  efficacy:
+    # PRIMARY: CR/CRi = complete remission + complete remission with incomplete
+    # blood count recovery, pooled as a single composite proportion.
+    - {name: cr_cri_rate, level: abstract, pool: proportion,
+       label: "CR/CRi rate (complete remission composite)"}
+    # SECONDARY: overall response rate if reported (ORR = CR+CRi+PR or CR+CRi)
+    - {name: orr, level: abstract, pool: proportion,
+       label: "Overall response rate (ORR)"}
+  safety:
+    - {name: neutropenia_grade_3_4, level: abstract, pool: proportion,
+       label: "Neutropenia grade 3-4"}
+    - {name: febrile_neutropenia, level: abstract, pool: proportion,
+       label: "Febrile neutropenia"}
+    - {name: thrombocytopenia_grade_3_4, level: abstract, pool: proportion,
+       label: "Thrombocytopenia grade 3-4"}
+
+rules:
+  - "Copy values verbatim from the source text only. Do not use outside knowledge."
+  - "If a field is not stated, set value to 'NR'. Derived values: prefix 'ESTIMATED:'."
+  - "For each non-NR numeric value, include the exact verbatim supporting quote."
+  - "Record disease_line as one of: ND-AML | R/R AML | MDS. If mixed cohort, record the predominant population or 'mixed'."
+  - "cr_cri_rate: Extract ONLY the venetoclax+azacitidine arm's CR/CRi proportion as a single percent (e.g. '67%' or '24/36') — do NOT include comparator arm values. If the study reports both CR and CRi separately, record the composite as 'X/N' (events/total) where possible. If a comparator arm is mentioned (e.g. 'VEN+AZA X% vs LDAC Y%'), record only the VEN+AZA value."
+  - "orr: Extract ONLY the venetoclax+azacitidine arm's ORR as a single percent or fraction. Do NOT include comparator arm values."
+  - "neutropenia_grade_3_4, febrile_neutropenia, thrombocytopenia_grade_3_4: Extract ONLY the venetoclax+azacitidine arm value as a single percent or fraction."
+  - "Do NOT fabricate response rates. If CR/CRi is not stated in the abstract, set cr_cri_rate to NR."
+  - "CRITICAL: Each poolable field must contain ONE numeric value (a single percent like '67%' or fraction like '24/36'). Multiple values separated by semicolons or 'vs' are NOT parseable — extract ONLY the VEN+AZA arm value."

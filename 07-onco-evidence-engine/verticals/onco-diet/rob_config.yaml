@@ -1,0 +1,50 @@
+# Newcastle-Ottawa Scale (NOS) for observational nutritional-epi studies.
+# Overrides the shared config so cohort AND case-control route to NOS (NOT ROBINS-I /
+# RoB 2.0). 9-star scale; >=7/9 = high quality (per protocol §7). The assessor awards
+# a star per item; comparability may earn up to 2. Overall = "<n>/9 — high/moderate/low".
+
+tool_by_design:
+  cohort: nos_cohort
+  "case-cohort": nos_cohort
+  prospective: nos_cohort
+  "case-control": nos_cc
+  "nested case-control": nos_cc
+  registry: nos_cohort
+  other: nos_cohort
+  review: nos_cohort
+
+# One star per item ("*"), "--" for not-awarded, "No information" when text is silent.
+# Comparability item may be awarded "**" (two stars).
+judgments:
+  nos_cohort: ["*", "**", "--", "No information"]
+  nos_cc: ["*", "**", "--", "No information"]
+
+# NOS polarity is INVERTED vs RoB2/ROBINS-I: a low star count ("low quality") means
+# HIGH risk of bias, while "high quality" means LOW risk. So the GRADE high-RoB
+# trigger matches the low-quality overall labels, NOT the substring "high" (which
+# would wrongly flag good "high quality" NOS studies).
+high_rob_overall: ["low quality", "very low", "poor quality", "— low"]
+
+tools:
+  nos_cohort:
+    name: "Newcastle-Ottawa Scale — cohort studies (max 9 stars; high quality >=7)"
+    domains:
+      - {key: S1, label: "Selection: representativeness of the exposed cohort"}
+      - {key: S2, label: "Selection: selection of the non-exposed cohort (same source population)"}
+      - {key: S3, label: "Selection: ascertainment of dietary exposure (validated FFQ / records)"}
+      - {key: S4, label: "Selection: outcome (pancreatic cancer) not present at start of study"}
+      - {key: C1, label: "Comparability: cohorts comparable on design/analysis (adjusts age, smoking, energy, BMI, diabetes) — up to **"}
+      - {key: O1, label: "Outcome: assessment of outcome (registry / pathology / linkage)"}
+      - {key: O2, label: "Outcome: follow-up long enough for cancer to occur"}
+      - {key: O3, label: "Outcome: adequacy / completeness of follow-up"}
+  nos_cc:
+    name: "Newcastle-Ottawa Scale — case-control studies (max 9 stars; high quality >=7)"
+    domains:
+      - {key: S1, label: "Selection: case definition adequate (histology / registry confirmed)"}
+      - {key: S2, label: "Selection: representativeness of the cases"}
+      - {key: S3, label: "Selection: selection of controls (community / hospital, same base)"}
+      - {key: S4, label: "Selection: definition of controls (no history of the outcome)"}
+      - {key: C1, label: "Comparability: cases & controls comparable on design/analysis (adjusts age, smoking, energy, BMI, diabetes) — up to **"}
+      - {key: E1, label: "Exposure: ascertainment of dietary exposure (validated FFQ / blinded interview)"}
+      - {key: E2, label: "Exposure: same ascertainment method for cases and controls"}
+      - {key: E3, label: "Exposure: non-response rate same for both groups"}

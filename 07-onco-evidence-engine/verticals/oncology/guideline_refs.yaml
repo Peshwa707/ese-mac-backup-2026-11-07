@@ -1,0 +1,13 @@
+# NCI PDQ health-professional summaries (US-government, public domain). The
+# guidelines connector selects entries whose `match` terms appear in the query
+# and fetches the summary prose. Add entries per cancer type as coverage grows.
+pdq_summaries:
+  - title: "Non-Small Cell Lung Cancer Treatment (PDQ) - Health Professional"
+    url: "https://www.cancer.gov/types/lung/hp/non-small-cell-lung-treatment-pdq"
+    match: ["lung", "nsclc", "non-small cell"]
+  - title: "Breast Cancer Treatment (PDQ) - Health Professional"
+    url: "https://www.cancer.gov/types/breast/hp/breast-treatment-pdq"
+    match: ["breast"]
+  - title: "Colon Cancer Treatment (PDQ) - Health Professional"
+    url: "https://www.cancer.gov/types/colorectal/hp/colon-treatment-pdq"
+    match: ["colon", "colorectal"]

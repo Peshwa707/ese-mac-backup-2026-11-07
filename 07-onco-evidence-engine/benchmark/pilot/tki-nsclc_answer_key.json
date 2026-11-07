@@ -1,0 +1,33 @@
+{
+  "case_id": "bench-tki-nsclc",
+  "status": "draft",
+  "expected_included_pmids": [
+    "28586279",
+    "34915469"
+  ],
+  "outcomes": [
+    {
+      "field": "pfs_hr",
+      "label": "PFS (HR, alectinib vs crizotinib)",
+      "family": "log_effect",
+      "group": "ALL",
+      "estimate": 0.35,
+      "ci_lb": 0.25,
+      "ci_ub": 0.49,
+      "i2": null
+    },
+    {
+      "field": "os_hr",
+      "label": "OS (HR, alectinib vs crizotinib)",
+      "family": "log_effect",
+      "group": "ALL",
+      "estimate": 0.66,
+      "ci_lb": 0.47,
+      "ci_ub": 0.92,
+      "i2": null
+    }
+  ],
+  "caveats": [
+    "DRAFT ANSWER KEY: Published values from Zeng et al. (Chemotherapy 2022;67(2):67-80; PMID 34915469; DOI 10.1159/000521452). PFS HR 0.35 (95% CI 0.25-0.49) and OS HR 0.66 (95% CI 0.47-0.92) taken verbatim from abstract. k=3 RCTs (ALEX, ALESIA, J-ALEX), n=697 patients, alectinib vs crizotinib in ALK+ NSCLC. I2 values not reported in abstract (i2=null). Human verification of full-text values required before sealing."
+  ]
+}

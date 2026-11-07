@@ -1,0 +1,19 @@
+# Data dictionary for the T-DXd benchmark (single-arm pooled-proportion safety
+# meta-analysis; reference PMID 37481956). Field names match the engine's poolable
+# PROPORTION_FIELDS so the meta-analysis covers the protocol's outcomes.
+fields:
+  population:
+    - {name: total_n, level: abstract}
+    - {name: study_design, level: abstract}          # phase III/II/I RCT, NRSI, observational cohort
+    - {name: dose, level: abstract}                   # T-DXd dose: 5.4 mg/kg or 6.4 mg/kg
+    - {name: her2_status, level: abstract}            # HER2-positive vs HER2-low
+  safety:
+    - {name: ild_incidence, level: abstract, pool: proportion, label: "Interstitial lung disease incidence"}   # PRIMARY outcome (ILD/pneumonitis)
+    - {name: lvef_decrease, level: abstract, pool: proportion, label: "Decreased LVEF"}
+    - {name: qt_prolongation, level: abstract, pool: proportion, label: "QT prolongation"}
+
+rules:
+  - "Copy values verbatim from the source text only. Do not use outside knowledge."
+  - "If a field is not stated, set value to 'NR'. Derived values: prefix 'ESTIMATED:'."
+  - "For each non-NR numeric value, include the exact verbatim supporting quote."
+  - "Record the T-DXd dose (5.4 or 6.4 mg/kg) in `dose` and the study design in `study_design`."

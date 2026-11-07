@@ -1,0 +1,35 @@
+{
+  "case_id": "protocol-live-cloud-060607",
+  "status": "draft",
+  "expected_included_pmids": [
+    "42227005",
+    "42212933",
+    "42169674",
+    "42163304"
+  ],
+  "expected_included_trial_ids": [
+    "42227005",
+    "NCT05572515",
+    "42169674",
+    "42163304"
+  ],
+  "expected_conclusion": "withheld",
+  "outcomes": [
+    {
+      "field": "cr_or_better_rate",
+      "label": ">=Complete response",
+      "family": "proportion",
+      "group": "ALL",
+      "effect_measure": "proportion",
+      "estimate": 64.5,
+      "ci_lb": 61.6,
+      "ci_ub": 67.3,
+      "i2": 8.9
+    }
+  ],
+  "caveats": [
+    "Fixture answer key is draft-only for offline scorer regression coverage."
+  ],
+  "seal_digest": "",
+  "seal_signature": ""
+}

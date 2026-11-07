@@ -1,0 +1,44 @@
+# GRADE certainty-of-evidence config. core/sr/grade.py computes per-outcome
+# certainty deterministically from the contributing studies, their designs, and
+# the risk-of-bias profile. Domains needing pooled statistics (inconsistency via
+# I^2, publication bias via funnel/Egger) are honestly deferred to Phase B.
+
+# Certainty ladder (highest -> lowest); downgrades step down this list.
+levels: [High, Moderate, Low, "Very Low"]
+
+# Starting certainty by design presence among contributing studies.
+start:
+  with_rct: High            # >=1 randomized trial contributes the outcome
+  observational_only: Low   # non-randomized only
+
+# Deterministic downgrade rules.
+rules:
+  indirectness:
+    # No head-to-head CAR-T vs BsAb RCT exists in this review -> always -1.
+    always_downgrade: 1
+    reason: "Indirect comparison — no head-to-head CAR-T vs bispecific RCTs; cross-study/indirect evidence."
+  risk_of_bias:
+    serious_fraction_threshold: 0.5   # >50% of contributors at Serious/High/Critical -> -1
+    reason: "Most contributing studies at serious/high risk of bias."
+  imprecision:
+    min_studies: 3            # fewer than this contributing -> -1 (sparse evidence)
+    reason: "Few contributing studies / sparse data."
+
+# Domains not computable without Phase B (reported honestly, no downgrade guessed).
+deferred_domains:
+  - "Inconsistency (I^2) — pending quantitative synthesis (Phase B)."
+  - "Publication bias (funnel/Egger) — pending Phase B (needs >=10 studies/outcome)."
+
+# Outcomes to grade, each mapped to its extraction field(s).
+outcomes:
+  - {name: "Overall response rate (ORR)", field: orr}
+  - {name: ">=Complete response (>=CR)", field: cr_or_better_rate}
+  - {name: "MRD negativity", field: mrd_negativity_rate}
+  - {name: "Progression-free survival (median)", field: median_pfs}
+  - {name: "Overall survival (median)", field: median_os}
+  - {name: "CRS (any grade)", field: crs_any_grade}
+  - {name: "CRS (grade >=3)", field: crs_grade_3plus}
+  - {name: "ICANS / neurotoxicity", field: icans_any_grade}
+  - {name: "Infections (grade >=3)", field: infections_grade_3plus}
+  - {name: "Neutropenia (grade >=3)", field: neutropenia_grade_3plus}
+  - {name: "Treatment-related mortality", field: treatment_related_mortality}

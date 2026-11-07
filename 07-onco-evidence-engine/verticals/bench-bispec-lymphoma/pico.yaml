@@ -1,0 +1,69 @@
+# Benchmark vertical — faithful to the supplied protocol (Kim et al., Blood 2024;
+# PMID 38696731; DOI 10.1182/blood.2023023419).
+# Run BLIND (engine has no knowledge of the reference paper's results). Search
+# date-bounded to the benchmark cut-off (2023-07-31).
+
+review:
+  title: >
+    CD20×CD3 bispecific antibodies as third-line or later therapy for
+    relapsed/refractory large B-cell lymphoma: a systematic review and
+    meta-analysis of single-arm response proportions
+  short_id: bench-bispec-lymphoma
+  registration: "PROSPERO: [benchmark protocol supplied — PMID 38696731]"
+  output_base: "~/Documents/Systematic Reviews/BsAb-Lymphoma-Benchmark"
+
+pico:
+  population: >
+    Adults with relapsed/refractory large B-cell lymphoma (R/R LBCL), primarily
+    diffuse large B-cell lymphoma (DLBCL), receiving third-line or later therapy.
+    Trials enrolling earlier lines are eligible if they report efficacy at the
+    recommended phase 2 dose (RP2D) in the relapsed/refractory setting.
+  intervention: >
+    CD20×CD3 bispecific antibodies (glofitamab, epcoritamab, mosunetuzumab,
+    odronextamab) as monotherapy. Single agent only.
+  comparator: >
+    Single-arm pooled proportion synthesis (no head-to-head comparator arm).
+    The reference paper also pools CAR-T cell therapy for indirect comparison;
+    this benchmark focuses on the bispecific antibody arm.
+  outcomes:
+    primary:
+      - complete response rate (CR)
+    secondary:
+      - overall response rate (ORR)
+
+# Synthesis axis: single class (bispecific antibodies only), single-arm pooled
+# proportions; no subgroup stratification needed. subgroup_field is empty.
+synthesis:
+  subgroup_field: ""
+  subgroup_map: {}
+  arms: []
+  indirect_comparison: false
+
+eligibility:
+  inclusion:
+    - "Prospective interventional trial (phase I/II/III) reporting efficacy at RP2D."
+    - "Phase I trials are eligible IF they use the RP2D and report response data."
+    - "Single-arm design; an RCT intervention arm may be extracted as single-arm."
+    - "Intervention is a CD20×CD3 bispecific antibody (glofitamab, epcoritamab, mosunetuzumab, odronextamab) as monotherapy."
+    - "Population: adults with R/R DLBCL / large B-cell lymphoma, third-line or later."
+    - "Reports complete response (CR) rate and/or overall response rate (ORR)."
+    - "English-language; published manuscripts or conference abstracts with usable efficacy data."
+  exclusion:
+    - "First- or second-line therapy (exclusively early-line use without RP2D R/R data)."
+    - "Non-CD20×CD3 bispecific antibody target (e.g. CD19, BCMA)."
+    - "Combination therapy (bispecific + chemotherapy or other agent)."
+    - "Non-DLBCL / non-large B-cell histology only (follicular lymphoma, CLL, etc.)."
+    - "Review, editorial, protocol-only, case report — no primary efficacy data."
+    - "Non-English."
+  exclusion_buckets:
+    - {label: "wrong histology (non-LBCL)", keywords: ["follicular", "mantle cell", "cll", "myeloma", "t-cell", "hodgkin"]}
+    - {label: "non-CD20xCD3 bispecific", keywords: ["cd19", "bcma", "bcmaxcd3", "gprc5d", "fcrh5"]}
+    - {label: "combination therapy", keywords: ["combination", "plus chemotherapy", "r-chop", "polatuzumab", "gemox"]}
+    - {label: "early line only", keywords: ["first-line", "front-line", "1l therapy", "second-line", "2l therapy"]}
+
+disclaimer: >
+  BLIND benchmark run (AI Reviewer 1 only). Search date-bounded to 2023-07-31 to match
+  the reference protocol's cut-off (MEDLINE / Embase searched until July 2023 per Kim
+  et al. 2024). Every PMID live-verified; values abstract/full-text-anchored or marked
+  NR. Requires human Reviewer 2 verification; results are for engine validation against
+  PMID 38696731 (DOI 10.1182/blood.2023023419).

@@ -1,0 +1,139 @@
+{
+  "case_id": "bench-tdxd-37481956",
+  "generated_at": "2026-06-10T03:42:05+00:00",
+  "key_sealed": false,
+  "selection": {
+    "expected_n": 0,
+    "engine_n": 10,
+    "overlap_n": 0,
+    "recall": null,
+    "precision": 0.0,
+    "jaccard": null,
+    "report_expected_n": 0,
+    "report_engine_n": 10,
+    "report_overlap_n": 0,
+    "report_recall": null,
+    "report_precision": 0.0,
+    "report_jaccard": null,
+    "study_expected_n": 0,
+    "study_engine_n": 10,
+    "study_overlap_n": 0,
+    "study_recall": null,
+    "study_precision": 0.0,
+    "study_jaccard": null
+  },
+  "integrity": {
+    "estimated_value_count": 0,
+    "nr_value_count": 27,
+    "pooled_n_excluded_total": 6
+  },
+  "conclusion": {
+    "expected": null,
+    "observed": null,
+    "matched": null,
+    "note": "narrative.json unavailable"
+  },
+  "outcomes": [
+    {
+      "field": "ild_incidence",
+      "label": "ILD incidence",
+      "family": "proportion",
+      "group": "ALL",
+      "classification": "matched",
+      "effect_measure": "proportion",
+      "null_value": null,
+      "expected": 11.7,
+      "observed": 11.5,
+      "delta": -0.1999999999999993,
+      "expected_ci": [
+        9.1,
+        15.0
+      ],
+      "observed_ci": [
+        3.7,
+        22.1
+      ],
+      "expected_direction": "na",
+      "observed_direction": "na",
+      "expected_significance": "na",
+      "observed_significance": "na",
+      "direction_agree": null,
+      "significance_agree": null,
+      "engine_estimate_in_published_ci": true,
+      "published_estimate_in_engine_ci": true,
+      "ci_interval_overlap": true,
+      "expected_i2": 66.0,
+      "observed_i2": 0.0,
+      "i2_delta": -66.0,
+      "headline_pass": true,
+      "note": ""
+    },
+    {
+      "field": "lvef_decrease",
+      "label": "Decreased LVEF",
+      "family": "proportion",
+      "group": "ALL",
+      "classification": "missing_engine",
+      "effect_measure": "proportion",
+      "null_value": null,
+      "expected": 1.95,
+      "observed": null,
+      "delta": null,
+      "expected_ci": [
+        0.65,
+        3.73
+      ],
+      "observed_ci": null,
+      "expected_direction": "na",
+      "observed_direction": "na",
+      "expected_significance": "na",
+      "observed_significance": "na",
+      "direction_agree": null,
+      "significance_agree": null,
+      "engine_estimate_in_published_ci": null,
+      "published_estimate_in_engine_ci": null,
+      "ci_interval_overlap": null,
+      "expected_i2": 59.0,
+      "observed_i2": null,
+      "i2_delta": null,
+      "headline_pass": null,
+      "note": "engine did not produce this outcome/group"
+    },
+    {
+      "field": "qt_prolongation",
+      "label": "QT prolongation",
+      "family": "proportion",
+      "group": "ALL",
+      "classification": "missing_engine",
+      "effect_measure": "proportion",
+      "null_value": null,
+      "expected": 7.77,
+      "observed": null,
+      "delta": null,
+      "expected_ci": [
+        2.74,
+        20.11
+      ],
+      "observed_ci": null,
+      "expected_direction": "na",
+      "observed_direction": "na",
+      "expected_significance": "na",
+      "observed_significance": "na",
+      "direction_agree": null,
+      "significance_agree": null,
+      "engine_estimate_in_published_ci": null,
+      "published_estimate_in_engine_ci": null,
+      "ci_interval_overlap": null,
+      "expected_i2": 84.0,
+      "observed_i2": null,
+      "i2_delta": null,
+      "headline_pass": null,
+      "note": "engine did not produce this outcome/group"
+    }
+  ],
+  "caveats": [
+    "DRAFT ANSWER KEY USED: this score report is for scaffolding only and must not be reported as sealed benchmark performance.",
+    "Published pooled values from Soares et al., ESMO Open 2023 (PMID 37481956; DOI 10.1016/j.esmoop.2023.101613); k=15 studies, N=1970; single-arm random-effects (DerSimonian-Laird) pooled proportions in percent.",
+    "LLM-drafted; human-verify."
+  ]
+}

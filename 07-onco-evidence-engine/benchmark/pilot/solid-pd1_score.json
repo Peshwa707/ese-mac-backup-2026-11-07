@@ -1,0 +1,143 @@
+{
+  "case_id": "bench-solid-pd1",
+  "generated_at": "2026-06-10T06:31:20+00:00",
+  "key_sealed": false,
+  "selection": {
+    "expected_n": 0,
+    "engine_n": 7,
+    "overlap_n": 0,
+    "recall": null,
+    "precision": 0.0,
+    "jaccard": null,
+    "report_expected_n": 0,
+    "report_engine_n": 7,
+    "report_overlap_n": 0,
+    "report_recall": null,
+    "report_precision": 0.0,
+    "report_jaccard": null,
+    "study_expected_n": 0,
+    "study_engine_n": 7,
+    "study_overlap_n": 0,
+    "study_recall": null,
+    "study_precision": 0.0,
+    "study_jaccard": null
+  },
+  "integrity": {
+    "estimated_value_count": 3,
+    "nr_value_count": 28,
+    "pooled_n_excluded_total": 2
+  },
+  "conclusion": {
+    "expected": "effect",
+    "observed": null,
+    "matched": null,
+    "note": "narrative.json unavailable"
+  },
+  "outcomes": [
+    {
+      "field": "os_hr",
+      "label": "Overall survival (HR)",
+      "family": "log_effect",
+      "group": "ALL",
+      "classification": "matched",
+      "effect_measure": "hr",
+      "null_value": 1.0,
+      "expected": 0.77,
+      "observed": 0.779,
+      "delta": 0.009000000000000008,
+      "expected_ci": [
+        0.73,
+        0.81
+      ],
+      "observed_ci": [
+        0.69,
+        0.881
+      ],
+      "expected_direction": "below_null",
+      "observed_direction": "below_null",
+      "expected_significance": "significant",
+      "observed_significance": "significant",
+      "direction_agree": true,
+      "significance_agree": true,
+      "engine_estimate_in_published_ci": true,
+      "published_estimate_in_engine_ci": true,
+      "ci_interval_overlap": true,
+      "expected_i2": null,
+      "observed_i2": 0.0,
+      "i2_delta": null,
+      "headline_pass": true,
+      "note": ""
+    },
+    {
+      "field": "pfs_hr",
+      "label": "PFS (HR)",
+      "family": "log_effect",
+      "group": "ALL",
+      "classification": "missing_engine",
+      "effect_measure": "hr",
+      "null_value": null,
+      "expected": 0.93,
+      "observed": null,
+      "delta": null,
+      "expected_ci": [
+        0.88,
+        0.99
+      ],
+      "observed_ci": null,
+      "expected_direction": "na",
+      "observed_direction": "na",
+      "expected_significance": "na",
+      "observed_significance": "na",
+      "direction_agree": null,
+      "significance_agree": null,
+      "engine_estimate_in_published_ci": null,
+      "published_estimate_in_engine_ci": null,
+      "ci_interval_overlap": null,
+      "expected_i2": null,
+      "observed_i2": null,
+      "i2_delta": null,
+      "headline_pass": null,
+      "note": "engine did not produce this outcome/group"
+    },
+    {
+      "field": "os_hr",
+      "label": "Overall survival (HR)",
+      "family": "log_effect",
+      "group": "atezolizumab",
+      "classification": "missing_key",
+      "effect_measure": "hr",
+      "null_value": 1.0,
+      "expected": null,
+      "observed": 0.755,
+      "delta": null,
+      "expected_ci": null,
+      "observed_ci": [
+        0.657,
+        0.866
+      ],
+      "expected_direction": "na",
+      "observed_direction": "below_null",
+      "expected_significance": "na",
+      "observed_significance": "significant",
+      "direction_agree": null,
+      "significance_agree": null,
+      "engine_estimate_in_published_ci": null,
+      "published_estimate_in_engine_ci": null,
+      "ci_interval_overlap": null,
+      "expected_i2": null,
+      "observed_i2": 0.0,
+      "i2_delta": null,
+      "headline_pass": null,
+      "note": "engine produced outcome absent from answer key"
+    }
+  ],
+  "caveats": [
+    "DRAFT ANSWER KEY USED: this score report is for scaffolding only and must not be reported as sealed benchmark performance.",
+    "DRAFT ANSWER KEY: published values from Li 2025 abstract (PMID 41208418, DOI 10.21037/cco-25-45); human verification required before sealing.",
+    "I2 values not reported in abstract; i2 set to null.",
+    "Engine PubMed-only recall found k=4 studies vs published k=10 (engine search lacked EMBASE/CNKI/WOS/Wanfang/Cochrane used by Li 2025); OS HR directionally concordant.",
+    "pfs_hr: engine extracted only 1 parseable PFS HR (PMID 38552197/CONTACT-01), insufficient for pooling; expected missing_engine classification.",
+    "Benchmark scores are scaffold-only; do not report as sealed performance.",
+    "ESTIMATED extracted values present (3); benchmark fabrication count must be 0 for sealed claims."
+  ]
+}

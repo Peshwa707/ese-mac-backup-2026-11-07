@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Decision Support — {{ report.id }}</title>
+  <style>
+    body { font-family: Georgia, "Times New Roman", serif; margin: 2.5rem; color: #1a1a1a; line-height: 1.5; }
+    h1 { font-size: 1.6rem; margin-bottom: 0.2rem; }
+    .disclaimer { background: #fff4e5; border-left: 4px solid #c97a00; padding: 0.75rem 1rem; font-size: 0.9rem; margin: 1rem 0; }
+    .case dt { font-weight: bold; }
+    .finding { border: 1px solid #ddd; border-radius: 6px; padding: 1rem; margin: 1rem 0; }
+    .grade { display: inline-block; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.04em; background: #eef; padding: 0.1rem 0.5rem; border-radius: 10px; }
+    .grade.low_evidence { background: #fde8e8; }
+    .quote { font-style: italic; color: #444; border-left: 3px solid #ccc; padding-left: 0.75rem; margin: 0.5rem 0; }
+    .citations a { color: #0b5; text-decoration: none; }
+    .conflict { color: #b00; font-weight: bold; }
+    .flags { font-size: 0.8rem; color: #a60; }
+    .empty { color: #777; font-style: italic; }
+    footer { margin-top: 2rem; font-size: 0.8rem; color: #777; }
+  </style>
+</head>
+<body>
+  <h1>Clinical Decision Support</h1>
+  <div class="disclaimer">{{ report.disclaimer }}</div>
+
+  <section class="case">
+    <h2>Structured case</h2>
+    <dl>
+      {# Skip absent fields, and render list fields as a readable join, so a
+         missing value shows nothing instead of the literal string "None". #}
+      {% for key, value in report.structured_case.items() %}
+        {% if value is not none and value != '' and value != [] %}
+          <dt>{{ key }}</dt>
+          <dd>{{ value | join(', ') if (value is iterable and value is not string) else value }}</dd>
+        {% endif %}
+      {% endfor %}
+    </dl>
+  </section>
+
+  <section>
+    <h2>Evidence-based options</h2>
+    {% if not report.decision_support %}
+      <p class="empty">No evidence found{% if report.empty_reason %}: {{ report.empty_reason }}{% endif %}.</p>
+    {% endif %}
+    {% for f in report.decision_support %}
+      <div class="finding">
+        <p>{{ f.statement }}
+          <span class="grade {% if 'low_evidence' in f.flags %}low_evidence{% endif %}">{{ f.evidence_grade.value }} · conf {{ '%.2f'|format(f.confidence) }}</span>
+        </p>
+        {% if f.quote %}<blockquote class="quote">“{{ f.quote }}”</blockquote>{% endif %}
+        <div class="citations">
+          {% for c in f.citations %}
+            <a href="{{ c.url }}">[{{ c.source }}:{{ c.id }}]</a>{% if not loop.last %} {% endif %}
+          {% endfor %}
+        </div>
+        {% if f.conflicts_with %}<p class="conflict">⚠ Conflicts with finding(s): {{ f.conflicts_with|join(', ') }} — review side by side.</p>{% endif %}
+        {% if f.flags %}<p class="flags">flags: {{ f.flags|join(', ') }}</p>{% endif %}
+      </div>
+    {% endfor %}
+  </section>
+
+  <section>
+    <h2>Source availability</h2>
+    <ul>
+      {% for s in report.sources_status %}
+        <li>{{ s.source }}: {{ 'available' if s.available else 'unavailable' }}{% if s.note %} — {{ s.note }}{% endif %}</li>
+      {% endfor %}
+    </ul>
+  </section>
+
+  <footer>Report {{ report.id }} · provenance {{ report.provenance_id }}</footer>
+</body>
+</html>

@@ -1,0 +1,416 @@
+{
+  "extractions": [
+    {
+      "pmid": "42227005",
+      "study_name": "",
+      "modality": "CAR-T",
+      "data_cut": "02/2022-05/2025",
+      "values": [
+        {
+          "field": "total_n",
+          "group": "population",
+          "value": "171",
+          "flag": "",
+          "quote": "Adults treated with cilta-cel after 1-3 and \u22654 prior LOT were included (N=171)."
+        },
+        {
+          "field": "comparator_label",
+          "group": "population",
+          "value": "NR",
+          "flag": "NR",
+          "quote": ""
+        },
+        {
+          "field": "pct_1_to_3_prior_lines",
+          "group": "population",
+          "value": "ESTIMATED: 42.7% (73/171)",
+          "flag": "ESTIMATED",
+          "quote": "Among 171 patients, 73 had 1-3 prior LOT and 98 had \u22654 prior LOT."
+        },
+        {
+          "field": "median_prior_lines",
+          "group": "population",
+          "value": "NR",
+          "flag": "NR",
+          "quote": ""
+        },
+        {
+          "field": "pfs_hr_vs_comparator",
+          "group": "efficacy",
+          "value": "NR",
+          "flag": "NR",
+          "quote": ""
+        },
+        {
+          "field": "os_hr_vs_comparator",
+          "group": "efficacy",
+          "value": "NR",
+          "flag": "NR",
+          "quote": ""
+        },
+        {
+          "field": "orr",
+          "group": "efficacy",
+          "value": "NR",
+          "flag": "NR",
+          "quote": ""
+        },
+        {
+          "field": "cr_or_better_rate",
+          "group": "efficacy",
+          "value": "NR",
+          "flag": "NR",
+          "quote": ""
+        },
+        {
+          "field": "mrd_negativity_rate",
+          "group": "efficacy",
+          "value": "NR",
+          "flag": "NR",
+          "quote": ""
+        },
+        {
+          "field": "crs_any_grade",
+          "group": "safety",
+          "value": "NR",
+          "flag": "NR",
+          "quote": ""
+        },
+        {
+          "field": "crs_grade_3plus",
+          "group": "safety",
+          "value": "NR",
+          "flag": "NR",
+          "quote": ""
+        },
+        {
+          "field": "icans_any_grade",
+          "group": "safety",
+          "value": "NR",
+          "flag": "NR",
+          "quote": ""
+        },
+        {
+          "field": "infections_grade_3plus",
+          "group": "safety",
+          "value": "NR",
+          "flag": "NR",
+          "quote": ""
+        }
+      ],
+      "extraction_notes": "This real-world study focused on non-ICANS neurologic events (cranial nerve palsy, parkinsonism, Guillain-Barr\u00e9 syndrome) following cilta-cel; standard efficacy (PFS/OS HR, ORR, CR, MRD) and CRS/ICANS safety endpoints were not reported. The abstract states all patients with events had at least a partial response but no overall ORR/CR rates given. No comparator arm; single-cohort real-world analysis.",
+      "trial_id": "",
+      "key_source": "",
+      "member_pmids": []
+    },
+    {
+      "pmid": "42212933",
+      "study_name": "MajesTEC-9",
+      "modality": "bispecific",
+      "data_cut": "median follow-up, 17.3 months",
+      "values": [
+        {
+          "field": "total_n",
+          "group": "population",
+          "value": "593",
+          "flag": "ESTIMATED",
+          "quote": "A total of 296 patients were assigned to teclistamab and 297 to PVd or Kd."
+        },
+        {
+          "field": "comparator_label",
+          "group": "population",
+          "value": "investigator's choice of pomalidomide, bortezomib, and dexamethasone (PVd) or carfilzomib and dexamethasone (Kd)",
+          "flag": "",
+          "quote": "the investigator's choice of pomalidomide, bortezomib, and dexamethasone (PVd) or carfilzomib and dexamethasone (Kd)"
+        },
+        {
+          "field": "pct_1_to_3_prior_lines",
+          "group": "population",
+          "value": "100%",
+          "flag": "ESTIMATED",
+          "quote": "who had previously received one, two, or three lines of therapy"
+        },
+        {
+          "field": "median_prior_lines",
+          "group": "population",
+          "value": "NR",
+          "flag": "NR",
+          "quote": ""
+        },
+        {
+          "field": "pfs_hr_vs_comparator",
+          "group": "efficacy",
+          "value": "0.29 (95% CI, 0.23 to 0.38)",
+          "flag": "",
+          "quote": "hazard ratio for disease progression or death, 0.29; 95% confidence interval [CI], 0.23 to 0.38; P<0.001"
+        },
+        {
+          "field": "os_hr_vs_comparator",
+          "group": "efficacy",
+          "value": "0.60 (95% CI, 0.43 to 0.83)",
+          "flag": "",
+          "quote": "hazard ratio for death, 0.60; 95% CI, 0.43 to 0.83; P = 0.002"
+        },
+        {
+          "field": "orr",
+          "group": "efficacy",
+          "value": "NR",
+          "flag": "NR",
+          "quote": ""
+        },
+        {
+          "field": "cr_or_better_rate",
+          "group": "efficacy",
+          "value": "65.9%",
+          "flag": "",
+          "quote": "The percentage of patients with a complete response or better was higher with teclistamab than with PVd or Kd (65.9% vs. 16.8%, P<0.001)."
+        },
+        {
+          "field": "mrd_negativity_rate",
+          "group": "efficacy",
+          "value": "NR",
+          "flag": "NR",
+          "quote": ""
+        },
+        {
+          "field": "crs_any_grade",
+          "group": "safety",
+          "value": "66.0%",
+          "flag": "",
+          "quote": "Cytokine release syndrome, mostly of grade 1 or 2, occurred in 66.0% of teclistamab recipients"
+        },
+        {
+          "field": "crs_grade_3plus",
+          "group": "safety",
+          "value": "NR",
+          "flag": "NR",
+          "quote": ""
+        },
+        {
+          "field": "icans_any_grade",
+          "group": "safety",
+          "value": "4.1%",
+          "flag": "",
+          "quote": "immune effector cell-associated neurotoxicity syndrome occurred in 4.1%"
+        },
+        {
+          "field": "infections_grade_3plus",
+          "group": "safety",
+          "value": "41.6%",
+          "flag": "",
+          "quote": "Grade 3 or 4 infection occurred in 41.6% of teclistamab recipients and in 29.0% of PVd or Kd recipients."
+        }
+      ],
+      "extraction_notes": "total_n estimated by summing 296 + 297 = 593. CRS described as mostly grade 1 or 2; grade 3+ CRS not separately reported. comparator arm pooled PVd or Kd.",
+      "trial_id": "NCT05572515",
+      "key_source": "",
+      "member_pmids": []
+    },
+    {
+      "pmid": "42169674",
+      "study_name": "",
+      "modality": "CAR-T (cilta-cel) vs bispecific antibody (BCMA-targeting)",
+      "data_cut": "NR",
+      "values": [
+        {
+          "field": "total_n",
+          "group": "population",
+          "value": "NR",
+          "flag": "NR",
+          "quote": ""
+        },
+        {
+          "field": "comparator_label",
+          "group": "population",
+          "value": "NR",
+          "flag": "NR",
+          "quote": ""
+        },
+        {
+          "field": "pct_1_to_3_prior_lines",
+          "group": "population",
+          "value": "NR",
+          "flag": "NR",
+          "quote": ""
+        },
+        {
+          "field": "median_prior_lines",
+          "group": "population",
+          "value": "NR",
+          "flag": "NR",
+          "quote": ""
+        },
+        {
+          "field": "pfs_hr_vs_comparator",
+          "group": "efficacy",
+          "value": "NR",
+          "flag": "NR",
+          "quote": ""
+        },
+        {
+          "field": "os_hr_vs_comparator",
+          "group": "efficacy",
+          "value": "NR",
+          "flag": "NR",
+          "quote": ""
+        },
+        {
+          "field": "orr",
+          "group": "efficacy",
+          "value": "NR",
+          "flag": "NR",
+          "quote": ""
+        },
+        {
+          "field": "cr_or_better_rate",
+          "group": "efficacy",
+          "value": "NR",
+          "flag": "NR",
+          "quote": ""
+        },
+        {
+          "field": "mrd_negativity_rate",
+          "group": "efficacy",
+          "value": "NR",
+          "flag": "NR",
+          "quote": ""
+        },
+        {
+          "field": "crs_any_grade",
+          "group": "safety",
+          "value": "NR",
+          "flag": "NR",
+          "quote": ""
+        },
+        {
+          "field": "crs_grade_3plus",
+          "group": "safety",
+          "value": "NR",
+          "flag": "NR",
+          "quote": ""
+        },
+        {
+          "field": "icans_any_grade",
+          "group": "safety",
+          "value": "NR",
+          "flag": "NR",
+          "quote": ""
+        },
+        {
+          "field": "infections_grade_3plus",
+          "group": "safety",
+          "value": "NR",
+          "flag": "NR",
+          "quote": ""
+        }
+      ],
+      "extraction_notes": "No abstract text available; all fields set to NR. Modality inferred from study title only (cilta-cel CAR-T vs BCMA-targeting bispecific antibodies).",
+      "trial_id": "",
+      "key_source": "",
+      "member_pmids": []
+    },
+    {
+      "pmid": "42163304",
+      "study_name": "",
+      "modality": "CAR-T",
+      "data_cut": "NR",
+      "values": [
+        {
+          "field": "total_n",
+          "group": "population",
+          "value": "606",
+          "flag": "",
+          "quote": "Of 606 patients, 177 (30%) were treated in the Early and 429 (70%) in the Late setting."
+        },
+        {
+          "field": "comparator_label",
+          "group": "population",
+          "value": "Early group (1-3 prior lines) versus Late group (> 3 prior lines)",
+          "flag": "",
+          "quote": "Patients were stratified by prior lines of therapy into an Early group (1-3 prior lines) and a Late group (> 3 prior lines)."
+        },
+        {
+          "field": "pct_1_to_3_prior_lines",
+          "group": "population",
+          "value": "30% (177/606 in Early group, 1-3 prior lines)",
+          "flag": "",
+          "quote": "Of 606 patients, 177 (30%) were treated in the Early and 429 (70%) in the Late setting."
+        },
+        {
+          "field": "median_prior_lines",
+          "group": "population",
+          "value": "NR",
+          "flag": "NR",
+          "quote": ""
+        },
+        {
+          "field": "pfs_hr_vs_comparator",
+          "group": "efficacy",
+          "value": "NR",
+          "flag": "NR",
+          "quote": ""
+        },
+        {
+          "field": "os_hr_vs_comparator",
+          "group": "efficacy",
+          "value": "NR",
+          "flag": "NR",
+          "quote": ""
+        },
+        {
+          "field": "orr",
+          "group": "efficacy",
+          "value": "91% (Early) and 88% (Late)",
+          "flag": "",
+          "quote": "The overall response rate was 91% and 88%, with complete response in 63% and 54%, respectively."
+        },
+        {
+          "field": "cr_or_better_rate",
+          "group": "efficacy",
+          "value": "63% (Early) and 54% (Late)",
+          "flag": "",
+          "quote": "with complete response in 63% and 54%, respectively"
+        },
+        {
+          "field": "mrd_negativity_rate",
+          "group": "efficacy",
+          "value": "NR",
+          "flag": "NR",
+          "quote": ""
+        },
+        {
+          "field": "crs_any_grade",
+          "group": "safety",
+          "value": "NR",
+          "flag": "NR",
+          "quote": ""
+        },
+        {
+          "field": "crs_grade_3plus",
+          "group": "safety",
+          "value": "NR",
+          "flag": "NR",
+          "quote": ""
+        },
+        {
+          "field": "icans_any_grade",
+          "group": "safety",
+          "value": "NR",
+          "flag": "NR",
+          "quote": ""
+        },
+        {
+          "field": "infections_grade_3plus",
+          "group": "safety",
+          "value": "NR",
+          "flag": "NR",
+          "quote": ""
+        }
+      ],
+      "extraction_notes": "Real-world German registry analysis of standard-of-care cilta-cel stratified by prior lines (Early 1-3 vs Late >3). Abstract reports CRS and ICANS as secondary endpoints but does not give numeric rates; only non-ICANS neurotoxicity (3% vs 8%) and non-relapse mortality (6% vs 7%) are reported. No HRs reported. 12-month PFS 79% Early vs 70% Late.",
+      "trial_id": "",
+      "key_source": "",
+      "member_pmids": []
+    }
+  ]
+}

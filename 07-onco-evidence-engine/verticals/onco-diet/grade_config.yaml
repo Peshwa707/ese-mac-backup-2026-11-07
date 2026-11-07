@@ -1,0 +1,32 @@
+# GRADE config for the nutritional-epi vertical. Observational evidence starts at LOW
+# (GRADE default for non-randomized studies). Inconsistency (I^2), publication bias, and
+# the large-effect/dose-response UPGRADES are honestly deferred to the quantitative
+# synthesis / human Reviewer 2 — not guessed here.
+
+levels: [High, Moderate, Low, "Very Low"]
+
+start:
+  with_rct: High
+  observational_only: Low   # diet-cancer evidence is observational -> start Low
+
+rules:
+  # PECO is direct (dietary exposure -> pancreatic cancer); no automatic indirectness.
+  indirectness:
+    always_downgrade: 0
+    reason: ""
+  risk_of_bias:
+    serious_fraction_threshold: 0.5
+    reason: "Most contributing studies at high risk of bias (NOS)."
+  imprecision:
+    min_studies: 3
+    reason: "Few contributing studies / sparse data."
+
+deferred_domains:
+  - "Inconsistency (I^2) — total fat (all) I^2=64%, cholesterol I^2=54%: a downgrade for inconsistency is likely warranted; confirm at Reviewer 2."
+  - "Publication bias — not assessable (k<10 per cell; Egger/Begg/trim-and-fill underpowered)."
+  - "Possible UPGRADE for large effect (case-control OR ~2) and exposure-response gradient — deferred to Reviewer 2 / dose-response synthesis."
+
+# Two pre-specified outcomes (the exposures), each mapped to its highest-vs-lowest field.
+outcomes:
+  - {name: "Pancreatic cancer risk — dietary total fat (highest vs lowest)", field: effect_total_fat}
+  - {name: "Pancreatic cancer risk — dietary cholesterol (highest vs lowest)", field: effect_cholesterol}

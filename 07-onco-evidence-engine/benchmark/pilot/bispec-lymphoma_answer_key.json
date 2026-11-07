@@ -1,0 +1,46 @@
+{
+  "case_id": "bench-bispec-lymphoma",
+  "status": "draft",
+  "reference": {
+    "pmid": "38696731",
+    "doi": "10.1182/blood.2023023419",
+    "citation": "Kim J, Cho J, Lee MH, et al. Blood. 2024;144(6):629-638.",
+    "title": "CAR T cells vs bispecific antibody as third- or later-line large B-cell lymphoma therapy: a meta-analysis.",
+    "search_cutoff": "2023-07-31",
+    "k_studies": 16,
+    "n_patients": 1347,
+    "notes": "Single-arm pooled proportions (bispecific antibody arm); random-effects model. Published CR 0.36 (95% CI 0.29-0.43); CAR-T naive bispecific subset CR 0.37 (0.32-0.43). ORR pooled separately per study; reference paper focus is CR as primary outcome. I2 not reported per subgroup in abstract."
+  },
+  "expected_included_pmids": [],
+  "outcomes": [
+    {
+      "field": "complete_response_rate",
+      "label": "CR",
+      "family": "proportion",
+      "group": "ALL",
+      "estimate": 36,
+      "ci_lb": 29,
+      "ci_ub": 43,
+      "i2": null
+    },
+    {
+      "field": "orr",
+      "label": "ORR",
+      "family": "proportion",
+      "group": "ALL",
+      "estimate": null,
+      "ci_lb": null,
+      "ci_ub": null,
+      "i2": null
+    }
+  ],
+  "caveats": [
+    "DRAFT ANSWER KEY — human-verify against Kim 2024 full text (PMID 38696731, DOI 10.1182/blood.2023023419) before sealing.",
+    "Published CR extracted from abstract: 0.36 (95% CI 0.29-0.43) for bispecific antibody group; converted to percent (36%, 29-43%).",
+    "ORR not pooled in abstract for BsAb arm specifically; estimate left null (not_scored).",
+    "I2 not reported per subgroup in abstract; set to null.",
+    "k=16 studies (bispecific antibody trials), n=1347 total (both arms) in reference.",
+    "group=ALL because subgroup_field is empty (single bispecific antibody class, no stratification).",
+    "Reference search bounded to July 2023; engine search bounded to 2023-07-31."
+  ]
+}

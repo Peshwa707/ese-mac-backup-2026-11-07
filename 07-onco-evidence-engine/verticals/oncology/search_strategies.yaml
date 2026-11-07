@@ -1,0 +1,57 @@
+# Per-source query construction + oncology term knowledge. core/ reads this.
+
+disclaimer: >
+  Clinician decision SUPPORT only — not autonomous or patient-facing advice.
+  Every claim is grounded in a verified, cited source; confirm against primary
+  literature and current guidelines before any clinical use.
+
+# Structured fields used to seed queries (in priority order).
+# Intentionally limited to the fields that give the best signal/noise ratio.
+# stage and prior_lines are excluded here: they over-narrow queries and produce
+# zero results (e.g. "stage IV" ANDed with biomarkers returns almost nothing).
+key_fields:
+  - diagnosis
+  - biomarkers
+
+# Synonym / MeSH / brand<->generic expansion. Key is the canonical term; values
+# are interchangeable variants. Matching is case-insensitive, exact OR substring.
+synonyms:
+  "non-small cell lung cancer":
+    - "NSCLC"
+    - "non-small cell lung"
+    - "lung adenocarcinoma"
+    - "lung carcinoma"
+    - "non small cell lung cancer"
+  "EGFR":
+    - "epidermal growth factor receptor"
+    - "EGFR mutation"
+    - "EGFR-mutated"
+  "osimertinib":
+    - "Tagrisso"
+  "pembrolizumab":
+    - "Keytruda"
+
+# Per-source query templates. {terms} is the joined, expanded term list.
+# anchor: an optional string appended after the formatted query to constrain
+#         the search domain without ANDing more raw case fields.
+sources:
+  pubmed:
+    template: "{terms}"
+    joiner: " AND "
+    max_terms: 3
+    anchor: "AND (treatment OR therapy OR trial)"
+  clinicaltrials:
+    template: "{terms}"
+    joiner: " "
+    max_terms: 3
+  openfda:
+    template: 'indications_and_usage:"{terms}"'
+    joiner: " "
+    max_terms: 2
+  pdq:
+    template: "{terms}"
+    joiner: " "
+    max_terms: 3
+
+# Optional grade overrides keyed by study-type substring -> EvidenceGrade value.
+study_type_overrides: {}

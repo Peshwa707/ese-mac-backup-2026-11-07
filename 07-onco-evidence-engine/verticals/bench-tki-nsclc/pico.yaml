@@ -1,0 +1,71 @@
+# Benchmark vertical — alectinib vs crizotinib in ALK-positive advanced NSCLC.
+# Target reference: Zeng et al., Chemotherapy 2022;67(2):67-80.
+# PMID 34915469; DOI 10.1159/000521452; published 2021-12-14 (print 2022).
+# Analysis = pairwise RCT meta-analysis, generic inverse-variance pooling of
+# log hazard ratios (log_effect). NOT a network meta-analysis. NOT IPD.
+# Search date-bounded to the reference search cut-off: 2021-09-01 (approx.;
+# authors searched up to ~September 2021 per publication timeline).
+# Included RCTs: ALEX (NCT02075840), ALESIA (NCT02838420), J-ALEX (NCT01399489).
+
+review:
+  title: >
+    Crizotinib versus alectinib for the treatment of ALK-positive non-small cell
+    lung cancer: a systematic review and meta-analysis of randomized controlled
+    trials
+  short_id: bench-tki-nsclc
+  registration: "PROSPERO: [not registered; blind benchmark]"
+  output_base: "~/Documents/Systematic Reviews/TKI-NSCLC-Benchmark"
+
+pico:
+  population: >
+    Patients with pathologically confirmed advanced (locally advanced or metastatic)
+    ALK-rearranged non-small cell lung cancer (NSCLC), any line of therapy,
+    any age, any ECOG performance status admitted in the trials.
+  intervention: >
+    Alectinib (next-generation ALK tyrosine kinase inhibitor; 600 mg twice daily
+    orally) as monotherapy.
+  comparator: >
+    Crizotinib (first-generation ALK tyrosine kinase inhibitor; 250 mg twice daily
+    orally) as monotherapy.
+  outcomes:
+    primary:
+      - progression-free survival (PFS) hazard ratio (HR, 95% CI), alectinib vs crizotinib
+    secondary:
+      - overall survival (OS) hazard ratio (HR, 95% CI), alectinib vs crizotinib
+      - central nervous system PFS (CNS-PFS) hazard ratio
+      - objective response rate (ORR)
+      - duration of response
+      - adverse events (grade >=3)
+
+# Synthesis axis: single comparator pair (alectinib vs crizotinib); no subgroup
+# splitting needed for the primary endpoint — all studies use the same comparison.
+# subgroup_field empty ("") so all studies pool into the "ALL" group.
+synthesis:
+  subgroup_field: ""
+  subgroup_map: {}
+  arms: []
+  indirect_comparison: false
+
+eligibility:
+  inclusion:
+    - "Randomized controlled trial (RCT) comparing alectinib to crizotinib in ALK-positive advanced NSCLC."
+    - "Pathologically confirmed ALK rearrangement (FISH, IHC, or equivalent)."
+    - "Reports at least one of PFS, OS, or CNS-PFS as hazard ratio with 95% CI."
+    - "Published in English; full-text or abstract available."
+  exclusion:
+    - "Single-arm studies, observational cohorts, or case series."
+    - "Network meta-analyses, indirect comparison studies, or IPD meta-analyses."
+    - "Non-English language."
+    - "Conference abstracts without usable HR + 95% CI."
+    - "Duplicate publication of the same trial (retain the most complete/final analysis)."
+    - "Combination therapy in either arm."
+
+disclaimer: >
+  BLIND benchmark run (AI Reviewer 1 only). Pairwise RCT meta-analysis of
+  alectinib vs crizotinib in ALK+ NSCLC. Pooling = generic inverse-variance
+  of log hazard ratios (log_effect family). PubMed executed live, recall-oriented,
+  no outcome filter; search date-bounded to 2021-09-01 to match the reference
+  protocol's approximate cut-off. Every PMID live-verified; values
+  abstract/full-text-anchored or marked NR. Human Reviewer 2 verification
+  required before any output is final. Reference: PMID 34915469
+  (DOI 10.1159/000521452).

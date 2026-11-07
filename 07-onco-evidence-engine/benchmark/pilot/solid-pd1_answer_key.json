@@ -1,0 +1,50 @@
+{
+  "case_id": "bench-solid-pd1",
+  "status": "draft",
+  "source": {
+    "pmid": "41208418",
+    "doi": "10.21037/cco-25-45",
+    "citation": "Li X, Zhao H, Cui Y. Efficacy and safety of atezolizumab compared to docetaxel in non-small cell lung cancer patients regardless of PD-L1 status: a systematic review and meta-analysis. Chin Clin Oncol. 2025;14(5):51.",
+    "search_cutoff": "2024-12-31",
+    "k_total": 10,
+    "n_total": 6463,
+    "notes": "10 double-blind RCTs; atezolizumab (n=3445) vs docetaxel (n=3018); any PD-L1 expression; any histology; NSCLC."
+  },
+  "expected_included_pmids": [],
+  "outcomes": [
+    {
+      "field": "os_hr",
+      "label": "Overall survival (HR)",
+      "family": "log_effect",
+      "group": "ALL",
+      "effect_measure": "hr",
+      "estimate": 0.77,
+      "ci_lb": 0.73,
+      "ci_ub": 0.81,
+      "i2": null,
+      "k": 10,
+      "is_scored": true
+    },
+    {
+      "field": "pfs_hr",
+      "label": "PFS (HR)",
+      "family": "log_effect",
+      "group": "ALL",
+      "effect_measure": "hr",
+      "estimate": 0.93,
+      "ci_lb": 0.88,
+      "ci_ub": 0.99,
+      "i2": null,
+      "k": 10,
+      "is_scored": true
+    }
+  ],
+  "expected_conclusion": "effect",
+  "caveats": [
+    "DRAFT ANSWER KEY: published values from Li 2025 abstract (PMID 41208418, DOI 10.21037/cco-25-45); human verification required before sealing.",
+    "I2 values not reported in abstract; i2 set to null.",
+    "Engine PubMed-only recall found k=4 studies vs published k=10 (engine search lacked EMBASE/CNKI/WOS/Wanfang/Cochrane used by Li 2025); OS HR directionally concordant.",
+    "pfs_hr: engine extracted only 1 parseable PFS HR (PMID 38552197/CONTACT-01), insufficient for pooling; expected missing_engine classification.",
+    "Benchmark scores are scaffold-only; do not report as sealed performance."
+  ]
+}

@@ -1,0 +1,30 @@
+disclaimer: >
+  Validation run: PubMed/MEDLINE executed live, no date/outcome filters.
+
+pubmed:
+  executed: true
+  query: >
+    ("heart failure"[tiab] AND ("reduced ejection fraction"[tiab] OR "HFrEF"[tiab]))
+    AND ("SGLT2"[tiab] OR "sodium-glucose"[tiab] OR dapagliflozin[tiab] OR
+    empagliflozin[tiab] OR sotagliflozin[tiab]) AND (randomized[tiab] OR
+    randomised[tiab] OR placebo[tiab] OR trial[tiab])
+  retmax: 30
+
+europepmc:
+  executed: true
+  query: >
+    ("heart failure" AND ("reduced ejection fraction" OR HFrEF)) AND
+    (SGLT2 OR dapagliflozin OR empagliflozin OR sotagliflozin) AND
+    (randomized OR placebo OR trial)
+  page_size: 60
+
+clinicaltrials:
+  executed: true
+  query: "heart failure SGLT2 dapagliflozin empagliflozin"
+
+named_trials:
+  - DAPA-HF
+  - EMPEROR-Reduced
+  - SOLOIST-WHF
+
+reference_mining_seeds: []
